@@ -8,6 +8,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import theme.FitnessAppTheme
@@ -30,9 +31,15 @@ fun FitnessAppButton(
             contentColor = FitnessAppTheme.colors.onPrimary
         ),
         content = {
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 startIcon?.let {
-                    FitnessAppIcon(icon = startIcon)
+                    FitnessAppIcon(
+                        icon = startIcon,
+                        tint = FitnessAppTheme.colors.onPrimary
+                    )
                 }
 
                 Text(

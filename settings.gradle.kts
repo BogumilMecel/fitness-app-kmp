@@ -1,4 +1,4 @@
-rootProject.name = "fitness-app-compose-mutliplatform"
+rootProject.name = "fitness-app-kmp"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 

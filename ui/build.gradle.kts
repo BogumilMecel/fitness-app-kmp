@@ -42,14 +42,8 @@ kotlin {
             api(libs.moko.resources)
             api(libs.moko.resources.compose)
         }
-        val iosX64Main by getting {
-            resources.srcDirs("build/generated/moko/iosX64Main/src")
-        }
-        val iosArm64Main by getting {
-            resources.srcDirs("build/generated/moko/iosArm64Main/src")
-        }
-        val iosSimulatorArm64Main by getting {
-            resources.srcDirs("build/generated/moko/iosSimulatorArm64Main/src")
+        iosMain.dependencies {
+            implementation(libs.stately.common)
         }
     }
 }
