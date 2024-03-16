@@ -1,0 +1,109 @@
+*.iml
+**/build/
+xcuserdata
+!src/**/build/
+local.properties
+.idea
+.DS_Store
+captures
+.externalNativeBuild
+.cxx
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/WorkspaceSettings.xcsettings
+
+# Gradle files
+.gradle/
+build/
+
+# Gradle wrapper jar file
+gradle-wrapper.jar
+
+# Build outputs
+*/build/
+*/out/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Android Studio files
+.idea/
+*.iws
+*.ipr
+.localhistory/
+.navigation/
+captures/
+*.hprof
+*.apk
+*.ap_
+*.aab
+
+# Keystore files
+*.jks
+*.keystore
+
+# External native build folder generated in Android Studio 2.2 and later
+
+# Google Services (e.g., APIs or Firebase)
+google-services.json
+
+# Freeline
+freeline.py
+freeline/
+freeline_project_description.json
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/readme.md
+
+# Version control
+vcs.xml
+
+# lint
+lint/intermediates/
+lint/generated/
+lint/outputs/
+lint/tmp/
+*.lint.xml
+
+# Xcode files
+*.xcworkspace
+*.xcodeproj
+*.pbxproj
+*.xcuserstate
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/
+Carthage/Build
+
+# Kotlin/Native build folders
+*.klib
+kotlin-native/
+
+# Node modules for any tooling
+node_modules/
+
+# Environment variables
+.env*
+!.env.example
+
+# JetBrains Rider
+*.sln.iml
+*.csproj.iml
+*.dotsettings

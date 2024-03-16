@@ -1,0 +1,32 @@
+<resources>
+    <!--    Icon descriptions ↓ ↓ ↓-->
+    <string name="favorite">Favorite icon</string>
+    <string name="favorite_filled">Filled favorite icon</string>
+    <string name="back">Back icon</string>
+    <string name="search">Search icon</string>
+    <string name="cancel">Cancel icon</string>
+    <string name="add">Add icon</string>
+    <string name="log_out">Log out icon</string>
+    <string name="save">Save icon</string>
+    <string name="edit">Edit icon</string>
+    <string name="email">Email icon</string>
+    <string name="password">Password icon</string>
+    <string name="login">Login icon</string>
+    <string name="account">Account icon</string>
+    <string name="barcode">Barcode icon</string>
+    <string name="info">Info icon</string>
+    <string name="arrow_down">Arrow down icon</string>
+    <string name="copy">Copy icon</string>
+    <string name="error">Error icon</string>
+    <string name="clear">Clear icon</string>
+    <!--    Icon description ↑ ↑ ↑-->
+
+    <!--    auth ↓ ↓ ↓-->
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="login">Log into your account</string>
+    <string name="sign_in">Sign In</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="i_don_t_have_an_account_register">I Don\'t Have An Account! Register</string>
+    <!--    auth ↑ ↑ ↑-->
+</resources>

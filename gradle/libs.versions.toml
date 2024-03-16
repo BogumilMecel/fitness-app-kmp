@@ -1,0 +1,50 @@
+[versions]
+agp = "8.2.2"
+android-compileSdk = "34"
+android-minSdk = "24"
+android-targetSdk = "34"
+
+androidx-activityCompose = "1.8.2"
+compose = "1.6.2"
+compose-plugin = "1.6.0"
+
+kotlin = "1.9.22"
+
+koin = "3.5.3"
+koin-compose = "1.1.2"
+
+kotlinx-serialization = "1.6.3"
+
+kotlin-logging = "1.4.2"
+
+voyager = "1.0.0"
+
+moko = "0.23.0"
+
+[libraries]
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }
+
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+kotling-logging = { module = "org.lighthousegames:logging", version.ref = "kotlin-logging" }
+
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager"}
+voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
+voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager"}
+
+moko-resources-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "moko"}
+moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko"}
+moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko"}
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko" }
