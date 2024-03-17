@@ -34,6 +34,7 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidsvg.aar)
         }
         commonMain.dependencies {
             implementation(compose.material)

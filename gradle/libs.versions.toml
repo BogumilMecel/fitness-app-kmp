@@ -4,6 +4,7 @@ android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
 
+androidsvgAar = "1.4"
 androidx-activityCompose = "1.8.2"
 compose = "1.6.2"
 compose-plugin = "1.6.0"
@@ -23,6 +24,7 @@ voyager = "1.0.0"
 moko = "0.23.0"
 
 [libraries]
+androidsvg-aar = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvgAar" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }

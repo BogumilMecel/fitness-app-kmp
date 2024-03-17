@@ -16,19 +16,28 @@ import theme.FitnessAppTheme
 @Composable
 fun FitnessAppButton(
     modifier: Modifier = Modifier,
+    style: FitnessAppButtonStyle = FitnessAppButtonStyle.Primary,
     onClick: () -> Unit,
     text: String,
     startIcon: Icon? = null,
     endIcon: Icon? = null
 ) {
+    val backgroundColor = when(style) {
+        FitnessAppButtonStyle.Primary -> FitnessAppTheme.colors.primary
+        FitnessAppButtonStyle.Content -> FitnessAppTheme.colors.contentPrimary
+    }
+    val contentColor = when(style) {
+        FitnessAppButtonStyle.Primary -> FitnessAppTheme.colors.onPrimary
+        FitnessAppButtonStyle.Content -> FitnessAppTheme.colors.onContentPrimary
+    }
     Button(
         modifier = modifier
             .heightIn(min = 48.dp)
             .fillMaxWidth(),
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = FitnessAppTheme.colors.primary,
-            contentColor = FitnessAppTheme.colors.onPrimary
+            backgroundColor = backgroundColor,
+            contentColor = contentColor
         ),
         content = {
             Row(
@@ -38,21 +47,29 @@ fun FitnessAppButton(
                 startIcon?.let {
                     FitnessAppIcon(
                         icon = startIcon,
-                        tint = FitnessAppTheme.colors.onPrimary
+                        tint = contentColor
                     )
                 }
 
                 Text(
-                    text = text,
-                    style = FitnessAppTheme.typography.labelLarge
+                    text = text.uppercase(),
+                    style = FitnessAppTheme.typography.labelLarge,
+                    color = contentColor
                 )
 
                 endIcon?.let {
                     startIcon?.let {
-                        FitnessAppIcon(icon = startIcon)
+                        FitnessAppIcon(
+                            icon = startIcon,
+                            tint = contentColor
+                        )
                     }
                 }
             }
         }
     )
+}
+
+enum class FitnessAppButtonStyle {
+    Primary, Content
 }

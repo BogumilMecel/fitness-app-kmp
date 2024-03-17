@@ -19,6 +19,7 @@
     <string name="copy">Copy icon</string>
     <string name="error">Error icon</string>
     <string name="clear">Clear icon</string>
+    <string name="register">Register icon</string>
     <!--    Icon description ↑ ↑ ↑-->
 
     <!--    auth ↓ ↓ ↓-->
@@ -28,5 +29,8 @@
     <string name="sign_in">Sign In</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="i_don_t_have_an_account_register">I Don\'t Have An Account! Register</string>
+    <string name="login_with_email">Log in with email</string>
+    <string name="login_with_google">Log in with google</string>
+    <string name="create_account_with_email">Continue with</string>
     <!--    auth ↑ ↑ ↑-->
 </resources>

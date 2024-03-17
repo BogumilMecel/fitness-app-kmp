@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.Color
 data class FitnessAppColorScheme(
     val primary: Color,
     val onPrimary: Color,
+    val onContentPrimary: Color,
     val calories: Color,
     val carbohydrates: Color,
     val protein: Color,
@@ -27,6 +28,7 @@ fun lightFitnessAppColorSchema() = FitnessAppColorScheme(
     surface = surfaceLight,
     error = errorLight,
     primary = primaryLight,
+    onContentPrimary = contentPrimaryDark,
     onPrimary = contentPrimaryDark,
     calories = caloriesLight,
     carbohydrates = carbohydratesLight,
@@ -45,6 +47,7 @@ fun darkFitnessAppColorSchema() = FitnessAppColorScheme(
     surface = surfaceDark,
     primary = primaryDark,
     onPrimary = contentPrimaryDark,
+    onContentPrimary = contentPrimaryLight,
     calories = caloriesDark,
     carbohydrates = carbohydratesDark,
     protein = proteinDark,
