@@ -5,14 +5,35 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import cafe.adriel.voyager.core.screen.Screen
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
+import utils.navigation.NavigationAction
 
 open class BaseModel : ScreenModel {
 
-    val navigation = Channel<Screen>()
+    val navigation = Channel<NavigationAction>()
 
-    fun navigateTo(screen: Screen) {
+    open fun onBackPressed() {
+        navigateBack()
+    }
+
+    fun navigateTo(
+        screen: Screen,
+        withPopUp: Boolean = false
+    ) {
         screenModelScope.launch {
-            navigation.send(screen)
+            navigation.send(
+                NavigationAction.ToScreen(
+                    screen = screen,
+                    withPopUp = withPopUp
+                )
+            )
+        }
+    }
+
+    private fun navigateBack(withPopUp: Boolean = false) {
+        screenModelScope.launch {
+            navigation.send(
+                NavigationAction.Back(withPopUp = withPopUp)
+            )
         }
     }
 }

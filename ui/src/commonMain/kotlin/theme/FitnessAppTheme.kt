@@ -12,6 +12,8 @@ internal val LocalTypography = staticCompositionLocalOf { FitnessAppTypography()
 internal val LocalColors = staticCompositionLocalOf { lightFitnessAppColorSchema() }
 internal val LocalShapes = staticCompositionLocalOf { Shapes() }
 
+val LocalRippleColor = staticCompositionLocalOf { lightFitnessAppColorSchema().contentPrimary }
+
 object FitnessAppTheme {
     val typography: FitnessAppTypography
         @ReadOnlyComposable

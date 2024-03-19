@@ -9,6 +9,10 @@ class LoginScreenModel: BaseModel() {
 
     val state = MutableStateFlow(LoginState())
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+
     fun onEmailChanged(value: String) {
         state.update {
             it.copy(email = value)
@@ -27,9 +31,5 @@ class LoginScreenModel: BaseModel() {
 
     fun onForgotPasswordClicked() {
 
-    }
-
-    fun onRegisterButtonClicked() {
-        navigateTo(RegisterScreen())
     }
 }

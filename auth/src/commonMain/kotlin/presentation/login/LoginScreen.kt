@@ -29,7 +29,10 @@ class LoginScreen : Screen {
             val state by state.collectAsState()
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                FitnessAppTopBar(title = stringResource(SharedRes.strings.login))
+                FitnessAppTopBar(
+                    title = stringResource(SharedRes.strings.login),
+                    onBackPressed = ::onBackPressed
+                )
 
                 Column(
                     modifier = Modifier
@@ -70,12 +73,6 @@ class LoginScreen : Screen {
                         onClick = ::onForgotPasswordClicked
                     )
                 }
-
-                FitnessAppClickableText(
-                    modifier = Modifier.padding(bottom = 64.dp),
-                    text = stringResource(SharedRes.strings.i_don_t_have_an_account_register),
-                    onClick = ::onRegisterButtonClicked
-                )
             }
         }
     }

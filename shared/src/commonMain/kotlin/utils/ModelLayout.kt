@@ -7,6 +7,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import kotlinx.coroutines.flow.receiveAsFlow
+import utils.navigation.NavigationAction
 
 @Composable
 inline fun <reified T : BaseModel> Screen.ModelLayout(
@@ -16,8 +17,18 @@ inline fun <reified T : BaseModel> Screen.ModelLayout(
     val screenModel = getScreenModel<T>()
 
     LaunchedEffect(true) {
-        screenModel.navigation.receiveAsFlow().collect {
-            navigator?.push(it)
+        screenModel.navigation.receiveAsFlow().collect { navigationAction ->
+            navigator?.let {
+                when(navigationAction) {
+                    is NavigationAction.ToScreen -> {
+                        navigator.push(navigationAction.screen)
+                    }
+
+                    is NavigationAction.Back -> {
+                        navigator.pop()
+                    }
+                }
+            }
         }
     }
 

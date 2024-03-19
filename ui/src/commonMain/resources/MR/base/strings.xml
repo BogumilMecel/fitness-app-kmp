@@ -28,9 +28,11 @@
     <string name="login">Log into your account</string>
     <string name="sign_in">Sign In</string>
     <string name="forgot_password">Forgot Password?</string>
-    <string name="i_don_t_have_an_account_register">I Don\'t Have An Account! Register</string>
-    <string name="login_with_email">Log in with email</string>
-    <string name="login_with_google">Log in with google</string>
-    <string name="create_account_with_email">Continue with</string>
+    <string name="sing_in_with_email">Sign In With</string>
+    <string name="email">Email</string>
+    <string name="google">Google</string>
+    <string name="or_">or</string>
+    <string name="sign_up_with_email">Sign up with email</string>
+    <string name="welcome_to">Welcome To Fitness App</string>
     <!--    auth ↑ ↑ ↑-->
 </resources>

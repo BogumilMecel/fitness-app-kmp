@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.Color
 
 object FitnessAppRippleTheme : RippleTheme {
     @Composable
-    override fun defaultColor(): Color = FitnessAppTheme.colors.contentPrimary
+    override fun defaultColor(): Color = LocalRippleColor.current
 
     @Composable
     override fun rippleAlpha(): RippleAlpha = RippleTheme.defaultRippleAlpha(

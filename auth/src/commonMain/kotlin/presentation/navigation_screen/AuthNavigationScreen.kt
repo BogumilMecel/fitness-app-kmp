@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
+import com.gmail.bogumilmecel2.ui.SharedRes
 import components.Divider
 import components.FitnessAppButton
 import components.FitnessAppButtonStyle
@@ -17,6 +18,7 @@ import components.FitnessAppTopBar
 import components.HorizontalSpacer
 import components.IconPainter
 import components.IconVector
+import dev.icerock.moko.resources.compose.stringResource
 import theme.FitnessAppTheme
 import utils.ModelLayout
 
@@ -24,7 +26,7 @@ class AuthNavigationScreen : Screen {
     @Composable
     override fun Content() {
         ModelLayout<AuthNavigationModel> {
-            FitnessAppTopBar(title = "Welcome to App Name")
+            FitnessAppTopBar(title = stringResource(SharedRes.strings.welcome_to))
 
             Column(
                 modifier = Modifier
@@ -34,7 +36,7 @@ class AuthNavigationScreen : Screen {
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Sign In",
+                    text = stringResource(SharedRes.strings.sing_in_with_email),
                     color = FitnessAppTheme.colors.contentPrimary,
                     style = FitnessAppTheme.typography.labelLarge
                 )
@@ -42,40 +44,32 @@ class AuthNavigationScreen : Screen {
                 HorizontalSpacer()
 
                 FitnessAppButton(
-                    text = "With email",
+                    text = stringResource(SharedRes.strings.email),
                     style = FitnessAppButtonStyle.Content,
                     startIcon = IconVector.Email,
-                    onClick = {
-
-                    }
+                    onClick = ::onSignInWithEmailClicked
                 )
 
                 HorizontalSpacer()
 
                 FitnessAppButton(
-                    text = "With google",
+                    text = stringResource(SharedRes.strings.google),
                     style = FitnessAppButtonStyle.Content,
                     startIcon = IconPainter.Google,
-                    onClick = {
-
-                    }
+                    onClick = ::onSignInWithGoogleClicked
                 )
 
                 Divider(
                     modifier = Modifier.padding(vertical = 16.dp),
-                    text = "or"
+                    text = stringResource(SharedRes.strings.or_)
                 )
 
                 FitnessAppButton(
-                    text = "Sign up with email",
+                    text = stringResource(SharedRes.strings.sign_up_with_email),
                     style = FitnessAppButtonStyle.Content,
                     startIcon = IconVector.Register,
-                    onClick = {
-
-                    }
+                    onClick = ::onSignUpWithEmailClicked
                 )
-
-                HorizontalSpacer()
             }
         }
     }
