@@ -2,7 +2,7 @@ package presentation.register
 
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
-import utils.ModelLayout
+import presentation.ModelLayout
 
 class RegisterScreen: Screen {
 

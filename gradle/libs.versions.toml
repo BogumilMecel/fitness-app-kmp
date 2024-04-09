@@ -14,7 +14,8 @@ kotlin = "1.9.22"
 koin = "3.5.3"
 koin-compose = "1.1.2"
 
-kotlinx-serialization = "1.6.3"
+kotlinx-serialization = "1.7.3"
+kotlinx-coroutines = "1.8.1-Beta"
 
 kotlin-logging = "1.4.2"
 
@@ -22,6 +23,9 @@ statelyCommon = "2.0.6"
 voyager = "1.0.0"
 
 moko = "0.23.0"
+
+ktor = "2.3.9"
+fitness-app-common = "1.6"
 
 [libraries]
 androidsvg-aar = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvgAar" }
@@ -31,7 +35,13 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }
 
-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor"}
 
 kotling-logging = { module = "org.lighthousegames:logging", version.ref = "kotlin-logging" }
 
@@ -43,6 +53,8 @@ voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voy
 moko-resources-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "moko"}
 moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko"}
 moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko"}
+
+fitness-app-common = { module = "com.github.bodzio6978:fitness-app-common", version.ref = "fitness-app-common" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

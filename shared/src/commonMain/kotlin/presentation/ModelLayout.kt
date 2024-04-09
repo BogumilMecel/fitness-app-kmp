@@ -1,4 +1,4 @@
-package utils
+package presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
@@ -7,7 +7,8 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import kotlinx.coroutines.flow.receiveAsFlow
-import utils.navigation.NavigationAction
+import presentation.navigation.NavigationAction
+import presentation.utils.getDefaultRootModifier
 
 @Composable
 inline fun <reified T : BaseModel> Screen.ModelLayout(

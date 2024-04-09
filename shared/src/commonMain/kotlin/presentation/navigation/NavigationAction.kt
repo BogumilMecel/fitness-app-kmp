@@ -1,4 +1,4 @@
-package utils.navigation
+package presentation.navigation
 
 import cafe.adriel.voyager.core.screen.Screen
 

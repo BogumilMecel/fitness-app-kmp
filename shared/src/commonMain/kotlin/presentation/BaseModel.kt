@@ -1,11 +1,12 @@
-package utils
+package presentation
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import cafe.adriel.voyager.core.screen.Screen
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
-import utils.navigation.NavigationAction
+import presentation.navigation.NavigationAction
+import utils.Resource
 
 open class BaseModel : ScreenModel {
 
@@ -27,6 +28,29 @@ open class BaseModel : ScreenModel {
                 )
             )
         }
+    }
+
+    protected inline fun <T> Resource<T>.handle(
+        showSnackbar: Boolean = true,
+        finally: () -> Unit = {},
+        onError: (Exception) -> Unit = {},
+        block: (T) -> Unit
+    ) {
+        when (this) {
+            is Resource.ComplexError -> {
+                onError(exception)
+            }
+
+            is Resource.Error -> {
+                if (showSnackbar) {
+                }
+            }
+
+            is Resource.Success -> {
+                block(this.data)
+            }
+        }
+        finally()
     }
 
     private fun navigateBack(withPopUp: Boolean = false) {

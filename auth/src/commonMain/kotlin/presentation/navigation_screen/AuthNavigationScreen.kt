@@ -18,15 +18,18 @@ import components.FitnessAppTopBar
 import components.HorizontalSpacer
 import components.IconPainter
 import components.IconVector
+import dev.icerock.moko.resources.compose.localized
 import dev.icerock.moko.resources.compose.stringResource
+import dev.icerock.moko.resources.desc.Resource
+import dev.icerock.moko.resources.desc.StringDesc
 import theme.FitnessAppTheme
-import utils.ModelLayout
+import presentation.ModelLayout
 
 class AuthNavigationScreen : Screen {
     @Composable
     override fun Content() {
         ModelLayout<AuthNavigationModel> {
-            FitnessAppTopBar(title = stringResource(SharedRes.strings.welcome_to))
+            FitnessAppTopBar(title = StringDesc.Resource(SharedRes.strings.welcome_to).localized())
 
             Column(
                 modifier = Modifier
@@ -36,7 +39,7 @@ class AuthNavigationScreen : Screen {
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = stringResource(SharedRes.strings.sing_in_with_email),
+                    text = stringResource(SharedRes.strings.sing_in_with),
                     color = FitnessAppTheme.colors.contentPrimary,
                     style = FitnessAppTheme.typography.labelLarge
                 )

@@ -19,7 +19,7 @@ import components.HorizontalSpacer
 import components.IconVector
 import dev.icerock.moko.resources.compose.stringResource
 import theme.FitnessAppTheme
-import utils.ModelLayout
+import presentation.ModelLayout
 
 class LoginScreen : Screen {
 

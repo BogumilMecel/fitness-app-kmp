@@ -1,17 +1,20 @@
 package presentation.login
 
+import cafe.adriel.voyager.core.model.screenModelScope
+import domain.model.ResourceProvider
+import domain.use_case.LogInUserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
-import presentation.register.RegisterScreen
-import utils.BaseModel
+import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import presentation.BaseModel
 
-class LoginScreenModel: BaseModel() {
+class LoginScreenModel(
+    private val resourceProvider: ResourceProvider,
+    private val logInUserUseCase: LogInUserUseCase
+): BaseModel(), KoinComponent {
 
     val state = MutableStateFlow(LoginState())
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
 
     fun onEmailChanged(value: String) {
         state.update {
@@ -26,7 +29,14 @@ class LoginScreenModel: BaseModel() {
     }
 
     fun onLoginButtonClicked() {
+        screenModelScope.launch {
+            logInUserUseCase(
+                email = state.value.email,
+                password = state.value.password
+            ).handle {
 
+            }
+        }
     }
 
     fun onForgotPasswordClicked() {

@@ -147,7 +147,7 @@ sealed class IconVector(
 
     data object Email : IconVector(
         imageVector = Icons.Default.Email,
-        contentDescriptionResource = SharedRes.strings.email
+        contentDescriptionResource = SharedRes.strings.email_icon
     )
 
     data object Password : IconVector(

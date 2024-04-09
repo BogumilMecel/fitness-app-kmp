@@ -1,6 +1,6 @@
 package presentation.register
 
-import utils.BaseModel
+import presentation.BaseModel
 
 class RegisterScreenModel: BaseModel() {
 

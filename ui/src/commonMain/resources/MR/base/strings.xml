@@ -9,7 +9,7 @@
     <string name="log_out">Log out icon</string>
     <string name="save">Save icon</string>
     <string name="edit">Edit icon</string>
-    <string name="email">Email icon</string>
+    <string name="email_icon">Email icon</string>
     <string name="password">Password icon</string>
     <string name="login">Login icon</string>
     <string name="account">Account icon</string>
@@ -28,11 +28,21 @@
     <string name="login">Log into your account</string>
     <string name="sign_in">Sign In</string>
     <string name="forgot_password">Forgot Password?</string>
-    <string name="sing_in_with_email">Sign In With</string>
+    <string name="sing_in_with">Sign In With</string>
     <string name="email">Email</string>
     <string name="google">Google</string>
     <string name="or_">or</string>
     <string name="sign_up_with_email">Sign up with email</string>
     <string name="welcome_to">Welcome To Fitness App</string>
+    <string name="empty_fields_error">Please Make Sure All Fields Are Filled In Correctly.</string>
+    <string name="password_not_match_error">Please Make Sure Both Passwords Are The Same.</string>
+    <string name="i_have_an_account_login">I Have An Account! Login</string>
+    <string name="please_enter_your_email_in_order_to_reset_your_password">Please Enter Your Email In Order To Reset Your Password.</string>
+    <string name="reset_your_password">Reset your password</string>
+    <string name="reset_my_password">SEND EMAIL</string>
+    <string name="password_length_error">please make sure your password is at least %d characters and is not longer than %d characters</string>
+    <string name="register_email_length_invalid">Please make sure you have entered correct email</string>
+    <string name="register_username_length_invalid">Please make sure you have entered correct username</string>
+    <string name="invalid_email_error">Please make sure you have entered the correct email</string>
     <!--    auth ↑ ↑ ↑-->
 </resources>

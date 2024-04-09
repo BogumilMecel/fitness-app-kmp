@@ -2,7 +2,7 @@ package presentation.navigation_screen
 
 import presentation.login.LoginScreen
 import presentation.register.RegisterScreen
-import utils.BaseModel
+import presentation.BaseModel
 
 class AuthNavigationModel: BaseModel() {
 

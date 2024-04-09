@@ -1,21 +1,20 @@
-package com.gmail.bogumilmecel2.fitnessappv2.feature_auth.domain.repository
+package domain.repository
 
-import com.gmail.bogumilmecel2.fitnessappv2.common.util.Resource
-import com.gmail.bogumilmecel2.fitnessappv2.feature_auth.domain.model.LoginRequest
-import com.gmail.bogumilmecel2.fitnessappv2.feature_auth.domain.model.RegisterRequest
-import com.gmail.bogumilmecel2.fitnessappv2.feature_auth.domain.model.TokenResponse
+import domain.model.AuthRequest
+import domain.model.AuthResponse
+import utils.Resource
 
 interface AuthRepository {
 
     suspend fun logInUser(
-        loginRequest: LoginRequest
-    ): Resource<TokenResponse>
+        authRequest: AuthRequest
+    ): Resource<AuthResponse>
 
     suspend fun registerUser(
-        registerRequest: RegisterRequest
+        authRequest: AuthRequest
     ): Resource<Unit>
 
     suspend fun sendPasswordResetEmail(
-        email: String
-    ): Resource<Boolean>
+        authRequest: AuthRequest
+    ): Resource<Unit>
 }

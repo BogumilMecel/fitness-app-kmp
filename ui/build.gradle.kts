@@ -24,7 +24,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "ComposeApp"
+            baseName = "ui"
             isStatic = true
             export("dev.icerock.moko:resources:0.23.0")
             export("dev.icerock.moko:graphics:0.9.0")
