@@ -12,7 +12,7 @@ import presentation.navigation_screen.AuthNavigationModel
 import presentation.register.RegisterScreenModel
 
 val authModule = module {
-    single { AuthApiClient(baseApiClient = get()) }
+    single { AuthApiClient(httpClient = get()) }
     single<AuthRepository> { AuthRepositoryImp(authApiClient = get()) }
     single { ValidateEmailUseCase(resourceProvider = get()) }
     single { ValidatePasswordUseCase(resourceProvider = get()) }
