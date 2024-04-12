@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
+import org.lighthousegames.logging.logging
 import presentation.BaseModel
 
 class LoginScreenModel(
@@ -33,9 +34,14 @@ class LoginScreenModel(
             logInUserUseCase(
                 email = state.value.email,
                 password = state.value.password
-            ).handle {
+            ).handle(
+                onError = {
+                    logging(tag = "error").error { it.uiText }
+                },
+                onSuccess = {
 
-            }
+                }
+            )
         }
     }
 

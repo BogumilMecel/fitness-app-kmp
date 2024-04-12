@@ -11,12 +11,12 @@ import io.ktor.client.request.url
 class AuthApiClient(private val httpClient: HttpClient) {
 
     suspend fun login(authRequest: AuthRequest) = httpClient.post {
-        url(urlString = "/authentication/signup/")
+        url(urlString = "/authentication/signin/")
         setBody(authRequest)
     }.body<AuthResponse>()
 
     suspend fun register(authRequest: AuthRequest) = httpClient.post {
-        url(urlString = "/authentication/signin/")
+        url(urlString = "/authentication/signup/")
         setBody(authRequest)
     }.body<Unit>()
 }

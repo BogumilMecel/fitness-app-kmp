@@ -1,14 +1,28 @@
 package utils
 
+import io.ktor.client.plugins.ClientRequestException
+
 sealed class Resource<T>(open val data: T? = null) {
     data class Success<T>(override val data: T) : Resource<T>()
-    open class Error<T>(val uiText: String = "unknown error") : Resource<T>() {
-        fun getHttpCode(): Int? = (this as? ComplexError)?.exception?.getHttpCode()
+    data class Error<T>(
+        val uiText: String = "unknown error",
+        val exception: Exception? = null
+    ) : Resource<T>() {
+
+        companion object {
+            fun <T> createFromException(exception: Exception) = Error<T>(
+                exception = exception,
+                uiText = exception.message ?: exception.getHttpCode()?.let {
+                    "Error $it"
+                } ?: "unknown error"
+            )
+        }
+
+        fun getHttpCode(): Int? = exception?.getHttpCode()
     }
-    data class ComplexError<T>(val exception: Exception) :
-        Error<T>(uiText = exception.message ?: "unknown error")
 }
 
-fun <T> Resource.ComplexError<*>.copyType() = Resource.ComplexError<T>(
+fun <T> Resource.Error<*>.copyType() = Resource.Error<T>(
+    uiText = uiText,
     exception = exception,
 )

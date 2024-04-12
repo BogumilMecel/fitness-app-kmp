@@ -3,6 +3,7 @@ package domain.use_case
 import domain.model.AuthRequest
 import domain.repository.AuthRepository
 import utils.Resource
+import utils.copyType
 
 class LogInUserUseCase(
     private val authRepository: AuthRepository,
@@ -25,7 +26,7 @@ class LogInUserUseCase(
 
         return when (resource) {
             is Resource.Success -> Resource.Error("not implemented yet, token: ${resource.data.token}")
-            is Resource.Error -> Resource.Error(resource.uiText)
+            is Resource.Error -> resource.copyType()
         }
     }
 }

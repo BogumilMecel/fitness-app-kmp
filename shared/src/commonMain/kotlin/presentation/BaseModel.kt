@@ -33,21 +33,19 @@ open class BaseModel : ScreenModel {
     protected inline fun <T> Resource<T>.handle(
         showSnackbar: Boolean = true,
         finally: () -> Unit = {},
-        onError: (Exception) -> Unit = {},
-        block: (T) -> Unit
+        onError: (Resource.Error<T>) -> Unit = {},
+        onSuccess: (T) -> Unit
     ) {
         when (this) {
-            is Resource.ComplexError -> {
-                onError(exception)
-            }
-
             is Resource.Error -> {
                 if (showSnackbar) {
+                    // TODO: Add snackbar when ready
                 }
+                onError(this)
             }
 
             is Resource.Success -> {
-                block(this.data)
+                onSuccess(data)
             }
         }
         finally()

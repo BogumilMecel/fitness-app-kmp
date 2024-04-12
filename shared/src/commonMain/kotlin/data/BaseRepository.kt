@@ -8,7 +8,7 @@ open class BaseRepository {
             Resource.Success(block())
         } catch (exception: Exception) {
             exception.printStackTrace()
-            Resource.ComplexError(exception = exception)
+            Resource.Error.createFromException(exception)
         }
     }
 }
