@@ -1,5 +1,6 @@
 package data
 
+import org.lighthousegames.logging.logging
 import utils.Resource
 
 open class BaseRepository {
@@ -7,8 +8,8 @@ open class BaseRepository {
         return try {
             Resource.Success(block())
         } catch (exception: Exception) {
-            exception.printStackTrace()
-            Resource.Error.createFromException(exception)
+            logging(tag = "BaseRepository").e { exception.message }
+            Resource.Error(exception)
         }
     }
 }

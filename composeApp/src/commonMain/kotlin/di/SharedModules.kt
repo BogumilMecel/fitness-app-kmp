@@ -17,6 +17,7 @@ import org.lighthousegames.logging.logging
 private val sharedModule = module {
     single<HttpClient> {
         HttpClient {
+            expectSuccess = true
             install(Logging) {
                 logger = Logger.DEFAULT
                 level = LogLevel.ALL

@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.lighthousegames.logging.logging
 import presentation.BaseModel
+import utils.getErrorMessage
 
 class LoginScreenModel(
     private val resourceProvider: ResourceProvider,
@@ -35,8 +36,12 @@ class LoginScreenModel(
                 email = state.value.email,
                 password = state.value.password
             ).handle(
-                onError = {
-                    logging(tag = "error").error { it.uiText }
+                onError = { exception ->
+                    exception.getErrorMessage {
+                        logging("LoginScreenModel").e {
+                            it
+                        }
+                    }
                 },
                 onSuccess = {
 

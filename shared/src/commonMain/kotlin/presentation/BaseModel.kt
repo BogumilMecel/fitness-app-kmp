@@ -33,7 +33,7 @@ open class BaseModel : ScreenModel {
     protected inline fun <T> Resource<T>.handle(
         showSnackbar: Boolean = true,
         finally: () -> Unit = {},
-        onError: (Resource.Error<T>) -> Unit = {},
+        onError: (Exception) -> Unit = {},
         onSuccess: (T) -> Unit
     ) {
         when (this) {
@@ -41,7 +41,7 @@ open class BaseModel : ScreenModel {
                 if (showSnackbar) {
                     // TODO: Add snackbar when ready
                 }
-                onError(this)
+                onError(exception)
             }
 
             is Resource.Success -> {
