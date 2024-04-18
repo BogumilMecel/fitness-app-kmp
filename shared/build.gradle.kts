@@ -60,6 +60,9 @@ kotlin {
 
             //serialization
             api(libs.kotlinx.serialization.json)
+
+            //key-value
+            implementation(libs.multiplatform.settings)
         }
         iosMain.dependencies {
             //http client

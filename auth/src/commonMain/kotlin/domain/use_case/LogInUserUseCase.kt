@@ -25,7 +25,7 @@ class LogInUserUseCase(
         )
 
         return when (resource) {
-            is Resource.Success -> Resource.Error.createSimple("not implemented yet, token: ${resource.data.token}")
+            is Resource.Success -> Resource.Error("not implemented yet, token: ${resource.data.token}")
             is Resource.Error -> resource.copyType()
         }
     }

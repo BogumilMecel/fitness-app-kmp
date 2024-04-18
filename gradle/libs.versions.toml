@@ -25,7 +25,8 @@ voyager = "1.0.0"
 moko = "0.23.0"
 
 ktor = "2.3.9"
-fitness-app-common = "1.6"
+
+multiplatform-setting = "1.1.1"
 
 [libraries]
 androidsvg-aar = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvgAar" }
@@ -55,7 +56,7 @@ moko-resources-generator = { module = "dev.icerock.moko:resources-generator", ve
 moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko"}
 moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko"}
 
-fitness-app-common = { module = "com.github.bodzio6978:fitness-app-common", version.ref = "fitness-app-common" }
+multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatform-setting"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
