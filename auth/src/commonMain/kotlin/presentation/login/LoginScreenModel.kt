@@ -1,7 +1,7 @@
 package presentation.login
 
 import cafe.adriel.voyager.core.model.screenModelScope
-import domain.model.ResourceProvider
+import domain.model.ResourcesService
 import domain.use_case.LogInUserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -12,7 +12,7 @@ import presentation.BaseModel
 import utils.getErrorMessage
 
 class LoginScreenModel(
-    private val resourceProvider: ResourceProvider,
+    private val resourcesService: ResourcesService,
     private val logInUserUseCase: LogInUserUseCase
 ): BaseModel(), KoinComponent {
 

@@ -14,15 +14,16 @@ import presentation.register.RegisterScreenModel
 val authModule = module {
     single { AuthApiClient(httpClient = get()) }
     single<AuthRepository> { AuthRepositoryImp(authApiClient = get()) }
-    single { ValidateEmailUseCase(resourceProvider = get()) }
-    single { ValidatePasswordUseCase(resourceProvider = get()) }
+    single { ValidateEmailUseCase(resourcesService = get()) }
+    single { ValidatePasswordUseCase(resourcesService = get()) }
     factory {
         LoginScreenModel(
-            resourceProvider = get(),
+            resourcesService = get(),
             logInUserUseCase = LogInUserUseCase(
                 authRepository = get(),
                 validateEmailUseCase = get(),
-                validatePasswordUseCase = get()
+                validatePasswordUseCase = get(),
+                settingsService = get()
             )
         )
     }

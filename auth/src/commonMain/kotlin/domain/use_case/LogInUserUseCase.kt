@@ -1,14 +1,15 @@
 package domain.use_case
 
 import domain.model.AuthRequest
+import domain.model.SettingsService
 import domain.repository.AuthRepository
 import utils.Resource
-import utils.copyType
 
 class LogInUserUseCase(
     private val authRepository: AuthRepository,
     private val validateEmailUseCase: ValidateEmailUseCase,
-    private val validatePasswordUseCase: ValidatePasswordUseCase
+    private val validatePasswordUseCase: ValidatePasswordUseCase,
+    private val settingsService: SettingsService
 ) {
     suspend operator fun invoke(email: String, password: String): Resource<Unit> {
         val emailValidationResource = validateEmailUseCase(email = email)
@@ -24,9 +25,11 @@ class LogInUserUseCase(
             )
         )
 
-        return when (resource) {
-            is Resource.Success -> Resource.Error("not implemented yet, token: ${resource.data.token}")
-            is Resource.Error -> resource.copyType()
+        resource.data?.token?.let {
+            settingsService.saveAccessToken(it)
+            return Resource.Success(Unit)
         }
+
+        return Resource.Error()
     }
 }

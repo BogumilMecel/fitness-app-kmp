@@ -1,18 +1,18 @@
 package utils.providers
 
+import android.content.Context
 import dev.icerock.moko.resources.StringResource
 import dev.icerock.moko.resources.desc.Resource
-import dev.icerock.moko.resources.desc.ResourceFormatted
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.format
-import domain.model.ResourceProvider
+import domain.model.ResourcesService
 
-actual class ResourceProviderImp : ResourceProvider {
+actual class ResourcesServiceImp(private val context: Context) : ResourcesService {
     override fun getString(resource: StringResource, args: List<Any>): String {
         return if (args.isEmpty()) {
-            StringDesc.Resource(resource).localized()
+            StringDesc.Resource(resource).toString(context = context)
         } else {
-            resource.format(*args.toTypedArray()).localized()
+            resource.format(args).toString(context = context)
         }
     }
 }

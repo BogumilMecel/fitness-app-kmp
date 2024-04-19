@@ -1,6 +1,6 @@
 package domain.model
 
-interface CachedValuesProvider {
+interface SettingsService {
     fun saveAccessToken(token: String)
     fun getAccessToken(): String?
 }

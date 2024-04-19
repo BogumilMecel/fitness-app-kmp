@@ -1,9 +1,9 @@
 package utils.providers
 
 import com.russhwolf.settings.Settings
-import domain.model.CachedValuesProvider
+import domain.model.SettingsService
 
-class CachedValuesProviderImp(private val settings: Settings): CachedValuesProvider {
+class SettingsServiceImp(private val settings: Settings): SettingsService {
 
     companion object {
         private const val ACCESS_TOKEN_KEY = "access_token_key"
