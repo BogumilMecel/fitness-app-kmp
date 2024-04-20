@@ -1,7 +1,7 @@
 package di
 
-import domain.model.ResourcesService
-import domain.model.SettingsService
+import domain.services.ResourcesService
+import domain.services.SettingsService
 import org.koin.core.module.Module
 import org.koin.core.scope.Scope
 import org.koin.dsl.module

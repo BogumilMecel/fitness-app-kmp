@@ -1,7 +1,7 @@
 package domain.use_case
 
 import domain.model.AuthRequest
-import domain.model.SettingsService
+import domain.services.SettingsService
 import domain.repository.AuthRepository
 import utils.Resource
 

@@ -2,7 +2,7 @@ package domain.use_case
 
 import com.gmail.bogumilmecel2.ui.SharedRes
 import domain.constants.AuthConstants
-import domain.model.ResourcesService
+import domain.services.ResourcesService
 import utils.Resource
 import utils.isLengthInRange
 

@@ -1,4 +1,4 @@
-package domain.model
+package domain.services
 
 interface SettingsService {
     fun saveAccessToken(token: String)

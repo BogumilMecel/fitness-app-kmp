@@ -1,4 +1,4 @@
-package domain.model
+package domain.services
 
 import dev.icerock.moko.resources.StringResource
 

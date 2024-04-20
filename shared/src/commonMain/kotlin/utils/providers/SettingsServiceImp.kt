@@ -1,7 +1,7 @@
 package utils.providers
 
 import com.russhwolf.settings.Settings
-import domain.model.SettingsService
+import domain.services.SettingsService
 
 class SettingsServiceImp(private val settings: Settings): SettingsService {
 

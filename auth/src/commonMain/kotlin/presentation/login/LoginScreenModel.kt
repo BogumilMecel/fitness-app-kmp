@@ -1,7 +1,7 @@
 package presentation.login
 
 import cafe.adriel.voyager.core.model.screenModelScope
-import domain.model.ResourcesService
+import domain.services.ResourcesService
 import domain.use_case.LogInUserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update

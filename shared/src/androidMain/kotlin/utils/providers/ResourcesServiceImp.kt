@@ -5,7 +5,7 @@ import dev.icerock.moko.resources.StringResource
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.format
-import domain.model.ResourcesService
+import domain.services.ResourcesService
 
 actual class ResourcesServiceImp(private val context: Context) : ResourcesService {
     override fun getString(resource: StringResource, args: List<Any>): String {
