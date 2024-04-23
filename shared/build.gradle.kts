@@ -63,6 +63,9 @@ kotlin {
 
             //key-value
             api(libs.multiplatform.settings)
+
+            //date
+            api(libs.kotlinx.date)
         }
         iosMain.dependencies {
             //http client
