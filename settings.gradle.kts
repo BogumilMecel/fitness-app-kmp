@@ -6,6 +6,7 @@ include(":composeApp")
 include(":ui")
 include(":shared")
 include(":auth")
+include(":splash")
 
 pluginManagement {
     repositories {

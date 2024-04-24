@@ -3,6 +3,7 @@ package presentation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -23,6 +24,10 @@ inline fun <reified T : BaseModel> Screen.ModelLayout(
                 when(navigationAction) {
                     is NavigationAction.ToScreen -> {
                         navigator.push(navigationAction.screen)
+                    }
+
+                    is NavigationAction.ToSharedScreen -> {
+                        navigator.replaceAll(ScreenRegistry.get(navigationAction.screen))
                     }
 
                     is NavigationAction.Back -> {
