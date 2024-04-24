@@ -2,12 +2,12 @@
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.Navigator
-import presentation.navigation_screen.AuthNavigationScreen
+import presentation.SplashScreen
 import theme.FitnessAppTheme
 
 @Composable
 fun App() {
     FitnessAppTheme(darkTheme = isSystemInDarkTheme()) {
-        Navigator(screen = AuthNavigationScreen())
+        Navigator(screen = SplashScreen())
     }
 }

@@ -6,6 +6,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import presentation.navigation.NavigationAction
+import presentation.navigation.SharedScreen
 import utils.Resource
 
 open class BaseModel : ScreenModel {
@@ -26,6 +27,14 @@ open class BaseModel : ScreenModel {
                     screen = screen,
                     withPopUp = withPopUp
                 )
+            )
+        }
+    }
+
+    fun navigateToSharedScreen(screen: SharedScreen) {
+        screenModelScope.launch {
+            navigation.send(
+                NavigationAction.ToSharedScreen(screen = screen)
             )
         }
     }

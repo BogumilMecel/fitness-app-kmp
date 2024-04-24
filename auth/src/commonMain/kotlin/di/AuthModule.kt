@@ -29,5 +29,4 @@ val authModule = module {
     }
     factory { RegisterScreenModel() }
     factory { AuthNavigationModel() }
-
 }
