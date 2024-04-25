@@ -45,4 +45,9 @@
     <string name="register_username_length_invalid">Please make sure you have entered correct username</string>
     <string name="invalid_email_error">Please make sure you have entered the correct email</string>
     <!--    auth ↑ ↑ ↑-->
+
+    <string name="bottom_nav_summary">Summary</string>
+    <string name="bottom_nav_diary">Diary</string>
+    <string name="bottom_nav_account">Account</string>
+    <string name="bottom_nav_training">Training</string>
 </resources>

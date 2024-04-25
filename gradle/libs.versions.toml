@@ -54,6 +54,7 @@ stately-common = { module = "co.touchlab:stately-common", version.ref = "stately
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager"}
 voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager"}
+voyager-tab = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
 
 moko-resources-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "moko"}
 moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko"}
