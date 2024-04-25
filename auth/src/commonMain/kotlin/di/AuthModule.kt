@@ -18,7 +18,6 @@ val authModule = module {
     single { ValidatePasswordUseCase(resourcesService = get()) }
     factory {
         LoginScreenModel(
-            resourcesService = get(),
             logInUserUseCase = LogInUserUseCase(
                 authRepository = get(),
                 validateEmailUseCase = get(),

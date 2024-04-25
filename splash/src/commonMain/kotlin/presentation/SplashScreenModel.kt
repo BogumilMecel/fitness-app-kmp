@@ -21,7 +21,7 @@ class SplashScreenModel (
                     navigateToSharedScreen(screen = SharedScreen.AuthNavigationScreen)
                 }
                 Result.NavigateToMainScreen -> {
-                    // TODO: Handle when adding main screen
+                    navigateToSharedScreen(screen = SharedScreen.TabNavigatorScreen)
                 }
             }
         }
