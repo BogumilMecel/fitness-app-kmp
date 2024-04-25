@@ -15,9 +15,7 @@ class SplashScreenModel (
         screenModelScope.launch {
             when(authenticateUserUseCase()) {
                 Result.NavigateToLogin -> {
-                    navigateToSharedScreen(
-                        screen = SharedScreen.AuthNavigationScreen
-                    )
+                    navigateToSharedScreen(screen = SharedScreen.AuthNavigationScreen)
                 }
                 Result.NavigateToIntroduction -> {
                     navigateToSharedScreen(screen = SharedScreen.AuthNavigationScreen)

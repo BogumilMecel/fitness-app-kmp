@@ -1,20 +1,14 @@
 package presentation.login
 
 import cafe.adriel.voyager.core.model.screenModelScope
-import domain.services.ResourcesService
 import domain.use_case.LogInUserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
-import org.lighthousegames.logging.logging
 import presentation.BaseModel
-import utils.getErrorMessage
 
-class LoginScreenModel(
-    private val resourcesService: ResourcesService,
-    private val logInUserUseCase: LogInUserUseCase
-): BaseModel(), KoinComponent {
+class LoginScreenModel(private val logInUserUseCase: LogInUserUseCase): BaseModel(), KoinComponent {
 
     val state = MutableStateFlow(LoginState())
 
@@ -36,13 +30,6 @@ class LoginScreenModel(
                 email = state.value.email,
                 password = state.value.password
             ).handle(
-                onError = { exception ->
-                    exception.getErrorMessage {
-                        logging("LoginScreenModel").e {
-                            it
-                        }
-                    }
-                },
                 onSuccess = {
 
                 }
