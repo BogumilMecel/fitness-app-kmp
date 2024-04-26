@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import com.gmail.bogumilmecel2.ui.SharedRes
@@ -41,7 +42,7 @@ class LoginScreen : Screen {
                     verticalArrangement = Arrangement.Center,
                 ) {
                     FitnessAppTextField(
-                        value = state.email,
+                        textFieldData = state.email,
                         label = stringResource(SharedRes.strings.email_address),
                         onValueChange = ::onEmailChanged,
                         leadingIcon = IconVector.Email
@@ -50,9 +51,10 @@ class LoginScreen : Screen {
                     HorizontalSpacer()
 
                     FitnessAppTextField(
-                        value = state.password,
+                        textFieldData = state.password,
                         label = stringResource(resource = SharedRes.strings.password),
                         onValueChange = ::onPasswordChanged,
+                        visualTransformation = PasswordVisualTransformation(),
                         leadingIcon = IconVector.Password
                     )
 

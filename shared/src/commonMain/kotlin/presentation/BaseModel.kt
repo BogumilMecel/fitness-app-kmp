@@ -3,13 +3,20 @@ package presentation
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import cafe.adriel.voyager.core.screen.Screen
+import components.TextFieldData
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
 import presentation.navigation.NavigationAction
 import presentation.navigation.SharedScreen
 import utils.Resource
 
-open class BaseModel : ScreenModel {
+open class BaseModel : ScreenModel, KoinComponent {
 
     val navigation = Channel<NavigationAction>()
 
@@ -43,7 +50,7 @@ open class BaseModel : ScreenModel {
         showSnackbar: Boolean = true,
         finally: () -> Unit = {},
         onError: (Exception) -> Unit = {},
-        onSuccess: (T) -> Unit
+        onSuccess: (T) -> Unit = {}
     ) {
         when (this) {
             is Resource.Error -> {
@@ -67,4 +74,17 @@ open class BaseModel : ScreenModel {
             )
         }
     }
+
+    protected fun <T> Flow<T>.collectInScreenModel(initialValue: T) =
+        stateIn(screenModelScope, SharingStarted.Eagerly, initialValue = initialValue)
+
+    protected fun MutableStateFlow<TextFieldData>.updateText(text: String) =
+        update { it.copy(text = text) }
+
+    protected fun MutableStateFlow<TextFieldData>.getText() = value.text
+
+    protected fun MutableStateFlow<TextFieldData>.updateError(error: String) =
+        update { it.copy(error = error) }
+
+    protected fun MutableStateFlow<TextFieldData>.isError() = value.error != null
 }
