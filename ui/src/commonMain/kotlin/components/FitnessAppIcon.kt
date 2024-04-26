@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.Password
 import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -172,6 +173,11 @@ sealed class IconVector(
 
     data object Info : IconVector(
         imageVector = Icons.Default.Info,
+        contentDescriptionResource = SharedRes.strings.info
+    )
+
+    data object InfoOutlined : IconVector(
+        imageVector = Icons.Outlined.Info,
         contentDescriptionResource = SharedRes.strings.info
     )
 

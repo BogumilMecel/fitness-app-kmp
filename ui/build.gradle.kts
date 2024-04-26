@@ -37,8 +37,9 @@ kotlin {
             implementation(libs.androidsvg.aar)
         }
         commonMain.dependencies {
-            api(compose.material)
             implementation(compose.material3)
+
+            api(compose.material)
             api(compose.materialIconsExtended)
             api(libs.moko.resources)
             api(libs.moko.resources.compose)
