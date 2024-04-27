@@ -17,25 +17,23 @@ class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
         LoginState(email = email, password = password)
     }.collectInScreenModel(LoginState())
 
-    fun onEmailChanged(value: String) = email.updateText(value)
+    fun onEmailChanged(value: String) = email.setText(value)
 
-    fun onPasswordChanged(value: String) = password.updateText(value)
+    fun onPasswordChanged(value: String) = password.setText(value)
 
     fun onForgotPasswordClicked() {
 
     }
 
     fun onLoginButtonClicked() {
-        loginUseCases.validateEmailUseCase(email = email.getText()).handle(
-            onError = {
-                // TODO: handle exception
-            }
-        )
-        loginUseCases.validatePasswordUseCase(password = password.getText()).handle(
-            onError = {
-                // TODO: handle exception
-            }
-        )
+        loginUseCases.validateEmailUseCase(
+            email = email.getText()
+        ).handle(validationField = email)
+
+        loginUseCases.validatePasswordUseCase(
+            password = password.getText()
+        ).handle(validationField = password)
+
         if (!email.isError() && !password.isError()) {
             requestLogin()
         }

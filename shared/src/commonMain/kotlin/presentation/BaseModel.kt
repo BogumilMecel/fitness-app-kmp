@@ -67,6 +67,30 @@ open class BaseModel : ScreenModel, KoinComponent {
         finally()
     }
 
+    protected inline fun <T> Resource<T>.handle(validationField: MutableStateFlow<TextFieldData>) {
+        handle(
+            onError = { validationField.setError(it.message) },
+            onSuccess = { validationField.setError(null) }
+        )
+    }
+
+    protected inline fun <T> Resource<T>.handle(
+        finally: () -> Unit = {},
+        onError: (Exception) -> Unit = {},
+        onSuccess: (T) -> Unit = {}
+    ) {
+        when (this) {
+            is Resource.Error -> {
+                onError(exception)
+            }
+
+            is Resource.Success -> {
+                onSuccess(data)
+            }
+        }
+        finally()
+    }
+
     private fun navigateBack(withPopUp: Boolean = false) {
         screenModelScope.launch {
             navigation.send(
@@ -78,12 +102,12 @@ open class BaseModel : ScreenModel, KoinComponent {
     protected fun <T> Flow<T>.collectInScreenModel(initialValue: T) =
         stateIn(screenModelScope, SharingStarted.Eagerly, initialValue = initialValue)
 
-    protected fun MutableStateFlow<TextFieldData>.updateText(text: String) =
+    protected fun MutableStateFlow<TextFieldData>.setText(text: String) =
         update { it.copy(text = text) }
 
     protected fun MutableStateFlow<TextFieldData>.getText() = value.text
 
-    protected fun MutableStateFlow<TextFieldData>.updateError(error: String) =
+    protected fun MutableStateFlow<TextFieldData>.setError(error: String?) =
         update { it.copy(error = error) }
 
     protected fun MutableStateFlow<TextFieldData>.isError() = value.error != null
