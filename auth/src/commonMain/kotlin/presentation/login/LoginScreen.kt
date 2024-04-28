@@ -45,6 +45,7 @@ class LoginScreen : Screen {
                         textFieldData = state.email,
                         label = stringResource(SharedRes.strings.email_address),
                         onValueChange = ::onEmailChanged,
+                        onErrorCleared = ::onEmailErrorCleared,
                         leadingIcon = IconVector.Email
                     )
 
@@ -54,8 +55,9 @@ class LoginScreen : Screen {
                         textFieldData = state.password,
                         label = stringResource(resource = SharedRes.strings.password),
                         onValueChange = ::onPasswordChanged,
+                        onErrorCleared = ::onPasswordErrorCleared,
                         visualTransformation = PasswordVisualTransformation(),
-                        leadingIcon = IconVector.Password
+                        leadingIcon = IconVector.Password,
                     )
 
                     HorizontalSpacer(size = 24.dp)

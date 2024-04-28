@@ -19,7 +19,11 @@ class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
 
     fun onEmailChanged(value: String) = email.setText(value)
 
+    fun onEmailErrorCleared() = email.clearError()
+
     fun onPasswordChanged(value: String) = password.setText(value)
+
+    fun onPasswordErrorCleared() = password.clearError()
 
     fun onForgotPasswordClicked() {
 

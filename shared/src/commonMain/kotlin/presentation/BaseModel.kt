@@ -67,7 +67,7 @@ open class BaseModel : ScreenModel, KoinComponent {
         finally()
     }
 
-    protected inline fun <T> Resource<T>.handle(validationField: MutableStateFlow<TextFieldData>) {
+    protected fun <T> Resource<T>.handle(validationField: MutableStateFlow<TextFieldData>) {
         handle(
             onError = { validationField.setError(it.message) },
             onSuccess = { validationField.setError(null) }
@@ -107,8 +107,11 @@ open class BaseModel : ScreenModel, KoinComponent {
 
     protected fun MutableStateFlow<TextFieldData>.getText() = value.text
 
-    protected fun MutableStateFlow<TextFieldData>.setError(error: String?) =
+    private fun MutableStateFlow<TextFieldData>.setError(error: String?) =
         update { it.copy(error = error) }
+
+    protected fun MutableStateFlow<TextFieldData>.clearError() =
+        update { it.copy(error = null) }
 
     protected fun MutableStateFlow<TextFieldData>.isError() = value.error != null
 }
