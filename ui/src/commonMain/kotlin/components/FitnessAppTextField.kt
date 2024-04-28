@@ -1,21 +1,30 @@
 package components
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import theme.FitnessAppTheme
@@ -25,12 +34,19 @@ fun FitnessAppTextField(
     modifier: Modifier = Modifier,
     textFieldData: TextFieldData,
     onValueChange: (String) -> Unit,
+    onErrorCleared: (() -> Unit)? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     leadingIcon: Icon? = null,
     label: String
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
+
+    LaunchedEffect(key1 = isFocused) {
+        if (isFocused) {
+            onErrorCleared?.invoke()
+        }
+    }
 
     val isError = textFieldData.error != null
     val focusedColor by animateColorAsState(
@@ -60,7 +76,10 @@ fun FitnessAppTextField(
     ) {
         OutlinedTextField(
             value = textFieldData.text,
-            onValueChange = onValueChange,
+            onValueChange = {
+                onErrorCleared?.invoke()
+                onValueChange(it)
+            },
             modifier = modifier.fillMaxWidth(),
             textStyle = FitnessAppTheme.typography.bodyLarge,
             label = { Text(text = label) },
@@ -68,6 +87,21 @@ fun FitnessAppTextField(
                 leadingIcon?.let {
                     FitnessAppIcon(
                         icon = leadingIcon,
+                        tint = iconColor
+                    )
+                }
+            },
+            trailingIcon = {
+                AnimatedVisibility(
+                    visible = isFocused,
+                    enter = fadeIn(),
+                    exit = fadeOut()
+                ) {
+                    FitnessAppIcon(
+                        icon = IconVector.Close,
+                        modifier = Modifier.clickable {
+                            onValueChange("")
+                        },
                         tint = iconColor
                     )
                 }
@@ -81,7 +115,7 @@ fun FitnessAppTextField(
                 focusedLabelColor = focusedColor,
                 unfocusedLabelColor = labelColor,
             ),
-            interactionSource = interactionSource
+            interactionSource = interactionSource,
         )
 
         textFieldData.error?.let {

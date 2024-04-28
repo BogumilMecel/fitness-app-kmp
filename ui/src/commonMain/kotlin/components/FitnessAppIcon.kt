@@ -8,6 +8,7 @@ import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Email
@@ -174,6 +175,11 @@ sealed class IconVector(
     data object Info : IconVector(
         imageVector = Icons.Default.Info,
         contentDescriptionResource = SharedRes.strings.info
+    )
+
+    data object Close : IconVector(
+        imageVector = Icons.Default.Close,
+        contentDescriptionResource = SharedRes.strings.close
     )
 
     data object InfoOutlined : IconVector(
