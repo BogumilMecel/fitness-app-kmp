@@ -99,19 +99,22 @@ open class BaseModel : ScreenModel, KoinComponent {
         }
     }
 
-    protected fun <T> Flow<T>.collectInScreenModel(initialValue: T) =
-        stateIn(screenModelScope, SharingStarted.Eagerly, initialValue = initialValue)
-
-    protected fun MutableStateFlow<TextFieldData>.setText(text: String) =
-        update { it.copy(text = text) }
-
     protected fun MutableStateFlow<TextFieldData>.getText() = value.text
 
-    private fun MutableStateFlow<TextFieldData>.setError(error: String?) =
-        update { it.copy(error = error) }
+    private fun MutableStateFlow<TextFieldData>.setError(error: String?) = update {
+        it.copy(error = error)
+    }
 
-    protected fun MutableStateFlow<TextFieldData>.clearError() =
-        update { it.copy(error = null) }
+    fun MutableStateFlow<TextFieldData>.isError() = value.error != null
 
-    protected fun MutableStateFlow<TextFieldData>.isError() = value.error != null
+    fun MutableStateFlow<TextFieldData>.initTextField(
+        initialValue: String = "",
+        onValueChange: ((String) -> Unit)? = null
+    ) {
+        value = TextFieldData(
+            text = initialValue,
+            onValueChange = onValueChange ?: { newValue -> update { it.copy(text = newValue) } },
+            onErrorCleared = { update { it.copy(error = null) } }
+        )
+    }
 }

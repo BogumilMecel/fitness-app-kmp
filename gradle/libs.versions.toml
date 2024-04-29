@@ -7,9 +7,9 @@ android-targetSdk = "34"
 androidsvgAar = "1.4"
 androidx-activityCompose = "1.8.2"
 compose = "1.6.2"
-compose-plugin = "1.6.0"
+compose-plugin = "1.6.2"
 
-kotlin = "1.9.22"
+kotlin = "1.9.23"
 
 koin = "3.5.3"
 koin-compose = "1.1.2"

@@ -4,29 +4,21 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import components.TextFieldData
 import domain.use_case.LoginUseCases
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import presentation.BaseModel
 
 class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
 
-    private val email = MutableStateFlow(TextFieldData())
-    private val password = MutableStateFlow(TextFieldData())
+    val email = MutableStateFlow(TextFieldData())
+    val password = MutableStateFlow(TextFieldData())
 
-    val state = combine(email, password) { email, password ->
-        LoginState(email = email, password = password)
-    }.collectInScreenModel(LoginState())
-
-    fun onEmailChanged(value: String) = email.setText(value)
-
-    fun onEmailErrorCleared() = email.clearError()
-
-    fun onPasswordChanged(value: String) = password.setText(value)
-
-    fun onPasswordErrorCleared() = password.clearError()
+    init {
+        email.initTextField()
+        password.initTextField()
+    }
 
     fun onForgotPasswordClicked() {
-
+        // TODO: Navigate to forgot password activity
     }
 
     fun onLoginButtonClicked() {
