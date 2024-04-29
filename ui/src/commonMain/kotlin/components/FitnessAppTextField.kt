@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
@@ -24,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import theme.FitnessAppTheme
+import utils.ClickableContent
 
 @Composable
 fun FitnessAppTextField(
@@ -31,6 +33,7 @@ fun FitnessAppTextField(
     textFieldData: TextFieldData,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     leadingIcon: Icon? = null,
+    trailingIcon: ClickableContent.Icon? = null,
     label: String
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -86,19 +89,34 @@ fun FitnessAppTextField(
                 }
             },
             trailingIcon = {
-                AnimatedVisibility(
-                    visible = isFocused && textFieldData.text.isNotEmpty(),
-                    enter = fadeIn(),
-                    exit = fadeOut()
+                Row(
+                    modifier = Modifier.animateContentSize(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    FitnessAppIcon(
-                        icon = IconVector.Close,
-                        modifier = Modifier.clickable {
-                            textFieldData.onErrorCleared()
-                            textFieldData.onValueChange("")
-                        },
-                        tint = iconColor
-                    )
+                    trailingIcon?.let {
+                        FitnessAppIcon(
+                            icon = it.icon,
+                            modifier = Modifier.clickable(onClick = it.onClick),
+                            tint = iconColor
+                        )
+                    }
+
+                    AnimatedVisibility(
+                        visible = isFocused && textFieldData.text.isNotEmpty(),
+                        enter = fadeIn(),
+                        exit = fadeOut()
+                    ) {
+                        FitnessAppIcon(
+                            icon = IconVector.Close,
+                            modifier = Modifier
+                                .padding(end = if (trailingIcon == null) 0.dp else 12.dp)
+                                .clickable {
+                                    textFieldData.onErrorCleared()
+                                    textFieldData.onValueChange("")
+                                },
+                            tint = iconColor
+                        )
+                    }
                 }
             },
             visualTransformation = visualTransformation,

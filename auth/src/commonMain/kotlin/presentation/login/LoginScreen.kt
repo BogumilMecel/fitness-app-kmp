@@ -8,7 +8,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import com.gmail.bogumilmecel2.ui.SharedRes
@@ -21,6 +20,9 @@ import components.IconVector
 import dev.icerock.moko.resources.compose.stringResource
 import theme.FitnessAppTheme
 import presentation.ModelLayout
+import utils.ClickableContent
+import utils.PasswordTransformationWithVisibility
+import utils.PasswordVisibilityIcon
 
 class LoginScreen : Screen {
 
@@ -29,6 +31,7 @@ class LoginScreen : Screen {
         ModelLayout<LoginScreenModel> {
             val email by email.collectAsState()
             val password by password.collectAsState()
+            val passwordVisible by passwordVisible.collectAsState()
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 FitnessAppTopBar(
@@ -53,8 +56,14 @@ class LoginScreen : Screen {
                     FitnessAppTextField(
                         textFieldData = password,
                         label = stringResource(resource = SharedRes.strings.password),
-                        visualTransformation = PasswordVisualTransformation(),
+                        visualTransformation = PasswordTransformationWithVisibility(
+                            passwordVisible = passwordVisible
+                        ),
                         leadingIcon = IconVector.Password,
+                        trailingIcon = ClickableContent.Icon(
+                            icon = PasswordVisibilityIcon(passwordVisible = passwordVisible),
+                            onClick = ::onShowPasswordClicked
+                        )
                     )
 
                     HorizontalSpacer(size = 24.dp)

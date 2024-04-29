@@ -21,6 +21,8 @@
     <string name="clear">Clear icon</string>
     <string name="register">Register icon</string>
     <string name="close">Close icon</string>
+    <string name="visibility_icon">Visibility icon</string>
+    <string name="visibility_off_icon">Visibility off icon</string>
     <!--    Icon description ↑ ↑ ↑-->
 
     <!--    auth ↓ ↓ ↓-->
