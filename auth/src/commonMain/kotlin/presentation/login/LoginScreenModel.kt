@@ -11,6 +11,7 @@ class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
 
     val email = MutableStateFlow(TextFieldData())
     val password = MutableStateFlow(TextFieldData())
+    val passwordVisible = MutableStateFlow(true)
 
     init {
         email.initTextField()
@@ -19,6 +20,10 @@ class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
 
     fun onForgotPasswordClicked() {
         // TODO: Navigate to forgot password activity
+    }
+
+    fun onShowPasswordClicked() {
+        passwordVisible.value = !passwordVisible.value
     }
 
     fun onLoginButtonClicked() {

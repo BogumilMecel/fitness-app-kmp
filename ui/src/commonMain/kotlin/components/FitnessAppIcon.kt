@@ -21,6 +21,8 @@ import androidx.compose.material.icons.filled.Password
 import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -205,5 +207,15 @@ sealed class IconVector(
     data object Clear : IconVector(
         imageVector = Icons.Default.Clear,
         contentDescriptionResource = SharedRes.strings.clear
+    )
+
+    data object Visibility : IconVector(
+        imageVector = Icons.Default.Visibility,
+        contentDescriptionResource = SharedRes.strings.visibility_icon
+    )
+
+    data object VisibilityOff : IconVector(
+        imageVector = Icons.Default.VisibilityOff,
+        contentDescriptionResource = SharedRes.strings.visibility_off_icon
     )
 }
