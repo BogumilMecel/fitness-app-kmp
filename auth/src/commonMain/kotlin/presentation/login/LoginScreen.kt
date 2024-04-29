@@ -27,7 +27,8 @@ class LoginScreen : Screen {
     @Composable
     override fun Content() {
         ModelLayout<LoginScreenModel> {
-            val state by state.collectAsState()
+            val email by email.collectAsState()
+            val password by password.collectAsState()
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 FitnessAppTopBar(
@@ -42,20 +43,16 @@ class LoginScreen : Screen {
                     verticalArrangement = Arrangement.Center,
                 ) {
                     FitnessAppTextField(
-                        textFieldData = state.email,
+                        textFieldData = email,
                         label = stringResource(SharedRes.strings.email_address),
-                        onValueChange = ::onEmailChanged,
-                        onErrorCleared = ::onEmailErrorCleared,
                         leadingIcon = IconVector.Email
                     )
 
                     HorizontalSpacer()
 
                     FitnessAppTextField(
-                        textFieldData = state.password,
+                        textFieldData = password,
                         label = stringResource(resource = SharedRes.strings.password),
-                        onValueChange = ::onPasswordChanged,
-                        onErrorCleared = ::onPasswordErrorCleared,
                         visualTransformation = PasswordVisualTransformation(),
                         leadingIcon = IconVector.Password,
                     )

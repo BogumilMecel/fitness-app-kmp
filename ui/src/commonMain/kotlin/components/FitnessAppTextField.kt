@@ -1,6 +1,5 @@
 package components
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
@@ -13,8 +12,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
@@ -24,7 +21,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import theme.FitnessAppTheme
@@ -33,8 +29,6 @@ import theme.FitnessAppTheme
 fun FitnessAppTextField(
     modifier: Modifier = Modifier,
     textFieldData: TextFieldData,
-    onValueChange: (String) -> Unit,
-    onErrorCleared: (() -> Unit)? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     leadingIcon: Icon? = null,
     label: String
@@ -44,7 +38,7 @@ fun FitnessAppTextField(
 
     LaunchedEffect(key1 = isFocused) {
         if (isFocused) {
-            onErrorCleared?.invoke()
+            textFieldData.onErrorCleared()
         }
     }
 
@@ -77,8 +71,8 @@ fun FitnessAppTextField(
         OutlinedTextField(
             value = textFieldData.text,
             onValueChange = {
-                onErrorCleared?.invoke()
-                onValueChange(it)
+                textFieldData.onErrorCleared()
+                textFieldData.onValueChange(it)
             },
             modifier = modifier.fillMaxWidth(),
             textStyle = FitnessAppTheme.typography.bodyLarge,
@@ -93,14 +87,15 @@ fun FitnessAppTextField(
             },
             trailingIcon = {
                 AnimatedVisibility(
-                    visible = isFocused,
+                    visible = isFocused && textFieldData.text.isNotEmpty(),
                     enter = fadeIn(),
                     exit = fadeOut()
                 ) {
                     FitnessAppIcon(
                         icon = IconVector.Close,
                         modifier = Modifier.clickable {
-                            onValueChange("")
+                            textFieldData.onErrorCleared()
+                            textFieldData.onValueChange("")
                         },
                         tint = iconColor
                     )
@@ -140,5 +135,7 @@ fun FitnessAppTextField(
 
 data class TextFieldData(
     val text: String = "",
-    val error: String? = null
+    val onValueChange: (String) -> Unit = {},
+    val error: String? = null,
+    val onErrorCleared: () -> Unit = {},
 )
