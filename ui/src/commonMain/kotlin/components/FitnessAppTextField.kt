@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -32,9 +33,11 @@ fun FitnessAppTextField(
     modifier: Modifier = Modifier,
     textFieldData: TextFieldData,
     visualTransformation: VisualTransformation = VisualTransformation.None,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     leadingIcon: Icon? = null,
     trailingIcon: ClickableContent.Icon? = null,
     label: String
+    maxLines: Int = 1
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
@@ -129,6 +132,8 @@ fun FitnessAppTextField(
                 unfocusedLabelColor = labelColor,
             ),
             interactionSource = interactionSource,
+            keyboardOptions = keyboardOptions,
+            maxLines = maxLines
         )
 
         textFieldData.error?.let {

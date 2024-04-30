@@ -96,7 +96,7 @@ sealed class IconPainter(
 ) : Icon {
     data object Google : IconPainter(
         imageResource = SharedRes.images.google_logo,
-        contentDescriptionResource = SharedRes.strings.account
+        contentDescriptionResource = SharedRes.strings.account_icon
     )
 }
 
@@ -106,47 +106,47 @@ sealed class IconVector(
 ) : Icon {
     data object Heart : IconVector(
         imageVector = Icons.Default.FavoriteBorder,
-        contentDescriptionResource = SharedRes.strings.favorite
+        contentDescriptionResource = SharedRes.strings.favorite_icon
     )
 
     data object HeartFilled : IconVector(
         imageVector = Icons.Filled.Favorite,
-        contentDescriptionResource = SharedRes.strings.favorite_filled
+        contentDescriptionResource = SharedRes.strings.favorite_filled_icon
     )
 
     data object Back : IconVector(
         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-        contentDescriptionResource = SharedRes.strings.back
+        contentDescriptionResource = SharedRes.strings.back_icon
     )
 
     data object Search : IconVector(
         imageVector = Icons.Default.Search,
-        contentDescriptionResource = SharedRes.strings.search
+        contentDescriptionResource = SharedRes.strings.search_icon
     )
 
     data object Cancel : IconVector(
         imageVector = Icons.Default.Search,
-        contentDescriptionResource = SharedRes.strings.cancel
+        contentDescriptionResource = SharedRes.strings.cancel_icon
     )
 
     data object Add : IconVector(
         imageVector = Icons.Default.Add,
-        contentDescriptionResource = SharedRes.strings.add
+        contentDescriptionResource = SharedRes.strings.add_icon
     )
 
     data object Logout : IconVector(
         imageVector = Icons.AutoMirrored.Filled.Logout,
-        contentDescriptionResource = SharedRes.strings.log_out
+        contentDescriptionResource = SharedRes.strings.log_out_icon
     )
 
     data object Save : IconVector(
         imageVector = Icons.Default.Save,
-        contentDescriptionResource = SharedRes.strings.save
+        contentDescriptionResource = SharedRes.strings.save_icon
     )
 
     data object Edit : IconVector(
         imageVector = Icons.Default.Edit,
-        contentDescriptionResource = SharedRes.strings.edit
+        contentDescriptionResource = SharedRes.strings.edit_icon
     )
 
     data object Email : IconVector(
@@ -156,57 +156,57 @@ sealed class IconVector(
 
     data object Password : IconVector(
         imageVector = Icons.Default.Password,
-        contentDescriptionResource = SharedRes.strings.password
+        contentDescriptionResource = SharedRes.strings.password_icon
     )
 
     data object Login : IconVector(
         imageVector = Icons.AutoMirrored.Filled.Login,
-        contentDescriptionResource = SharedRes.strings.login
+        contentDescriptionResource = SharedRes.strings.login_icon
     )
 
     data object Register : IconVector(
         imageVector = Icons.Default.PersonAdd,
-        contentDescriptionResource = SharedRes.strings.register
+        contentDescriptionResource = SharedRes.strings.register_icon
     )
 
     data object Account : IconVector(
         imageVector = Icons.Default.AccountCircle,
-        contentDescriptionResource = SharedRes.strings.account
+        contentDescriptionResource = SharedRes.strings.account_icon
     )
 
     data object Info : IconVector(
         imageVector = Icons.Default.Info,
-        contentDescriptionResource = SharedRes.strings.info
+        contentDescriptionResource = SharedRes.strings.info_icon
     )
 
     data object Close : IconVector(
         imageVector = Icons.Default.Close,
-        contentDescriptionResource = SharedRes.strings.close
+        contentDescriptionResource = SharedRes.strings.close_icon
     )
 
     data object InfoOutlined : IconVector(
         imageVector = Icons.Outlined.Info,
-        contentDescriptionResource = SharedRes.strings.info
+        contentDescriptionResource = SharedRes.strings.info_icon
     )
 
     data object ArrowDown : IconVector(
         imageVector = Icons.Default.KeyboardArrowDown,
-        contentDescriptionResource = SharedRes.strings.arrow_down
+        contentDescriptionResource = SharedRes.strings.arrow_down_icon
     )
 
     data object Copy : IconVector(
         imageVector = Icons.Default.ContentCopy,
-        contentDescriptionResource = SharedRes.strings.copy
+        contentDescriptionResource = SharedRes.strings.copy_icon
     )
 
     data object Warning : IconVector(
         imageVector = Icons.Default.Error,
-        contentDescriptionResource = SharedRes.strings.error
+        contentDescriptionResource = SharedRes.strings.error_icon
     )
 
     data object Clear : IconVector(
         imageVector = Icons.Default.Clear,
-        contentDescriptionResource = SharedRes.strings.clear
+        contentDescriptionResource = SharedRes.strings.clear_icon
     )
 
     data object Visibility : IconVector(

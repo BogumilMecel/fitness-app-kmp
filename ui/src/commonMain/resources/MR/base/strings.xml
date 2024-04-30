@@ -1,31 +1,31 @@
 <resources>
     <!--    Icon descriptions ↓ ↓ ↓-->
-    <string name="favorite">Favorite icon</string>
-    <string name="favorite_filled">Filled favorite icon</string>
-    <string name="back">Back icon</string>
-    <string name="search">Search icon</string>
-    <string name="cancel">Cancel icon</string>
-    <string name="add">Add icon</string>
-    <string name="log_out">Log out icon</string>
-    <string name="save">Save icon</string>
-    <string name="edit">Edit icon</string>
+    <string name="favorite_icon">Favorite icon</string>
+    <string name="favorite_filled_icon">Filled favorite icon</string>
+    <string name="back_icon">Back icon</string>
+    <string name="search_icon">Search icon</string>
+    <string name="cancel_icon">Cancel icon</string>
+    <string name="add_icon">Add icon</string>
+    <string name="log_out_icon">Log out icon</string>
+    <string name="save_icon">Save icon</string>
+    <string name="edit_icon">Edit icon</string>
     <string name="email_icon">Email icon</string>
-    <string name="password">Password icon</string>
-    <string name="login">Login icon</string>
-    <string name="account">Account icon</string>
-    <string name="barcode">Barcode icon</string>
-    <string name="info">Info icon</string>
-    <string name="arrow_down">Arrow down icon</string>
-    <string name="copy">Copy icon</string>
-    <string name="error">Error icon</string>
-    <string name="clear">Clear icon</string>
-    <string name="register">Register icon</string>
-    <string name="close">Close icon</string>
+    <string name="password_icon">Password icon</string>
+    <string name="login_icon">Login icon</string>
+    <string name="account_icon">Account icon</string>
+    <string name="barcode_icon">Barcode icon</string>
+    <string name="info_icon">Info icon</string>
+    <string name="arrow_down_icon">Arrow down icon</string>
+    <string name="copy_icon">Copy icon</string>
+    <string name="error_icon">Error icon</string>
+    <string name="clear_icon">Clear icon</string>
+    <string name="register_icon">Register icon</string>
+    <string name="close_icon">Close icon</string>
     <string name="visibility_icon">Visibility icon</string>
     <string name="visibility_off_icon">Visibility off icon</string>
     <!--    Icon description ↑ ↑ ↑-->
 
-    <!--    auth ↓ ↓ ↓-->
+    <!--    Auth-->
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
     <string name="login">Log into your account</string>
@@ -37,6 +37,9 @@
     <string name="or_">or</string>
     <string name="sign_up_with_email">Sign up with email</string>
     <string name="welcome_to">Welcome To Fitness App</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="register_header">Create your account</string>
+    <string name="confirm_your_password">Confirm Your Password</string>
     <string name="empty_fields_error">Please Make Sure All Fields Are Filled In Correctly.</string>
     <string name="password_not_match_error">Please Make Sure Both Passwords Are The Same.</string>
     <string name="i_have_an_account_login">I Have An Account! Login</string>
@@ -49,8 +52,140 @@
     <string name="invalid_email_error">Please make sure you have entered the correct email</string>
     <!--    auth ↑ ↑ ↑-->
 
+    <string name="currency_pln">zł</string>
+    <string name="currency_usd">$</string>
+    <string name="currency_eur">€</string>
+
+    <string name="kcal"> Kcal</string>
+    <string name="name">Name</string>
+    <string name="save">Save</string>
+
+    <string name="carbs">Carbs</string>
+    <string name="protein">Protein</string>
+
+
+    <string name="add">Add</string>
+
+    <string name="search_everything">Everything</string>
+    <string name="search_my_products">My products</string>
+    <string name="search_my_recipes">My recipes</string>
+    <string name="search_for_products">Search for products</string>
+    <string name="search_for_recipes">Search for recipes</string>
+    <string name="search">Search</string>
+    <string name="search_browse_recipes">Browse recipes</string>
+    <string name="search_quick_add">Quick add</string>
+    <string name="search_add_ingredient">Add ingredient</string>
+
+    <!--    summary-->
+    <string name="days">%s days in a row</string>
+    <string name="summary_weight_dialog_title">What is your today\'s weight</string>
+    <string name="summary_ask_for_weight_dialogs_title">Would you like us to track your weight daily?</string>
+    <string name="summary_ask_for_weight_dialogs_description">You will be automatically asked about your weight every time you log into the app for the first time each day. Later, if you don\'t like it you can turn this off in your account settings</string>
+
+    <!--    product-->
+    <string name="prices">Prices</string>
+    <string name="price_for_100g_of_protein">100 Grams of protein</string>
+    <string name="price_for_100g_of_fat">100 Grams of fat</string>
+    <string name="price_for_100g_of_carbohydrates">100 Grams of carbs</string>
+    <string name="price_for_100_kcal">100 Calories</string>
+    <string name="price_how_much_pay">How much did you pay for %s</string>
+    <string name="submit_new_price">Submit New Price</string>
+    <string name="submit">Submit</string>
+    <string name="paid">Paid</string>
+    <string name="price_for">For</string>
+    <string name="product_no_price">No one has entered a price for this product.</string>
+    <string name="please_make_sure_you_have_entered_correct_values_for_new_price">Please make sure you have entered correct values for the new price</string>
+    <string name="successfully_submitted_new_price">Successfully submitted new price</string>
+
+    <string name="carbohydrates_g">Carbohydrates(g)</string>
+    <string name="protein_g">Protein(g)</string>
+    <string name="fat_g">Fat(g)</string>
+    <string name="carbohydrates">Carbohydrates</string>
+    <string name="fat">Fat</string>
+
+    <!--    Summary weight-->
+    <string name="weight">Weight</string>
+
+    <string name="account_daily_weight_description">You will be automatically asked about your weight every time you log into the app for the first time each day</string>
+
+    <!--    recipe-->
+    <string name="add_recipe">Create recipe</string>
+    <string name="recipe_name">Recipe name</string>
+    <string name="products">Products</string>
+    <string name="recipes">Recipes</string>
+    <string name="add_image">Add image</string>
+    <string name="time">Time</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="servings">Servings</string>
+    <string name="empty_recipe_ingredients">Please make sure there are at least 2 ingredients in your recipe.</string>
+    <string name="bad_recipe_name">Please make sure your recipe\'s name is at least 4 characters long</string>
+    <string name="recipe_time_required">Time to make</string>
+    <string name="recipe_difficulty">Difficulty</string>
+    <string name="recipe_serves">Recipe serves %s people</string>
+    <string name="recipe_ingredients">Ingredients</string>
+    <string name="recipe_save_to">Save to %s</string>
+    <string name="recipe_edit">Edit recipe</string>
+    <string name="recipe_servings_error">Please make sure you have entered correct servings value</string>
+    <string name="recipe_price">Recipe price</string>
+    <string name="recipe_information">Recipe information</string>
+    <string name="serving">Serving</string>
+    <string name="recipe">Recipe</string>
+    <string name="recipe_price_warning">Not every product has a price!</string>
+    <string name="selected">Selected</string>
+    <string name="new_recipe_delete_ingredient_title">Do you want to delete %s from your recipe?</string>
+    <string name="recipe_difficulty_out_of_5">%s / 5</string>
+
+    <string name="new_recipe_public">Should recipe be public</string>
+    <string name="new_recipe_public_des">Everybody will be able to see it and you will not be able to delete it</string>
+    <string name="new_recipe_save">Save recipe</string>
+
+    <string name="finish">FINISH</string>
+    <string name="back">BACK</string>
+    <string name="let_us_know_something_about_you">Let Us Know Something About You!</string>
+
+
+    <string name="bar_code">Bar code</string>
+
+    <string name="log_out">Log out</string>
+    <string name="account_ask_for_weight_daily">Ask for weight daily</string>
+    <string name="create_product">Create Product</string>
+    <string name="add_product">Add product</string>
+    <string name="you_have_logged_for">You have logged for</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="username">Username</string>
+    <string name="macro_elements">Macro elements</string>
+    <string name="total">Total %</string>
+    <string name="your_total_has_to_be_at_100">Your total has to be at 100%</string>
+
+    <string name="nutrition_goals">Nutrition goals</string>
+
+    <string name="introduction_sedentary">Sedentary</string>
+    <string name="introduction_mixed">Mixed</string>
+    <string name="introduction_physical">Physical</string>
+
+    <string name="introduction_none">None</string>
+    <string name="introduction_training_low">1–2</string>
+    <string name="introduction_training_average">3–4</string>
+    <string name="introduction_training_high">5–6</string>
+    <string name="introduction_training_very_high">7–8</string>
+    <string name="introduction_activity_low">Low</string>
+    <string name="introduction_activity_moderate">Moderate</string>
+    <string name="introduction_activity_high">High</string>
+    <string name="introduction_activity_very_high">Very High</string>
+    <string name="introduction_male">Male</string>
+    <string name="introduction_female">Female</string>
+    <string name="introduction_loose">Loose</string>
+    <string name="introduction_gain">Gain</string>
+    <string name="introduction_keep">Keep</string>
+
+    <string name="training_start_workout">Start New Workout</string>
+    <string name="training_copy_workout">Copy Previous Workout</string>
+
+    <!--    Bottom Nav-->
     <string name="bottom_nav_summary">Summary</string>
     <string name="bottom_nav_diary">Diary</string>
     <string name="bottom_nav_account">Account</string>
     <string name="bottom_nav_training">Training</string>
+    <!--    Bottom Nav-->
 </resources>
