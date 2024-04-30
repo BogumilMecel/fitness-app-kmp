@@ -1,7 +1,8 @@
 package presentation.login
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -33,7 +34,7 @@ class LoginScreen : Screen {
             val password by password.collectAsState()
             val passwordVisible by passwordVisible.collectAsState()
 
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Box(modifier = Modifier.fillMaxSize()) {
                 FitnessAppTopBar(
                     title = stringResource(SharedRes.strings.login),
                     onBackPressed = ::onBackPressed
@@ -41,9 +42,9 @@ class LoginScreen : Screen {
 
                 Column(
                     modifier = Modifier
-                        .weight(1f)
+                        .align(Alignment.Center)
                         .padding(horizontal = 16.dp),
-                    verticalArrangement = Arrangement.Center,
+//                    verticalArrangement = Arrangement.Center,
                 ) {
                     FitnessAppTextField(
                         textFieldData = email,
