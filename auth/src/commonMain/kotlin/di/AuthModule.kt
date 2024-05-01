@@ -5,8 +5,11 @@ import data.repository.AuthRepositoryImp
 import domain.repository.AuthRepository
 import domain.use_case.LogInUserUseCase
 import domain.use_case.LoginUseCases
+import domain.use_case.RegisterUseCases
+import domain.use_case.RegisterUserUseCase
 import domain.use_case.ValidateEmailUseCase
 import domain.use_case.ValidatePasswordUseCase
+import domain.use_case.ValidateUsernameUseCase
 import org.koin.dsl.module
 import presentation.login.LoginScreenModel
 import presentation.navigation_screen.AuthNavigationModel
@@ -18,17 +21,32 @@ val authModule = module {
     single { ValidateEmailUseCase(resourcesService = get()) }
     single { ValidatePasswordUseCase(resourcesService = get()) }
     factory {
+        LogInUserUseCase(
+            authRepository = get(),
+            settingsService = get()
+        )
+    }
+    factory {
         LoginScreenModel(
             loginUseCases = LoginUseCases(
-                logInUserUseCase = LogInUserUseCase(
-                    authRepository = get(),
-                    settingsService = get()
-                ),
+                logInUserUseCase = get(),
                 validateEmailUseCase = get(),
                 validatePasswordUseCase = get()
             ),
         )
     }
-    factory { RegisterScreenModel() }
+    factory {
+        RegisterScreenModel(
+            registerUseCases = RegisterUseCases(
+                validatePasswordUseCase = get(),
+                validateEmailUseCase = get(),
+                validateUsernameUseCase = ValidateUsernameUseCase(resourcesService = get()),
+                registerUserUseCase = RegisterUserUseCase(
+                    authRepository = get(),
+                    logInUserUseCase = get()
+                )
+            )
+        )
+    }
     factory { AuthNavigationModel() }
 }
