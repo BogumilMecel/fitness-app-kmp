@@ -10,8 +10,10 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.OutlinedTextField
@@ -73,7 +75,7 @@ fun FitnessAppTextField(
     )
 
     Column(
-        modifier = Modifier.animateContentSize(),
+        modifier = Modifier.animateContentSize().height(IntrinsicSize.Max),
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         OutlinedTextField(

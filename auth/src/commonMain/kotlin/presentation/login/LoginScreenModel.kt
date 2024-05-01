@@ -6,6 +6,7 @@ import domain.use_case.LoginUseCases
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import presentation.BaseModel
+import presentation.navigation.SharedScreen
 
 class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
 
@@ -35,7 +36,7 @@ class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
             password = password.getText()
         ).handle(validationField = password)
 
-        if (!email.isError() && !password.isError()) {
+        if (email.isNotError() && password.isNotError()) {
             requestLogin()
         }
     }
@@ -47,7 +48,7 @@ class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
                 password = password.getText()
             ).handle(
                 onSuccess = {
-
+                    navigateToSharedScreen(SharedScreen.TabNavigatorScreen)
                 }
             )
         }
