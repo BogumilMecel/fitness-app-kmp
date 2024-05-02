@@ -24,6 +24,7 @@ import presentation.ModelLayout
 import utils.ClickableContent
 import utils.PasswordTransformationWithVisibility
 import utils.PasswordVisibilityIcon
+import utils.TestTags
 
 class LoginScreen : Screen {
 
@@ -44,12 +45,12 @@ class LoginScreen : Screen {
                     modifier = Modifier
                         .align(Alignment.Center)
                         .padding(horizontal = 16.dp),
-//                    verticalArrangement = Arrangement.Center,
                 ) {
                     FitnessAppTextField(
                         textFieldData = email,
                         label = stringResource(SharedRes.strings.email_address),
-                        leadingIcon = IconVector.Email
+                        leadingIcon = IconVector.Email,
+                        testTag = TestTags.EMAIL,
                     )
 
                     HorizontalSpacer()
@@ -64,7 +65,8 @@ class LoginScreen : Screen {
                         trailingIcon = ClickableContent.Icon(
                             icon = PasswordVisibilityIcon(passwordVisible = passwordVisible),
                             onClick = ::onShowPasswordClicked
-                        )
+                        ),
+                        testTag = TestTags.PASSWORD,
                     )
 
                     HorizontalSpacer(size = 24.dp)

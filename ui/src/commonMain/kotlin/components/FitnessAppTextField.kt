@@ -23,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import theme.FitnessAppTheme
@@ -36,8 +37,9 @@ fun FitnessAppTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     leadingIcon: Icon? = null,
     trailingIcon: ClickableContent.Icon? = null,
-    label: String
-    maxLines: Int = 1
+    label: String,
+    maxLines: Int = 1,
+    testTag: String? = null,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
@@ -80,7 +82,9 @@ fun FitnessAppTextField(
                 textFieldData.onErrorCleared()
                 textFieldData.onValueChange(it)
             },
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier
+                .fillMaxWidth()
+                .then(other = testTag?.let { Modifier.testTag(it) } ?: Modifier),
             textStyle = FitnessAppTheme.typography.bodyLarge,
             label = { Text(text = label) },
             leadingIcon = {

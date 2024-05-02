@@ -22,6 +22,7 @@ import components.HorizontalSpacer
 import components.IconVector
 import dev.icerock.moko.resources.compose.stringResource
 import presentation.ModelLayout
+import utils.TestTags
 
 class RegisterScreen : Screen {
 
@@ -31,7 +32,6 @@ class RegisterScreen : Screen {
             val email by email.collectAsState()
             val username by username.collectAsState()
             val password by password.collectAsState()
-            val confirmPassword by confirmPassword.collectAsState()
 
             Box(modifier = Modifier.fillMaxSize()) {
                 FitnessAppTopBar(
@@ -51,7 +51,7 @@ class RegisterScreen : Screen {
                         label = stringResource(SharedRes.strings.email_address),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                         leadingIcon = IconVector.Email,
-//                        testTag = TestTags.EMAIL
+                        testTag = TestTags.EMAIL
                     )
 
                     HorizontalSpacer()
@@ -60,7 +60,7 @@ class RegisterScreen : Screen {
                         textFieldData = username,
                         label = stringResource(resource = SharedRes.strings.username),
                         leadingIcon = IconVector.Account,
-//                        testTag = TestTags.USERNAME
+                        testTag = TestTags.USERNAME
                     )
 
                     HorizontalSpacer()
@@ -71,18 +71,7 @@ class RegisterScreen : Screen {
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                         visualTransformation = PasswordVisualTransformation(),
                         leadingIcon = IconVector.Password,
-//                        testTag = TestTags.PASSWORD
-                    )
-
-                    HorizontalSpacer()
-
-                    FitnessAppTextField(
-                        textFieldData = confirmPassword,
-                        label = stringResource(resource = SharedRes.strings.confirm_your_password),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                        visualTransformation = PasswordVisualTransformation(),
-                        leadingIcon = IconVector.Password,
-//                        testTag = TestTags.CONFIRM_PASSWORD
+                        testTag = TestTags.PASSWORD
                     )
 
                     HorizontalSpacer(24.dp)
