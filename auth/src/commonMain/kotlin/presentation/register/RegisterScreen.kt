@@ -39,8 +39,6 @@ class RegisterScreen : Screen {
                     onBackPressed = ::onBackPressed
                 )
 
-                HorizontalSpacer(128.dp)
-
                 Column(
                     modifier = Modifier
                         .align(Alignment.Center)
