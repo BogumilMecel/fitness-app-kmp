@@ -12,7 +12,7 @@ interface AuthRepository {
 
     suspend fun registerUser(
         authRequest: AuthRequest
-    ): Resource<Unit>
+    ): Resource<AuthResponse>
 
     suspend fun sendPasswordResetEmail(
         authRequest: AuthRequest

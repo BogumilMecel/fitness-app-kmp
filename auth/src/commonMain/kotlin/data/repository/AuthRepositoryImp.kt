@@ -14,7 +14,7 @@ class AuthRepositoryImp(
         return handleRequest { authApiClient.login(authRequest) }
     }
 
-    override suspend fun registerUser(authRequest: AuthRequest): Resource<Unit> {
+    override suspend fun registerUser(authRequest: AuthRequest): Resource<AuthResponse> {
         return handleRequest { authApiClient.register(authRequest) }
     }
 

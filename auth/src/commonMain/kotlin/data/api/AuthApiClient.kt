@@ -18,5 +18,5 @@ class AuthApiClient(private val httpClient: HttpClient) {
     suspend fun register(authRequest: AuthRequest) = httpClient.post {
         url(urlString = "/authentication/signup/")
         setBody(authRequest)
-    }.body<Unit>()
+    }.body<AuthResponse>()
 }

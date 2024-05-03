@@ -43,7 +43,7 @@ val authModule = module {
                 validateUsernameUseCase = ValidateUsernameUseCase(resourcesService = get()),
                 registerUserUseCase = RegisterUserUseCase(
                     authRepository = get(),
-                    logInUserUseCase = get()
+                    settingsService = get()
                 )
             )
         )
