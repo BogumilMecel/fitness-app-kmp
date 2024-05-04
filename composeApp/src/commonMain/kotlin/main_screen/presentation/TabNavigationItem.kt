@@ -12,6 +12,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -48,7 +49,10 @@ fun RowScope.TabNavigationItem(tab: Tab) {
         animationSpec = animationSpec
     )
 
-    Column {
+    Column(
+        modifier = Modifier.weight(1f),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Divider(
             modifier = Modifier.width((getScreenWidth() / 4).dp),
             color = dividerColor
