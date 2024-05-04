@@ -13,13 +13,11 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import com.gmail.bogumilmecel2.ui.SharedRes
 import components.FitnessAppButton
-import components.FitnessAppClickableText
 import components.FitnessAppTextField
 import components.FitnessAppTopBar
 import components.HorizontalSpacer
 import components.IconVector
 import dev.icerock.moko.resources.compose.stringResource
-import theme.FitnessAppTheme
 import presentation.ModelLayout
 import utils.ClickableContent
 import utils.PasswordTransformationWithVisibility
@@ -79,12 +77,13 @@ class LoginScreen : Screen {
 
                     HorizontalSpacer()
 
-                    FitnessAppClickableText(
-                        text = stringResource(SharedRes.strings.forgot_password),
-                        style = FitnessAppTheme.typography.labelSmall,
-                        color = FitnessAppTheme.colors.contentSecondary,
-                        onClick = ::onForgotPasswordClicked
-                    )
+                    // TODO: Uncomment when forgot password handled
+//                    FitnessAppClickableText(
+//                        text = stringResource(SharedRes.strings.forgot_password),
+//                        style = FitnessAppTheme.typography.labelSmall,
+//                        color = FitnessAppTheme.colors.contentSecondary,
+//                        onClick = ::onForgotPasswordClicked
+//                    )
                 }
             }
         }
