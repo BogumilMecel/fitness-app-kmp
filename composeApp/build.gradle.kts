@@ -32,8 +32,7 @@ kotlin {
             implementation(project(":shared"))
             implementation(project(":auth"))
             implementation(project(":splash"))
-
-            implementation(libs.voyager.tab)
+            implementation(project(":summary"))
         }
     }
 }

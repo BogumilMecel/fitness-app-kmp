@@ -23,9 +23,6 @@ data class User(
     @SerialName("log_streak")
     val logStreak: Int? = null,
 
-    @SerialName("latest_weight_entry")
-    val latestWeightEntry: WeightEntry? = null,
-
     @SerialName("weight_progress")
     val weightProgress: Double? = null,
 

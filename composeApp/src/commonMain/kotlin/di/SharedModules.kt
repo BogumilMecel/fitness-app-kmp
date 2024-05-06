@@ -75,5 +75,6 @@ private val sharedModule = module {
 val sharedModules = listOf(
     sharedModule,
     authModule,
-    splashModule
+    splashModule,
+    summaryModule,
 )

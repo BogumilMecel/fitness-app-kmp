@@ -4,7 +4,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.FitnessCenter
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -13,29 +12,6 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.gmail.bogumilmecel2.ui.SharedRes
 import dev.icerock.moko.resources.compose.stringResource
-
-object SummaryTab : Tab {
-
-    @Composable
-    override fun Content() {
-        Text(text = "summary")
-    }
-
-    override val options: TabOptions
-        @Composable
-        get() {
-            val title = stringResource(SharedRes.strings.bottom_nav_summary)
-            val icon = rememberVectorPainter(Icons.Default.Home)
-
-            return remember {
-                TabOptions(
-                    index = 0u,
-                    title = title,
-                    icon = icon
-                )
-            }
-        }
-}
 
 object DiaryTab : Tab {
 
