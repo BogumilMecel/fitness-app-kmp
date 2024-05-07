@@ -38,7 +38,7 @@ fun RowScope.TabNavigationItem(tab: Tab) {
     )
 
     val dividerColor by animateColorAsState(
-        targetValue = if (isSelected) FitnessAppTheme.colors.contentPrimary else FitnessAppTheme.colors.background,
+        targetValue = if (isSelected) FitnessAppTheme.colors.contentPrimary else Color.Transparent,
         label = "bottom navigation divider color",
         animationSpec = animationSpec
     )

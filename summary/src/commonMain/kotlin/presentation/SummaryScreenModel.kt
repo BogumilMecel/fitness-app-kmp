@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class SummaryScreenModel(
     private val resourcesService: ResourcesService,
-    private val settingsService: SettingsService
+    settingsService: SettingsService
 ): BaseModel() {
 
     val streakText = MutableStateFlow<String?>(null)
@@ -16,7 +16,7 @@ class SummaryScreenModel(
         settingsService.getUser()?.let {
             streakText.value = resourcesService.getString(
                 resource = SharedRes.strings.days,
-                args = listOf(it.logStreak ?: 1)
+                args = listOf(it.logStreak)
             )
         }
     }
