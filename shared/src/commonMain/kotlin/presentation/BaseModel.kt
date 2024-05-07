@@ -5,7 +5,10 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import cafe.adriel.voyager.core.screen.Screen
 import components.TextFieldData
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -95,6 +98,9 @@ open class BaseModel : ScreenModel, KoinComponent {
             )
         }
     }
+
+    protected fun <T> Flow<T>.collectInScreenModel(initialValue: T) =
+        stateIn(screenModelScope, SharingStarted.Eagerly, initialValue = initialValue)
 
     protected fun MutableStateFlow<TextFieldData>.getText() = value.text
 

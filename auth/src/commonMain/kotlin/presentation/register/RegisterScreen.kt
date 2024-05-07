@@ -18,7 +18,7 @@ import com.gmail.bogumilmecel2.ui.SharedRes
 import components.FitnessAppButton
 import components.FitnessAppTextField
 import components.FitnessAppTopBar
-import components.HorizontalSpacer
+import components.VerticalSpacer
 import components.IconVector
 import dev.icerock.moko.resources.compose.stringResource
 import presentation.ModelLayout
@@ -52,7 +52,7 @@ class RegisterScreen : Screen {
                         testTag = TestTags.EMAIL
                     )
 
-                    HorizontalSpacer()
+                    VerticalSpacer()
 
                     FitnessAppTextField(
                         textFieldData = username,
@@ -61,7 +61,7 @@ class RegisterScreen : Screen {
                         testTag = TestTags.USERNAME
                     )
 
-                    HorizontalSpacer()
+                    VerticalSpacer()
 
                     FitnessAppTextField(
                         textFieldData = password,
@@ -72,7 +72,7 @@ class RegisterScreen : Screen {
                         testTag = TestTags.PASSWORD
                     )
 
-                    HorizontalSpacer(24.dp)
+                    VerticalSpacer(24.dp)
 
                     FitnessAppButton(
                         onClick = ::onRegisterButtonClicked,

@@ -15,7 +15,7 @@ import components.Divider
 import components.FitnessAppButton
 import components.FitnessAppButtonStyle
 import components.FitnessAppTopBar
-import components.HorizontalSpacer
+import components.VerticalSpacer
 import components.IconPainter
 import components.IconVector
 import dev.icerock.moko.resources.compose.localized
@@ -44,7 +44,7 @@ class AuthNavigationScreen : Screen {
                     style = FitnessAppTheme.typography.labelLarge
                 )
 
-                HorizontalSpacer()
+                VerticalSpacer()
 
                 FitnessAppButton(
                     text = stringResource(SharedRes.strings.email),
@@ -53,7 +53,7 @@ class AuthNavigationScreen : Screen {
                     onClick = ::onSignInWithEmailClicked
                 )
 
-                HorizontalSpacer()
+                VerticalSpacer()
 
                 FitnessAppButton(
                     text = stringResource(SharedRes.strings.google),

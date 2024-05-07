@@ -51,12 +51,12 @@
     <string name="register_username_length_invalid">Please make sure you have entered correct username</string>
     <string name="invalid_email_error">Please make sure you have entered the correct email</string>
     <!--    auth ↑ ↑ ↑-->
-
+    <string name="calories">Calories</string>
     <string name="currency_pln">zł</string>
     <string name="currency_usd">$</string>
     <string name="currency_eur">€</string>
 
-    <string name="kcal"> Kcal</string>
+    <string name="kcal">Kcal</string>
     <string name="name">Name</string>
     <string name="save">Save</string>
 

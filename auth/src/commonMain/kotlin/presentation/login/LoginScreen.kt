@@ -15,7 +15,7 @@ import com.gmail.bogumilmecel2.ui.SharedRes
 import components.FitnessAppButton
 import components.FitnessAppTextField
 import components.FitnessAppTopBar
-import components.HorizontalSpacer
+import components.VerticalSpacer
 import components.IconVector
 import dev.icerock.moko.resources.compose.stringResource
 import presentation.ModelLayout
@@ -51,7 +51,7 @@ class LoginScreen : Screen {
                         testTag = TestTags.EMAIL,
                     )
 
-                    HorizontalSpacer()
+                    VerticalSpacer()
 
                     FitnessAppTextField(
                         textFieldData = password,
@@ -67,7 +67,7 @@ class LoginScreen : Screen {
                         testTag = TestTags.PASSWORD,
                     )
 
-                    HorizontalSpacer(size = 24.dp)
+                    VerticalSpacer(size = 24.dp)
 
                     FitnessAppButton(
                         onClick = ::onLoginButtonClicked,
@@ -75,7 +75,7 @@ class LoginScreen : Screen {
                         text = stringResource(SharedRes.strings.sign_in)
                     )
 
-                    HorizontalSpacer()
+                    VerticalSpacer()
 
                     // TODO: Uncomment when forgot password handled
 //                    FitnessAppClickableText(
