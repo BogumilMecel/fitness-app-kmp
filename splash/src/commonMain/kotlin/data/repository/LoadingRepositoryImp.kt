@@ -3,7 +3,7 @@ package data.repository
 import data.api.LoadingApi
 import domain.repository.LoadingRepository
 import data.BaseRepository
-import domain.model.User
+import domain.model.user.User
 import utils.Resource
 
 class LoadingRepositoryImp(private val loadingApi: LoadingApi) : LoadingRepository, BaseRepository() {

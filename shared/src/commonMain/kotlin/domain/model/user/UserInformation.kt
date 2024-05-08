@@ -1,5 +1,10 @@
-package domain.model
+package domain.model.user
 
+import domain.model.ActivityLevel
+import domain.model.DesiredWeight
+import domain.model.Gender
+import domain.model.TrainingFrequency
+import domain.model.TypeOfWork
 import kotlinx.serialization.Serializable
 
 @Serializable

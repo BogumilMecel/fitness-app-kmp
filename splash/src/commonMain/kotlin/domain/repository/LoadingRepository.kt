@@ -1,6 +1,6 @@
 package domain.repository
 
-import domain.model.User
+import domain.model.user.User
 import utils.Resource
 
 interface LoadingRepository {

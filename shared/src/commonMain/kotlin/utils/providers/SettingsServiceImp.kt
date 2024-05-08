@@ -1,7 +1,7 @@
 package utils.providers
 
 import com.russhwolf.settings.Settings
-import domain.model.User
+import domain.model.user.User
 import domain.services.SettingsService
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

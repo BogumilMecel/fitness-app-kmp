@@ -1,6 +1,6 @@
 package domain.services
 
-import domain.model.User
+import domain.model.user.User
 
 interface SettingsService {
     fun saveAccessToken(token: String)

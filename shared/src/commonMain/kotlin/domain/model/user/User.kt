@@ -1,5 +1,7 @@
-package domain.model
+package domain.model.user
 
+import domain.model.NutritionValues
+import domain.model.WeightEntry
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

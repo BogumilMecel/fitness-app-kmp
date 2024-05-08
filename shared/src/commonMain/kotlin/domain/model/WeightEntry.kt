@@ -8,11 +8,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class WeightEntry(
     @SerialName("value")
-    val value: Double? = null,
+    val value: Double,
 
     @SerialName("creation_date_time")
-    val creationDateTime: LocalDateTime? = null,
+    val creationDateTime: LocalDateTime,
 
     @SerialName("date")
-    val date: LocalDate? = null
+    val date: LocalDate
 )
