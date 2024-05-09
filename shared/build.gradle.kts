@@ -33,6 +33,9 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
 
             api(libs.koin.android)
+
+            //sql
+            api(libs.sqldelight.android)
         }
         commonMain.dependencies {
             //compose ui
@@ -70,6 +73,7 @@ kotlin {
         iosMain.dependencies {
             //http client
             implementation(libs.ktor.client.darwin)
+            api(libs.sqldelight.ios)
         }
     }
 }

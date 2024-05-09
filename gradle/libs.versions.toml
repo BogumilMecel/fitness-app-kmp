@@ -1,5 +1,5 @@
 [versions]
-agp = "8.2.2"
+agp = "8.4.0"
 android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
@@ -29,6 +29,7 @@ ktor = "2.3.9"
 multiplatform-setting = "1.1.1"
 
 kotlinx-date = "0.6.0-RC.2"
+sqldelight = "2.0.1"
 
 [libraries]
 androidsvg-aar = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvgAar" }
@@ -41,6 +42,9 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-com
 kotlinx-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-date = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-date" }
+
+sqldelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+sqldelight-ios = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
@@ -70,3 +74,4 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
