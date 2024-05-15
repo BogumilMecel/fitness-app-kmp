@@ -2,13 +2,15 @@ package presentation
 
 import cafe.adriel.voyager.core.model.screenModelScope
 import domain.use_case.AuthenticateUserUseCase
+import domain.use_case.GetDiaryCacheUseCase
 import domain.use_case.Result
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import presentation.navigation.SharedScreen
 
 class SplashScreenModel (
-    authenticateUserUseCase: AuthenticateUserUseCase
+    private val authenticateUserUseCase: AuthenticateUserUseCase,
+    private val getDiaryCacheUseCase: GetDiaryCacheUseCase
 ): BaseModel(), KoinComponent {
 
     init {
@@ -21,6 +23,7 @@ class SplashScreenModel (
                     navigateToSharedScreen(screen = SharedScreen.AuthNavigationScreen)
                 }
                 Result.NavigateToMainScreen -> {
+                    getDiaryCacheUseCase()
                     navigateToSharedScreen(screen = SharedScreen.TabNavigatorScreen)
                 }
             }
