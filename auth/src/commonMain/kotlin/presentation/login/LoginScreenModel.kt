@@ -13,6 +13,7 @@ class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
     val email = MutableStateFlow(TextFieldData())
     val password = MutableStateFlow(TextFieldData())
     val passwordVisible = MutableStateFlow(true)
+    val buttonEnabled = MutableStateFlow(true)
 
     init {
         email.initTextField()
@@ -42,6 +43,7 @@ class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
     }
 
     private fun requestLogin() {
+        buttonEnabled.value = false
         screenModelScope.launch {
             loginUseCases.logInUserUseCase(
                 email = email.getText(),
@@ -49,6 +51,9 @@ class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
             ).handle(
                 onSuccess = {
                     navigateToSharedScreen(SharedScreen.TabNavigatorScreen)
+                },
+                finally = {
+                    buttonEnabled.value = true
                 }
             )
         }

@@ -34,6 +34,7 @@ class LoginScreen : Screen {
             val email by email.collectAsState()
             val password by password.collectAsState()
             val passwordVisible by passwordVisible.collectAsState()
+            val buttonEnabled by buttonEnabled.collectAsState()
 
             Box(modifier = Modifier.fillMaxSize()) {
                 FitnessAppTopBar(
@@ -74,6 +75,7 @@ class LoginScreen : Screen {
                     FitnessAppButton(
                         onClick = ::onLoginButtonClicked,
                         startIcon = IconVector.Login,
+                        enabled = buttonEnabled,
                         text = stringResource(SharedRes.strings.sign_in)
                     )
 

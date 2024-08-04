@@ -7,12 +7,10 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
-import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import theme.FitnessAppRippleTheme
 import theme.FitnessAppTheme
 import theme.LocalRippleColor
 
@@ -22,6 +20,7 @@ fun FitnessAppButton(
     style: FitnessAppButtonStyle = FitnessAppButtonStyle.Primary,
     onClick: () -> Unit,
     text: String,
+    enabled: Boolean = true,
     startIcon: Icon? = null,
     endIcon: Icon? = null
 ) {
@@ -48,6 +47,7 @@ fun FitnessAppButton(
             backgroundColor = backgroundColor,
             contentColor = contentColor
         ),
+        enabled = enabled,
         content = {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(4.dp),

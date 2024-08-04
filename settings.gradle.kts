@@ -7,6 +7,7 @@ include(":ui")
 include(":shared")
 include(":auth")
 include(":splash")
+include(":summary")
 
 pluginManagement {
     repositories {
