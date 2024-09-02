@@ -6,6 +6,8 @@ import androidx.compose.ui.graphics.Color
 @Immutable
 data class FitnessAppColorScheme(
     val primary: Color,
+    val primaryBackground: Color,
+    val secondary: Color,
     val onPrimary: Color,
     val onContentPrimary: Color,
     val calories: Color,
@@ -30,6 +32,8 @@ fun lightFitnessAppColorSchema() = FitnessAppColorScheme(
     surface = surfaceLight,
     error = errorLight,
     primary = primaryLight,
+    primaryBackground = primaryBackgroundLight,
+    secondary = secondaryLight,
     onContentPrimary = contentPrimaryDark,
     onPrimary = contentPrimaryDark,
     calories = caloriesLight,
@@ -46,9 +50,11 @@ fun lightFitnessAppColorSchema() = FitnessAppColorScheme(
 
 fun darkFitnessAppColorSchema() = FitnessAppColorScheme(
     background = backgroundDark,
+    primaryBackground = primaryBackgroundDark,
     backgroundSecondary = backgroundSecondaryDark,
     surface = surfaceDark,
     primary = primaryDark,
+    secondary = secondaryDark,
     onPrimary = contentPrimaryDark,
     onContentPrimary = contentPrimaryLight,
     calories = caloriesDark,
@@ -96,8 +102,14 @@ private val carbohydratesLight = Color(0xff11d79b)
 private val proteinDark = Color(0xffaeb4fd)
 private val proteinLight = Color(0xff8f98fd)
 
-private val primaryLight = Color(0xffdb4c3e)
-private val primaryDark = Color(0xffdd4c49)
+private val primaryLight = Color(0xffd1506f)
+private val primaryDark = Color(0xffcc375a)
+
+private val secondaryLight = Color(0xffad3b55)
+private val secondaryDark = Color(0xff88253d)
+
+private val primaryBackgroundLight = Color(0xffedcdd8)
+private val primaryBackgroundDark = Color(0xff3a1f28)
 
 private val errorLight = Color(0xffba1a1a)
 private val errorDark = Color(0xffffb4ab)
