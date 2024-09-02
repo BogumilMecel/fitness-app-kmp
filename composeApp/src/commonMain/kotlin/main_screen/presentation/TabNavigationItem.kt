@@ -12,6 +12,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -31,13 +32,13 @@ fun RowScope.TabNavigationItem(tab: Tab) {
     )
 
     val selectedColor by animateColorAsState(
-        targetValue = FitnessAppTheme.colors.contentPrimary,
+        targetValue = FitnessAppTheme.colors.primary,
         label = "selected bottom navigation item color",
         animationSpec = animationSpec
     )
 
     val dividerColor by animateColorAsState(
-        targetValue = if (isSelected) FitnessAppTheme.colors.contentPrimary else FitnessAppTheme.colors.background,
+        targetValue = if (isSelected) FitnessAppTheme.colors.primary else FitnessAppTheme.colors.background,
         label = "bottom navigation divider color",
         animationSpec = animationSpec
     )
@@ -48,7 +49,10 @@ fun RowScope.TabNavigationItem(tab: Tab) {
         animationSpec = animationSpec
     )
 
-    Column {
+    Column(
+        modifier = Modifier.weight(1f),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
         Divider(
             modifier = Modifier.width((getScreenWidth() / 4).dp),
             color = dividerColor
@@ -58,16 +62,9 @@ fun RowScope.TabNavigationItem(tab: Tab) {
             selected = isSelected,
             onClick = { tabNavigator.current = tab },
             label = { Text(text = tab.options.title) },
-            icon = {
-                tab.options.icon?.let {
-                    Icon(
-                        painter = it,
-                        contentDescription = tab.options.title
-                    )
-                }
-            },
+            icon = { tab.options.icon?.let { Icon(painter = it, contentDescription = null) } },
             selectedContentColor = selectedColor,
-            unselectedContentColor = notSelectedColor
+            unselectedContentColor = notSelectedColor,
         )
     }
 }
