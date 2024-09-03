@@ -21,10 +21,12 @@ data class FitnessAppTypography(
     val titleMedium: TextStyle = title(fontSize = 20.sp, lineHeight = 28.sp),
     val titleSmall: TextStyle = title(fontSize = 18.sp, lineHeight = 24.sp),
 
+    val bodyExtraLarge: TextStyle = body(fontSize = 18.sp, lineHeight = 24.sp),
     val bodyLarge: TextStyle = body(fontSize = 16.sp, lineHeight = 24.sp),
     val bodyMedium: TextStyle = body(fontSize = 14.sp, lineHeight = 20.sp),
     val bodySmall: TextStyle = body(fontSize = 12.sp, lineHeight = 16.sp),
 
+    val labelExtraLarge: TextStyle = label(fontSize = 18.sp, lineHeight = 24.sp),
     val labelLarge: TextStyle = label(fontSize = 16.sp, lineHeight = 24.sp),
     val labelMedium: TextStyle = label(fontSize = 14.sp, lineHeight = 20.sp),
     val labelSmall: TextStyle = label(fontSize = 12.sp, lineHeight = 16.sp),
