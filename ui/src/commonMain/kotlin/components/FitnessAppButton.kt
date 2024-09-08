@@ -6,13 +6,54 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 import theme.FitnessAppTheme
 import theme.LocalRippleColor
+
+@Composable
+fun FitnessAppButtonWithPainter(
+    modifier: Modifier = Modifier,
+    style: FitnessAppButtonStyle = FitnessAppButtonStyle.Primary,
+    onClick: () -> Unit,
+    text: String,
+    enabled: Boolean = true,
+    startIcon: DrawableResource? = null,
+    endIcon: DrawableResource? = null
+) {
+    FitnessAppButtonContent(
+        modifier = modifier,
+        style = style,
+        onClick = onClick,
+        text = text,
+        enabled = enabled,
+        startIcon = startIcon?.let {
+            {
+                Icon(
+                    painter = painterResource(it),
+                    contentDescription = null,
+                    tint = style.contentColor,
+                )
+            }
+        },
+        endIcon = endIcon?.let {
+            {
+                Icon(
+                    painter = painterResource(it),
+                    contentDescription = null,
+                    tint = style.contentColor,
+                )
+            }
+        }
+    )
+}
 
 @Composable
 fun FitnessAppButton(
@@ -21,19 +62,52 @@ fun FitnessAppButton(
     onClick: () -> Unit,
     text: String,
     enabled: Boolean = true,
-    startIcon: Icon? = null,
-    endIcon: Icon? = null
+    startIcon: ImageVector? = null,
+    endIcon: ImageVector? = null
 ) {
-    val backgroundColor = when(style) {
+    FitnessAppButtonContent(
+        modifier = modifier,
+        style = style,
+        onClick = onClick,
+        text = text,
+        enabled = enabled,
+        startIcon = startIcon?.let {
+            {
+                Icon(
+                    imageVector = it,
+                    contentDescription = null,
+                    tint = style.contentColor,
+                )
+            }
+        },
+        endIcon = endIcon?.let {
+            {
+                Icon(
+                    imageVector = it,
+                    contentDescription = null,
+                    tint = style.contentColor,
+                )
+            }
+        }
+    )
+}
+
+@Composable
+private fun FitnessAppButtonContent(
+    modifier: Modifier = Modifier,
+    style: FitnessAppButtonStyle = FitnessAppButtonStyle.Primary,
+    onClick: () -> Unit,
+    text: String,
+    enabled: Boolean = true,
+    startIcon: (@Composable () -> Unit)? = null,
+    endIcon: (@Composable () -> Unit)? = null,
+) {
+    val backgroundColor = when (style) {
         FitnessAppButtonStyle.Primary -> FitnessAppTheme.colors.primary
         FitnessAppButtonStyle.Content -> FitnessAppTheme.colors.contentPrimary
     }
-    val contentColor = when(style) {
-        FitnessAppButtonStyle.Primary -> FitnessAppTheme.colors.onPrimary
-        FitnessAppButtonStyle.Content -> FitnessAppTheme.colors.onContentPrimary
-    }
     LocalRippleColor.provides(
-        when(style) {
+        when (style) {
             FitnessAppButtonStyle.Primary -> FitnessAppTheme.colors.onPrimary
             FitnessAppButtonStyle.Content -> FitnessAppTheme.colors.onContentPrimary
         }
@@ -45,7 +119,7 @@ fun FitnessAppButton(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = backgroundColor,
-            contentColor = contentColor
+            contentColor = style.contentColor
         ),
         enabled = enabled,
         content = {
@@ -53,32 +127,27 @@ fun FitnessAppButton(
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                startIcon?.let {
-                    FitnessAppIcon(
-                        icon = startIcon,
-                        tint = contentColor
-                    )
-                }
+                startIcon?.invoke()
 
                 Text(
                     text = text.uppercase(),
                     style = FitnessAppTheme.typography.labelLarge,
-                    color = contentColor
+                    color = style.contentColor
                 )
 
-                endIcon?.let {
-                    startIcon?.let {
-                        FitnessAppIcon(
-                            icon = startIcon,
-                            tint = contentColor
-                        )
-                    }
-                }
+                endIcon?.invoke()
             }
         }
     )
 }
 
 enum class FitnessAppButtonStyle {
-    Primary, Content
+    Primary, Content;
+
+    internal val contentColor
+        @Composable
+        get() = when (this) {
+            Primary -> FitnessAppTheme.colors.onPrimary
+            Content -> FitnessAppTheme.colors.onContentPrimary
+        }
 }

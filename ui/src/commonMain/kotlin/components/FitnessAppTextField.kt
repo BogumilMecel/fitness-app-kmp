@@ -14,17 +14,22 @@ import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -37,7 +42,7 @@ fun FitnessAppTextField(
     textFieldData: TextFieldData,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    leadingIcon: Icon? = null,
+    leadingIcon: ImageVector? = null,
     trailingIcon: ClickableContent.Icon? = null,
     label: String,
     maxLines: Int = 1,
@@ -91,8 +96,9 @@ fun FitnessAppTextField(
             label = { Text(text = label) },
             leadingIcon = {
                 leadingIcon?.let {
-                    FitnessAppIcon(
-                        icon = leadingIcon,
+                    Icon(
+                        imageVector = it,
+                        contentDescription = null,
                         tint = iconColor
                     )
                 }
@@ -103,10 +109,11 @@ fun FitnessAppTextField(
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     trailingIcon?.let {
-                        FitnessAppIcon(
-                            icon = it.icon,
-                            modifier = Modifier.clickable(onClick = it.onClick),
-                            tint = iconColor
+                        Icon(
+                            imageVector = it.icon,
+                            contentDescription = null,
+                            tint = iconColor,
+                            modifier = Modifier.clickable(onClick = it.onClick)
                         )
                     }
 
@@ -115,15 +122,16 @@ fun FitnessAppTextField(
                         enter = fadeIn(),
                         exit = fadeOut()
                     ) {
-                        FitnessAppIcon(
-                            icon = IconVector.Close,
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = null,
+                            tint = iconColor,
                             modifier = Modifier
                                 .padding(end = if (trailingIcon == null) 0.dp else 12.dp)
                                 .clickable {
                                     textFieldData.onErrorCleared()
                                     textFieldData.onValueChange("")
-                                },
-                            tint = iconColor
+                                }
                         )
                     }
                 }
@@ -147,9 +155,10 @@ fun FitnessAppTextField(
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                FitnessAppIcon(
-                    icon = IconVector.InfoOutlined,
-                    tint = FitnessAppTheme.colors.error
+                Icon(
+                    imageVector = Icons.Outlined.Info,
+                    contentDescription = null,
+                    tint = FitnessAppTheme.colors.error,
                 )
 
                 Text(

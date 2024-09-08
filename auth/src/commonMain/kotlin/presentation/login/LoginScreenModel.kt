@@ -29,33 +29,33 @@ class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
     }
 
     fun onLoginButtonClicked() {
-        loginUseCases.validateEmailUseCase(
-            email = email.getText()
-        ).handle(validationField = email)
+        screenModelScope.launch {
+            loginUseCases.validateEmailUseCase(
+                email = email.getText()
+            ).handle(validationField = email)
 
-        loginUseCases.validatePasswordUseCase(
-            password = password.getText()
-        ).handle(validationField = password)
+            loginUseCases.validatePasswordUseCase(
+                password = password.getText()
+            ).handle(validationField = password)
 
-        if (email.isNotError() && password.isNotError()) {
-            requestLogin()
+            if (email.isNotError() && password.isNotError()) {
+                requestLogin()
+            }
         }
     }
 
-    private fun requestLogin() {
+    private suspend fun requestLogin() {
         buttonEnabled.value = false
-        screenModelScope.launch {
-            loginUseCases.logInUserUseCase(
-                email = email.getText(),
-                password = password.getText()
-            ).handle(
-                onSuccess = {
-                    navigateToSharedScreen(SharedScreen.TabNavigatorScreen)
-                },
-                finally = {
-                    buttonEnabled.value = true
-                }
-            )
-        }
+        loginUseCases.logInUserUseCase(
+            email = email.getText(),
+            password = password.getText()
+        ).handle(
+            onSuccess = {
+                navigateToSharedScreen(SharedScreen.TabNavigatorScreen)
+            },
+            finally = {
+                buttonEnabled.value = true
+            }
+        )
     }
 }

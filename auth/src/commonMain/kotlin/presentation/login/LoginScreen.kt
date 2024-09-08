@@ -4,6 +4,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Login
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Password
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -11,16 +15,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import com.gmail.bogumilmecel2.ui.SharedRes
+import com.gmail.bogumilmecel2.ui.composeResources.Res
+import com.gmail.bogumilmecel2.ui.composeResources.email_address
+import com.gmail.bogumilmecel2.ui.composeResources.forgot_password
+import com.gmail.bogumilmecel2.ui.composeResources.login
+import com.gmail.bogumilmecel2.ui.composeResources.password
+import com.gmail.bogumilmecel2.ui.composeResources.sign_in
 import components.FitnessAppButton
 import components.FitnessAppClickableText
 import components.FitnessAppTextField
 import components.FitnessAppTopBar
 import components.HorizontalSpacer
-import components.IconVector
-import dev.icerock.moko.resources.compose.stringResource
-import theme.FitnessAppTheme
+import org.jetbrains.compose.resources.stringResource
 import presentation.ModelLayout
+import theme.FitnessAppTheme
 import utils.ClickableContent
 import utils.PasswordTransformationWithVisibility
 import utils.PasswordVisibilityIcon
@@ -38,7 +46,7 @@ class LoginScreen : Screen {
 
             Box(modifier = Modifier.fillMaxSize()) {
                 FitnessAppTopBar(
-                    title = stringResource(SharedRes.strings.login),
+                    title = stringResource(Res.string.login),
                     onBackPressed = ::onBackPressed
                 )
 
@@ -49,8 +57,8 @@ class LoginScreen : Screen {
                 ) {
                     FitnessAppTextField(
                         textFieldData = email,
-                        label = stringResource(SharedRes.strings.email_address),
-                        leadingIcon = IconVector.Email,
+                        label = stringResource(Res.string.email_address),
+                        leadingIcon = Icons.Default.Email,
                         testTag = TestTags.EMAIL,
                     )
 
@@ -58,11 +66,11 @@ class LoginScreen : Screen {
 
                     FitnessAppTextField(
                         textFieldData = password,
-                        label = stringResource(resource = SharedRes.strings.password),
+                        label = stringResource(resource = Res.string.password),
                         visualTransformation = PasswordTransformationWithVisibility(
                             passwordVisible = passwordVisible
                         ),
-                        leadingIcon = IconVector.Password,
+                        leadingIcon = Icons.Default.Password,
                         trailingIcon = ClickableContent.Icon(
                             icon = PasswordVisibilityIcon(passwordVisible = passwordVisible),
                             onClick = ::onShowPasswordClicked
@@ -74,15 +82,15 @@ class LoginScreen : Screen {
 
                     FitnessAppButton(
                         onClick = ::onLoginButtonClicked,
-                        startIcon = IconVector.Login,
+                        startIcon = Icons.AutoMirrored.Filled.Login,
                         enabled = buttonEnabled,
-                        text = stringResource(SharedRes.strings.sign_in)
+                        text = stringResource(Res.string.sign_in)
                     )
 
                     HorizontalSpacer()
 
                     FitnessAppClickableText(
-                        text = stringResource(SharedRes.strings.forgot_password),
+                        text = stringResource(Res.string.forgot_password),
                         style = FitnessAppTheme.typography.labelSmall,
                         color = FitnessAppTheme.colors.contentSecondary,
                         onClick = ::onForgotPasswordClicked

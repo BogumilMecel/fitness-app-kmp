@@ -5,6 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Password
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -14,13 +18,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import com.gmail.bogumilmecel2.ui.SharedRes
-import components.FitnessAppButton
+import com.gmail.bogumilmecel2.ui.composeResources.Res
+import com.gmail.bogumilmecel2.ui.composeResources.email_address
+import com.gmail.bogumilmecel2.ui.composeResources.password
+import com.gmail.bogumilmecel2.ui.composeResources.register_header
+import com.gmail.bogumilmecel2.ui.composeResources.sign_up
+import com.gmail.bogumilmecel2.ui.composeResources.username
+import components.FitnessAppButtonWithPainter
 import components.FitnessAppTextField
 import components.FitnessAppTopBar
 import components.HorizontalSpacer
-import components.IconVector
-import dev.icerock.moko.resources.compose.stringResource
+import org.jetbrains.compose.resources.stringResource
 import presentation.ModelLayout
 import utils.TestTags
 
@@ -35,7 +43,7 @@ class RegisterScreen : Screen {
 
             Box(modifier = Modifier.fillMaxSize()) {
                 FitnessAppTopBar(
-                    title = stringResource(resource = SharedRes.strings.register_header),
+                    title = stringResource(Res.string.register_header),
                     onBackPressed = ::onBackPressed
                 )
 
@@ -48,9 +56,9 @@ class RegisterScreen : Screen {
                 ) {
                     FitnessAppTextField(
                         textFieldData = email,
-                        label = stringResource(SharedRes.strings.email_address),
+                        label = stringResource(Res.string.email_address),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                        leadingIcon = IconVector.Email,
+                        leadingIcon = Icons.Default.Email,
                         testTag = TestTags.EMAIL
                     )
 
@@ -58,8 +66,8 @@ class RegisterScreen : Screen {
 
                     FitnessAppTextField(
                         textFieldData = username,
-                        label = stringResource(resource = SharedRes.strings.username),
-                        leadingIcon = IconVector.Account,
+                        label = stringResource(resource = Res.string.username),
+                        leadingIcon = Icons.Default.AccountCircle,
                         testTag = TestTags.USERNAME
                     )
 
@@ -67,18 +75,18 @@ class RegisterScreen : Screen {
 
                     FitnessAppTextField(
                         textFieldData = password,
-                        label = stringResource(resource = SharedRes.strings.password),
+                        label = stringResource(resource = Res.string.password),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                         visualTransformation = PasswordVisualTransformation(),
-                        leadingIcon = IconVector.Password,
+                        leadingIcon = Icons.Default.Password,
                         testTag = TestTags.PASSWORD
                     )
 
                     HorizontalSpacer(24.dp)
 
-                    FitnessAppButton(
+                    FitnessAppButtonWithPainter(
                         onClick = ::onRegisterButtonClicked,
-                        text = stringResource(resource = SharedRes.strings.sign_up)
+                        text = stringResource(resource = Res.string.sign_up),
                     )
                 }
             }

@@ -11,8 +11,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import com.gmail.bogumilmecel2.ui.SharedRes
-import dev.icerock.moko.resources.compose.stringResource
+import com.gmail.bogumilmecel2.ui.composeResources.Res
+import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_account
+import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_diary
+import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_summary
+import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_training
+import org.jetbrains.compose.resources.stringResource
 import presentation.ModelLayout
 import presentation.SummaryScreenModel
 import presentation.SummaryTab
@@ -29,7 +33,7 @@ object Summary : Tab {
     override val options: TabOptions
         @Composable
         get() {
-            val title = stringResource(SharedRes.strings.bottom_nav_summary)
+            val title = stringResource(Res.string.bottom_nav_summary)
             val icon = rememberVectorPainter(Icons.Default.Home)
 
             return remember {
@@ -52,7 +56,7 @@ object DiaryTab : Tab {
     override val options: TabOptions
         @Composable
         get() {
-            val title = stringResource(SharedRes.strings.bottom_nav_diary)
+            val title = stringResource(Res.string.bottom_nav_diary)
             val icon = rememberVectorPainter(Icons.Default.Book)
 
             return remember {
@@ -75,7 +79,7 @@ object TrainingTab : Tab {
     override val options: TabOptions
         @Composable
         get() {
-            val title = stringResource(SharedRes.strings.bottom_nav_training)
+            val title = stringResource(Res.string.bottom_nav_training)
             val icon = rememberVectorPainter(Icons.Default.FitnessCenter)
 
             return remember {
@@ -98,7 +102,7 @@ object AccountTab : Tab {
     override val options: TabOptions
         @Composable
         get() {
-            val title = stringResource(SharedRes.strings.bottom_nav_account)
+            val title = stringResource(Res.string.bottom_nav_account)
             val icon = rememberVectorPainter(Icons.Default.AccountCircle)
 
             return remember {

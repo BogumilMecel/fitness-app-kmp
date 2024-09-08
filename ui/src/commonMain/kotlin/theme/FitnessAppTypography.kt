@@ -8,8 +8,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
-import com.gmail.bogumilmecel2.ui.SharedRes
-import dev.icerock.moko.resources.compose.asFont
+import com.gmail.bogumilmecel2.ui.composeResources.Res
+import com.gmail.bogumilmecel2.ui.composeResources.roboto_bold
+import com.gmail.bogumilmecel2.ui.composeResources.roboto_medium
+import com.gmail.bogumilmecel2.ui.composeResources.roboto_regular
+import org.jetbrains.compose.resources.Font
 
 @Immutable
 data class FitnessAppTypography(
@@ -73,7 +76,16 @@ private fun textStyle(fontSize: TextUnit, fontWeight: FontWeight, lineHeight: Te
 
 private val roboto
     @Composable get() = FontFamily(
-        SharedRes.fonts.roboto.regular.asFont(weight = FontWeight.Normal)!!,
-        SharedRes.fonts.roboto.medium.asFont(weight = FontWeight.Medium)!!,
-        SharedRes.fonts.roboto.bold.asFont(weight = FontWeight.Bold)!!,
+        Font(
+            resource = Res.font.roboto_regular,
+            weight = FontWeight.Normal,
+        ),
+        Font(
+            resource = Res.font.roboto_medium,
+            weight = FontWeight.Medium,
+        ),
+        Font(
+            resource = Res.font.roboto_bold,
+            weight = FontWeight.Bold,
+        ),
     )

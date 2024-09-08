@@ -1,6 +1,7 @@
 package di
 
 import domain.model.Country
+import domain.services.ResourcesService
 import domain.services.SettingsService
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -17,9 +18,11 @@ import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 import org.lighthousegames.logging.logging
 import utils.Constants
+import utils.providers.ResourcesServiceImp
 import utils.providers.SettingsServiceImp
 
 private val sharedModule = module {
+    single<ResourcesService> { ResourcesServiceImp() }
     single<SettingsService> { SettingsServiceImp() }
     single<HttpClient> {
         val settingsService: SettingsService = get()
