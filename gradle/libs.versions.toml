@@ -1,34 +1,21 @@
 [versions]
-agp = "8.2.2"
+agp = "8.6.0"
 android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
-
 androidsvgAar = "1.4"
-androidx-activityCompose = "1.8.2"
-compose = "1.6.2"
-compose-plugin = "1.6.2"
-
-kotlin = "1.9.23"
-
-koin = "3.5.3"
+androidx-activityCompose = "1.9.2"
+compose-plugin = "1.6.11"
+kotlin = "2.0.20"
+koin = "3.5.4"
 koin-compose = "1.1.2"
-
-kotlinx-serialization = "1.7.3"
-kotlinx-coroutines = "1.8.1-Beta"
-
+kotlinx-coroutines = "1.8.1"
 kotlin-logging = "1.4.2"
-
 statelyCommon = "2.0.6"
 voyager = "1.0.0"
-
-moko = "0.23.0"
-
-ktor = "2.3.9"
-
+ktor = "2.3.11"
 multiplatform-setting = "1.1.1"
-
-kotlinx-date = "0.6.0-RC.2"
+kotlinx-date = "0.6.0"
 
 [libraries]
 androidsvg-aar = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvgAar" }
@@ -56,19 +43,15 @@ voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", vers
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
 voyager-tab = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
 
-moko-resources-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "moko" }
-moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko" }
-moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko" }
-
 settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatform-setting" }
 settings-serialization = { module = "com.russhwolf:multiplatform-settings-serialization", version.ref = "multiplatform-setting" }
 settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatform-setting" }
 
 [plugins]
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko" }

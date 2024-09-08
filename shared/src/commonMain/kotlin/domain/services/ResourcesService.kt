@@ -1,9 +1,9 @@
 package domain.services
 
-import dev.icerock.moko.resources.StringResource
+import org.jetbrains.compose.resources.StringResource
 
 interface ResourcesService {
-    fun getString(
+    suspend fun getString(
         resource: StringResource,
         args: List<Any> = emptyList()
     ): String

@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,7 +28,7 @@ fun FitnessAppTopBar(
     ) {
         onBackPressed?.let {
             FitnessAppIconButton(
-                icon = IconVector.Back,
+                icon = Icons.AutoMirrored.Filled.ArrowBack,
                 onClick = onBackPressed,
             )
         }

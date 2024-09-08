@@ -1,19 +1,22 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.moko.resources)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_17
         }
     }
 
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
     compilerOptions {
         freeCompilerArgs.add("-Xexpect-actual-classes")
     }
@@ -26,8 +29,6 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ui"
             isStatic = true
-            export("dev.icerock.moko:resources:0.23.0")
-            export("dev.icerock.moko:graphics:0.9.0")
         }
     }
 
@@ -39,10 +40,9 @@ kotlin {
         commonMain.dependencies {
             implementation(compose.material3)
 
+            api(compose.components.resources)
             api(compose.material)
             api(compose.materialIconsExtended)
-            api(libs.moko.resources)
-            api(libs.moko.resources.compose)
         }
         iosMain.dependencies {
             implementation(libs.stately.common)
@@ -62,13 +62,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
-    sourceSets {
-        getByName("main").java.srcDirs("build/generated/moko/androidMain/src")
-    }
 }
 
-multiplatformResources {
-    multiplatformResourcesPackage = "com.gmail.bogumilmecel2.ui"
-    multiplatformResourcesClassName = "SharedRes"
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "com.gmail.bogumilmecel2.ui.composeResources"
+    generateResClass = auto
 }

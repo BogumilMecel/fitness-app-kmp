@@ -107,3 +107,4 @@ node_modules/
 *.sln.iml
 *.csproj.iml
 *.dotsettings
+.kotlin/metadata
