@@ -14,17 +14,17 @@ import theme.FitnessAppTheme
 class TabNavigatorScreen: Screen {
     @Composable
     override fun Content() {
-        TabNavigator(tab = SummaryTab) {
+        TabNavigator(tab = Summary) {
             Scaffold(
                 content = {
                     CurrentTab()
                 },
                 bottomBar = {
                     BottomNavigation(
-                        backgroundColor = FitnessAppTheme.colors.background,
+                        backgroundColor = FitnessAppTheme.colors.backgroundSecondary,
                         modifier = Modifier.height(60.dp)
                     ) {
-                        TabNavigationItem(tab = SummaryTab)
+                        TabNavigationItem(tab = Summary)
                         TabNavigationItem(tab = DiaryTab)
                         TabNavigationItem(tab = TrainingTab)
                         TabNavigationItem(tab = AccountTab)

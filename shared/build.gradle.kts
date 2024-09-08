@@ -62,7 +62,9 @@ kotlin {
             api(libs.kotlinx.serialization.json)
 
             //key-value
-            api(libs.multiplatform.settings)
+            api(libs.settings)
+            api(libs.settings.serialization)
+            api(libs.settings.coroutines)
 
             //date
             api(libs.kotlinx.date)

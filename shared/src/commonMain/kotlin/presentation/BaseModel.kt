@@ -4,17 +4,25 @@ import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import cafe.adriel.voyager.core.screen.Screen
 import components.TextFieldData
+import domain.services.SettingsService
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import presentation.navigation.NavigationAction
 import presentation.navigation.SharedScreen
 import utils.Resource
 
 open class BaseModel : ScreenModel, KoinComponent {
 
+    val settingsService by inject<SettingsService>()
     val navigation = Channel<NavigationAction>()
 
     open fun onBackPressed() {
@@ -88,6 +96,8 @@ open class BaseModel : ScreenModel, KoinComponent {
         finally()
     }
 
+    protected fun getNotNullUserFlow() = settingsService.getUser().filterNotNull()
+
     private fun navigateBack(withPopUp: Boolean = false) {
         screenModelScope.launch {
             navigation.send(
@@ -114,4 +124,10 @@ open class BaseModel : ScreenModel, KoinComponent {
             onErrorCleared = { update { it.copy(error = null) } }
         )
     }
+
+    protected fun <T> Flow<T>.stateInScreenModelScope(initialValue: T): StateFlow<T> = stateIn(
+        scope = screenModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = initialValue,
+    )
 }

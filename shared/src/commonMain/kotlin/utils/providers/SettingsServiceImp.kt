@@ -1,12 +1,19 @@
 package utils.providers
 
+import com.russhwolf.settings.ExperimentalSettingsApi
+import com.russhwolf.settings.ObservableSettings
 import com.russhwolf.settings.Settings
+import com.russhwolf.settings.coroutines.getStringOrNullFlow
 import domain.model.User
 import domain.services.SettingsService
+import kotlinx.coroutines.flow.map
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class SettingsServiceImp(private val settings: Settings) : SettingsService {
+class SettingsServiceImp : SettingsService {
+
+    private val settings = Settings()
+    private val observableSettings = settings as ObservableSettings
 
     companion object {
         private const val ACCESS_TOKEN_KEY = "access_token_key"
@@ -20,7 +27,10 @@ class SettingsServiceImp(private val settings: Settings) : SettingsService {
 
     override fun getAccessToken() = settings.getStringOrNull(key = ACCESS_TOKEN_KEY)
 
-    override fun getUser() = stringToObject<User?>(settings.getStringOrNull(USER_KEY))
+    @OptIn(ExperimentalSettingsApi::class)
+    override fun getUser() = observableSettings.getStringOrNullFlow(key = USER_KEY).map {
+        stringToObject<User>(it)
+    }
 
     override fun setUser(user: User) {
         objectToString(user)?.let {

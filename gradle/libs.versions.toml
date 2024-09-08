@@ -45,22 +45,24 @@ kotlinx-date = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
-ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor"}
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 
 kotling-logging = { module = "org.lighthousegames:logging", version.ref = "kotlin-logging" }
 
 stately-common = { module = "co.touchlab:stately-common", version.ref = "statelyCommon" }
-voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager"}
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
-voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager"}
+voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
 voyager-tab = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
 
-moko-resources-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "moko"}
-moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko"}
-moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko"}
+moko-resources-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "moko" }
+moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko" }
+moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko" }
 
-multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatform-setting"}
+settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatform-setting" }
+settings-serialization = { module = "com.russhwolf:multiplatform-settings-serialization", version.ref = "multiplatform-setting" }
+settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatform-setting" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

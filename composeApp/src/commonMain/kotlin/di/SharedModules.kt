@@ -17,8 +17,10 @@ import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 import org.lighthousegames.logging.logging
 import utils.Constants
+import utils.providers.SettingsServiceImp
 
 private val sharedModule = module {
+    single<SettingsService> { SettingsServiceImp() }
     single<HttpClient> {
         val settingsService: SettingsService = get()
         HttpClient {
@@ -54,7 +56,7 @@ private val sharedModule = module {
                     key = Constants.Headers.TIMEZONE,
                     value = TimeZone.currentSystemDefault().id
                 )
-                url(urlString = "http://192.168.0.243/")
+                url(urlString = "http://192.168.0.134/")
                 port = 8080
             }
 
@@ -75,5 +77,6 @@ private val sharedModule = module {
 val sharedModules = listOf(
     sharedModule,
     authModule,
-    splashModule
+    splashModule,
+    summaryModule,
 )

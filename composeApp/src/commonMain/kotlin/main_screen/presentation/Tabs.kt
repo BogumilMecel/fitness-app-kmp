@@ -13,12 +13,17 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.gmail.bogumilmecel2.ui.SharedRes
 import dev.icerock.moko.resources.compose.stringResource
+import presentation.ModelLayout
+import presentation.SummaryScreenModel
+import presentation.SummaryTab
 
-object SummaryTab : Tab {
+object Summary : Tab {
 
     @Composable
     override fun Content() {
-        Text(text = "summary")
+        ModelLayout<SummaryScreenModel> {
+            SummaryTab(model = this)
+        }
     }
 
     override val options: TabOptions

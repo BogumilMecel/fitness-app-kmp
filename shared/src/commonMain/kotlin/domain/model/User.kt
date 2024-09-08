@@ -6,13 +6,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class User(
     @SerialName("id")
-    val id: String? = null,
+    val id: String,
 
     @SerialName("email")
-    val email: String? = null,
+    val email: String,
 
     @SerialName("username")
-    val username: String? = null,
+    val username: String,
 
     @SerialName("nutrition_values")
     val nutritionValues: NutritionValues? = null,
@@ -21,7 +21,7 @@ data class User(
     val userInformation: UserInformation? = null,
 
     @SerialName("log_streak")
-    val logStreak: Int? = null,
+    val logStreak: Int,
 
     @SerialName("latest_weight_entry")
     val latestWeightEntry: WeightEntry? = null,
