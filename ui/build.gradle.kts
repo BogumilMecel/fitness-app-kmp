@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.vectorize)
 }
 
 kotlin {
@@ -39,6 +40,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(compose.material3)
+            api(libs.vectorize)
 
             api(compose.components.resources)
             api(compose.material)

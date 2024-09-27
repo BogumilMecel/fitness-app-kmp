@@ -16,6 +16,7 @@ voyager = "1.0.0"
 ktor = "2.3.11"
 multiplatform-setting = "1.1.1"
 kotlinx-date = "0.6.0"
+vectorize = "1.0.1"
 
 [libraries]
 androidsvg-aar = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvgAar" }
@@ -46,6 +47,7 @@ voyager-tab = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.re
 settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatform-setting" }
 settings-serialization = { module = "com.russhwolf:multiplatform-settings-serialization", version.ref = "multiplatform-setting" }
 settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatform-setting" }
+vectorize = { module = "dev.sergiobelda.compose.vectorize:compose-vectorize-core", version.ref = "vectorize" }
 
 [plugins]
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -55,3 +57,4 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+vectorize = { id = "dev.sergiobelda.compose.vectorize", version.ref = "vectorize" }

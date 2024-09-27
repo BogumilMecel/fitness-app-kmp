@@ -5,18 +5,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AppRegistration
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import com.gmail.bogumilmecel2.ui.composeResources.Res
 import com.gmail.bogumilmecel2.ui.composeResources.email
 import com.gmail.bogumilmecel2.ui.composeResources.google
-import com.gmail.bogumilmecel2.ui.composeResources.google_logo
 import com.gmail.bogumilmecel2.ui.composeResources.or_
 import com.gmail.bogumilmecel2.ui.composeResources.sign_up_with_email
 import com.gmail.bogumilmecel2.ui.composeResources.sing_in_with
@@ -24,9 +24,10 @@ import com.gmail.bogumilmecel2.ui.composeResources.welcome_to
 import components.Divider
 import components.FitnessAppButton
 import components.FitnessAppButtonStyle
-import components.FitnessAppButtonWithPainter
 import components.FitnessAppTopBar
 import components.HorizontalSpacer
+import dev.sergiobelda.compose.vectorize.images.Images
+import dev.sergiobelda.compose.vectorize.images.icons.GoogleLogo
 import org.jetbrains.compose.resources.stringResource
 import presentation.ModelLayout
 import theme.FitnessAppTheme
@@ -61,10 +62,11 @@ class AuthNavigationScreen : Screen {
 
                 HorizontalSpacer()
 
-                FitnessAppButtonWithPainter(
+                FitnessAppButton(
                     text = stringResource(Res.string.google),
                     style = FitnessAppButtonStyle.Content,
-                    startIcon = Res.drawable.google_logo,
+                    startIcon = Images.Icons.GoogleLogo,
+                    iconColor = Color.Unspecified,
                     onClick = ::onSignInWithGoogleClicked
                 )
 
@@ -76,7 +78,7 @@ class AuthNavigationScreen : Screen {
                 FitnessAppButton(
                     text = stringResource(Res.string.sign_up_with_email),
                     style = FitnessAppButtonStyle.Content,
-                    startIcon = Icons.Default.AppRegistration,
+                    startIcon = Icons.Default.Person,
                     onClick = ::onSignUpWithEmailClicked
                 )
             }

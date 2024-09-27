@@ -11,54 +11,17 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
 import theme.FitnessAppTheme
 import theme.LocalRippleColor
-
-@Composable
-fun FitnessAppButtonWithPainter(
-    modifier: Modifier = Modifier,
-    style: FitnessAppButtonStyle = FitnessAppButtonStyle.Primary,
-    onClick: () -> Unit,
-    text: String,
-    enabled: Boolean = true,
-    startIcon: DrawableResource? = null,
-    endIcon: DrawableResource? = null
-) {
-    FitnessAppButtonContent(
-        modifier = modifier,
-        style = style,
-        onClick = onClick,
-        text = text,
-        enabled = enabled,
-        startIcon = startIcon?.let {
-            {
-                Icon(
-                    painter = painterResource(it),
-                    contentDescription = null,
-                    tint = style.contentColor,
-                )
-            }
-        },
-        endIcon = endIcon?.let {
-            {
-                Icon(
-                    painter = painterResource(it),
-                    contentDescription = null,
-                    tint = style.contentColor,
-                )
-            }
-        }
-    )
-}
 
 @Composable
 fun FitnessAppButton(
     modifier: Modifier = Modifier,
     style: FitnessAppButtonStyle = FitnessAppButtonStyle.Primary,
+    iconColor: Color = style.contentColor,
     onClick: () -> Unit,
     text: String,
     enabled: Boolean = true,
@@ -76,7 +39,7 @@ fun FitnessAppButton(
                 Icon(
                     imageVector = it,
                     contentDescription = null,
-                    tint = style.contentColor,
+                    tint = iconColor,
                 )
             }
         },
@@ -85,7 +48,7 @@ fun FitnessAppButton(
                 Icon(
                     imageVector = it,
                     contentDescription = null,
-                    tint = style.contentColor,
+                    tint = iconColor,
                 )
             }
         }

@@ -24,7 +24,7 @@ import com.gmail.bogumilmecel2.ui.composeResources.password
 import com.gmail.bogumilmecel2.ui.composeResources.register_header
 import com.gmail.bogumilmecel2.ui.composeResources.sign_up
 import com.gmail.bogumilmecel2.ui.composeResources.username
-import components.FitnessAppButtonWithPainter
+import components.FitnessAppButton
 import components.FitnessAppTextField
 import components.FitnessAppTopBar
 import components.HorizontalSpacer
@@ -84,7 +84,7 @@ class RegisterScreen : Screen {
 
                     HorizontalSpacer(24.dp)
 
-                    FitnessAppButtonWithPainter(
+                    FitnessAppButton(
                         onClick = ::onRegisterButtonClicked,
                         text = stringResource(resource = Res.string.sign_up),
                     )
