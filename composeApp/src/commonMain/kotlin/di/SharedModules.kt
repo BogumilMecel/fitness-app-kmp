@@ -83,4 +83,5 @@ val sharedModules = listOf(
     splashModule,
     summaryModule,
     diaryModule,
+    trainingModule,
 )

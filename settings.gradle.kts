@@ -9,6 +9,7 @@ include(":auth")
 include(":splash")
 include(":summary")
 include(":diary")
+include(":training")
 
 pluginManagement {
     repositories {

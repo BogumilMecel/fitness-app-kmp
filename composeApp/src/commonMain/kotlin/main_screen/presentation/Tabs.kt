@@ -22,6 +22,8 @@ import presentation.DiaryTab
 import presentation.ModelLayout
 import presentation.SummaryScreenModel
 import presentation.SummaryTab
+import presentation.TrainingScreenModel
+import presentation.TrainingTab
 
 object Summary : Tab {
 
@@ -77,7 +79,9 @@ object TrainingTab : Tab {
 
     @Composable
     override fun Content() {
-        Text(text = "trainig")
+        ModelLayout<TrainingScreenModel> {
+            TrainingTab(model = this)
+        }
     }
 
     override val options: TabOptions
