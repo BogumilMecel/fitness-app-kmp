@@ -10,6 +10,7 @@ include(":splash")
 include(":summary")
 include(":diary")
 include(":training")
+include(":account")
 
 pluginManagement {
     repositories {
