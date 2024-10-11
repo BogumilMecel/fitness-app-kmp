@@ -8,6 +8,7 @@ include(":shared")
 include(":auth")
 include(":splash")
 include(":summary")
+include(":diary")
 
 pluginManagement {
     repositories {

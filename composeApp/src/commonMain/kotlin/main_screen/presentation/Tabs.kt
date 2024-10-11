@@ -17,6 +17,8 @@ import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_diary
 import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_summary
 import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_training
 import org.jetbrains.compose.resources.stringResource
+import presentation.DiaryScreenModel
+import presentation.DiaryTab
 import presentation.ModelLayout
 import presentation.SummaryScreenModel
 import presentation.SummaryTab
@@ -50,7 +52,9 @@ object DiaryTab : Tab {
 
     @Composable
     override fun Content() {
-        Text(text = "diary")
+        ModelLayout<DiaryScreenModel> {
+            DiaryTab(model = this)
+        }
     }
 
     override val options: TabOptions
