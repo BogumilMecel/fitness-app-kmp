@@ -8,6 +8,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import kotlinx.coroutines.flow.receiveAsFlow
+import presentation.base.BaseModel
 import presentation.navigation.NavigationAction
 import presentation.utils.getDefaultRootModifier
 

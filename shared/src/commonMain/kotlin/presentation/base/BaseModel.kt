@@ -1,4 +1,4 @@
-package presentation
+package presentation.base
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
@@ -22,7 +22,7 @@ import utils.Resource
 
 open class BaseModel : ScreenModel, KoinComponent {
 
-    val settingsService by inject<SettingsService>()
+    protected val settingsService by inject<SettingsService>()
     val navigation = Channel<NavigationAction>()
 
     open fun onBackPressed() {

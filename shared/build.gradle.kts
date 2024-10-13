@@ -43,7 +43,6 @@ kotlin {
             api(compose.runtime)
             api(compose.ui)
             api(project(":ui"))
-            api(project(":utils"))
 
             //logger
             api(libs.kotling.logging)
@@ -69,6 +68,8 @@ kotlin {
             api(libs.settings)
             api(libs.settings.serialization)
             api(libs.settings.coroutines)
+
+            api(libs.kotlinx.date)
         }
         iosMain.dependencies {
             //http client

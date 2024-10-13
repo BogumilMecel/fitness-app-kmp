@@ -5,6 +5,7 @@ import domain.use_case.AuthenticateUserUseCase
 import domain.use_case.Result
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
+import presentation.base.BaseModel
 import presentation.navigation.SharedScreen
 
 class SplashScreenModel (

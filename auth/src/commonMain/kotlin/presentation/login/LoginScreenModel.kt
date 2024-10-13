@@ -5,7 +5,7 @@ import components.TextFieldData
 import domain.use_case.LoginUseCases
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import presentation.BaseModel
+import presentation.base.BaseModel
 import presentation.navigation.SharedScreen
 
 class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {

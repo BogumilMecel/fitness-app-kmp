@@ -1,8 +1,8 @@
 package domain.use_case
 
 import domain.model.AuthRequest
-import domain.services.SettingsService
 import domain.repository.AuthRepository
+import domain.services.SettingsService
 import utils.Resource
 
 class LogInUserUseCase(
