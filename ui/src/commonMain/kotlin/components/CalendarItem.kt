@@ -16,12 +16,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import theme.FitnessAppTheme
 import utils.noRippleClickable
 
 @Composable
 fun CalendarItem(
+    modifier: Modifier = Modifier,
     dayOfWeek: String,
     dayOfMonth: String,
     selected: Boolean,
@@ -29,21 +31,21 @@ fun CalendarItem(
 ) {
     val contentColor by animateColorAsState(
         targetValue = if (selected) FitnessAppTheme.colors.onPrimary else FitnessAppTheme.colors.contentSecondary,
-        animationSpec = tween(durationMillis = 200, easing = LinearEasing)
+        animationSpec = tween(durationMillis = 100, easing = LinearEasing)
     )
 
     val topBackgroundColor by animateColorAsState(
         targetValue = if (selected) FitnessAppTheme.colors.primary else FitnessAppTheme.colors.backgroundSecondary,
-        animationSpec = tween(durationMillis = 200, easing = LinearEasing)
+        animationSpec = tween(durationMillis = 100, easing = LinearEasing)
     )
 
     val bottomBackgroundColor by animateColorAsState(
         targetValue = if (selected) FitnessAppTheme.colors.secondary else FitnessAppTheme.colors.backgroundTertiary,
-        animationSpec = tween(durationMillis = 200, easing = LinearEasing)
+        animationSpec = tween(durationMillis = 100, easing = LinearEasing)
     )
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .width(44.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(color = topBackgroundColor)
@@ -52,9 +54,10 @@ fun CalendarItem(
     ) {
         Text(
             text = dayOfWeek,
-            style = FitnessAppTheme.typography.bodySmall,
+            style = FitnessAppTheme.typography.bodyExtraSmall,
             color = contentColor,
-            modifier = Modifier.padding(top = 4.dp, bottom = 2.dp)
+            modifier = Modifier.padding(vertical = 4.dp),
+            overflow = TextOverflow.Ellipsis,
         )
 
         Text(
