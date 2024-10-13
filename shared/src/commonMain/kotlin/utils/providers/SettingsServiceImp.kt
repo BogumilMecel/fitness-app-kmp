@@ -4,6 +4,7 @@ import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.ObservableSettings
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.coroutines.getStringOrNullFlow
+import domain.model.AvailableDiaryDatesResponse
 import domain.model.User
 import domain.services.SettingsService
 import kotlinx.coroutines.flow.map
@@ -18,6 +19,7 @@ class SettingsServiceImp : SettingsService {
     companion object {
         private const val ACCESS_TOKEN_KEY = "access_token_key"
         private const val USER_KEY = "user_key"
+        private const val AVAILABLE_DIARY_DATES_KEY = "available_diary_dates"
     }
 
     override fun saveAccessToken(token: String) = settings.putString(
@@ -39,6 +41,20 @@ class SettingsServiceImp : SettingsService {
                 value = it
             )
         }
+    }
+
+    override fun saveAvailableDiaryDates(availableDiaryDatesResponse: AvailableDiaryDatesResponse) {
+        objectToString(availableDiaryDatesResponse)?.let {
+            settings.putString(
+                key = AVAILABLE_DIARY_DATES_KEY,
+                value = it
+            )
+        }
+    }
+
+    @OptIn(ExperimentalSettingsApi::class)
+    override fun getAvailableDiaryDates() = observableSettings.getStringOrNullFlow(AVAILABLE_DIARY_DATES_KEY).map {
+        stringToObject<AvailableDiaryDatesResponse>(it)
     }
 
     private inline fun <reified T> stringToObject(string: String?) = try {

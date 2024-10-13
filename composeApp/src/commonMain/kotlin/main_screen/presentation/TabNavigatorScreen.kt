@@ -9,28 +9,31 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import presentation.ModelLayout
 import theme.FitnessAppTheme
 
 class TabNavigatorScreen: Screen {
     @Composable
     override fun Content() {
-        TabNavigator(tab = Summary) {
-            Scaffold(
-                content = {
-                    CurrentTab()
-                },
-                bottomBar = {
-                    BottomNavigation(
-                        backgroundColor = FitnessAppTheme.colors.backgroundSecondary,
-                        modifier = Modifier.height(60.dp)
-                    ) {
-                        TabNavigationItem(tab = Summary)
-                        TabNavigationItem(tab = DiaryTab)
-                        TabNavigationItem(tab = TrainingTab)
-                        TabNavigationItem(tab = AccountTab)
+        ModelLayout<TabNavigatorModel> {
+            TabNavigator(tab = Summary) {
+                Scaffold(
+                    content = {
+                        CurrentTab()
+                    },
+                    bottomBar = {
+                        BottomNavigation(
+                            backgroundColor = FitnessAppTheme.colors.backgroundSecondary,
+                            modifier = Modifier.height(60.dp)
+                        ) {
+                            TabNavigationItem(tab = Summary)
+                            TabNavigationItem(tab = DiaryTab)
+                            TabNavigationItem(tab = TrainingTab)
+                            TabNavigationItem(tab = AccountTab)
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     }
 }

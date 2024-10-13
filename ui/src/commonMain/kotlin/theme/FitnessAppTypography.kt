@@ -28,6 +28,7 @@ data class FitnessAppTypography(
     val bodyLarge: TextStyle = body(fontSize = 16.sp, lineHeight = 24.sp),
     val bodyMedium: TextStyle = body(fontSize = 14.sp, lineHeight = 20.sp),
     val bodySmall: TextStyle = body(fontSize = 12.sp, lineHeight = 16.sp),
+    val bodyExtraSmall: TextStyle = body(fontSize = 11.sp, lineHeight = 12.sp),
 
     val labelExtraLarge: TextStyle = label(fontSize = 18.sp, lineHeight = 24.sp),
     val labelLarge: TextStyle = label(fontSize = 16.sp, lineHeight = 24.sp),
