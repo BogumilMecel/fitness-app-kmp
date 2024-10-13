@@ -39,6 +39,7 @@ kotlin {
             implementation(project(":diary"))
             implementation(project(":training"))
             implementation(project(":account"))
+            implementation(project(":utils"))
 
             implementation(libs.voyager.tab)
         }

@@ -15,11 +15,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
+import compose.getScreenWidth
 import theme.FitnessAppTheme
-import utils.getScreenWidth
 
 @Composable
 fun RowScope.TabNavigationItem(tab: Tab) {
@@ -54,7 +53,7 @@ fun RowScope.TabNavigationItem(tab: Tab) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Divider(
-            modifier = Modifier.width((getScreenWidth() / 4).dp),
+            modifier = Modifier.width((getScreenWidth() / 4)),
             color = dividerColor
         )
 

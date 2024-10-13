@@ -1,5 +1,6 @@
 package di
 
+import constans.Constants
 import domain.model.Country
 import domain.services.ResourcesService
 import domain.services.SettingsService
@@ -17,7 +18,6 @@ import kotlinx.datetime.TimeZone
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 import org.lighthousegames.logging.logging
-import utils.Constants
 import utils.providers.ResourcesServiceImp
 import utils.providers.SettingsServiceImp
 
