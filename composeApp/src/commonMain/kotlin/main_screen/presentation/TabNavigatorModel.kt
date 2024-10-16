@@ -25,6 +25,8 @@ class TabNavigatorModel(private val mainRepository: MainRepository) : BaseModel(
     }
 
     private suspend fun requestAvailableDiaryDates() {
-        mainRepository.requestAvailableDates().handle { settingsService.saveAvailableDiaryDates(it) }
+        mainRepository.requestAvailableDates().handle {
+            settingsService.setAvailableDiaryDatesCount(it.availableDaysCount)
+        }
     }
 }

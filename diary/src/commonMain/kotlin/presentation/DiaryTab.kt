@@ -18,23 +18,22 @@ import presentation.utils.getDefaultRootModifier
 
 @Composable
 fun DiaryTab(model: DiaryScreenModel) {
-    val availableDatesResponse by model.availableDatesResponse.collectAsState()
     val selectedDate by model.selectedDate.collectAsState()
 
     Column(getDefaultRootModifier()) {
         LazyRow(
             state = rememberLazyListState(
-                initialFirstVisibleItemIndex = availableDatesResponse.availableDaysCount / 2,
+                initialFirstVisibleItemIndex = model.availableDates.size / 2,
                 initialFirstVisibleItemScrollOffset = with(LocalDensity.current) {
                     // get negative screen width in px - 4px for padding in 29 elements
                     // + 2 * 2px for horizontal content padding and divide it by half
-                    -((getScreenWidth().roundToPx() - 4 * (availableDatesResponse.availableDaysCount) + 1) / 2)
+                    -((getScreenWidth().roundToPx() - 4 * (model.availableDates.size) + 1) / 2)
                 }
             ),
             horizontalArrangement = Arrangement.spacedBy(4.dp),
             contentPadding = PaddingValues(start = 2.dp, end = 2.dp, top = 8.dp)
         ) {
-            items(items = availableDatesResponse.availableDates) { date ->
+            items(items = model.availableDates) { date ->
                 CalendarItem(
                     dayOfWeek = date.dayOfWeek.getShortName(),
                     dayOfMonth = date.dayOfMonth.toString(),
