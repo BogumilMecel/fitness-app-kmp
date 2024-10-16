@@ -11,7 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import components.CalendarItem
+import presentation.components.CalendarItem
 import compose.getScreenWidth
 import date.getShortName
 import presentation.utils.getDefaultRootModifier
