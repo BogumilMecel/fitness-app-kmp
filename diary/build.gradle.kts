@@ -33,6 +33,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
+            implementation(compose.components.resources)
             implementation(project(":shared"))
             implementation(project(":utils"))
         }
@@ -51,4 +52,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+}
+
+compose.resources {
+    publicResClass = false
+    packageOfResClass = "com.gmail.bogumilmecel2.diary.composeResources"
+    generateResClass = auto
 }
