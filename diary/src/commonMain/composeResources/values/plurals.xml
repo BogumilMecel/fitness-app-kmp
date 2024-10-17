@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="servings">
+        <item quantity="one">%s serving</item>
+        <item quantity="other">%s servings</item>
+    </plurals>
+</resources>
