@@ -6,4 +6,14 @@
 
     <string name="measurement_unit_gram">g</string>
     <string name="measurement_unit_milliliter">ml</string>
+
+    <string name="calories_short_name">Kcal</string>
+    <string name="carbohydrates_short_name">Carb</string>
+    <string name="protein_short_name">Prot</string>
+    <string name="fat_short_name">Fat</string>
+
+    <string name="calories">Calories</string>
+    <string name="carbs">Carbs</string>
+    <string name="protein">Protein</string>
+    <string name="fat">Fat</string>
 </resources>
