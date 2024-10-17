@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.stringResource
 
 @Serializable
-enum class Meal {
+enum class MealName {
     BREAKFAST, LUNCH, DINNER, SUPPER;
 
     @Composable
