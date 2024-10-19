@@ -17,6 +17,9 @@ ktor = "2.3.11"
 multiplatform-setting = "1.1.1"
 kotlinx-date = "0.6.0"
 vectorize = "1.0.1"
+sqldelight = "2.0.1"
+room = "2.7.0-alpha10"
+ksp = "1.9.23-1.0.19"
 
 [libraries]
 androidsvg-aar = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvgAar" }
@@ -48,6 +51,10 @@ settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref
 settings-serialization = { module = "com.russhwolf:multiplatform-settings-serialization", version.ref = "multiplatform-setting" }
 settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatform-setting" }
 vectorize = { module = "dev.sergiobelda.compose.vectorize:compose-vectorize-core", version.ref = "vectorize" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-runtime-android = { module = "androidx.room:room-runtime-android", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqldelight" }
 
 [plugins]
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -58,3 +65,5 @@ jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugi
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 vectorize = { id = "dev.sergiobelda.compose.vectorize", version.ref = "vectorize" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }
