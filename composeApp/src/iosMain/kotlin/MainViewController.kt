@@ -1,5 +1,7 @@
 import androidx.compose.ui.window.ComposeUIViewController
 import cafe.adriel.voyager.core.registry.ScreenRegistry
+import di.createSharedNativeModule
+import di.iosSharedModule
 import di.startDi
 import main_screen.presentation.TabNavigatorScreen
 import org.koin.dsl.module
@@ -16,6 +18,6 @@ fun MainViewController() = ComposeUIViewController {
             TabNavigatorScreen()
         }
     }
-    startDi(nativeModule = module {  })
+    startDi(nativeModule = iosSharedModule)
     App()
 }
