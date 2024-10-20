@@ -19,7 +19,7 @@ kotlinx-date = "0.6.0"
 vectorize = "1.0.1"
 sqldelight = "2.0.1"
 room = "2.7.0-alpha10"
-ksp = "1.9.23-1.0.19"
+ksp = "2.0.20-1.0.25"
 
 [libraries]
 androidsvg-aar = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvgAar" }
