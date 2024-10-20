@@ -10,5 +10,10 @@ import domain.model.Product
     version = 1,
 )
 abstract class FitnessAppDatabase : RoomDatabase() {
+
+    companion object {
+        const val DB_NAME = "fitness_app_database.db"
+    }
+
     abstract val diaryDao: DiaryDao
 }
