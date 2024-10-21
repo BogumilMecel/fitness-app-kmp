@@ -30,4 +30,16 @@ class DiaryRepositoryImp(
             )
         }
     }
+
+    override suspend fun insertOfflineProducts(products: List<Product>): Resource<Unit> {
+        return handleRequest {
+            products.forEach { insertOfflineProduct(it) }
+        }
+    }
+
+    override suspend fun insertOfflineProduct(product: Product): Resource<Unit> {
+        return handleRequest {
+            diaryDao.insertProduct(product = product)
+        }
+    }
 }

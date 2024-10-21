@@ -74,8 +74,8 @@ kotlin {
             api(libs.kotlinx.date)
 
             //room
-            implementation(libs.room.runtime)
-            implementation(libs.sqlite.bundled)
+            api(libs.room.runtime)
+            api(libs.sqlite.bundled)
         }
         iosMain.dependencies {
             //http client

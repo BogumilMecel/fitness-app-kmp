@@ -13,4 +13,8 @@ interface DiaryRepository {
         limit: Int,
         skip: Int = 0,
     ): Resource<List<Product>>
+
+    suspend fun insertOfflineProducts(products: List<Product>): Resource<Unit>
+
+    suspend fun insertOfflineProduct(product: Product): Resource<Unit>
 }
