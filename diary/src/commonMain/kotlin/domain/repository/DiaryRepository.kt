@@ -1,5 +1,7 @@
 package domain.repository
 
+import domain.model.DeleteDiaryEntryRequest
+import domain.model.DiaryEntriesResponse
 import domain.model.NutritionValues
 import domain.model.Product
 import domain.model.ProductDiaryEntry
@@ -10,7 +12,39 @@ import kotlinx.datetime.LocalDateTime
 import utils.Resource
 
 interface DiaryRepository {
+    suspend fun getDiaryEntries(date: LocalDate): Resource<DiaryEntriesResponse>
+
+    suspend fun getProductDiaryEntries(latestDateTime: LocalDateTime?): Resource<List<ProductDiaryEntry>>
+
+    suspend fun getRecipeDiaryEntries(latestDateTime: LocalDateTime?): Resource<List<RecipeDiaryEntry>>
+
+    suspend fun searchForProducts(searchText: String, page: Int): Resource<List<Product>>
+
+    suspend fun searchForProductWithBarcode(barcode: String): Resource<Product?>
+
+    suspend fun searchForRecipes(searchText: String): Resource<List<Recipe>>
+
+    suspend fun insertProductDiaryEntry(productDiaryEntry: ProductDiaryEntry): Resource<ProductDiaryEntry>
+
+    suspend fun insertRecipeDiaryEntry(recipeDiaryEntry: RecipeDiaryEntry): Resource<RecipeDiaryEntry>
+
+    suspend fun getRecipe(recipeId: String): Resource<Recipe?>
+
+    suspend fun deleteDiaryEntry(deleteDiaryEntryRequest: DeleteDiaryEntryRequest): Resource<Unit>
+
+    suspend fun editProductDiaryEntry(productDiaryEntry: ProductDiaryEntry): Resource<ProductDiaryEntry>
+
+    suspend fun editRecipeDiaryEntry(recipeDiaryEntry: RecipeDiaryEntry): Resource<RecipeDiaryEntry>
+
+    suspend fun saveNewProduct(product: Product): Resource<Product>
+
+    suspend fun getProduct(productId: String): Resource<Product?>
+
+    suspend fun addNewRecipe(recipe: Recipe): Resource<Recipe>
+
     suspend fun getUserProducts(latestDateTime: LocalDateTime?): Resource<List<Product>>
+
+    suspend fun getUserRecipes(latestDateTime: LocalDateTime?): Resource<List<Recipe>>
 
     suspend fun getOfflineProducts(
         userId: String? = null,
