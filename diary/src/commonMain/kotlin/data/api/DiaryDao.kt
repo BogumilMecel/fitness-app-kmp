@@ -18,8 +18,8 @@ interface DiaryDao {
     suspend fun getProducts(
         userId: String?,
         searchText: String?,
-        limit: Int,
-        offset: Int
+        limit: Long,
+        offset: Long
     ): List<Product>
 
     // Insert or replace product
