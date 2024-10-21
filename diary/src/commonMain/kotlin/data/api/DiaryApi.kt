@@ -1,5 +1,8 @@
 import constans.Constants
 import domain.model.Product
+import domain.model.ProductDiaryEntry
+import domain.model.Recipe
+import domain.model.RecipeDiaryEntry
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -20,6 +23,18 @@ class DiaryApi(private val httpClient: HttpClient) {
         url(urlString = "/userData/products")
     }.body<List<Product>>()
 
+    suspend fun getUserProductDiaryEntries(latestDateTime: LocalDateTime?) = httpClient.get {
+        parameters {
+            latestDateTime?.toString()?.let {
+                append(
+                    name = Constants.Query.LATEST_DATE_TIME,
+                    value = it
+                )
+            }
+        }
+        url(urlString = "/userData/product_diary")
+    }.body<List<ProductDiaryEntry>>()
+
     suspend fun getUserRecipes(latestDateTime: LocalDateTime?) = httpClient.get {
         parameters {
             latestDateTime?.toString()?.let {
@@ -30,5 +45,17 @@ class DiaryApi(private val httpClient: HttpClient) {
             }
         }
         url(urlString = "/userData/recipes")
-    }.body<List<Product>>()
+    }.body<List<Recipe>>()
+
+    suspend fun getUserRecipeDiaryEntries(latestDateTime: LocalDateTime?) = httpClient.get {
+        parameters {
+            latestDateTime?.toString()?.let {
+                append(
+                    name = Constants.Query.LATEST_DATE_TIME,
+                    value = it
+                )
+            }
+        }
+        url(urlString = "/userData/recipe_diary")
+    }.body<List<RecipeDiaryEntry>>()
 }
