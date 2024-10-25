@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import domain.model.Product
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DiaryDao {
@@ -20,7 +21,7 @@ interface DiaryDao {
         searchText: String?,
         limit: Long,
         offset: Long
-    ): List<Product>
+    ): Flow<List<Product>>
 
     // Insert or replace product
     @Insert(onConflict = OnConflictStrategy.REPLACE)
