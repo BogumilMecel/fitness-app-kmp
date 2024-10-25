@@ -7,6 +7,7 @@ import domain.model.Product
 import domain.model.ProductDiaryEntry
 import domain.model.Recipe
 import domain.model.RecipeDiaryEntry
+import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import utils.Resource
@@ -51,7 +52,7 @@ interface DiaryRepository {
         searchText: String? = null,
         limit: Long,
         skip: Long = 0,
-    ): Resource<List<Product>>
+    ): Flow<List<Product>>
 
     suspend fun getOfflineProduct(productId: String): Resource<Product?>
 
@@ -65,9 +66,9 @@ interface DiaryRepository {
         skip: Long = 0,
     ): Resource<List<ProductDiaryEntry>>
 
-    suspend fun getOfflineProductDiaryEntries(limit: Long): Resource<List<ProductDiaryEntry>>
+    suspend fun getOfflineProductDiaryEntries(limit: Long): Flow<List<ProductDiaryEntry>>
 
-    suspend fun getOfflineProductDiaryEntries(date: LocalDate): Resource<List<ProductDiaryEntry>>
+    suspend fun getOfflineProductDiaryEntries(date: LocalDate): Flow<List<ProductDiaryEntry>>
 
     suspend fun insertOfflineProductDiaryEntries(productDiaryEntries: List<ProductDiaryEntry>): Resource<Unit>
 
@@ -94,11 +95,11 @@ interface DiaryRepository {
         searchText: String? = null,
         limit: Long,
         skip: Long = 0,
-    ): Resource<List<RecipeDiaryEntry>>
+    ): Flow<List<RecipeDiaryEntry>>
 
-    suspend fun getOfflineRecipeDiaryEntries(limit: Long): Resource<List<RecipeDiaryEntry>>
+    suspend fun getOfflineRecipeDiaryEntries(limit: Long): Flow<List<RecipeDiaryEntry>>
 
-    suspend fun getOfflineRecipeDiaryEntries(date: LocalDate): Resource<List<RecipeDiaryEntry>>
+    suspend fun getOfflineRecipeDiaryEntries(date: LocalDate): Flow<List<RecipeDiaryEntry>>
 
     suspend fun insertOfflineRecipeDiaryEntries(recipeDiaryEntries: List<RecipeDiaryEntry>): Resource<Unit>
 

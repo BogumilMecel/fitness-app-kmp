@@ -8,6 +8,7 @@ import domain.model.ProductDiaryEntry
 import domain.model.Recipe
 import domain.model.RecipeDiaryEntry
 import domain.repository.DiaryRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import utils.Resource
@@ -97,15 +98,13 @@ class DiaryRepositoryImp(
         searchText: String?,
         limit: Long,
         skip: Long,
-    ): Resource<List<Product>> {
-        return handleRequest {
-            diaryDao.getProducts(
-                userId = userId,
-                searchText = searchText,
-                limit = limit,
-                offset = skip
-            )
-        }
+    ): Flow<List<Product>> {
+        return diaryDao.getProducts(
+            userId = userId,
+            searchText = searchText,
+            limit = limit,
+            offset = skip
+        )
     }
 
     override suspend fun insertOfflineProducts(products: List<Product>): Resource<Unit> {
@@ -132,12 +131,12 @@ class DiaryRepositoryImp(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getOfflineProductDiaryEntries(limit: Long): Resource<List<ProductDiaryEntry>> {
+    override suspend fun getOfflineProductDiaryEntries(limit: Long): Flow<List<ProductDiaryEntry>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getOfflineProductDiaryEntries(date: LocalDate): Resource<List<ProductDiaryEntry>> {
-        TODO("Not yet implemented")
+    override suspend fun getOfflineProductDiaryEntries(date: LocalDate): Flow<List<ProductDiaryEntry>> {
+        return diaryDao.getProductDiaryEntriesByDate(date)
     }
 
     override suspend fun insertOfflineProductDiaryEntries(productDiaryEntries: List<ProductDiaryEntry>): Resource<Unit> {
@@ -181,16 +180,16 @@ class DiaryRepositoryImp(
         searchText: String?,
         limit: Long,
         skip: Long
-    ): Resource<List<RecipeDiaryEntry>> {
+    ): Flow<List<RecipeDiaryEntry>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getOfflineRecipeDiaryEntries(limit: Long): Resource<List<RecipeDiaryEntry>> {
+    override suspend fun getOfflineRecipeDiaryEntries(limit: Long): Flow<List<RecipeDiaryEntry>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getOfflineRecipeDiaryEntries(date: LocalDate): Resource<List<RecipeDiaryEntry>> {
-        TODO("Not yet implemented")
+    override suspend fun getOfflineRecipeDiaryEntries(date: LocalDate): Flow<List<RecipeDiaryEntry>> {
+        return diaryDao.getRecipeDiaryEntriesByDate(date)
     }
 
     override suspend fun insertOfflineRecipeDiaryEntries(recipeDiaryEntries: List<RecipeDiaryEntry>): Resource<Unit> {

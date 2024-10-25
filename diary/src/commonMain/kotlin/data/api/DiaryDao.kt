@@ -52,7 +52,7 @@ interface DiaryDao {
 
     // Get product diary entries by date
     @Query("SELECT * FROM ProductDiaryEntry WHERE date = :date ORDER BY creationDateTime DESC")
-    suspend fun getProductDiaryEntriesByDate(date: LocalDate): List<ProductDiaryEntry>
+    suspend fun getProductDiaryEntriesByDate(date: LocalDate): Flow<List<ProductDiaryEntry>>
 
     // Delete a product diary entry
     @Delete
@@ -102,7 +102,7 @@ interface DiaryDao {
 
     // Get recipe diary entries by date
     @Query("SELECT * FROM RecipeDiaryEntry WHERE date = :date ORDER BY creationDateTime DESC")
-    suspend fun getRecipeDiaryEntriesByDate(date: LocalDate): List<RecipeDiaryEntry>
+    suspend fun getRecipeDiaryEntriesByDate(date: LocalDate): Flow<List<RecipeDiaryEntry>>
 
     // Delete a recipe diary entry
     @Delete
