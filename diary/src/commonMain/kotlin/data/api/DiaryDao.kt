@@ -8,6 +8,7 @@ import androidx.room.Query
 import domain.model.NutritionValues
 import domain.model.Product
 import domain.model.ProductDiaryEntry
+import domain.model.Recipe
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDate
 
@@ -63,4 +64,21 @@ interface DiaryDao {
     // Get product diary entries' nutrition values by date
     @Query("SELECT nutritionValues FROM ProductDiaryEntry WHERE date = :date")
     suspend fun getProductDiaryEntriesNutritionValues(date: LocalDate): List<NutritionValues>
+
+    // Get user recipes
+    @Query("""
+        SELECT * FROM Recipe
+        WHERE (:userId IS NULL OR user_id = :userId)
+        AND (:searchText IS NULL OR name LIKE '%' || :searchText || '%')
+        ORDER BY creationDateTime DESC LIMIT :limit OFFSET :offset
+    """)
+    suspend fun getUserRecipes(userId: String?, searchText: String?, limit: Int, offset: Int): List<Recipe>
+
+    // Insert or replace a recipe
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertRecipe(recipe: Recipe)
+
+    // Get recipe by ID
+    @Query("SELECT * FROM Recipe WHERE id = :recipeId LIMIT 1")
+    suspend fun getRecipe(recipeId: String): Recipe?
 }
