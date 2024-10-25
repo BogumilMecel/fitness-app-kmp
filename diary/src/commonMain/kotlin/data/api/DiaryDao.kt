@@ -1,11 +1,15 @@
 package data.api
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import domain.model.NutritionValues
 import domain.model.Product
+import domain.model.ProductDiaryEntry
 import kotlinx.coroutines.flow.Flow
+import kotlinx.datetime.LocalDate
 
 @Dao
 interface DiaryDao {
@@ -30,4 +34,33 @@ interface DiaryDao {
     // Get product by ID
     @Query("SELECT * FROM SqlProduct WHERE id = :productId LIMIT 1")
     suspend fun getProduct(productId: String): Product?
+
+
+    // Insert single product diary entry
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertProductDiaryEntry(entry: ProductDiaryEntry)
+
+    // Get product diary entries with search
+    @Query("SELECT * FROM ProductDiaryEntry WHERE (:searchText IS NULL OR product_name LIKE '%' || :searchText || '%') GROUP BY product_id ORDER BY creationDateTime DESC LIMIT :limit OFFSET :offset")
+    suspend fun getProductDiaryEntries(searchText: String?, limit: Int, offset: Int): List<ProductDiaryEntry>
+
+    // Get all product diary entries
+    @Query("SELECT * FROM ProductDiaryEntry ORDER BY creationDateTime DESC LIMIT :limit")
+    suspend fun getAllProductDiaryEntries(limit: Int): List<ProductDiaryEntry>
+
+    // Get product diary entries by date
+    @Query("SELECT * FROM ProductDiaryEntry WHERE date = :date ORDER BY creationDateTime DESC")
+    suspend fun getProductDiaryEntriesByDate(date: LocalDate): List<ProductDiaryEntry>
+
+    // Delete a product diary entry
+    @Delete
+    suspend fun deleteProductDiaryEntry(entry: ProductDiaryEntry)
+
+    // Delete product diary entries by date
+    @Query("DELETE FROM ProductDiaryEntry WHERE date = :date")
+    suspend fun deleteProductDiaryEntriesByDate(date: LocalDate)
+
+    // Get product diary entries' nutrition values by date
+    @Query("SELECT nutritionValues FROM ProductDiaryEntry WHERE date = :date")
+    suspend fun getProductDiaryEntriesNutritionValues(date: LocalDate): List<NutritionValues>
 }
