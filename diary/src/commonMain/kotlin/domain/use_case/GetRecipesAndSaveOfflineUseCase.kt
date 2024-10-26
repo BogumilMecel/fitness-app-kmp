@@ -13,12 +13,12 @@ class GetRecipesAndSaveOfflineUseCase(
         val latestOfflineRecipe = diaryRepository.getOfflineRecipes(
             userId = settingsService.getUser().firstOrNull()?.id,
             limit = 1,
-        ).data ?: return Resource.Error()
+        ).firstOrNull() ?: return Resource.Error()
 
         val userRecipes = diaryRepository.getUserRecipes(
             latestDateTime = latestOfflineRecipe.firstOrNull()?.creationDateTime
         ).data ?: return Resource.Error()
 
-        return diaryRepository.insertOfflineRecipes(userRecipes)
+        return Resource.Success(diaryRepository.insertOfflineRecipes(userRecipes))
     }
 }

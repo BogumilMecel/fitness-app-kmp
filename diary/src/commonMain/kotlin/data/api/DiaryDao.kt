@@ -30,6 +30,10 @@ interface DiaryDao {
 
     // Insert or replace product
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertProducts(products: List<Product>)
+
+    // Insert or replace product
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProduct(product: Product)
 
     // Get product by ID

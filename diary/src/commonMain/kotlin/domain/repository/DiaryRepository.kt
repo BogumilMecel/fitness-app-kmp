@@ -56,7 +56,7 @@ interface DiaryRepository {
 
     suspend fun getOfflineProduct(productId: String): Resource<Product?>
 
-    suspend fun insertOfflineProducts(products: List<Product>): Resource<Unit>
+    suspend fun insertOfflineProducts(products: List<Product>)
 
     suspend fun insertOfflineProduct(product: Product): Resource<Unit>
 
@@ -68,9 +68,9 @@ interface DiaryRepository {
 
     suspend fun getOfflineProductDiaryEntries(limit: Long): Flow<List<ProductDiaryEntry>>
 
-    suspend fun getOfflineProductDiaryEntries(date: LocalDate): Flow<List<ProductDiaryEntry>>
+    fun getOfflineProductDiaryEntries(date: LocalDate): Flow<List<ProductDiaryEntry>>
 
-    suspend fun insertOfflineProductDiaryEntries(productDiaryEntries: List<ProductDiaryEntry>): Resource<Unit>
+    suspend fun insertOfflineProductDiaryEntries(productDiaryEntries: List<ProductDiaryEntry>)
 
     suspend fun insertOfflineProductDiaryEntry(productDiaryEntry: ProductDiaryEntry): Resource<Unit>
 
@@ -83,11 +83,11 @@ interface DiaryRepository {
         searchText: String? = null,
         limit: Long,
         skip: Long = 0,
-    ): Resource<List<Recipe>>
+    ): Flow<List<Recipe>>
 
     suspend fun getOfflineRecipe(recipeId: String): Resource<Recipe?>
 
-    suspend fun insertOfflineRecipes(recipes: List<Recipe>): Resource<Unit>
+    suspend fun insertOfflineRecipes(recipes: List<Recipe>)
 
     suspend fun insertOfflineRecipe(recipe: Recipe): Resource<Unit>
 
@@ -99,9 +99,9 @@ interface DiaryRepository {
 
     suspend fun getOfflineRecipeDiaryEntries(limit: Long): Flow<List<RecipeDiaryEntry>>
 
-    suspend fun getOfflineRecipeDiaryEntries(date: LocalDate): Flow<List<RecipeDiaryEntry>>
+    fun getOfflineRecipeDiaryEntries(date: LocalDate): Flow<List<RecipeDiaryEntry>>
 
-    suspend fun insertOfflineRecipeDiaryEntries(recipeDiaryEntries: List<RecipeDiaryEntry>): Resource<Unit>
+    suspend fun insertOfflineRecipeDiaryEntries(recipeDiaryEntries: List<RecipeDiaryEntry>)
 
     suspend fun insertOfflineRecipeDiaryEntry(recipeDiaryEntry: RecipeDiaryEntry): Resource<Unit>
 

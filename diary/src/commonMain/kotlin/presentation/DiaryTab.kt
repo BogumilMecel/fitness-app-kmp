@@ -9,16 +9,28 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import presentation.components.CalendarItem
 import compose.getScreenWidth
 import date.getShortName
+import domain.model.MealName
+import domain.model.NutritionValues
+import presentation.components.MealCard
 import presentation.utils.getDefaultRootModifier
 
 @Composable
 fun DiaryTab(model: DiaryScreenModel) {
     val selectedDate by model.selectedDate.collectAsState()
+    val breakfast by model.breakfast.collectAsState()
+    val breakfastNutritionValues by model.breakfastNutritionValues.collectAsState()
+    val lunch by model.lunch.collectAsState()
+    val lunchNutritionValues by model.lunchNutritionValues.collectAsState()
+    val dinner by model.dinner.collectAsState()
+    val dinnerNutritionValues by model.dinnerNutritionValues.collectAsState()
+    val supper by model.supper.collectAsState()
+    val supperNutritionValues by model.supperNutritionValues.collectAsState()
 
     Column(getDefaultRootModifier()) {
         LazyRow(
@@ -41,6 +53,27 @@ fun DiaryTab(model: DiaryScreenModel) {
                     onClick = {
                         model.onDateSelected(date)
                     }
+                )
+            }
+        }
+
+        MealName.entries.forEach { mealName ->
+            when(mealName) {
+                MealName.BREAKFAST -> breakfast to breakfastNutritionValues
+                MealName.LUNCH -> lunch to lunchNutritionValues
+                MealName.DINNER -> dinner to dinnerNutritionValues
+                MealName.SUPPER -> supper to supperNutritionValues
+            }.let { (meal, nutritionValues) ->
+                MealCard(
+                    modifier = Modifier,
+                    mealName = mealName,
+                    diaryEntries = meal,
+                    nutritionValues = nutritionValues,
+                    // TODO: Replace with total nutrition values
+                    wantedNutritionValues = NutritionValues(calories = 2000, carbohydrates = 200.0, protein = 200.0, fat = 90.0),
+                    onAddClicked = {},
+                    onDiaryEntryClicked = {},
+                    onDiaryEntryLongClicked = {}
                 )
             }
         }

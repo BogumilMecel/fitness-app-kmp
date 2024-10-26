@@ -107,10 +107,8 @@ class DiaryRepositoryImp(
         )
     }
 
-    override suspend fun insertOfflineProducts(products: List<Product>): Resource<Unit> {
-        return handleRequest {
-            products.forEach { insertOfflineProduct(it) }
-        }
+    override suspend fun insertOfflineProducts(products: List<Product>) {
+        diaryDao.insertProducts(products)
     }
 
     override suspend fun insertOfflineProduct(product: Product): Resource<Unit> {
@@ -132,15 +130,15 @@ class DiaryRepositoryImp(
     }
 
     override suspend fun getOfflineProductDiaryEntries(limit: Long): Flow<List<ProductDiaryEntry>> {
-        TODO("Not yet implemented")
+        return diaryDao.getAllProductDiaryEntries(limit)
     }
 
-    override suspend fun getOfflineProductDiaryEntries(date: LocalDate): Flow<List<ProductDiaryEntry>> {
+    override fun getOfflineProductDiaryEntries(date: LocalDate): Flow<List<ProductDiaryEntry>> {
         return diaryDao.getProductDiaryEntriesByDate(date)
     }
 
-    override suspend fun insertOfflineProductDiaryEntries(productDiaryEntries: List<ProductDiaryEntry>): Resource<Unit> {
-        TODO("Not yet implemented")
+    override suspend fun insertOfflineProductDiaryEntries(productDiaryEntries: List<ProductDiaryEntry>) {
+        diaryDao.insertProductDiaryEntries(productDiaryEntries)
     }
 
     override suspend fun insertOfflineProductDiaryEntry(productDiaryEntry: ProductDiaryEntry): Resource<Unit> {
@@ -160,16 +158,16 @@ class DiaryRepositoryImp(
         searchText: String?,
         limit: Long,
         skip: Long
-    ): Resource<List<Recipe>> {
-        TODO("Not yet implemented")
+    ): Flow<List<Recipe>> {
+        return diaryDao.getUserRecipes(userId = userId, searchText = searchText, limit = limit, offset = skip)
     }
 
     override suspend fun getOfflineRecipe(recipeId: String): Resource<Recipe?> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun insertOfflineRecipes(recipes: List<Recipe>): Resource<Unit> {
-        TODO("Not yet implemented")
+    override suspend fun insertOfflineRecipes(recipes: List<Recipe>) {
+        diaryDao.insertRecipes(recipes)
     }
 
     override suspend fun insertOfflineRecipe(recipe: Recipe): Resource<Unit> {
@@ -185,15 +183,15 @@ class DiaryRepositoryImp(
     }
 
     override suspend fun getOfflineRecipeDiaryEntries(limit: Long): Flow<List<RecipeDiaryEntry>> {
-        TODO("Not yet implemented")
+        return diaryDao.getAllRecipeDiaryEntries(limit)
     }
 
-    override suspend fun getOfflineRecipeDiaryEntries(date: LocalDate): Flow<List<RecipeDiaryEntry>> {
+    override fun getOfflineRecipeDiaryEntries(date: LocalDate): Flow<List<RecipeDiaryEntry>> {
         return diaryDao.getRecipeDiaryEntriesByDate(date)
     }
 
-    override suspend fun insertOfflineRecipeDiaryEntries(recipeDiaryEntries: List<RecipeDiaryEntry>): Resource<Unit> {
-        TODO("Not yet implemented")
+    override suspend fun insertOfflineRecipeDiaryEntries(recipeDiaryEntries: List<RecipeDiaryEntry>) {
+        diaryDao.insertRecipeDiaryEntries(recipeDiaryEntries)
     }
 
     override suspend fun insertOfflineRecipeDiaryEntry(recipeDiaryEntry: RecipeDiaryEntry): Resource<Unit> {

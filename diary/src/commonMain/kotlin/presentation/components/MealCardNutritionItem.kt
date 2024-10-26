@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import components.HorizontalProgressIndicator
 import components.HorizontalSpacer
+import components.VerticalSpacer
 import theme.FitnessAppTheme
 
 @Composable
@@ -26,7 +27,7 @@ fun MealCardNutritionItem(
             progress = if (wantedValue.toFloat() > 0.0f) (currentValue.toFloat() / wantedValue.toFloat() * 100.0f) else 0.0f
         )
 
-        HorizontalSpacer(size = 6.dp)
+        VerticalSpacer(size = 6.dp)
 
         Column {
             Text(

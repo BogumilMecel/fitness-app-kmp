@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material3.Text
@@ -56,7 +55,8 @@ fun MealCard(
             ) {
                 Text(
                     text = mealName.getName(),
-                    style = MaterialTheme.typography.h3,
+                    style = FitnessAppTheme.typography.headlineSmall,
+                    color = FitnessAppTheme.colors.contentPrimary,
                 )
 
                 Row {

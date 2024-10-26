@@ -31,13 +31,13 @@ fun HorizontalProgressIndicator(
     ) {
         Box(
             modifier = Modifier
-                .weight(if ((1F - progressState) < 0F) 0f else 1 - progressState)
+                .weight(if ((1F - progressState) <= 0F) 0.0000001f else 1 - progressState)
                 .fillMaxWidth()
         )
         Box(
             modifier = Modifier
                 .clip(RoundedCornerShape(12.dp))
-                .weight(if (progressState < 0F) 0f else progressState)
+                .weight(if (progressState <= 0F) 0.0000001f else progressState)
                 .fillMaxWidth()
                 .background(FitnessAppTheme.colors.primary)
         )

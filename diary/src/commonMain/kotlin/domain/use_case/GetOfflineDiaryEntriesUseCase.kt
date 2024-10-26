@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.datetime.LocalDate
 
 class GetOfflineDiaryEntriesUseCase(private val diaryRepository: DiaryRepository) {
-    suspend operator fun invoke(date: LocalDate): Flow<List<DiaryItem>> {
+    operator fun invoke(date: LocalDate): Flow<List<DiaryItem>> {
         return combine(
             flow = diaryRepository.getOfflineProductDiaryEntries(date = date),
             flow2 = diaryRepository.getOfflineRecipeDiaryEntries(date = date),
