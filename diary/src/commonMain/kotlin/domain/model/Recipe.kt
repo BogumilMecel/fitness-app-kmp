@@ -1,9 +1,11 @@
 package domain.model
 
+import androidx.room.Entity
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Entity(tableName = "Recipe")
 @Serializable
 data class Recipe(
     @SerialName("id")

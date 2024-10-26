@@ -6,7 +6,7 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Entity
+@Entity(tableName = "Product")
 @Serializable
 data class Product(
     @PrimaryKey
