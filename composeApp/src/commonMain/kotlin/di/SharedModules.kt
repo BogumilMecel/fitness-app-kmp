@@ -1,6 +1,7 @@
 package di
 
 import constans.Constants
+import data.database.FitnessAppDatabase
 import domain.model.Country
 import domain.services.ResourcesService
 import domain.services.SettingsService
@@ -75,6 +76,7 @@ private val sharedModule = module {
             }
         }
     }
+    single { get<FitnessAppDatabase>().diaryDao }
 }
 
 val sharedModules = listOf(

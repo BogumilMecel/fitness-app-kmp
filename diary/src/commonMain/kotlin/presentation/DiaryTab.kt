@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import components.HorizontalSpacer
 import presentation.components.CalendarItem
 import compose.getScreenWidth
 import date.getShortName
@@ -33,6 +34,8 @@ fun DiaryTab(model: DiaryScreenModel) {
     val supperNutritionValues by model.supperNutritionValues.collectAsState()
 
     Column(getDefaultRootModifier()) {
+        HorizontalSpacer(size = 4.dp)
+
         LazyRow(
             state = rememberLazyListState(
                 initialFirstVisibleItemIndex = model.availableDates.size / 2,
@@ -56,6 +59,8 @@ fun DiaryTab(model: DiaryScreenModel) {
                 )
             }
         }
+
+        HorizontalSpacer(size = 16.dp)
 
         MealName.entries.forEach { mealName ->
             when(mealName) {
