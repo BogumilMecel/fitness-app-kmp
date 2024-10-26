@@ -2,6 +2,7 @@ package domain.model
 
 import androidx.compose.runtime.Composable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.gmail.bogumilmecel2.diary.composeResources.Res
 import com.gmail.bogumilmecel2.diary.composeResources.servings
 import kotlinx.datetime.LocalDate
@@ -13,6 +14,7 @@ import org.jetbrains.compose.resources.pluralStringResource
 @Entity(tableName = "RecipeDiaryEntry")
 @Serializable
 data class RecipeDiaryEntry(
+    @PrimaryKey
     @SerialName("id")
     override val id: String,
 

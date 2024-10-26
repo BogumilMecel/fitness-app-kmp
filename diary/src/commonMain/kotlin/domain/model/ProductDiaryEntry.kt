@@ -2,6 +2,7 @@ package domain.model
 
 import androidx.compose.runtime.Composable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
@@ -10,6 +11,7 @@ import kotlinx.serialization.Serializable
 @Entity(tableName = "ProductDiaryEntry")
 @Serializable
 data class ProductDiaryEntry(
+    @PrimaryKey
     @SerialName("id")
     override val id: String,
 
