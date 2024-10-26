@@ -38,6 +38,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
 
             api(libs.koin.android)
+            api(libs.room.runtime.android)
         }
         commonMain.dependencies {
             //compose ui

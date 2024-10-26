@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -69,10 +70,15 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+}
+
+dependencies {
+    ksp(libs.room.compiler)
 }

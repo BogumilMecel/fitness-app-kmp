@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -58,4 +59,8 @@ compose.resources {
     publicResClass = false
     packageOfResClass = "com.gmail.bogumilmecel2.diary.composeResources"
     generateResClass = auto
+}
+
+dependencies {
+    ksp(libs.room.compiler)
 }
