@@ -76,7 +76,9 @@ fun DiaryTab(model: DiaryScreenModel) {
                     nutritionValues = nutritionValues,
                     // TODO: Replace with total nutrition values
                     wantedNutritionValues = NutritionValues(calories = 2000, carbohydrates = 200.0, protein = 200.0, fat = 90.0),
-                    onAddClicked = {},
+                    onAddClicked = {
+                        model.onAddClicked(mealName = mealName)
+                    },
                     onDiaryEntryClicked = {},
                     onDiaryEntryLongClicked = {}
                 )

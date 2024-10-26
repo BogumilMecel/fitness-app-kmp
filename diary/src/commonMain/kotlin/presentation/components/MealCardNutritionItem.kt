@@ -8,7 +8,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import components.HorizontalProgressIndicator
-import components.HorizontalSpacer
 import components.VerticalSpacer
 import theme.FitnessAppTheme
 

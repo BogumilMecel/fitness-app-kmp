@@ -62,6 +62,10 @@ class DiaryScreenModel(
         selectedDate.value = date
     }
 
+    fun onAddClicked(mealName: MealName) {
+
+    }
+
     private fun List<DiaryItem>.sumNutritionValues() = NutritionValues(
         calories = sumOf { it.nutritionValues.calories },
         carbohydrates = sumOf { it.nutritionValues.carbohydrates },
