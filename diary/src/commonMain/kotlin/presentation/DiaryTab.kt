@@ -22,7 +22,7 @@ import presentation.components.MealCard
 import presentation.utils.getDefaultRootModifier
 
 @Composable
-fun DiaryTab(model: DiaryScreenModel) {
+fun DiaryTab(model: DiaryTabModel) {
     val selectedDate by model.selectedDate.collectAsState()
     val breakfast by model.breakfast.collectAsState()
     val breakfastNutritionValues by model.breakfastNutritionValues.collectAsState()

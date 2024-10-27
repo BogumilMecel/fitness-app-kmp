@@ -18,7 +18,7 @@ import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_training
 import org.jetbrains.compose.resources.stringResource
 import presentation.AccountScreenModel
 import presentation.AccountTab
-import presentation.DiaryScreenModel
+import presentation.DiaryTabModel
 import presentation.DiaryTab
 import presentation.ModelLayout
 import presentation.SummaryScreenModel
@@ -55,7 +55,7 @@ object DiaryTab : Tab {
 
     @Composable
     override fun Content() {
-        ModelLayout<DiaryScreenModel> {
+        ModelLayout<DiaryTabModel> {
             DiaryTab(model = this)
         }
     }
