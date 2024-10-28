@@ -63,7 +63,12 @@ class DiaryScreenModel(
     }
 
     fun onAddClicked(mealName: MealName) {
-
+        navigateTo(
+            DiarySearchScreen(
+                mealName = mealName,
+                date = selectedDate.value
+            )
+        )
     }
 
     private fun List<DiaryItem>.sumNutritionValues() = NutritionValues(
