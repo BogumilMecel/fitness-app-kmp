@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.datetime.LocalDate
 import presentation.base.BaseModel
 
-class DiaryTabModel(
+class DiaryScreenModel(
     createAvailableDiaryDatesUseCase: CreateAvailableDiaryDatesUseCase,
     private val getOfflineDiaryEntriesUseCase: GetOfflineDiaryEntriesUseCase
 ) : BaseModel() {

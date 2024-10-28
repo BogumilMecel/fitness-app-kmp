@@ -6,8 +6,11 @@ import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.FitnessCenter
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import cafe.adriel.voyager.navigator.CurrentScreen
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.gmail.bogumilmecel2.ui.composeResources.Res
@@ -18,8 +21,7 @@ import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_training
 import org.jetbrains.compose.resources.stringResource
 import presentation.AccountScreenModel
 import presentation.AccountTab
-import presentation.DiaryTabModel
-import presentation.DiaryTab
+import presentation.DiaryScreen
 import presentation.ModelLayout
 import presentation.SummaryScreenModel
 import presentation.SummaryTab
@@ -51,12 +53,15 @@ object Summary : Tab {
         }
 }
 
-object DiaryTab : Tab {
+class DiaryTab(private val onNestedNavigation: (isRoot: Boolean) -> Unit) : Tab {
 
     @Composable
     override fun Content() {
-        ModelLayout<DiaryTabModel> {
-            DiaryTab(model = this)
+        Navigator(screen = DiaryScreen()) { navigator ->
+            LaunchedEffect(navigator.lastItem) {
+                onNestedNavigation(navigator.lastItem is DiaryScreen)
+            }
+            CurrentScreen()
         }
     }
 
