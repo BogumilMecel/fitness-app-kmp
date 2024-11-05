@@ -45,6 +45,12 @@ kotlin {
             api(compose.components.resources)
             api(compose.material)
             api(compose.materialIconsExtended)
+
+            //voyager navigation
+            api(libs.voyager.navigator)
+            api(libs.voyager.screenmodel)
+            api(libs.voyager.koin)
+            api(libs.voyager.bottomsheet)
         }
         iosMain.dependencies {
             implementation(libs.stately.common)
