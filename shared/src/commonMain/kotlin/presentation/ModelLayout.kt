@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import kotlinx.coroutines.flow.receiveAsFlow
 import presentation.base.BaseModel
@@ -17,7 +17,7 @@ inline fun <reified T : BaseModel> Screen.ModelLayout(
     model: @Composable T.() -> Unit
 ) {
     val navigator = LocalNavigator.current
-    val screenModel = getScreenModel<T>()
+    val screenModel = koinScreenModel<T>()
 
     LaunchedEffect(true) {
         screenModel.navigation.receiveAsFlow().collect { navigationAction ->
@@ -40,6 +40,6 @@ inline fun <reified T : BaseModel> Screen.ModelLayout(
     }
 
     Box(modifier = getDefaultRootModifier()) {
-        model(getScreenModel<T>())
+        model(screenModel)
     }
 }
