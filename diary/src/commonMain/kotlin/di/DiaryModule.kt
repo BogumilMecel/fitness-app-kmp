@@ -6,6 +6,7 @@ import domain.repository.DiaryRepository
 import domain.use_case.CreateAvailableDiaryDatesUseCase
 import domain.use_case.GetOfflineDiaryEntriesUseCase
 import org.koin.dsl.module
+import presentation.search.DiarySearchScreenModel
 import presentation.DiaryScreenModel
 
 val diaryModule = module {
@@ -20,5 +21,8 @@ val diaryModule = module {
             createAvailableDiaryDatesUseCase = CreateAvailableDiaryDatesUseCase(settingsService = get()),
             getOfflineDiaryEntriesUseCase = GetOfflineDiaryEntriesUseCase(diaryRepository = get())
         )
+    }
+    factory {
+        DiarySearchScreenModel()
     }
 }

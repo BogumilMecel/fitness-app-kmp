@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.LocalDate
 import presentation.base.BaseModel
+import presentation.search.DiarySearchScreen
 
 class DiaryScreenModel(
     createAvailableDiaryDatesUseCase: CreateAvailableDiaryDatesUseCase,

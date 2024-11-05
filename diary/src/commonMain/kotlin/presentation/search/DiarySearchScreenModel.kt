@@ -1,4 +1,4 @@
-package presentation
+package presentation.search
 
 import presentation.base.BaseModel
 
