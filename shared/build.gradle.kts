@@ -58,6 +58,7 @@ kotlin {
             api(libs.voyager.navigator)
             api(libs.voyager.screenmodel)
             api(libs.voyager.koin)
+            api(libs.voyager.bottomsheet)
 
             //http client
             api(libs.ktor.client.core)
