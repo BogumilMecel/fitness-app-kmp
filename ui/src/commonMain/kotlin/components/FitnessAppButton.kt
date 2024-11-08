@@ -1,5 +1,6 @@
 package components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -68,13 +69,9 @@ private fun FitnessAppButtonContent(
     val backgroundColor = when (style) {
         FitnessAppButtonStyle.Primary -> FitnessAppTheme.colors.primary
         FitnessAppButtonStyle.Content -> FitnessAppTheme.colors.contentPrimary
+        FitnessAppButtonStyle.Secondary -> FitnessAppTheme.colors.background
     }
-    LocalRippleColor.provides(
-        when (style) {
-            FitnessAppButtonStyle.Primary -> FitnessAppTheme.colors.onPrimary
-            FitnessAppButtonStyle.Content -> FitnessAppTheme.colors.onContentPrimary
-        }
-    )
+    LocalRippleColor.provides(style.contentColor)
     Button(
         modifier = modifier
             .heightIn(min = 48.dp)
@@ -84,6 +81,13 @@ private fun FitnessAppButtonContent(
             backgroundColor = backgroundColor,
             contentColor = style.contentColor
         ),
+        border = when (style) {
+            FitnessAppButtonStyle.Secondary -> BorderStroke(
+                width = 1.dp,
+                color = FitnessAppTheme.colors.contentSecondary
+            )
+            else -> null
+        },
         enabled = enabled,
         content = {
             Row(
@@ -105,12 +109,13 @@ private fun FitnessAppButtonContent(
 }
 
 enum class FitnessAppButtonStyle {
-    Primary, Content;
+    Primary, Content, Secondary;
 
     internal val contentColor
         @Composable
         get() = when (this) {
             Primary -> FitnessAppTheme.colors.onPrimary
             Content -> FitnessAppTheme.colors.onContentPrimary
+            Secondary -> FitnessAppTheme.colors.contentPrimary
         }
 }
