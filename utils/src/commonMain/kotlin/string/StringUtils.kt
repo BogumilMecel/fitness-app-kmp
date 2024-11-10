@@ -9,3 +9,6 @@ fun formatTwoValues(
 enum class FormatTwoValues(val value: String) {
     SEMICOLON(":");
 }
+
+val String.Companion.EMPTY
+    get() = ""
