@@ -3,6 +3,7 @@ package components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material.Button
@@ -33,38 +34,45 @@ fun FitnessAppButton(
         modifier = modifier,
         style = style,
         onClick = onClick,
-        text = text,
         enabled = enabled,
-        startIcon = startIcon?.let {
-            {
-                Icon(
-                    imageVector = it,
-                    contentDescription = null,
-                    tint = iconColor,
+        content = {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                if (startIcon != null) {
+                    Icon(
+                        imageVector = startIcon,
+                        contentDescription = null,
+                        tint = iconColor,
+                    )
+                }
+
+                Text(
+                    text = text.uppercase(),
+                    style = FitnessAppTheme.typography.labelLarge,
+                    color = style.contentColor
                 )
+
+                if (endIcon != null) {
+                    Icon(
+                        imageVector = endIcon,
+                        contentDescription = null,
+                        tint = iconColor,
+                    )
+                }
             }
         },
-        endIcon = endIcon?.let {
-            {
-                Icon(
-                    imageVector = it,
-                    contentDescription = null,
-                    tint = iconColor,
-                )
-            }
-        }
     )
 }
 
 @Composable
-private fun FitnessAppButtonContent(
+internal fun FitnessAppButtonContent(
     modifier: Modifier = Modifier,
     style: FitnessAppButtonStyle = FitnessAppButtonStyle.Primary,
     onClick: () -> Unit,
-    text: String,
     enabled: Boolean = true,
-    startIcon: (@Composable () -> Unit)? = null,
-    endIcon: (@Composable () -> Unit)? = null,
+    content: @Composable RowScope.() -> Unit,
 ) {
     val backgroundColor = when (style) {
         FitnessAppButtonStyle.Primary -> FitnessAppTheme.colors.primary
@@ -89,22 +97,7 @@ private fun FitnessAppButtonContent(
             else -> null
         },
         enabled = enabled,
-        content = {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                startIcon?.invoke()
-
-                Text(
-                    text = text.uppercase(),
-                    style = FitnessAppTheme.typography.labelLarge,
-                    color = style.contentColor
-                )
-
-                endIcon?.invoke()
-            }
-        }
+        content = content
     )
 }
 
