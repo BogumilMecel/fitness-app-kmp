@@ -1,12 +1,18 @@
 package presentation.search
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRow
+import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -36,18 +42,13 @@ class DiarySearchScreen(
     override fun Content() {
         ModelLayout<DiarySearchScreenModel> {
             val searchBarText by searchBarText.collectAsState()
+            val selectedTabIndex by selectedTabIndex.collectAsState()
 
             Column(modifier = getDefaultRootModifier()) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(
-                            color = FitnessAppTheme.colors.backgroundSecondary,
-                            shape = RoundedCornerShape(
-                                bottomEnd = 12.dp,
-                                bottomStart = 12.dp,
-                            )
-                        )
+                        .background(color = FitnessAppTheme.colors.backgroundSecondary)
                 ) {
                     FitnessAppTopBar(
                         title = mealName.name,
@@ -75,6 +76,37 @@ class DiarySearchScreen(
                     )
 
                     HorizontalSpacer(size = 16.dp)
+
+                    TabRow(
+                        selectedTabIndex = selectedTabIndex,
+                        backgroundColor = FitnessAppTheme.colors.backgroundSecondary,
+                        indicator = { tabPositions ->
+                            Box(
+                                modifier = Modifier
+                                    .tabIndicatorOffset(tabPositions[selectedTabIndex])
+                                    .fillMaxWidth()
+                                    .height(2.dp)
+                                    .background(FitnessAppTheme.colors.contentPrimary)
+                            )
+                        },
+                        tabs = {
+                            SearchTab.entries.forEachIndexed { index, tab ->
+                                Tab(
+                                    text = {
+                                        Text(
+                                            text = tab.displayValue,
+                                            style = MaterialTheme.typography.button,
+                                            color = FitnessAppTheme.colors.contentPrimary
+                                        )
+                                    },
+                                    selected = index == selectedTabIndex,
+                                    onClick = {
+                                        onTabSelected(tab)
+                                    }
+                                )
+                            }
+                        }
+                    )
                 }
             }
         }

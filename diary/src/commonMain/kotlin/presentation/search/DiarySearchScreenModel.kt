@@ -7,6 +7,7 @@ import presentation.base.BaseModel
 class DiarySearchScreenModel : BaseModel() {
 
     val searchBarText = MutableStateFlow(TextFieldData())
+    val selectedTabIndex = MutableStateFlow(SearchTab.EVERYTHING.ordinal)
 
     init {
         searchBarText.initTextField()
@@ -14,5 +15,9 @@ class DiarySearchScreenModel : BaseModel() {
 
     fun onSearch() {
 
+    }
+
+    fun onTabSelected(tab: SearchTab) {
+        selectedTabIndex.value = tab.ordinal
     }
 }
