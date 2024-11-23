@@ -94,15 +94,15 @@ fun FitnessAppTextField(
                 .then(other = testTag?.let { Modifier.testTag(it) } ?: Modifier),
             textStyle = FitnessAppTheme.typography.bodyLarge,
             label = { Text(text = label) },
-            leadingIcon = {
-                leadingIcon?.let {
+            leadingIcon = if (leadingIcon != null) {
+                {
                     Icon(
-                        imageVector = it,
+                        imageVector = leadingIcon,
                         contentDescription = null,
                         tint = iconColor
                     )
                 }
-            },
+            } else null,
             trailingIcon = {
                 Row(
                     modifier = Modifier.animateContentSize(),
@@ -147,7 +147,7 @@ fun FitnessAppTextField(
             ),
             interactionSource = interactionSource,
             keyboardOptions = keyboardOptions,
-            maxLines = maxLines
+            maxLines = maxLines,
         )
 
         textFieldData.error?.let {

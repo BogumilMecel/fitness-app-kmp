@@ -6,4 +6,5 @@
     <string name="friday_short_name">Fri</string>
     <string name="saturday_short_name">Sat</string>
     <string name="sunday_short_name">Sun</string>
+    <string name="today">Today</string>
 </resources>
