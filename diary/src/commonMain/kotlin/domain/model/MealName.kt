@@ -13,11 +13,12 @@ import org.jetbrains.compose.resources.stringResource
 enum class MealName {
     BREAKFAST, LUNCH, DINNER, SUPPER;
 
-    @Composable
-    fun getName() = when (this) {
-        BREAKFAST -> stringResource(Res.string.meal_name_breakfast)
-        LUNCH -> stringResource(Res.string.meal_name_lunch)
-        DINNER -> stringResource(Res.string.meal_name_dinner)
-        SUPPER -> stringResource(Res.string.meal_name_supper)
-    }
+    val displayName: String
+        @Composable
+        get() = when (this) {
+            BREAKFAST -> stringResource(Res.string.meal_name_breakfast)
+            LUNCH -> stringResource(Res.string.meal_name_lunch)
+            DINNER -> stringResource(Res.string.meal_name_dinner)
+            SUPPER -> stringResource(Res.string.meal_name_supper)
+        }
 }

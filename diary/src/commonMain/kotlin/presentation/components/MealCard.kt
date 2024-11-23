@@ -54,7 +54,7 @@ fun MealCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = mealName.getName(),
+                    text = mealName.displayName,
                     style = FitnessAppTheme.typography.headlineSmall,
                     color = FitnessAppTheme.colors.contentPrimary,
                 )
