@@ -108,3 +108,4 @@ node_modules/
 *.csproj.iml
 *.dotsettings
 .kotlin/metadata
+.kotlin/errors
