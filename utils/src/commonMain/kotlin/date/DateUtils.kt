@@ -7,6 +7,7 @@ import com.gmail.bogumilmecel2.utils.composeResources.monday_short_name
 import com.gmail.bogumilmecel2.utils.composeResources.saturday_short_name
 import com.gmail.bogumilmecel2.utils.composeResources.sunday_short_name
 import com.gmail.bogumilmecel2.utils.composeResources.thursday_short_name
+import com.gmail.bogumilmecel2.utils.composeResources.today
 import com.gmail.bogumilmecel2.utils.composeResources.tuesday_short_name
 import com.gmail.bogumilmecel2.utils.composeResources.wednesday_short_name
 import kotlinx.datetime.Clock
@@ -19,6 +20,12 @@ import org.jetbrains.compose.resources.stringResource
 fun getCurrentDate() = Clock.System.now().toLocalDateTime(timeZone = TimeZone.currentSystemDefault()).date
 
 fun LocalDate.isToday() = equals(getCurrentDate())
+
+@Composable
+fun LocalDate.getDisplayValue() = when {
+    isToday() -> stringResource(Res.string.today)
+    else -> toString()
+}
 
 @Composable
 fun DayOfWeek.getShortName() = when(this) {
