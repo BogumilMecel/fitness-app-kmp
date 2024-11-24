@@ -18,10 +18,12 @@ import theme.FitnessAppTheme
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DiaryItem(
-    searchItemParams: SearchItemParams,
+    name: String,
+    textBelowName: String,
+    endText: String,
     onItemClick: () -> Unit,
     onItemLongClick: () -> Unit,
-) = with(searchItemParams) {
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -57,9 +59,3 @@ fun DiaryItem(
         )
     }
 }
-
-data class SearchItemParams(
-    val name: String,
-    val textBelowName: String,
-    val endText: String,
-)
