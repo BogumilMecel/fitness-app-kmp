@@ -93,7 +93,7 @@ class DiaryRepositoryImp(
         }
     }
 
-    override suspend fun getOfflineProducts(
+    override fun getOfflineProducts(
         userId: String?,
         searchText: String?,
         limit: Long,
@@ -153,7 +153,7 @@ class DiaryRepositoryImp(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getOfflineRecipes(
+    override fun getOfflineRecipes(
         userId: String?,
         searchText: String?,
         limit: Long,

@@ -47,7 +47,7 @@ interface DiaryRepository {
 
     suspend fun getUserRecipes(latestDateTime: LocalDateTime?): Resource<List<Recipe>>
 
-    suspend fun getOfflineProducts(
+    fun getOfflineProducts(
         userId: String? = null,
         searchText: String? = null,
         limit: Long,
@@ -78,7 +78,7 @@ interface DiaryRepository {
 
     suspend fun deleteOfflineProductDiaryEntry(productDiaryEntryId: String): Resource<Unit>
 
-    suspend fun getOfflineRecipes(
+    fun getOfflineRecipes(
         userId: String? = null,
         searchText: String? = null,
         limit: Long,
