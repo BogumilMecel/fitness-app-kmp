@@ -6,8 +6,8 @@ import domain.repository.DiaryRepository
 import domain.use_case.CreateAvailableDiaryDatesUseCase
 import domain.use_case.GetOfflineDiaryEntriesUseCase
 import org.koin.dsl.module
-import presentation.search.DiarySearchScreenModel
 import presentation.DiaryScreenModel
+import presentation.search.DiarySearchScreenModel
 
 val diaryModule = module {
     single<DiaryRepository> {
@@ -23,6 +23,6 @@ val diaryModule = module {
         )
     }
     factory {
-        DiarySearchScreenModel()
+        DiarySearchScreenModel(diaryRepository = get())
     }
 }

@@ -41,8 +41,8 @@ class DiarySearchScreen(
     @Composable
     override fun Content() {
         ModelLayout<DiarySearchScreenModel> {
-            val searchBarText by searchBarText.collectAsState()
-            val selectedTabIndex by selectedTabIndex.collectAsState()
+            val searchBarText by searchText.collectAsState()
+            val selectedTab by selectedTab.collectAsState()
 
             Column(modifier = getDefaultRootModifier()) {
                 Column(
@@ -62,7 +62,8 @@ class DiarySearchScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp),
-                        textFieldData = searchBarText,
+                        text = searchBarText,
+                        onValueChange = ::onSearchTextChanged,
                         label = stringResource(Res.string.search_for_products),
                         maxLines = 1,
                         keyboardOptions = KeyboardOptions(
@@ -78,12 +79,12 @@ class DiarySearchScreen(
                     HorizontalSpacer(size = 16.dp)
 
                     TabRow(
-                        selectedTabIndex = selectedTabIndex,
+                        selectedTabIndex = selectedTab.ordinal,
                         backgroundColor = FitnessAppTheme.colors.backgroundSecondary,
                         indicator = { tabPositions ->
                             Box(
                                 modifier = Modifier
-                                    .tabIndicatorOffset(tabPositions[selectedTabIndex])
+                                    .tabIndicatorOffset(tabPositions[selectedTab.ordinal])
                                     .fillMaxWidth()
                                     .height(2.dp)
                                     .background(FitnessAppTheme.colors.contentPrimary)
@@ -99,7 +100,7 @@ class DiarySearchScreen(
                                             color = FitnessAppTheme.colors.contentPrimary
                                         )
                                     },
-                                    selected = index == selectedTabIndex,
+                                    selected = index == selectedTab.ordinal,
                                     onClick = {
                                         onTabSelected(tab)
                                     }
