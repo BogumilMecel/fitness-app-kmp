@@ -23,6 +23,9 @@ val diaryModule = module {
         )
     }
     factory {
-        DiarySearchScreenModel(diaryRepository = get())
+        DiarySearchScreenModel(
+            diaryRepository = get(),
+            resourcesService = get(),
+        )
     }
 }

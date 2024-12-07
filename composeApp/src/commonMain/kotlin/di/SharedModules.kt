@@ -60,7 +60,7 @@ private val sharedModule = module {
                     key = Constants.Headers.TIMEZONE,
                     value = TimeZone.currentSystemDefault().id
                 )
-                url(urlString = "http://192.168.26.65/")
+                url(urlString = "http://192.168.122.65/")
                 port = 8080
             }
 

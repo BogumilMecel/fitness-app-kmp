@@ -12,3 +12,6 @@ enum class FormatTwoValues(val value: String) {
 
 val String.Companion.EMPTY
     get() = ""
+
+val String.Companion.SPACE
+    get() = " "

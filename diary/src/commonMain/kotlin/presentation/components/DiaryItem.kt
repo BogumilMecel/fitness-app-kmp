@@ -13,15 +13,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import domain.model.Product
+import domain.services.ResourcesService
 import theme.FitnessAppTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DiaryItem(
-    searchItemParams: SearchItemParams,
+    params: DiaryItemParams,
     onItemClick: () -> Unit,
     onItemLongClick: () -> Unit,
-) = with(searchItemParams) {
+) = with(params) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -58,8 +60,22 @@ fun DiaryItem(
     }
 }
 
-data class SearchItemParams(
+data class DiaryItemParams(
     val name: String,
     val textBelowName: String,
     val endText: String,
-)
+) {
+    companion object {
+        suspend fun create(
+            product: Product,
+            resourcesService: ResourcesService
+        ) = DiaryItemParams(
+            name = product.name,
+            textBelowName = product.measurementUnit.formatWithValue(
+                resourcesService = resourcesService,
+                value = 100,
+            ),
+            endText = product.nutritionValues.getCaloriesFormatted(resourcesService)
+        )
+    }
+}

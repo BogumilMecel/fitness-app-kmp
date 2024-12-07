@@ -1,10 +1,14 @@
 package domain.model
 
 import androidx.room.TypeConverter
+import com.gmail.bogumilmecel2.ui.composeResources.Res
+import com.gmail.bogumilmecel2.ui.composeResources.kcal
+import domain.services.ResourcesService
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import string.SPACE
 
 @Serializable
 data class NutritionValues(
@@ -19,7 +23,10 @@ data class NutritionValues(
 
     @SerialName("fat")
     val fat: Double = 0.0,
-)
+) {
+    suspend fun getCaloriesFormatted(resourcesService: ResourcesService) =
+        calories.toString() + String.SPACE + resourcesService.getString(Res.string.kcal)
+}
 
 class NutritionValuesTypeConverter {
 

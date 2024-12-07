@@ -2,17 +2,23 @@ package presentation.search
 
 import constans.Constants
 import domain.repository.DiaryRepository
+import domain.services.ResourcesService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import org.lighthousegames.logging.logging
 import presentation.base.BaseModel
+import presentation.components.DiaryItemParams
 import string.EMPTY
 
 class DiarySearchScreenModel(
     private val diaryRepository: DiaryRepository,
+    private val resourcesService: ResourcesService,
 ) : BaseModel() {
 
     val searchText = MutableStateFlow(String.EMPTY)
@@ -22,7 +28,7 @@ class DiarySearchScreenModel(
     private val userRecipesPage = MutableStateFlow(0)
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val userProducts = combine(
+    private val userProducts = combine(
         searchText,
         selectedTab,
         userProductsPage,
@@ -36,7 +42,16 @@ class DiarySearchScreenModel(
                 skip = page * Constants.Paging.OFFLINE_PAGE_SIZE,
             )
         } else emptyFlow()
-    }.flatMapLatest { it }.stateInScreenModelScope(emptyList())
+    }.flatMapLatest { it }.onEach { logging("PLN1").e { it.toString() } }.stateInScreenModelScope(emptyList())
+
+    val productsParams = userProducts.map { products ->
+        products.map { product ->
+            DiaryItemParams.create(
+                product = product,
+                resourcesService = resourcesService,
+            )
+        }
+    }.onEach { logging("PLN1").e { it.toString() } }.stateInScreenModelScope(emptyList())
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val userRecipes = combine(
@@ -65,5 +80,9 @@ class DiarySearchScreenModel(
 
     fun onTabSelected(tab: SearchTab) {
         selectedTab.value = tab
+    }
+
+    fun onScrollToEnd() {
+
     }
 }

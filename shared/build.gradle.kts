@@ -72,6 +72,7 @@ kotlin {
             //room
             api(libs.room.runtime)
             api(libs.sqlite.bundled)
+            implementation(project(":utils"))
         }
         iosMain.dependencies {
             //http client
