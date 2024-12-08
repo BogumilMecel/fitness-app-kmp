@@ -1,6 +1,6 @@
 package presentation.register
 
-import cafe.adriel.voyager.core.model.screenModelScope
+import androidx.lifecycle.viewModelScope
 import components.TextFieldData
 import domain.use_case.RegisterUseCases
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +21,7 @@ class RegisterScreenModel(private val registerUseCases: RegisterUseCases) : Base
     }
 
     fun onRegisterButtonClicked() {
-        screenModelScope.launch {
+        viewModelScope.launch {
             registerUseCases.validateEmailUseCase(
                 email = email.getText()
             ).handle(validationField = email)

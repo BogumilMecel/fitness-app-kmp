@@ -1,6 +1,6 @@
 package presentation
 
-import cafe.adriel.voyager.core.model.screenModelScope
+import androidx.lifecycle.viewModelScope
 import domain.use_case.AuthenticateUserUseCase
 import domain.use_case.Result
 import kotlinx.coroutines.launch
@@ -13,7 +13,7 @@ class SplashScreenModel (
 ): BaseModel(), KoinComponent {
 
     init {
-        screenModelScope.launch {
+        viewModelScope.launch {
             when(authenticateUserUseCase()) {
                 Result.NavigateToLogin -> {
                     navigateToSharedScreen(screen = SharedScreen.AuthNavigationScreen)

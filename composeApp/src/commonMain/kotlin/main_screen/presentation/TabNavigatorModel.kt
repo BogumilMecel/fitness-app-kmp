@@ -1,6 +1,6 @@
 package main_screen.presentation
 
-import cafe.adriel.voyager.core.model.screenModelScope
+import androidx.lifecycle.viewModelScope
 import domain.repository.MainRepository
 import domain.use_case.InitialDiaryDataUseCases
 import kotlinx.coroutines.async
@@ -22,7 +22,7 @@ class TabNavigatorModel(
     }
 
     private fun requestInitialData() {
-        screenModelScope.launch {
+        viewModelScope.launch {
             val availableDiaryDates = async { requestAvailableDiaryDates() }
             val diaryData = async { requestDiaryData() }
             awaitAll(availableDiaryDates, diaryData)

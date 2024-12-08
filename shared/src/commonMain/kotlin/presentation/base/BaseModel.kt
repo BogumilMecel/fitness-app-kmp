@@ -1,7 +1,7 @@
 package presentation.base
 
-import cafe.adriel.voyager.core.model.ScreenModel
-import cafe.adriel.voyager.core.model.screenModelScope
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import cafe.adriel.voyager.core.screen.Screen
 import components.TextFieldData
 import domain.services.SettingsService
@@ -20,7 +20,7 @@ import presentation.navigation.NavigationAction
 import presentation.navigation.SharedScreen
 import utils.Resource
 
-open class BaseModel : ScreenModel, KoinComponent {
+open class BaseModel : ViewModel(), KoinComponent {
 
     protected val settingsService by inject<SettingsService>()
     val navigation = Channel<NavigationAction>()
@@ -33,7 +33,7 @@ open class BaseModel : ScreenModel, KoinComponent {
         screen: Screen,
         withPopUp: Boolean = false
     ) {
-        screenModelScope.launch {
+        viewModelScope.launch {
             navigation.send(
                 NavigationAction.ToScreen(
                     screen = screen,
@@ -44,7 +44,7 @@ open class BaseModel : ScreenModel, KoinComponent {
     }
 
     fun navigateToSharedScreen(screen: SharedScreen) {
-        screenModelScope.launch {
+        viewModelScope.launch {
             navigation.send(
                 NavigationAction.ToSharedScreen(screen = screen)
             )
@@ -99,7 +99,7 @@ open class BaseModel : ScreenModel, KoinComponent {
     protected fun getNotNullUserFlow() = settingsService.getUser().filterNotNull()
 
     private fun navigateBack(withPopUp: Boolean = false) {
-        screenModelScope.launch {
+        viewModelScope.launch {
             navigation.send(
                 NavigationAction.Back(withPopUp = withPopUp)
             )
@@ -126,7 +126,7 @@ open class BaseModel : ScreenModel, KoinComponent {
     }
 
     protected fun <T> Flow<T>.stateInScreenModelScope(initialValue: T): StateFlow<T> = stateIn(
-        scope = screenModelScope,
+        scope = viewModelScope,
         started = SharingStarted.Eagerly,
         initialValue = initialValue,
     )

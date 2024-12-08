@@ -8,10 +8,11 @@ import domain.use_case.GetRecipeDiaryAndSaveOfflineUseCase
 import domain.use_case.GetRecipesAndSaveOfflineUseCase
 import domain.use_case.InitialDiaryDataUseCases
 import main_screen.presentation.TabNavigatorModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 val mainModule = module {
-    factory {
+    viewModel {
         TabNavigatorModel(
             mainRepository = MainRepositoryImp(
                 mainApiClient = MainApiClient(httpClient = get())

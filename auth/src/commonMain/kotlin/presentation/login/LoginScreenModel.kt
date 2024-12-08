@@ -1,6 +1,6 @@
 package presentation.login
 
-import cafe.adriel.voyager.core.model.screenModelScope
+import androidx.lifecycle.viewModelScope
 import components.TextFieldData
 import domain.use_case.LoginUseCases
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,7 +29,7 @@ class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
     }
 
     fun onLoginButtonClicked() {
-        screenModelScope.launch {
+        viewModelScope.launch {
             loginUseCases.validateEmailUseCase(
                 email = email.getText()
             ).handle(validationField = email)

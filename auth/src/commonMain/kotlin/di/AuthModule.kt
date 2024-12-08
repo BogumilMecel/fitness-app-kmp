@@ -10,6 +10,7 @@ import domain.use_case.RegisterUserUseCase
 import domain.use_case.ValidateEmailUseCase
 import domain.use_case.ValidatePasswordUseCase
 import domain.use_case.ValidateUsernameUseCase
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import presentation.login.LoginScreenModel
 import presentation.navigation_screen.AuthNavigationModel
@@ -26,7 +27,7 @@ val authModule = module {
             settingsService = get()
         )
     }
-    factory {
+    viewModel {
         LoginScreenModel(
             loginUseCases = LoginUseCases(
                 logInUserUseCase = get(),
@@ -35,7 +36,7 @@ val authModule = module {
             ),
         )
     }
-    factory {
+    viewModel {
         RegisterScreenModel(
             registerUseCases = RegisterUseCases(
                 validatePasswordUseCase = get(),
@@ -48,5 +49,5 @@ val authModule = module {
             )
         )
     }
-    factory { AuthNavigationModel() }
+    viewModel { AuthNavigationModel() }
 }

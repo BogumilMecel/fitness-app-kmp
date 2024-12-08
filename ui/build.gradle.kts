@@ -48,8 +48,8 @@ kotlin {
 
             //voyager navigation
             api(libs.voyager.navigator)
-            api(libs.voyager.screenmodel)
-            api(libs.voyager.koin)
+            api(libs.androidx.viewmodel)
+            api(libs.koin.compose.viewmodel)
             api(libs.voyager.bottomsheet)
         }
         iosMain.dependencies {
