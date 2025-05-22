@@ -73,6 +73,8 @@ kotlin {
             api(libs.room.runtime)
             api(libs.sqlite.bundled)
             implementation(project(":utils"))
+
+            implementation(compose.components.resources)
         }
         iosMain.dependencies {
             //http client
@@ -101,4 +103,10 @@ room {
 
 dependencies {
     ksp(libs.room.compiler)
+}
+
+compose.resources {
+    publicResClass = false
+    packageOfResClass = "com.gmail.bogumilmecel2.shared.composeResources"
+    generateResClass = auto
 }

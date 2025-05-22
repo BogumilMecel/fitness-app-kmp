@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
 import com.gmail.bogumilmecel2.ui.composeResources.Res
 import com.gmail.bogumilmecel2.ui.composeResources.email
 import com.gmail.bogumilmecel2.ui.composeResources.google
@@ -29,59 +28,55 @@ import components.HorizontalSpacer
 import dev.sergiobelda.compose.vectorize.images.Images
 import dev.sergiobelda.compose.vectorize.images.icons.GoogleLogo
 import org.jetbrains.compose.resources.stringResource
-import presentation.ModelLayout
+import org.koin.compose.viewmodel.koinViewModel
 import theme.FitnessAppTheme
 
-class AuthNavigationScreen : Screen {
-    @Composable
-    override fun Content() {
-        ModelLayout<AuthNavigationModel> {
-            FitnessAppTopBar(title = stringResource(Res.string.welcome_to))
+@Composable
+fun AuthNavigationScreen(viewModel: AuthNavigationModel = koinViewModel()) = with(viewModel) {
+    FitnessAppTopBar(title = stringResource(Res.string.welcome_to))
 
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = stringResource(Res.string.sing_in_with),
-                    color = FitnessAppTheme.colors.contentPrimary,
-                    style = FitnessAppTheme.typography.labelLarge
-                )
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = stringResource(Res.string.sing_in_with),
+            color = FitnessAppTheme.colors.contentPrimary,
+            style = FitnessAppTheme.typography.labelLarge
+        )
 
-                HorizontalSpacer()
+        HorizontalSpacer()
 
-                FitnessAppButton(
-                    text = stringResource(Res.string.email),
-                    style = FitnessAppButtonStyle.Content,
-                    startIcon = Icons.Default.Email,
-                    onClick = ::onSignInWithEmailClicked
-                )
+        FitnessAppButton(
+            text = stringResource(Res.string.email),
+            style = FitnessAppButtonStyle.Content,
+            startIcon = Icons.Default.Email,
+            onClick = ::onSignInWithEmailClicked
+        )
 
-                HorizontalSpacer()
+        HorizontalSpacer()
 
-                FitnessAppButton(
-                    text = stringResource(Res.string.google),
-                    style = FitnessAppButtonStyle.Content,
-                    startIcon = Images.Icons.GoogleLogo,
-                    iconColor = Color.Unspecified,
-                    onClick = ::onSignInWithGoogleClicked
-                )
+        FitnessAppButton(
+            text = stringResource(Res.string.google),
+            style = FitnessAppButtonStyle.Content,
+            startIcon = Images.Icons.GoogleLogo,
+            iconColor = Color.Unspecified,
+            onClick = ::onSignInWithGoogleClicked
+        )
 
-                Divider(
-                    modifier = Modifier.padding(vertical = 16.dp),
-                    text = stringResource(Res.string.or_)
-                )
+        Divider(
+            modifier = Modifier.padding(vertical = 16.dp),
+            text = stringResource(Res.string.or_)
+        )
 
-                FitnessAppButton(
-                    text = stringResource(Res.string.sign_up_with_email),
-                    style = FitnessAppButtonStyle.Content,
-                    startIcon = Icons.Default.Person,
-                    onClick = ::onSignUpWithEmailClicked
-                )
-            }
-        }
+        FitnessAppButton(
+            text = stringResource(Res.string.sign_up_with_email),
+            style = FitnessAppButtonStyle.Content,
+            startIcon = Icons.Default.Person,
+            onClick = ::onSignUpWithEmailClicked
+        )
     }
 }

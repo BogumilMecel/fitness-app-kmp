@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.LocalDate
+import navigation.presentation.Route
 import presentation.base.BaseModel
-import presentation.search.DiarySearchScreen
 
 class DiaryScreenModel(
     createAvailableDiaryDatesUseCase: CreateAvailableDiaryDatesUseCase,
@@ -65,9 +65,9 @@ class DiaryScreenModel(
 
     fun onAddClicked(mealName: MealName) {
         navigateTo(
-            DiarySearchScreen(
+            Route.DiarySearch(
                 mealName = mealName,
-                date = selectedDate.value
+                date = selectedDate.value.toString()
             )
         )
     }

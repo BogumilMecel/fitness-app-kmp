@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
 import com.gmail.bogumilmecel2.ui.composeResources.Res
 import com.gmail.bogumilmecel2.ui.composeResources.email_address
 import com.gmail.bogumilmecel2.ui.composeResources.password
@@ -29,67 +28,62 @@ import components.FitnessAppTextField
 import components.FitnessAppTopBar
 import components.HorizontalSpacer
 import org.jetbrains.compose.resources.stringResource
-import presentation.ModelLayout
+import org.koin.compose.viewmodel.koinViewModel
 import utils.TestTags
 
-class RegisterScreen : Screen {
+@Composable
+fun RegisterScreen(viewModel: RegisterScreenModel = koinViewModel()) = with(viewModel) {
+    val email by email.collectAsState()
+    val username by username.collectAsState()
+    val password by password.collectAsState()
 
-    @Composable
-    override fun Content() {
-        ModelLayout<RegisterScreenModel> {
-            val email by email.collectAsState()
-            val username by username.collectAsState()
-            val password by password.collectAsState()
+    Box(modifier = Modifier.fillMaxSize()) {
+        FitnessAppTopBar(
+            title = stringResource(Res.string.register_header),
+            onBackPressed = ::onBackPressed
+        )
 
-            Box(modifier = Modifier.fillMaxSize()) {
-                FitnessAppTopBar(
-                    title = stringResource(Res.string.register_header),
-                    onBackPressed = ::onBackPressed
-                )
+        HorizontalSpacer(128.dp)
 
-                HorizontalSpacer(128.dp)
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(horizontal = 16.dp),
+        ) {
+            FitnessAppTextField(
+                textFieldData = email,
+                label = stringResource(Res.string.email_address),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                leadingIcon = Icons.Default.Email,
+                testTag = TestTags.EMAIL
+            )
 
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .padding(horizontal = 16.dp),
-                ) {
-                    FitnessAppTextField(
-                        textFieldData = email,
-                        label = stringResource(Res.string.email_address),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                        leadingIcon = Icons.Default.Email,
-                        testTag = TestTags.EMAIL
-                    )
+            HorizontalSpacer()
 
-                    HorizontalSpacer()
+            FitnessAppTextField(
+                textFieldData = username,
+                label = stringResource(resource = Res.string.username),
+                leadingIcon = Icons.Default.AccountCircle,
+                testTag = TestTags.USERNAME
+            )
 
-                    FitnessAppTextField(
-                        textFieldData = username,
-                        label = stringResource(resource = Res.string.username),
-                        leadingIcon = Icons.Default.AccountCircle,
-                        testTag = TestTags.USERNAME
-                    )
+            HorizontalSpacer()
 
-                    HorizontalSpacer()
+            FitnessAppTextField(
+                textFieldData = password,
+                label = stringResource(resource = Res.string.password),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                visualTransformation = PasswordVisualTransformation(),
+                leadingIcon = Icons.Default.Password,
+                testTag = TestTags.PASSWORD
+            )
 
-                    FitnessAppTextField(
-                        textFieldData = password,
-                        label = stringResource(resource = Res.string.password),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                        visualTransformation = PasswordVisualTransformation(),
-                        leadingIcon = Icons.Default.Password,
-                        testTag = TestTags.PASSWORD
-                    )
+            HorizontalSpacer(24.dp)
 
-                    HorizontalSpacer(24.dp)
-
-                    FitnessAppButton(
-                        onClick = ::onRegisterButtonClicked,
-                        text = stringResource(resource = Res.string.sign_up),
-                    )
-                }
-            }
+            FitnessAppButton(
+                onClick = ::onRegisterButtonClicked,
+                text = stringResource(resource = Res.string.sign_up),
+            )
         }
     }
 }

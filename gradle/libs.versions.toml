@@ -13,7 +13,6 @@ koin-compose = "1.1.2"
 kotlinx-coroutines = "1.8.1"
 kotlin-logging = "1.4.2"
 statelyCommon = "2.0.6"
-voyager = "1.1.0-beta02"
 ktor = "2.3.11"
 multiplatform-setting = "1.1.1"
 kotlinx-date = "0.6.0"
@@ -21,7 +20,7 @@ vectorize = "1.0.1"
 sqldelight = "2.0.1"
 room = "2.7.0-alpha10"
 ksp = "2.0.20-1.0.25"
-compose-navigation = "2.8.4"
+compose-navigation = "2.8.0-alpha10"
 
 [libraries]
 androidsvg-aar = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvgAar" }
@@ -46,12 +45,9 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "k
 
 kotling-logging = { module = "org.lighthousegames:logging", version.ref = "kotlin-logging" }
 
-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
+jetbrains-compose-navigation = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref= "compose-navigation"}
 
 stately-common = { module = "co.touchlab:stately-common", version.ref = "statelyCommon" }
-voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
-voyager-tab = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
-voyager-bottomsheet = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
 
 settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatform-setting" }
 settings-serialization = { module = "com.russhwolf:multiplatform-settings-serialization", version.ref = "multiplatform-setting" }

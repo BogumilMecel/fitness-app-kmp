@@ -4,25 +4,24 @@ import androidx.lifecycle.viewModelScope
 import domain.use_case.AuthenticateUserUseCase
 import domain.use_case.Result
 import kotlinx.coroutines.launch
+import navigation.presentation.Route
 import org.koin.core.component.KoinComponent
 import presentation.base.BaseModel
-import presentation.navigation.SharedScreen
 
 class SplashScreenModel (
     authenticateUserUseCase: AuthenticateUserUseCase
 ): BaseModel(), KoinComponent {
-
     init {
         viewModelScope.launch {
             when(authenticateUserUseCase()) {
                 Result.NavigateToLogin -> {
-                    navigateToSharedScreen(screen = SharedScreen.AuthNavigationScreen)
+                    navigateTo(Route.Login)
                 }
                 Result.NavigateToIntroduction -> {
-                    navigateToSharedScreen(screen = SharedScreen.AuthNavigationScreen)
+                    navigateTo(Route.AuthNavigator)
                 }
                 Result.NavigateToMainScreen -> {
-                    navigateToSharedScreen(screen = SharedScreen.TabNavigatorScreen)
+                    navigateTo(Route.BottomNavigation.Summary)
                 }
             }
         }

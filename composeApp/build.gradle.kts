@@ -42,7 +42,7 @@ kotlin {
             implementation(project(":account"))
             implementation(project(":utils"))
 
-            implementation(libs.voyager.tab)
+            implementation(compose.material3)
         }
     }
 }

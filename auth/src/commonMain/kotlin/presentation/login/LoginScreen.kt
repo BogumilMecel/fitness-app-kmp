@@ -14,7 +14,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
 import com.gmail.bogumilmecel2.ui.composeResources.Res
 import com.gmail.bogumilmecel2.ui.composeResources.email_address
 import com.gmail.bogumilmecel2.ui.composeResources.forgot_password
@@ -27,76 +26,71 @@ import components.FitnessAppTextField
 import components.FitnessAppTopBar
 import components.HorizontalSpacer
 import org.jetbrains.compose.resources.stringResource
-import presentation.ModelLayout
+import org.koin.compose.viewmodel.koinViewModel
 import theme.FitnessAppTheme
 import utils.ClickableContent
 import utils.PasswordTransformationWithVisibility
 import utils.PasswordVisibilityIcon
 import utils.TestTags
 
-class LoginScreen : Screen {
+@Composable
+fun LoginScreen(viewModel : LoginScreenModel = koinViewModel()) = with(viewModel) {
+    val email by email.collectAsState()
+    val password by password.collectAsState()
+    val passwordVisible by passwordVisible.collectAsState()
+    val buttonEnabled by buttonEnabled.collectAsState()
 
-    @Composable
-    override fun Content() {
-        ModelLayout<LoginScreenModel> {
-            val email by email.collectAsState()
-            val password by password.collectAsState()
-            val passwordVisible by passwordVisible.collectAsState()
-            val buttonEnabled by buttonEnabled.collectAsState()
+    Box(modifier = Modifier.fillMaxSize()) {
+        FitnessAppTopBar(
+            title = stringResource(Res.string.login),
+            onBackPressed = ::onBackPressed
+        )
 
-            Box(modifier = Modifier.fillMaxSize()) {
-                FitnessAppTopBar(
-                    title = stringResource(Res.string.login),
-                    onBackPressed = ::onBackPressed
-                )
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(horizontal = 16.dp),
+        ) {
+            FitnessAppTextField(
+                textFieldData = email,
+                label = stringResource(Res.string.email_address),
+                leadingIcon = Icons.Default.Email,
+                testTag = TestTags.EMAIL,
+            )
 
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .padding(horizontal = 16.dp),
-                ) {
-                    FitnessAppTextField(
-                        textFieldData = email,
-                        label = stringResource(Res.string.email_address),
-                        leadingIcon = Icons.Default.Email,
-                        testTag = TestTags.EMAIL,
-                    )
+            HorizontalSpacer()
 
-                    HorizontalSpacer()
+            FitnessAppTextField(
+                textFieldData = password,
+                label = stringResource(resource = Res.string.password),
+                visualTransformation = PasswordTransformationWithVisibility(
+                    passwordVisible = passwordVisible
+                ),
+                leadingIcon = Icons.Default.Password,
+                trailingIcon = ClickableContent.Icon(
+                    icon = PasswordVisibilityIcon(passwordVisible = passwordVisible),
+                    onClick = ::onShowPasswordClicked
+                ),
+                testTag = TestTags.PASSWORD,
+            )
 
-                    FitnessAppTextField(
-                        textFieldData = password,
-                        label = stringResource(resource = Res.string.password),
-                        visualTransformation = PasswordTransformationWithVisibility(
-                            passwordVisible = passwordVisible
-                        ),
-                        leadingIcon = Icons.Default.Password,
-                        trailingIcon = ClickableContent.Icon(
-                            icon = PasswordVisibilityIcon(passwordVisible = passwordVisible),
-                            onClick = ::onShowPasswordClicked
-                        ),
-                        testTag = TestTags.PASSWORD,
-                    )
+            HorizontalSpacer(size = 24.dp)
 
-                    HorizontalSpacer(size = 24.dp)
+            FitnessAppButton(
+                onClick = ::onLoginButtonClicked,
+                startIcon = Icons.AutoMirrored.Filled.Login,
+                enabled = buttonEnabled,
+                text = stringResource(Res.string.sign_in)
+            )
 
-                    FitnessAppButton(
-                        onClick = ::onLoginButtonClicked,
-                        startIcon = Icons.AutoMirrored.Filled.Login,
-                        enabled = buttonEnabled,
-                        text = stringResource(Res.string.sign_in)
-                    )
+            HorizontalSpacer()
 
-                    HorizontalSpacer()
-
-                    FitnessAppClickableText(
-                        text = stringResource(Res.string.forgot_password),
-                        style = FitnessAppTheme.typography.labelSmall,
-                        color = FitnessAppTheme.colors.contentSecondary,
-                        onClick = ::onForgotPasswordClicked
-                    )
-                }
-            }
+            FitnessAppClickableText(
+                text = stringResource(Res.string.forgot_password),
+                style = FitnessAppTheme.typography.labelSmall,
+                color = FitnessAppTheme.colors.contentSecondary,
+                onClick = ::onForgotPasswordClicked
+            )
         }
     }
 }

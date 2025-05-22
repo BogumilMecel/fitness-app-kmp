@@ -1,11 +1,11 @@
 package domain.model
 
 import androidx.compose.runtime.Composable
-import com.gmail.bogumilmecel2.diary.composeResources.Res
-import com.gmail.bogumilmecel2.diary.composeResources.meal_name_breakfast
-import com.gmail.bogumilmecel2.diary.composeResources.meal_name_dinner
-import com.gmail.bogumilmecel2.diary.composeResources.meal_name_lunch
-import com.gmail.bogumilmecel2.diary.composeResources.meal_name_supper
+import com.gmail.bogumilmecel2.shared.composeResources.Res
+import com.gmail.bogumilmecel2.shared.composeResources.meal_name_breakfast
+import com.gmail.bogumilmecel2.shared.composeResources.meal_name_dinner
+import com.gmail.bogumilmecel2.shared.composeResources.meal_name_lunch
+import com.gmail.bogumilmecel2.shared.composeResources.meal_name_supper
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.stringResource
 

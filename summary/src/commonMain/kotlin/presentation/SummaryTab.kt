@@ -8,12 +8,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.koin.compose.viewmodel.koinViewModel
 import presentation.components.LogStreakSection
 import presentation.utils.getDefaultRootModifier
 
 @Composable
-fun SummaryTab(model: SummaryScreenModel) {
-    val logStreak by model.logStreak.collectAsState()
+fun SummaryScreen(viewModel: SummaryScreenModel = koinViewModel()) = with(viewModel) {
+    val logStreak by logStreak.collectAsState()
 
     Column(getDefaultRootModifier()) {
         LogStreakSection(

@@ -1,9 +1,4 @@
 <resources>
-    <string name="meal_name_breakfast">Breakfast</string>
-    <string name="meal_name_lunch">Lunch</string>
-    <string name="meal_name_dinner">Dinner</string>
-    <string name="meal_name_supper">Supper</string>
-
     <string name="measurement_unit_gram">g</string>
     <string name="measurement_unit_milliliter">ml</string>
 

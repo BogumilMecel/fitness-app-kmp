@@ -1,17 +1,10 @@
 package presentation
 
 import androidx.compose.runtime.Composable
-import cafe.adriel.voyager.core.screen.Screen
-import domain.model.MealName
-import kotlinx.datetime.LocalDate
+import org.koin.compose.viewmodel.koinViewModel
+import presentation.search.DiarySearchScreenModel
 
-class DiarySearchScreen(
-    mealName: MealName,
-    date: LocalDate,
-) : Screen {
+@Composable
+fun DiarySearchScreen(viewModel: DiarySearchScreenModel = koinViewModel()) {
 
-    @Composable
-    override fun Content() {
-
-    }
 }

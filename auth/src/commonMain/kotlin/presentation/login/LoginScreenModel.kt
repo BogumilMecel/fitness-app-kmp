@@ -5,8 +5,8 @@ import components.TextFieldData
 import domain.use_case.LoginUseCases
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import navigation.presentation.Route
 import presentation.base.BaseModel
-import presentation.navigation.SharedScreen
 
 class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
 
@@ -51,7 +51,7 @@ class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
             password = password.getText()
         ).handle(
             onSuccess = {
-                navigateToSharedScreen(SharedScreen.TabNavigatorScreen)
+                navigateTo(Route.BottomNavigation.Summary)
             },
             finally = {
                 buttonEnabled.value = true

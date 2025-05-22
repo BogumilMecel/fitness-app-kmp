@@ -23,7 +23,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
 import com.gmail.bogumilmecel2.ui.composeResources.Res
 import com.gmail.bogumilmecel2.ui.composeResources.search_for_products
 import components.FitnessAppLazyColumn
@@ -34,108 +33,104 @@ import date.getDisplayValue
 import domain.model.MealName
 import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.stringResource
-import presentation.ModelLayout
+import org.koin.compose.viewmodel.koinViewModel
 import presentation.components.DiaryItem
 import presentation.utils.getDefaultRootModifier
 import theme.FitnessAppTheme
 
-class DiarySearchScreen(
-    private val mealName: MealName,
-    private val date: LocalDate,
-) : Screen {
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun DiarySearchScreen(
+    viewModel: DiarySearchScreenModel = koinViewModel(),
+    date: LocalDate,
+    mealName: MealName,
+) {
+    val searchBarText by viewModel.searchText.collectAsState()
+    val selectedTab by viewModel.selectedTab.collectAsState()
+    val productsParams by viewModel.productsParams.collectAsState()
 
-    @OptIn(ExperimentalFoundationApi::class)
-    @Composable
-    override fun Content() {
-        ModelLayout<DiarySearchScreenModel> {
-            val searchBarText by searchText.collectAsState()
-            val selectedTab by selectedTab.collectAsState()
-            val productsParams by productsParams.collectAsState()
+    val pagerState = rememberPagerState {
+        SearchTab.entries.size
+    }
 
-            val pagerState = rememberPagerState {
-                SearchTab.entries.size
-            }
+    Column(modifier = getDefaultRootModifier()) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = FitnessAppTheme.colors.backgroundSecondary)
+        ) {
+            FitnessAppTopBar(
+                title = mealName.name,
+                subTitle = date.getDisplayValue(),
+                onBackPressed = viewModel::onBackPressed
+            )
 
-            Column(modifier = getDefaultRootModifier()) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(color = FitnessAppTheme.colors.backgroundSecondary)
-                ) {
-                    FitnessAppTopBar(
-                        title = mealName.name,
-                        subTitle = date.getDisplayValue(),
-                        onBackPressed = ::onBackPressed
-                    )
+            HorizontalSpacer(size = 8.dp)
 
-                    HorizontalSpacer(size = 8.dp)
+            FitnessAppTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                text = searchBarText,
+                onValueChange = viewModel::onSearchTextChanged,
+                label = stringResource(Res.string.search_for_products),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Search
+                ),
+                keyboardActions = KeyboardActions(
+                    onSearch = {
+                        viewModel.onSearch()
+                    }
+                )
+            )
 
-                    FitnessAppTextField(
+            HorizontalSpacer(size = 16.dp)
+
+            TabRow(
+                selectedTabIndex = selectedTab.ordinal,
+                backgroundColor = FitnessAppTheme.colors.backgroundSecondary,
+                indicator = { tabPositions ->
+                    Box(
                         modifier = Modifier
+                            .tabIndicatorOffset(tabPositions[selectedTab.ordinal])
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp),
-                        text = searchBarText,
-                        onValueChange = ::onSearchTextChanged,
-                        label = stringResource(Res.string.search_for_products),
-                        maxLines = 1,
-                        keyboardOptions = KeyboardOptions(
-                            imeAction = ImeAction.Search
-                        ),
-                        keyboardActions = KeyboardActions(
-                            onSearch = {
-                                onSearch()
+                            .height(2.dp)
+                            .background(FitnessAppTheme.colors.contentPrimary)
+                    )
+                },
+                tabs = {
+                    SearchTab.entries.forEachIndexed { index, tab ->
+                        Tab(
+                            text = {
+                                Text(
+                                    text = tab.displayValue,
+                                    style = MaterialTheme.typography.button,
+                                    color = FitnessAppTheme.colors.contentPrimary
+                                )
+                            },
+                            selected = index == selectedTab.ordinal,
+                            onClick = {
+                                viewModel.onTabSelected(tab)
                             }
                         )
-                    )
-
-                    HorizontalSpacer(size = 16.dp)
-
-                    TabRow(
-                        selectedTabIndex = selectedTab.ordinal,
-                        backgroundColor = FitnessAppTheme.colors.backgroundSecondary,
-                        indicator = { tabPositions ->
-                            Box(
-                                modifier = Modifier
-                                    .tabIndicatorOffset(tabPositions[selectedTab.ordinal])
-                                    .fillMaxWidth()
-                                    .height(2.dp)
-                                    .background(FitnessAppTheme.colors.contentPrimary)
-                            )
-                        },
-                        tabs = {
-                            SearchTab.entries.forEachIndexed { index, tab ->
-                                Tab(
-                                    text = {
-                                        Text(
-                                            text = tab.displayValue,
-                                            style = MaterialTheme.typography.button,
-                                            color = FitnessAppTheme.colors.contentPrimary
-                                        )
-                                    },
-                                    selected = index == selectedTab.ordinal,
-                                    onClick = {
-                                        onTabSelected(tab)
-                                    }
-                                )
-                            }
-                        }
-                    )
-                }
-
-                HorizontalPager(state = pagerState) {
-                    FitnessAppLazyColumn(onScrollToEnd = ::onScrollToEnd) {
-                        itemsIndexed(productsParams) { index, product ->
-                            DiaryItem(
-                                params = product,
-                                onItemClick = {
-                                    
-                                },
-                                onItemLongClick = {
-
-                                }
-                            )
-                        }
                     }
+                }
+            )
+        }
+
+        HorizontalPager(state = pagerState) {
+            FitnessAppLazyColumn(onScrollToEnd = viewModel::onScrollToEnd) {
+                itemsIndexed(productsParams) { index, product ->
+                    DiaryItem(
+                        params = product,
+                        onItemClick = {
+
+                        },
+                        onItemLongClick = {
+
+                        }
+                    )
                 }
             }
         }

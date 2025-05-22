@@ -39,18 +39,17 @@ kotlin {
             implementation(libs.androidsvg.aar)
         }
         commonMain.dependencies {
-            implementation(compose.material3)
             api(libs.vectorize)
 
             api(compose.components.resources)
             api(compose.material)
+            api(compose.material3)
             api(compose.materialIconsExtended)
 
             //voyager navigation
-            api(libs.voyager.navigator)
+            api(libs.jetbrains.compose.navigation)
             api(libs.androidx.viewmodel)
             api(libs.koin.compose.viewmodel)
-            api(libs.voyager.bottomsheet)
         }
         iosMain.dependencies {
             implementation(libs.stately.common)

@@ -1,13 +1,12 @@
 package presentation.navigation_screen
 
-import presentation.login.LoginScreen
-import presentation.register.RegisterScreen
+import navigation.presentation.Route
 import presentation.base.BaseModel
 
 class AuthNavigationModel: BaseModel() {
 
     fun onSignInWithEmailClicked() {
-        navigateTo(LoginScreen())
+        navigateTo(Route.Login)
     }
 
     fun onSignInWithGoogleClicked() {
@@ -15,6 +14,6 @@ class AuthNavigationModel: BaseModel() {
     }
 
     fun onSignUpWithEmailClicked() {
-        navigateTo(RegisterScreen())
+        navigateTo(Route.Register)
     }
 }

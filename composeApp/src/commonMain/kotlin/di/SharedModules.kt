@@ -2,6 +2,8 @@ package di
 
 import constans.Constants
 import data.database.FitnessAppDatabase
+import domain.NavigatorService
+import domain.NavigatorServiceImp
 import domain.model.Country
 import domain.services.ResourcesService
 import domain.services.SettingsService
@@ -23,6 +25,7 @@ import utils.providers.ResourcesServiceImp
 import utils.providers.SettingsServiceImp
 
 private val sharedModule = module {
+    single<NavigatorService> { NavigatorServiceImp() }
     single<ResourcesService> { ResourcesServiceImp() }
     single<SettingsService> { SettingsServiceImp() }
     single<HttpClient> {
@@ -60,7 +63,7 @@ private val sharedModule = module {
                     key = Constants.Headers.TIMEZONE,
                     value = TimeZone.currentSystemDefault().id
                 )
-                url(urlString = "http://192.168.122.65/")
+                url(urlString = "http://192.168.0.188/")
                 port = 8080
             }
 

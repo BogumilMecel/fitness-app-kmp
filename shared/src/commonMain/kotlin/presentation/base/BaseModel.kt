@@ -2,10 +2,10 @@ package presentation.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cafe.adriel.voyager.core.screen.Screen
 import components.TextFieldData
+import navigation.domain.NavigationAction
+import domain.NavigatorService
 import domain.services.SettingsService
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -16,37 +16,28 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import presentation.navigation.NavigationAction
-import presentation.navigation.SharedScreen
+import navigation.presentation.Route
 import utils.Resource
 
 open class BaseModel : ViewModel(), KoinComponent {
 
     protected val settingsService by inject<SettingsService>()
-    val navigation = Channel<NavigationAction>()
+    private val navigatorService by inject<NavigatorService>()
 
     open fun onBackPressed() {
         navigateBack()
     }
 
     fun navigateTo(
-        screen: Screen,
+        route: Route,
         withPopUp: Boolean = false
     ) {
         viewModelScope.launch {
-            navigation.send(
+            navigatorService.navigationAction.send(
                 NavigationAction.ToScreen(
-                    screen = screen,
+                    route = route,
                     withPopUp = withPopUp
                 )
-            )
-        }
-    }
-
-    fun navigateToSharedScreen(screen: SharedScreen) {
-        viewModelScope.launch {
-            navigation.send(
-                NavigationAction.ToSharedScreen(screen = screen)
             )
         }
     }
@@ -100,7 +91,7 @@ open class BaseModel : ViewModel(), KoinComponent {
 
     private fun navigateBack(withPopUp: Boolean = false) {
         viewModelScope.launch {
-            navigation.send(
+            navigatorService.navigationAction.send(
                 NavigationAction.Back(withPopUp = withPopUp)
             )
         }
