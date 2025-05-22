@@ -1,15 +1,18 @@
 package components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.ripple
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +20,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import theme.FitnessAppTheme
-import theme.LocalRippleColor
 
 @Composable
 fun FitnessAppButton(
@@ -79,14 +81,17 @@ internal fun FitnessAppButtonContent(
         FitnessAppButtonStyle.Content -> FitnessAppTheme.colors.contentPrimary
         FitnessAppButtonStyle.Secondary -> FitnessAppTheme.colors.background
     }
-    LocalRippleColor.provides(style.contentColor)
     Button(
         modifier = modifier
             .heightIn(min = 48.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .indication(
+                interactionSource = MutableInteractionSource(),
+                indication = ripple(color = style.contentColor)
+            ),
         onClick = onClick,
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = backgroundColor,
+        colors = ButtonDefaults.buttonColors().copy(
+            containerColor = backgroundColor,
             contentColor = style.contentColor
         ),
         border = when (style) {

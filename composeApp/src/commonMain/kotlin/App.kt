@@ -69,34 +69,15 @@ fun App() {
                             containerColor = FitnessAppTheme.colors.backgroundSecondary,
                             modifier = Modifier.height(60.dp)
                         ) {
-                            TabNavigationItem(
-                                bottomNavigation = Route.BottomNavigation.Summary,
-                                navBackStackEntry = it,
-                                onClick = {
-                                    navController.navigate(Route.BottomNavigation.Summary)
-                                }
-                            )
-                            TabNavigationItem(
-                                bottomNavigation = Route.BottomNavigation.Diary,
-                                navBackStackEntry = it,
-                                onClick = {
-                                    navController.navigate(Route.BottomNavigation.Diary)
-                                }
-                            )
-                            TabNavigationItem(
-                                bottomNavigation = Route.BottomNavigation.Training,
-                                navBackStackEntry = it,
-                                onClick = {
-                                    navController.navigate(Route.BottomNavigation.Training)
-                                }
-                            )
-                            TabNavigationItem(
-                                bottomNavigation = Route.BottomNavigation.Account,
-                                navBackStackEntry = it,
-                                onClick = {
-                                    navController.navigate(Route.BottomNavigation.Account)
-                                }
-                            )
+                            Route.BottomNavigation.entries.forEach { bottomNavigationRoute ->
+                                TabNavigationItem(
+                                    bottomNavigation = bottomNavigationRoute,
+                                    isSelected = it.destination.hasRoute(bottomNavigationRoute::class),
+                                    onClick = {
+                                        navController.navigate(bottomNavigationRoute)
+                                    }
+                                )
+                            }
                         }
                     }
                 }

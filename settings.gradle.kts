@@ -1,7 +1,6 @@
 rootProject.name = "fitness-app-kmp"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-
 include(":composeApp")
 include(":ui")
 include(":shared")

@@ -43,6 +43,10 @@ sealed interface Route {
             override val titleRes: StringResource = Res.string.bottom_nav_account
             override val icon: ImageVector = Icons.Default.AccountCircle
         }
+
+        companion object {
+            val entries: List<BottomNavigation> = listOf(Summary, Diary, Training, Account)
+        }
     }
     @Serializable
     data object Splash : Route

@@ -4,15 +4,13 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavDestination.Companion.hasRoute
 import navigation.presentation.Route
 import org.jetbrains.compose.resources.stringResource
 import theme.FitnessAppTheme
@@ -20,11 +18,9 @@ import theme.FitnessAppTheme
 @Composable
 fun RowScope.TabNavigationItem(
     bottomNavigation: Route.BottomNavigation,
-    navBackStackEntry: NavBackStackEntry,
+    isSelected: Boolean,
     onClick: () -> Unit,
 ) {
-    val isSelected = navBackStackEntry.destination.hasRoute(bottomNavigation::class)
-
     val animationSpec = tween<Color>(
         durationMillis = 200,
         easing = LinearEasing
