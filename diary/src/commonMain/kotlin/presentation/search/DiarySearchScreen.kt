@@ -12,11 +12,10 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
-import androidx.compose.material.Text
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -89,7 +88,7 @@ fun DiarySearchScreen(
 
             TabRow(
                 selectedTabIndex = selectedTab.ordinal,
-                backgroundColor = FitnessAppTheme.colors.backgroundSecondary,
+                containerColor = FitnessAppTheme.colors.backgroundSecondary,
                 indicator = { tabPositions ->
                     Box(
                         modifier = Modifier
@@ -105,7 +104,7 @@ fun DiarySearchScreen(
                             text = {
                                 Text(
                                     text = tab.displayValue,
-                                    style = MaterialTheme.typography.button,
+                                    style = FitnessAppTheme.typography.labelMedium,
                                     color = FitnessAppTheme.colors.contentPrimary
                                 )
                             },

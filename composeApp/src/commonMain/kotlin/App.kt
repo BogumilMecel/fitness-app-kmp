@@ -12,8 +12,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import domain.NavigatorService
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.datetime.LocalDate
 import main_screen.presentation.TabNavigationItem
 import navigation.domain.NavigationAction
 import navigation.presentation.Route
@@ -21,7 +23,6 @@ import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import presentation.AccountScreen
 import presentation.DiaryScreen
-import presentation.DiarySearchScreen
 import presentation.SplashScreen
 import presentation.SplashScreenModel
 import presentation.SummaryScreen
@@ -29,6 +30,7 @@ import presentation.TrainingScreen
 import presentation.login.LoginScreen
 import presentation.navigation_screen.AuthNavigationScreen
 import presentation.register.RegisterScreen
+import presentation.search.DiarySearchScreen
 import theme.FitnessAppTheme
 
 @Composable
@@ -107,7 +109,12 @@ fun App() {
                     DiaryScreen()
                 }
                 composable<Route.DiarySearch> {
-                    DiarySearchScreen()
+                    val route = it.toRoute<Route.DiarySearch>()
+
+                    DiarySearchScreen(
+                        date = LocalDate.parse(route.date),
+                        mealName = route.mealName,
+                    )
                 }
                 composable<Route.BottomNavigation.Training> {
                     TrainingScreen()
