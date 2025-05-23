@@ -24,10 +24,10 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.gmail.bogumilmecel2.ui.composeResources.Res
 import com.gmail.bogumilmecel2.ui.composeResources.search_for_products
-import components.FitnessAppLazyColumn
 import components.FitnessAppTextField
 import components.FitnessAppTopBar
 import components.HorizontalSpacer
+import components.LazyColumn
 import date.getDisplayValue
 import domain.model.MealName
 import kotlinx.datetime.LocalDate
@@ -119,7 +119,7 @@ fun DiarySearchScreen(
         }
 
         HorizontalPager(state = pagerState) {
-            FitnessAppLazyColumn(onScrollToEnd = viewModel::onScrollToEnd) {
+            LazyColumn(onScrollToEnd = viewModel::onScrollToEnd) {
                 itemsIndexed(productsParams) { index, product ->
                     DiaryItem(
                         params = product,

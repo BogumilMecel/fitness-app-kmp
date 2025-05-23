@@ -9,9 +9,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
-import org.lighthousegames.logging.logging
 import presentation.base.BaseModel
 import presentation.components.DiaryItemParams
 import string.EMPTY
@@ -42,7 +40,7 @@ class DiarySearchScreenModel(
                 skip = page * Constants.Paging.OFFLINE_PAGE_SIZE,
             )
         } else emptyFlow()
-    }.flatMapLatest { it }.onEach { logging("PLN1").e { it.toString() } }.stateInScreenModelScope(emptyList())
+    }.flatMapLatest { it }.stateInScreenModelScope(emptyList())
 
     val productsParams = userProducts.map { products ->
         products.map { product ->
@@ -51,7 +49,7 @@ class DiarySearchScreenModel(
                 resourcesService = resourcesService,
             )
         }
-    }.onEach { logging("PLN1").e { it.toString() } }.stateInScreenModelScope(emptyList())
+    }.stateInScreenModelScope(emptyList())
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val userRecipes = combine(
