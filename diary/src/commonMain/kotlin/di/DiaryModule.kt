@@ -1,7 +1,7 @@
 package di
 
 import DiaryApi
-import DiaryRepositoryImp
+import data.repository.DiaryRepositoryImp
 import domain.repository.DiaryRepository
 import domain.use_case.CreateAvailableDiaryDatesUseCase
 import domain.use_case.GetOfflineDiaryEntriesUseCase

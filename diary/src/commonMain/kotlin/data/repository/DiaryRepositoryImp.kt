@@ -1,3 +1,6 @@
+package data.repository
+
+import DiaryApi
 import data.BaseRepository
 import data.api.DiaryDao
 import domain.model.DeleteDiaryEntryRequest
