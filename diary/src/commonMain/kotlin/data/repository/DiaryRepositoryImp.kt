@@ -96,12 +96,12 @@ class DiaryRepositoryImp(
         }
     }
 
-    override fun getOfflineProducts(
+    override suspend fun getOfflineProducts(
         userId: String?,
         searchText: String?,
         limit: Long,
         skip: Long,
-    ): Flow<List<Product>> {
+    ): List<Product> {
         return diaryDao.getProducts(
             userId = userId,
             searchText = searchText,

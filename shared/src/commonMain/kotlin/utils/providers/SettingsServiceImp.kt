@@ -7,8 +7,8 @@ import com.russhwolf.settings.coroutines.getStringOrNullFlow
 import domain.model.User
 import domain.services.SettingsService
 import kotlinx.coroutines.flow.map
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import string.EMPTY
 
 class SettingsServiceImp : SettingsService {
 
@@ -32,6 +32,13 @@ class SettingsServiceImp : SettingsService {
     override fun getUser() = observableSettings.getStringOrNullFlow(key = USER_KEY).map {
         stringToObject<User>(it)
     }
+
+    override fun getNotNullUser() = stringToObject<User>(
+        string = settings.getString(
+            key = USER_KEY,
+            defaultValue = String.EMPTY,
+        )
+    )!!
 
     override fun setUser(user: User) {
         objectToString(user)?.let {

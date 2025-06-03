@@ -47,12 +47,12 @@ interface DiaryRepository {
 
     suspend fun getUserRecipes(latestDateTime: LocalDateTime?): Resource<List<Recipe>>
 
-    fun getOfflineProducts(
+    suspend fun getOfflineProducts(
         userId: String? = null,
         searchText: String? = null,
         limit: Long,
         skip: Long = 0,
-    ): Flow<List<Product>>
+    ): List<Product>
 
     suspend fun getOfflineProduct(productId: String): Resource<Product?>
 

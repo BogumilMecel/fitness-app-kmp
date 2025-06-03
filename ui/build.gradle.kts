@@ -35,6 +35,7 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
+            api(compose.uiTooling)
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidsvg.aar)
         }

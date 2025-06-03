@@ -17,8 +17,6 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -29,10 +27,7 @@ import components.FitnessAppTopBar
 import components.HorizontalSpacer
 import components.LazyColumn
 import date.getDisplayValue
-import domain.model.MealName
-import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.viewmodel.koinViewModel
 import presentation.components.DiaryItem
 import presentation.utils.getDefaultRootModifier
 import theme.FitnessAppTheme
@@ -40,14 +35,9 @@ import theme.FitnessAppTheme
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DiarySearchScreen(
-    viewModel: DiarySearchScreenModel = koinViewModel(),
-    date: LocalDate,
-    mealName: MealName,
+    state: DiarySearchState,
+    onEvent: (DiarySearchEvent) -> Unit,
 ) {
-    val searchBarText by viewModel.searchText.collectAsState()
-    val selectedTab by viewModel.selectedTab.collectAsState()
-    val productsParams by viewModel.productsParams.collectAsState()
-
     val pagerState = rememberPagerState {
         SearchTab.entries.size
     }
@@ -59,9 +49,11 @@ fun DiarySearchScreen(
                 .background(color = FitnessAppTheme.colors.backgroundSecondary)
         ) {
             FitnessAppTopBar(
-                title = mealName.name,
-                subTitle = date.getDisplayValue(),
-                onBackPressed = viewModel::onBackPressed
+                title = state.mealName.displayName,
+                subTitle = state.date.getDisplayValue(),
+                onBackPressed = {
+                    onEvent(DiarySearchEvent.BackPressed)
+                },
             )
 
             HorizontalSpacer(size = 8.dp)
@@ -70,8 +62,10 @@ fun DiarySearchScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
-                text = searchBarText,
-                onValueChange = viewModel::onSearchTextChanged,
+                text = state.searchBarText,
+                onValueChange = {
+                    onEvent(DiarySearchEvent.SearchTextChanged(it))
+                },
                 label = stringResource(Res.string.search_for_products),
                 maxLines = 1,
                 keyboardOptions = KeyboardOptions(
@@ -79,7 +73,7 @@ fun DiarySearchScreen(
                 ),
                 keyboardActions = KeyboardActions(
                     onSearch = {
-                        viewModel.onSearch()
+                        onEvent(DiarySearchEvent.Search)
                     }
                 )
             )
@@ -87,12 +81,12 @@ fun DiarySearchScreen(
             HorizontalSpacer(size = 16.dp)
 
             TabRow(
-                selectedTabIndex = selectedTab.ordinal,
+                selectedTabIndex = state.selectedTab.ordinal,
                 containerColor = FitnessAppTheme.colors.backgroundSecondary,
                 indicator = { tabPositions ->
                     Box(
                         modifier = Modifier
-                            .tabIndicatorOffset(tabPositions[selectedTab.ordinal])
+                            .tabIndicatorOffset(tabPositions[state.selectedTab.ordinal])
                             .fillMaxWidth()
                             .height(2.dp)
                             .background(FitnessAppTheme.colors.contentPrimary)
@@ -108,9 +102,9 @@ fun DiarySearchScreen(
                                     color = FitnessAppTheme.colors.contentPrimary
                                 )
                             },
-                            selected = index == selectedTab.ordinal,
+                            selected = index == state.selectedTab.ordinal,
                             onClick = {
-                                viewModel.onTabSelected(tab)
+                                onEvent(DiarySearchEvent.TabSelected(tab = tab))
                             }
                         )
                     }
@@ -119,8 +113,12 @@ fun DiarySearchScreen(
         }
 
         HorizontalPager(state = pagerState) {
-            LazyColumn(onScrollToEnd = viewModel::onScrollToEnd) {
-                itemsIndexed(productsParams) { index, product ->
+            LazyColumn(
+                onScrollToEnd = {
+                    onEvent(DiarySearchEvent.ScrollToEnd)
+                }
+            ) {
+                itemsIndexed(state.productsParams) { index, product ->
                     DiaryItem(
                         params = product,
                         onItemClick = {

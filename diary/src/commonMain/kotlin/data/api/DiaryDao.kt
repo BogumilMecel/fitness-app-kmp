@@ -26,7 +26,7 @@ interface DiaryDao {
         searchText: String?,
         limit: Long,
         offset: Long
-    ): Flow<List<Product>>
+    ): List<Product>
 
     // Insert or replace product
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -1,9 +1,11 @@
+
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -21,6 +23,7 @@ import navigation.domain.NavigationAction
 import navigation.presentation.Route
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 import presentation.AccountScreen
 import presentation.DiaryScreen
 import presentation.SplashScreen
@@ -31,6 +34,7 @@ import presentation.login.LoginScreen
 import presentation.navigation_screen.AuthNavigationScreen
 import presentation.register.RegisterScreen
 import presentation.search.DiarySearchScreen
+import presentation.search.DiarySearchScreenModel
 import theme.FitnessAppTheme
 
 @Composable
@@ -110,10 +114,14 @@ fun App() {
                 }
                 composable<Route.DiarySearch> {
                     val route = it.toRoute<Route.DiarySearch>()
+                    val viewModel: DiarySearchScreenModel = koinViewModel {
+                        parametersOf(LocalDate.parse(route.date), route.mealName)
+                    }
+                    val state by viewModel.state.collectAsState()
 
                     DiarySearchScreen(
-                        date = LocalDate.parse(route.date),
-                        mealName = route.mealName,
+                        state = state,
+                        onEvent = viewModel::onEvent
                     )
                 }
                 composable<Route.BottomNavigation.Training> {

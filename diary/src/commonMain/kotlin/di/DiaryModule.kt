@@ -23,8 +23,10 @@ val diaryModule = module {
             getOfflineDiaryEntriesUseCase = GetOfflineDiaryEntriesUseCase(diaryRepository = get())
         )
     }
-    viewModel {
+    viewModel { parameters ->
         DiarySearchScreenModel(
+            date = parameters.get(),
+            mealName = parameters.get(),
             diaryRepository = get(),
             resourcesService = get(),
         )
