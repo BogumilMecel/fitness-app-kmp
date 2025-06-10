@@ -6,11 +6,9 @@ import domain.model.MealName
 import domain.model.Product
 import domain.repository.DiaryRepository
 import domain.services.ResourcesService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
@@ -33,20 +31,6 @@ class DiarySearchScreenModel(
             mealName = mealName,
         )
     )
-
-    init {
-        state
-            .distinctUntilChangedBy { it.selectedTab }
-            .filter { it.selectedTab == SearchTab.PRODUCTS }
-            .onEach {
-                if (userProductsPage == 0) {
-                    userProductsPage = 1
-                    requestUserOfflineProducts()
-                } else {
-                    assignUserProducts()
-                }
-            }.launchIn(viewModelScope)
-    }
 
     fun onEvent(event: DiarySearchEvent) {
         when (event) {
@@ -86,6 +70,18 @@ class DiarySearchScreenModel(
         state.update {
             it.copy(selectedTab = tab)
         }
+        requestOrAssignUserProductsIfNeeded()
+    }
+
+    private fun requestOrAssignUserProductsIfNeeded() {
+        if (state.value.selectedTab == SearchTab.PRODUCTS) {
+            if (userProductsPage == 0) {
+                userProductsPage = 1
+                requestUserOfflineProducts()
+            } else {
+                assignUserProducts()
+            }
+        }
     }
 
     private fun onScrollToEnd() {
@@ -105,21 +101,23 @@ class DiarySearchScreenModel(
         }
     }
 
-    private suspend fun assignUserProducts() {
-        state.update {
-            it.copy(
-                productsParams = userProducts.map { product ->
-                    DiaryItemParams.create(
-                        product = product,
-                        resourcesService = resourcesService,
-                    )
-                }
-            )
+    private fun assignUserProducts() {
+        viewModelScope.launch {
+            state.update {
+                it.copy(
+                    productsParams = userProducts.map { product ->
+                        DiaryItemParams.create(
+                            product = product,
+                            resourcesService = resourcesService,
+                        )
+                    }
+                )
+            }
         }
     }
 
     private fun requestUserOfflineProducts() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             userProducts += diaryRepository.getOfflineProducts(
                 userId = settingsService.getNotNullUser().id,
                 searchText = state.value.searchBarText,
