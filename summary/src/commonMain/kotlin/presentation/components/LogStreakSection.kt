@@ -17,7 +17,7 @@ import com.gmail.bogumilmecel2.ui.composeResources.Res
 import com.gmail.bogumilmecel2.ui.composeResources.days
 import com.gmail.bogumilmecel2.ui.composeResources.you_have_logged_for
 import components.FitnessAppCard
-import components.VerticalSpacer
+import components.HorizontalSpacer
 import org.jetbrains.compose.resources.stringResource
 import theme.FitnessAppTheme
 
@@ -46,7 +46,7 @@ fun LogStreakSection(
                     color = FitnessAppTheme.colors.contentPrimary,
                 )
 
-                VerticalSpacer(size = 4.dp)
+                HorizontalSpacer(size = 4.dp)
 
                 Text(
                     text = stringResource(Res.string.days, logStreak),

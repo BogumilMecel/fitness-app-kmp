@@ -38,10 +38,24 @@ class DiarySearchScreenModel(
 
     fun onEvent(event: DiarySearchEvent) {
         when (event) {
-            DiarySearchEvent.BackPressed -> ::onBackPressed
-            DiarySearchEvent.ScrollToEnd -> ::onScrollToEnd
+            DiarySearchEvent.BackPressed -> {
+                onBackPressed()
+            }
+
+            DiarySearchEvent.ScrollToEnd -> {
+                onScrollToEnd()
+            }
+
             DiarySearchEvent.Search -> {
                 onSearch()
+            }
+
+            DiarySearchEvent.AddProduct -> {
+                onAddProductClicked()
+            }
+
+            DiarySearchEvent.ScanBarcode -> {
+                onScanBarcodeClicked()
             }
 
             is DiarySearchEvent.SearchTextChanged -> {
@@ -62,6 +76,7 @@ class DiarySearchScreenModel(
 
     private fun onSearch() {
         everythingPage = 1
+        requestEverythingProducts()
     }
 
     private fun onTabSelected(tab: SearchTab) {
@@ -69,6 +84,14 @@ class DiarySearchScreenModel(
             it.copy(selectedTab = tab)
         }
         requestOrAssignUserProductsIfNeeded()
+    }
+
+    private fun onAddProductClicked() {
+        // TODO: Handle on add product clicked
+    }
+
+    private fun onScanBarcodeClicked() {
+        // TODO: Handle on scan barcode clicked
     }
 
     private fun requestOrAssignUserProductsIfNeeded() {
@@ -140,7 +163,7 @@ class DiarySearchScreenModel(
         viewModelScope.launch {
             state.update {
                 it.copy(
-                    everythingState = ListState.Results(
+                    listState = ListState.Results(
                         items = everythingProducts.map { product ->
                             DiaryItemParams.create(
                                 product = product,

@@ -106,6 +106,33 @@ internal fun FitnessAppButtonContent(
     )
 }
 
+@Composable
+fun Button(
+    modifier: Modifier = Modifier,
+    backgroundColor: Color,
+    contentColor: Color = FitnessAppTheme.colors.contentPrimary,
+    borderStroke: BorderStroke? = null,
+    enabled: Boolean = true,
+    onClick: () -> Unit,
+    content: @Composable RowScope.() -> Unit,
+) {
+    Button(
+        modifier = modifier
+            .indication(
+                interactionSource = MutableInteractionSource(),
+                indication = ripple(color = contentColor),
+            ),
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors().copy(
+            containerColor = backgroundColor,
+            contentColor = contentColor,
+        ),
+        border = borderStroke,
+        enabled = enabled,
+        content = content
+    )
+}
+
 enum class FitnessAppButtonStyle {
     Primary, Content, Secondary;
 

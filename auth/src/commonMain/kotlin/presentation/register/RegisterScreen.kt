@@ -26,7 +26,7 @@ import com.gmail.bogumilmecel2.ui.composeResources.username
 import components.FitnessAppButton
 import components.FitnessAppTextField
 import components.FitnessAppTopBar
-import components.HorizontalSpacer
+import components.VerticalSpacer
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import utils.TestTags
@@ -43,7 +43,7 @@ fun RegisterScreen(viewModel: RegisterScreenModel = koinViewModel()) = with(view
             onBackPressed = ::onBackPressed
         )
 
-        HorizontalSpacer(128.dp)
+        VerticalSpacer(128.dp)
 
         Column(
             modifier = Modifier
@@ -58,7 +58,7 @@ fun RegisterScreen(viewModel: RegisterScreenModel = koinViewModel()) = with(view
                 testTag = TestTags.EMAIL
             )
 
-            HorizontalSpacer()
+            VerticalSpacer()
 
             FitnessAppTextField(
                 textFieldData = username,
@@ -67,7 +67,7 @@ fun RegisterScreen(viewModel: RegisterScreenModel = koinViewModel()) = with(view
                 testTag = TestTags.USERNAME
             )
 
-            HorizontalSpacer()
+            VerticalSpacer()
 
             FitnessAppTextField(
                 textFieldData = password,
@@ -78,7 +78,7 @@ fun RegisterScreen(viewModel: RegisterScreenModel = koinViewModel()) = with(view
                 testTag = TestTags.PASSWORD
             )
 
-            HorizontalSpacer(24.dp)
+            VerticalSpacer(24.dp)
 
             FitnessAppButton(
                 onClick = ::onRegisterButtonClicked,

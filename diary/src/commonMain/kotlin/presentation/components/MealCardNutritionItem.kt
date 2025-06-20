@@ -2,13 +2,13 @@ package presentation.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import components.HorizontalProgressIndicator
-import components.VerticalSpacer
+import components.HorizontalSpacer
 import theme.FitnessAppTheme
 
 @Composable
@@ -26,7 +26,7 @@ fun MealCardNutritionItem(
             progress = if (wantedValue.toFloat() > 0.0f) (currentValue.toFloat() / wantedValue.toFloat() * 100.0f) else 0.0f
         )
 
-        VerticalSpacer(size = 6.dp)
+        HorizontalSpacer(size = 6.dp)
 
         Column {
             Text(

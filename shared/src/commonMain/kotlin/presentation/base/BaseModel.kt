@@ -3,7 +3,6 @@ package presentation.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import components.TextFieldData
-import navigation.domain.NavigationAction
 import domain.NavigatorService
 import domain.services.SettingsService
 import kotlinx.coroutines.flow.Flow
@@ -14,9 +13,10 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import navigation.domain.NavigationAction
+import navigation.presentation.Route
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import navigation.presentation.Route
 import utils.Resource
 
 open class BaseModel : ViewModel(), KoinComponent {

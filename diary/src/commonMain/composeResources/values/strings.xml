@@ -16,4 +16,6 @@
     <string name="search_my_products">My products</string>
     <string name="search_my_recipes">My recipes</string>
     <string name="search_for_products">Search for products</string>
+    <string name="new_product">New product</string>
+    <string name="scan_barcode">Scan barcode</string>
 </resources>

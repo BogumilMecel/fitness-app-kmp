@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun HorizontalSpacer(
+fun VerticalSpacer(
     size: Dp = 16.dp,
     modifier: Modifier = Modifier,
 ) {
@@ -17,7 +17,7 @@ fun HorizontalSpacer(
 }
 
 @Composable
-fun VerticalSpacer(
+fun HorizontalSpacer(
     modifier: Modifier = Modifier,
     size: Dp = 16.dp
 ) {

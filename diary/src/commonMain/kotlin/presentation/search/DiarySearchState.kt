@@ -11,7 +11,7 @@ data class DiarySearchState(
     val mealName: MealName,
     val searchBarText: String = "",
     val selectedTab: SearchTab = SearchTab.EVERYTHING,
-    val everythingState: ListState = ListState.Loading,
+    val listState: ListState = ListState.Loading,
     val userProductsState: ListState = ListState.Loading,
 )
 

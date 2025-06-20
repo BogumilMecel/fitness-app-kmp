@@ -31,7 +31,7 @@ private fun PreviewContent(darkTheme: Boolean) {
                 mealName = MealName.BREAKFAST,
                 searchBarText = "Rice",
                 selectedTab = SearchTab.EVERYTHING,
-                everythingState = ListState.Loading,
+                listState = ListState.Loading,
                 userProductsState = ListState.Loading,
             ),
             onEvent = {}

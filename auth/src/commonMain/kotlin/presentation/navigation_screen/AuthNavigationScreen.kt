@@ -24,7 +24,7 @@ import components.Divider
 import components.FitnessAppButton
 import components.FitnessAppButtonStyle
 import components.FitnessAppTopBar
-import components.HorizontalSpacer
+import components.VerticalSpacer
 import dev.sergiobelda.compose.vectorize.images.Images
 import dev.sergiobelda.compose.vectorize.images.icons.GoogleLogo
 import org.jetbrains.compose.resources.stringResource
@@ -48,7 +48,7 @@ fun AuthNavigationScreen(viewModel: AuthNavigationModel = koinViewModel()) = wit
             style = FitnessAppTheme.typography.labelLarge
         )
 
-        HorizontalSpacer()
+        VerticalSpacer()
 
         FitnessAppButton(
             text = stringResource(Res.string.email),
@@ -57,7 +57,7 @@ fun AuthNavigationScreen(viewModel: AuthNavigationModel = koinViewModel()) = wit
             onClick = ::onSignInWithEmailClicked
         )
 
-        HorizontalSpacer()
+        VerticalSpacer()
 
         FitnessAppButton(
             text = stringResource(Res.string.google),

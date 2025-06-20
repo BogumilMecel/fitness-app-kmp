@@ -13,7 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import components.HorizontalSpacer
+import components.VerticalSpacer
 import compose.getScreenWidth
 import date.getShortName
 import domain.model.MealName
@@ -35,7 +35,7 @@ fun DiaryScreen(viewModel: DiaryScreenModel = koinViewModel()) = with(viewModel)
     val supperNutritionValues by supperNutritionValues.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        HorizontalSpacer(size = 4.dp)
+        VerticalSpacer(size = 4.dp)
 
         LazyRow(
             state = rememberLazyListState(
@@ -61,7 +61,7 @@ fun DiaryScreen(viewModel: DiaryScreenModel = koinViewModel()) = with(viewModel)
             }
         }
 
-        HorizontalSpacer(size = 16.dp)
+        VerticalSpacer(size = 16.dp)
 
         MealName.entries.forEach { mealName ->
             when (mealName) {

@@ -24,7 +24,7 @@ import components.FitnessAppButton
 import components.FitnessAppClickableText
 import components.FitnessAppTextField
 import components.FitnessAppTopBar
-import components.HorizontalSpacer
+import components.VerticalSpacer
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import theme.FitnessAppTheme
@@ -58,7 +58,7 @@ fun LoginScreen(viewModel : LoginScreenModel = koinViewModel()) = with(viewModel
                 testTag = TestTags.EMAIL,
             )
 
-            HorizontalSpacer()
+            VerticalSpacer()
 
             FitnessAppTextField(
                 textFieldData = password,
@@ -74,7 +74,7 @@ fun LoginScreen(viewModel : LoginScreenModel = koinViewModel()) = with(viewModel
                 testTag = TestTags.PASSWORD,
             )
 
-            HorizontalSpacer(size = 24.dp)
+            VerticalSpacer(size = 24.dp)
 
             FitnessAppButton(
                 onClick = ::onLoginButtonClicked,
@@ -83,7 +83,7 @@ fun LoginScreen(viewModel : LoginScreenModel = koinViewModel()) = with(viewModel
                 text = stringResource(Res.string.sign_in)
             )
 
-            HorizontalSpacer()
+            VerticalSpacer()
 
             FitnessAppClickableText(
                 text = stringResource(Res.string.forgot_password),
