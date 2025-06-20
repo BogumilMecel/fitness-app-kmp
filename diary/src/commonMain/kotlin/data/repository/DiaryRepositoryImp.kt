@@ -43,7 +43,9 @@ class DiaryRepositoryImp(
     }
 
     override suspend fun searchForProducts(searchText: String, page: Int): Resource<List<Product>> {
-        TODO("Not yet implemented")
+        return handleRequest {
+            diaryApi.searchForProducts(searchText = searchText, page = page)
+        }
     }
 
     override suspend fun searchForProductWithBarcode(barcode: String): Resource<Product?> {

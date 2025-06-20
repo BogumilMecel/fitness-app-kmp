@@ -8,6 +8,7 @@ object Constants {
     }
     object Query {
         const val LATEST_DATE_TIME = "latest_date_time"
+        const val PAGE = "page"
     }
     object Paging {
         const val API_PAGE_SIZE = 20L

@@ -58,4 +58,17 @@ class DiaryApi(private val httpClient: HttpClient) {
         }
         url(urlString = "/userData/recipe_diary")
     }.body<List<RecipeDiaryEntry>>()
+
+    suspend fun searchForProducts(
+        searchText: String,
+        page: Int
+    ) = httpClient.get {
+        parameters {
+            append(
+                name = Constants.Query.PAGE,
+                value = page.toString()
+            )
+        }
+        url(urlString = "/products/$searchText")
+    }.body<List<Product>>()
 }

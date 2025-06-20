@@ -113,21 +113,26 @@ fun DiarySearchScreen(
         }
 
         HorizontalPager(state = pagerState) {
-            LazyColumn(
-                onScrollToEnd = {
-                    onEvent(DiarySearchEvent.ScrollToEnd)
-                }
-            ) {
-                itemsIndexed(state.productsParams) { index, product ->
-                    DiaryItem(
-                        params = product,
-                        onItemClick = {
-
-                        },
-                        onItemLongClick = {
-
+            when(state.everythingState) {
+                is ListState.Loading -> {}
+                is ListState.Results -> {
+                    LazyColumn(
+                        onScrollToEnd = {
+                            onEvent(DiarySearchEvent.ScrollToEnd)
                         }
-                    )
+                    ) {
+                        itemsIndexed(state.everythingState.items) { index, product ->
+                            DiaryItem(
+                                params = product,
+                                onItemClick = {
+
+                                },
+                                onItemLongClick = {
+
+                                }
+                            )
+                        }
+                    }
                 }
             }
         }

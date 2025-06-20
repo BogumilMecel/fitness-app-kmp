@@ -8,6 +8,7 @@ import domain.repository.DiaryRepository
 import domain.services.ResourcesService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -22,6 +23,9 @@ class DiarySearchScreenModel(
     private val resourcesService: ResourcesService,
 ) : BaseModel() {
 
+    private var everythingRequestJob: Job? = null
+    private var everythingPage = 0
+    private val everythingProducts = mutableListOf<Product>()
     private var userProductsPage = 0
     private val userProducts = mutableListOf<Product>()
 
@@ -34,14 +38,8 @@ class DiarySearchScreenModel(
 
     fun onEvent(event: DiarySearchEvent) {
         when (event) {
-            DiarySearchEvent.BackPressed -> {
-                onBackPressed()
-            }
-
-            DiarySearchEvent.ScrollToEnd -> {
-                onScrollToEnd()
-            }
-
+            DiarySearchEvent.BackPressed -> ::onBackPressed
+            DiarySearchEvent.ScrollToEnd -> ::onScrollToEnd
             DiarySearchEvent.Search -> {
                 onSearch()
             }
@@ -63,7 +61,7 @@ class DiarySearchScreenModel(
     }
 
     private fun onSearch() {
-
+        everythingPage = 1
     }
 
     private fun onTabSelected(tab: SearchTab) {
@@ -87,7 +85,10 @@ class DiarySearchScreenModel(
     private fun onScrollToEnd() {
         when (state.value.selectedTab) {
             SearchTab.EVERYTHING -> {
-
+                if (everythingRequestJob != null) {
+                    everythingPage++
+                    requestEverythingProducts()
+                }
             }
 
             SearchTab.PRODUCTS -> {
@@ -101,16 +102,52 @@ class DiarySearchScreenModel(
         }
     }
 
+    private fun requestEverythingProducts() {
+        everythingRequestJob = viewModelScope.launch {
+            diaryRepository.searchForProducts(
+                searchText = state.value.searchBarText,
+                page = everythingPage,
+            ).handle(
+                finally = {
+                    everythingRequestJob = null
+                },
+                onSuccess = {
+                    everythingProducts += it
+                    assignEverythingState()
+                }
+            )
+        }
+    }
+
     private fun assignUserProducts() {
         viewModelScope.launch {
             state.update {
                 it.copy(
-                    productsParams = userProducts.map { product ->
-                        DiaryItemParams.create(
-                            product = product,
-                            resourcesService = resourcesService,
-                        )
-                    }
+                    userProductsState = ListState.Results(
+                        items = userProducts.map { product ->
+                            DiaryItemParams.create(
+                                product = product,
+                                resourcesService = resourcesService,
+                            )
+                        }
+                    )
+                )
+            }
+        }
+    }
+
+    private fun assignEverythingState() {
+        viewModelScope.launch {
+            state.update {
+                it.copy(
+                    everythingState = ListState.Results(
+                        items = everythingProducts.map { product ->
+                            DiaryItemParams.create(
+                                product = product,
+                                resourcesService = resourcesService,
+                            )
+                        }
+                    )
                 )
             }
         }

@@ -6,6 +6,7 @@ import date.getCurrentDate
 import domain.model.MealName
 import presentation.search.DiarySearchScreen
 import presentation.search.DiarySearchState
+import presentation.search.ListState
 import presentation.search.SearchTab
 import theme.FitnessAppTheme
 
@@ -30,7 +31,8 @@ private fun PreviewContent(darkTheme: Boolean) {
                 mealName = MealName.BREAKFAST,
                 searchBarText = "Rice",
                 selectedTab = SearchTab.EVERYTHING,
-                productsParams = emptyList(),
+                everythingState = ListState.Loading,
+                userProductsState = ListState.Loading,
             ),
             onEvent = {}
         )

@@ -11,5 +11,11 @@ data class DiarySearchState(
     val mealName: MealName,
     val searchBarText: String = "",
     val selectedTab: SearchTab = SearchTab.EVERYTHING,
-    val productsParams: List<DiaryItemParams> = emptyList(),
+    val everythingState: ListState = ListState.Loading,
+    val userProductsState: ListState = ListState.Loading,
 )
+
+sealed interface ListState {
+    data object Loading: ListState
+    data class Results(val items: List<DiaryItemParams>): ListState
+}
