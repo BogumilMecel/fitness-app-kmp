@@ -14,7 +14,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -111,7 +111,7 @@ fun NewProductScreen(
 
         VerticalSpacer()
 
-        Divider(modifier = Modifier.fillMaxWidth())
+        HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
 
         VerticalSpacer()
 
