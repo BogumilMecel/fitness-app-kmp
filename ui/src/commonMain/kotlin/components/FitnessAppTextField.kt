@@ -387,10 +387,7 @@ fun TextField(
                 }
             },
             trailingIcon = {
-                Row(
-                    modifier = Modifier.animateContentSize(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
+                Row(modifier = Modifier.animateContentSize()) {
                     trailingIcon?.let {
                         it()
                     }
@@ -422,8 +419,10 @@ fun TextField(
                 unfocusedIndicatorColor = unfocusedColor,
                 focusedLabelColor = focusedColor,
                 unfocusedLabelColor = labelColor,
-                focusedContainerColor = FitnessAppTheme.colors.backgroundSecondary,
-                unfocusedContainerColor = FitnessAppTheme.colors.backgroundSecondary,
+                focusedContainerColor = FitnessAppTheme.colors.background,
+                unfocusedContainerColor = FitnessAppTheme.colors.background,
+                focusedTrailingIconColor = FitnessAppTheme.colors.contentPrimary,
+                unfocusedTrailingIconColor = unfocusedColor,
             ),
             interactionSource = interactionSource,
             keyboardOptions = keyboardOptions,

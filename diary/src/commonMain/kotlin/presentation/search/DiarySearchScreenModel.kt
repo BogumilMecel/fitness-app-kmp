@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
+import navigation.presentation.Route
 import presentation.base.BaseModel
 import presentation.components.DiaryItemParams
 
@@ -87,7 +88,7 @@ class DiarySearchScreenModel(
     }
 
     private fun onAddProductClicked() {
-        // TODO: Handle on add product clicked
+        navigateTo(Route.NewProduct)
     }
 
     private fun onScanBarcodeClicked() {

@@ -9,6 +9,7 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import presentation.DiaryScreenModel
 import presentation.search.DiarySearchScreenModel
+import presentation.new_product.NewProductScreenModel
 
 val diaryModule = module {
     single<DiaryRepository> {
@@ -30,5 +31,8 @@ val diaryModule = module {
             diaryRepository = get(),
             resourcesService = get(),
         )
+    }
+    viewModel {
+        NewProductScreenModel()
     }
 }

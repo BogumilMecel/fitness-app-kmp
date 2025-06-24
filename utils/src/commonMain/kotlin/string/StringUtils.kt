@@ -15,3 +15,7 @@ val String.Companion.EMPTY
 
 val String.Companion.SPACE
     get() = " "
+
+fun String.normalizeDecimalSeparator(): String {
+    return this.replace(",", ".")
+}

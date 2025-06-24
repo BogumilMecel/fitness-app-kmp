@@ -65,4 +65,7 @@ sealed interface Route {
         val date: String,
         val mealName: MealName,
     ) : Route
+
+    @Serializable
+    data object NewProduct : Route
 }

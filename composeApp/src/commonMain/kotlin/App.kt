@@ -35,6 +35,8 @@ import presentation.navigation_screen.AuthNavigationScreen
 import presentation.register.RegisterScreen
 import presentation.search.DiarySearchScreen
 import presentation.search.DiarySearchScreenModel
+import presentation.new_product.NewProductScreen
+import presentation.new_product.NewProductScreenModel
 import theme.FitnessAppTheme
 
 @Composable
@@ -120,6 +122,15 @@ fun App() {
                     val state by viewModel.state.collectAsState()
 
                     DiarySearchScreen(
+                        state = state,
+                        onEvent = viewModel::onEvent
+                    )
+                }
+                composable<Route.NewProduct> {
+                    val viewModel: NewProductScreenModel = koinViewModel()
+                    val state by viewModel.state.collectAsState()
+
+                    NewProductScreen(
                         state = state,
                         onEvent = viewModel::onEvent
                     )

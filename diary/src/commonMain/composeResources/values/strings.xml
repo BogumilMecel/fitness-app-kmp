@@ -18,4 +18,12 @@
     <string name="search_for_products">Search for products</string>
     <string name="new_product">New product</string>
     <string name="scan_barcode">Scan barcode</string>
+
+    <string name="new_product_product_name">Product name</string>
+    <string name="new_product_container_weight">Container weight</string>
+    <string name="new_product_barcode">Barcode</string>
+    <string name="new_product_nutrition_values">Nutrition Values</string>
+    <string name="new_product_in_100_grams">In 100 grams</string>
+    <string name="new_product_in_container">In container</string>
+    <string name="new_product_in_average">In average</string>
 </resources>
