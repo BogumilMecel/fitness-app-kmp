@@ -4,10 +4,13 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ripple
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -17,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import theme.FitnessAppTheme
@@ -113,6 +117,7 @@ fun Button(
     contentColor: Color = FitnessAppTheme.colors.contentPrimary,
     borderStroke: BorderStroke? = null,
     enabled: Boolean = true,
+    shape: Shape = LargeButtonShape,
     onClick: () -> Unit,
     content: @Composable RowScope.() -> Unit,
 ) {
@@ -127,11 +132,28 @@ fun Button(
             containerColor = backgroundColor,
             contentColor = contentColor,
         ),
+        contentPadding = PaddingValues(),
         border = borderStroke,
         enabled = enabled,
-        content = content
+        content = content,
+        shape = shape,
     )
 }
+
+@Composable
+fun LargeButtonTextContent(text: String) {
+    Text(
+        text = text,
+        style = FitnessAppTheme.typography.labelLarge,
+        modifier = Modifier.padding(vertical = 16.dp),
+    )
+}
+
+fun Modifier.largeButton() = this
+    .fillMaxWidth()
+    .heightIn(min = 48.dp)
+
+val LargeButtonShape = RoundedCornerShape(size = 8.dp)
 
 enum class FitnessAppButtonStyle {
     Primary, Content, Secondary;

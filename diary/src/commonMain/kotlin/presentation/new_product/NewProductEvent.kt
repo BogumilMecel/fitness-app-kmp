@@ -10,4 +10,5 @@ sealed interface NewProductEvent {
     data class ProteinChanged(val value: String) : NewProductEvent
     data class FatChanged(val value: String) : NewProductEvent
     data class NutritionValuesChoiceChanged(val choice: NutritionValuesChoice) : NewProductEvent
+    object CreateProductClicked : NewProductEvent
 } 

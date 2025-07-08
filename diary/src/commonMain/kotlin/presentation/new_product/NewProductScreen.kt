@@ -33,6 +33,7 @@ import com.gmail.bogumilmecel2.diary.composeResources.calories
 import com.gmail.bogumilmecel2.diary.composeResources.carbs
 import com.gmail.bogumilmecel2.diary.composeResources.fat
 import com.gmail.bogumilmecel2.diary.composeResources.new_product
+import com.gmail.bogumilmecel2.diary.composeResources.new_product_add_new_product
 import com.gmail.bogumilmecel2.diary.composeResources.new_product_barcode
 import com.gmail.bogumilmecel2.diary.composeResources.new_product_container_weight
 import com.gmail.bogumilmecel2.diary.composeResources.new_product_in_100_grams
@@ -41,9 +42,12 @@ import com.gmail.bogumilmecel2.diary.composeResources.new_product_in_container
 import com.gmail.bogumilmecel2.diary.composeResources.new_product_nutrition_values
 import com.gmail.bogumilmecel2.diary.composeResources.new_product_product_name
 import com.gmail.bogumilmecel2.diary.composeResources.protein
+import components.Button
 import components.FitnessAppTopBar
+import components.LargeButtonTextContent
 import components.TextField
 import components.VerticalSpacer
+import components.largeButton
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import presentation.utils.getDefaultRootModifier
@@ -54,10 +58,7 @@ fun NewProductScreen(
     state: NewProductState,
     onEvent: (NewProductEvent) -> Unit,
 ) {
-    Column(
-        modifier = getDefaultRootModifier()
-            .verticalScroll(state = rememberScrollState())
-    ) {
+    Column(modifier = getDefaultRootModifier()) {
         FitnessAppTopBar(
             title = stringResource(Res.string.new_product),
             onBackPressed = {
@@ -65,127 +66,150 @@ fun NewProductScreen(
             }
         )
 
-        VerticalSpacer(size = 12.dp)
+        Column(
+            modifier = Modifier
+                .verticalScroll(state = rememberScrollState())
+                .weight(1f)
+        ) {
+            VerticalSpacer(size = 12.dp)
 
-        TextField(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            text = state.productName,
-            label = stringResource(Res.string.new_product_product_name),
-            onValueChange = {
-                onEvent(NewProductEvent.ProductNameChanged(it))
-            }
-        )
+            TextField(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = state.productName,
+                label = stringResource(Res.string.new_product_product_name),
+                onValueChange = {
+                    onEvent(NewProductEvent.ProductNameChanged(it))
+                }
+            )
 
-        VerticalSpacer(size = 12.dp)
+            VerticalSpacer(size = 12.dp)
 
-        TextField(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            text = state.containerWeight,
-            label = stringResource(Res.string.new_product_container_weight),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Number,
-            ),
-            onValueChange = {
-                onEvent(NewProductEvent.ContainerWeightChanged(it))
-            }
-        )
+            TextField(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = state.containerWeight,
+                label = stringResource(Res.string.new_product_container_weight),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                ),
+                onValueChange = {
+                    onEvent(NewProductEvent.ContainerWeightChanged(it))
+                }
+            )
 
-        VerticalSpacer(size = 12.dp)
+            VerticalSpacer(size = 12.dp)
 
-        TextField(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            text = state.barcode,
-            label = stringResource(Res.string.new_product_barcode),
-            trailingIcon = {
-                Icon(
-                    painter = painterResource(Res.drawable.barcode_scan),
-                    contentDescription = null,
-                    tint = FitnessAppTheme.colors.contentPrimary,
-                    modifier = Modifier.padding(end = 12.dp),
-                )
+            TextField(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = state.barcode,
+                label = stringResource(Res.string.new_product_barcode),
+                trailingIcon = {
+                    Icon(
+                        painter = painterResource(Res.drawable.barcode_scan),
+                        contentDescription = null,
+                        tint = FitnessAppTheme.colors.contentPrimary,
+                        modifier = Modifier.padding(end = 12.dp),
+                    )
+                },
+                onValueChange = {
+                    onEvent(NewProductEvent.BarcodeChanged(it))
+                }
+            )
+
+            VerticalSpacer()
+
+            HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+
+            VerticalSpacer()
+
+            Text(
+                text = stringResource(Res.string.new_product_nutrition_values),
+                style = FitnessAppTheme.typography.labelMedium,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+            )
+
+            VerticalSpacer(size = 12.dp)
+
+            NutritionValuesControls(
+                selectedNutritionValuesChoice = state.selectedNutritionValuesChoice,
+                onChoiceClicked = { choice ->
+                    onEvent(NewProductEvent.NutritionValuesChoiceChanged(choice))
+                }
+            )
+
+            VerticalSpacer(size = 12.dp)
+
+            TextField(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = state.calories,
+                label = stringResource(Res.string.calories),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                ),
+                onValueChange = {
+                    onEvent(NewProductEvent.CaloriesChanged(it))
+                }
+            )
+
+            VerticalSpacer(size = 12.dp)
+
+            TextField(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = state.carbohydrates,
+                label = stringResource(Res.string.carbs),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                ),
+                onValueChange = {
+                    onEvent(NewProductEvent.CarbohydratesChanged(it))
+                }
+            )
+
+            VerticalSpacer(size = 12.dp)
+
+            TextField(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = state.protein,
+                label = stringResource(Res.string.protein),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                ),
+                onValueChange = {
+                    onEvent(NewProductEvent.ProteinChanged(it))
+                }
+            )
+
+            VerticalSpacer(size = 12.dp)
+
+            TextField(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = state.fat,
+                label = stringResource(Res.string.fat),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                ),
+                onValueChange = {
+                    onEvent(NewProductEvent.FatChanged(it))
+                }
+            )
+        }
+
+        VerticalSpacer(size = 16.dp)
+
+        Button(
+            modifier = Modifier
+                .largeButton()
+                .padding(horizontal = 16.dp),
+            onClick = {
+                onEvent(NewProductEvent.CreateProductClicked)
             },
-            onValueChange = {
-                onEvent(NewProductEvent.BarcodeChanged(it))
+            backgroundColor = FitnessAppTheme.colors.primary,
+            content = {
+                LargeButtonTextContent(text = stringResource(Res.string.new_product_add_new_product))
             }
         )
 
-        VerticalSpacer()
-
-        HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
-
-        VerticalSpacer()
-
-        Text(
-            text = stringResource(Res.string.new_product_nutrition_values),
-            style = FitnessAppTheme.typography.labelMedium,
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-        )
-
-        VerticalSpacer(size = 12.dp)
-
-        NutritionValuesControls(
-            selectedNutritionValuesChoice = state.selectedNutritionValuesChoice,
-            onChoiceClicked = { choice ->
-                onEvent(NewProductEvent.NutritionValuesChoiceChanged(choice))
-            }
-        )
-
-        VerticalSpacer(size = 12.dp)
-
-        TextField(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            text = state.calories,
-            label = stringResource(Res.string.calories),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Number,
-            ),
-            onValueChange = {
-                onEvent(NewProductEvent.CaloriesChanged(it))
-            }
-        )
-
-        VerticalSpacer(size = 12.dp)
-
-        TextField(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            text = state.carbohydrates,
-            label = stringResource(Res.string.carbs),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Number,
-            ),
-            onValueChange = {
-                onEvent(NewProductEvent.CarbohydratesChanged(it))
-            }
-        )
-
-        VerticalSpacer(size = 12.dp)
-
-        TextField(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            text = state.protein,
-            label = stringResource(Res.string.protein),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Number,
-            ),
-            onValueChange = {
-                onEvent(NewProductEvent.ProteinChanged(it))
-            }
-        )
-
-        VerticalSpacer(size = 12.dp)
-
-        TextField(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            text = state.fat,
-            label = stringResource(Res.string.fat),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Number,
-            ),
-            onValueChange = {
-                onEvent(NewProductEvent.FatChanged(it))
-            }
-        )
+        VerticalSpacer(size = 16.dp)
     }
 }
 

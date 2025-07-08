@@ -33,6 +33,8 @@ val diaryModule = module {
         )
     }
     viewModel {
-        NewProductScreenModel()
+        NewProductScreenModel(
+            diaryRepository = get()
+        )
     }
 }

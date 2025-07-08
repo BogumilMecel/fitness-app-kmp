@@ -1,11 +1,20 @@
 package presentation.new_product
 
+import androidx.lifecycle.viewModelScope
+import domain.model.MeasurementUnit
+import domain.model.NewProductRequest
+import domain.model.NutritionValues
+import domain.model.NutritionValuesIn
+import domain.repository.DiaryRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import presentation.base.BaseModel
 import string.normalizeDecimalSeparator
 
-class NewProductScreenModel : BaseModel() {
+class NewProductScreenModel(
+    private val diaryRepository: DiaryRepository,
+) : BaseModel() {
 
     val state = MutableStateFlow(
         value = NewProductState()
@@ -40,6 +49,54 @@ class NewProductScreenModel : BaseModel() {
             is NewProductEvent.NutritionValuesChoiceChanged -> {
                 state.update { it.copy(selectedNutritionValuesChoice = event.choice) }
             }
+            NewProductEvent.CreateProductClicked -> {
+                onCreateProductClicked()
+            }
+        }
+    }
+
+    private fun onCreateProductClicked() {
+        val currentState = state.value
+        
+        if (currentState.productName.isBlank()) {
+            return
+        }
+        
+        viewModelScope.launch {
+            val calories = currentState.calories.toIntOrNull() ?: 0
+            val carbohydrates = currentState.carbohydrates.toDoubleOrNull() ?: 0.0
+            val protein = currentState.protein.toDoubleOrNull() ?: 0.0
+            val fat = currentState.fat.toDoubleOrNull() ?: 0.0
+            val containerWeight = currentState.containerWeight.toIntOrNull()
+            
+            val nutritionValuesIn = when (currentState.selectedNutritionValuesChoice) {
+                NutritionValuesChoice.IN_100_GRAMS -> NutritionValuesIn.HUNDRED_GRAMS
+                NutritionValuesChoice.IN_CONTAINER -> NutritionValuesIn.CONTAINER
+                NutritionValuesChoice.IN_AVERAGE -> NutritionValuesIn.AVERAGE
+            }
+            
+            val newProductRequest = NewProductRequest(
+                name = currentState.productName,
+                containerWeight = containerWeight,
+                nutritionValuesIn = nutritionValuesIn,
+                measurementUnit = MeasurementUnit.GRAMS,
+                nutritionValues = NutritionValues(
+                    calories = calories,
+                    carbohydrates = carbohydrates,
+                    protein = protein,
+                    fat = fat
+                ),
+                barcode = currentState.barcode.takeIf { it.isNotBlank() }
+            )
+            
+            diaryRepository.saveNewProduct(newProductRequest).handle(
+                onSuccess = { createdProduct ->
+                    onBackPressed()
+                },
+                onError = { error ->
+                    
+                }
+            )
         }
     }
 } 

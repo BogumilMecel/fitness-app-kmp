@@ -1,4 +1,5 @@
 import constans.Constants
+import domain.model.NewProductRequest
 import domain.model.Product
 import domain.model.ProductDiaryEntry
 import domain.model.Recipe
@@ -6,6 +7,8 @@ import domain.model.RecipeDiaryEntry
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.http.parameters
 import kotlinx.datetime.LocalDateTime
@@ -71,4 +74,9 @@ class DiaryApi(private val httpClient: HttpClient) {
         }
         url(urlString = "/products/$searchText")
     }.body<List<Product>>()
+
+    suspend fun insertProduct(newProductRequest: NewProductRequest) = httpClient.post {
+        url(urlString = "/products")
+        setBody(newProductRequest)
+    }.body<Product>()
 }

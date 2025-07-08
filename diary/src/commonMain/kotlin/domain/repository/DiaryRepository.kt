@@ -2,6 +2,7 @@ package domain.repository
 
 import domain.model.DeleteDiaryEntryRequest
 import domain.model.DiaryEntriesResponse
+import domain.model.NewProductRequest
 import domain.model.NutritionValues
 import domain.model.Product
 import domain.model.ProductDiaryEntry
@@ -37,7 +38,7 @@ interface DiaryRepository {
 
     suspend fun editRecipeDiaryEntry(recipeDiaryEntry: RecipeDiaryEntry): Resource<RecipeDiaryEntry>
 
-    suspend fun saveNewProduct(product: Product): Resource<Product>
+    suspend fun saveNewProduct(newProductRequest: NewProductRequest): Resource<Product>
 
     suspend fun getProduct(productId: String): Resource<Product?>
 

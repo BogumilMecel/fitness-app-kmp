@@ -26,4 +26,5 @@
     <string name="new_product_in_100_grams">In 100 grams</string>
     <string name="new_product_in_container">In container</string>
     <string name="new_product_in_average">In average</string>
+    <string name="new_product_add_new_product">Add new product</string>
 </resources>

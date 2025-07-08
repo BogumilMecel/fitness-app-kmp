@@ -5,6 +5,7 @@ import data.BaseRepository
 import data.api.DiaryDao
 import domain.model.DeleteDiaryEntryRequest
 import domain.model.DiaryEntriesResponse
+import domain.model.NewProductRequest
 import domain.model.NutritionValues
 import domain.model.Product
 import domain.model.ProductDiaryEntry
@@ -80,8 +81,10 @@ class DiaryRepositoryImp(
         TODO("Not yet implemented")
     }
 
-    override suspend fun saveNewProduct(product: Product): Resource<Product> {
-        TODO("Not yet implemented")
+    override suspend fun saveNewProduct(newProductRequest: NewProductRequest): Resource<Product> {
+        return handleRequest {
+            diaryApi.insertProduct(newProductRequest)
+        }
     }
 
     override suspend fun getProduct(productId: String): Resource<Product?> {
