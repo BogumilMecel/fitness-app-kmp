@@ -1,6 +1,6 @@
 package di
 
-import constans.Constants
+import utils.constans.Constants
 import data.database.FitnessAppDatabase
 import domain.NavigatorService
 import domain.NavigatorServiceImp

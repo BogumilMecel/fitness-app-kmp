@@ -22,7 +22,7 @@ import com.gmail.bogumilmecel2.diary.composeResources.fat
 import com.gmail.bogumilmecel2.diary.composeResources.protein
 import components.FitnessAppCard
 import components.HorizontalSpacer
-import domain.model.DiaryItem
+import models.DiaryItem
 import domain.model.MealName
 import domain.model.NutritionValues
 import org.jetbrains.compose.resources.stringResource

@@ -1,10 +1,6 @@
 package presentation.search
 
 import androidx.lifecycle.viewModelScope
-import constans.Constants
-import domain.model.MealName
-import domain.model.Product
-import domain.repository.DiaryRepository
 import domain.services.ResourcesService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -13,9 +9,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
+import domain.model.MealName
+import models.Product
 import navigation.presentation.Route
 import presentation.base.BaseModel
 import presentation.components.DiaryItemParams
+import repository.DiaryRepository
+import utils.constans.Constants
 
 class DiarySearchScreenModel(
     private val date: LocalDate,

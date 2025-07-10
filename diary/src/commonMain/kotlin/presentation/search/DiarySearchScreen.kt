@@ -39,7 +39,7 @@ import components.FitnessAppTopBar
 import components.HorizontalSpacer
 import components.LazyColumn
 import components.VerticalSpacer
-import date.getDisplayValue
+import utils.date.getDisplayValue
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import presentation.components.DiaryItem

@@ -7,7 +7,7 @@ import com.gmail.bogumilmecel2.ui.composeResources.password_not_match_error
 import domain.constants.AuthConstants
 import domain.services.ResourcesService
 import utils.Resource
-import utils.isLengthInRange
+import utils.string.isLengthInRange
 
 class ValidatePasswordUseCase(private val resourcesService: ResourcesService) {
     suspend operator fun invoke(

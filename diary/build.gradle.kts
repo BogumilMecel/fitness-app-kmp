@@ -35,8 +35,9 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(compose.components.resources)
-            implementation(project(":shared"))
-            implementation(project(":utils"))
+            implementation(project(":core"))
+            api(project(":diary-models"))
+            api(project(":diary-data"))
         }
     }
 }

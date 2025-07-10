@@ -1,7 +1,7 @@
 package presentation
 
-import date.getCurrentDate
-import domain.model.DiaryItem
+import utils.date.getCurrentDate
+import models.DiaryItem
 import domain.model.MealName
 import domain.model.NutritionValues
 import domain.use_case.CreateAvailableDiaryDatesUseCase

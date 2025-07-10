@@ -3,14 +3,16 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":composeApp")
 include(":ui")
-include(":shared")
+include(":core")
+include(":core-models")
+include(":diary-models")
+include(":diary-data")
 include(":auth")
 include(":splash")
 include(":summary")
 include(":diary")
 include(":training")
 include(":account")
-include(":utils")
 
 pluginManagement {
     repositories {

@@ -3,15 +3,15 @@ package data.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import data.api.DiaryDao
-import domain.model.IngredientsConverter
+import api.DiaryDao
 import domain.model.NutritionValuesTypeConverter
-import domain.model.Product
-import domain.model.ProductDiaryEntry
-import domain.model.Recipe
-import domain.model.RecipeDiaryEntry
-import utils.LocalDateConverter
-import utils.LocalDateTimeConverter
+import models.IngredientsConverter
+import models.Product
+import models.ProductDiaryEntry
+import models.Recipe
+import models.RecipeDiaryEntry
+import utils.date.LocalDateConverter
+import utils.date.LocalDateTimeConverter
 
 @Database(
     entities = [Product::class, Recipe::class, ProductDiaryEntry::class, RecipeDiaryEntry::class],

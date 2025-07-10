@@ -33,14 +33,13 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
-            implementation(project(":shared"))
+            implementation(project(":core"))
             implementation(project(":auth"))
             implementation(project(":splash"))
             implementation(project(":summary"))
             implementation(project(":diary"))
             implementation(project(":training"))
             implementation(project(":account"))
-            implementation(project(":utils"))
 
             implementation(compose.material3)
         }

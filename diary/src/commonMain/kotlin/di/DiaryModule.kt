@@ -1,15 +1,15 @@
 package di
 
-import DiaryApi
-import data.repository.DiaryRepositoryImp
-import domain.repository.DiaryRepository
+import api.DiaryApi
 import domain.use_case.CreateAvailableDiaryDatesUseCase
 import domain.use_case.GetOfflineDiaryEntriesUseCase
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import presentation.DiaryScreenModel
-import presentation.search.DiarySearchScreenModel
 import presentation.new_product.NewProductScreenModel
+import presentation.search.DiarySearchScreenModel
+import repository.DiaryRepository
+import repository.DiaryRepositoryImp
 
 val diaryModule = module {
     single<DiaryRepository> {

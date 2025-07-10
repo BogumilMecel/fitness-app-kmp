@@ -1,8 +1,8 @@
 package domain.use_case
 
-import domain.repository.DiaryRepository
 import domain.services.SettingsService
 import kotlinx.coroutines.flow.firstOrNull
+import repository.DiaryRepository
 import utils.Resource
 
 class GetRecipesAndSaveOfflineUseCase(

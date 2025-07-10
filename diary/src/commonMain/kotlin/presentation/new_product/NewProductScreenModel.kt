@@ -1,16 +1,16 @@
 package presentation.new_product
 
 import androidx.lifecycle.viewModelScope
-import domain.model.MeasurementUnit
-import domain.model.NewProductRequest
 import domain.model.NutritionValues
-import domain.model.NutritionValuesIn
-import domain.repository.DiaryRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import models.MeasurementUnit
+import models.NewProductRequest
+import models.NutritionValuesIn
 import presentation.base.BaseModel
-import string.normalizeDecimalSeparator
+import repository.DiaryRepository
+import utils.string.normalizeDecimalSeparator
 
 class NewProductScreenModel(
     private val diaryRepository: DiaryRepository,

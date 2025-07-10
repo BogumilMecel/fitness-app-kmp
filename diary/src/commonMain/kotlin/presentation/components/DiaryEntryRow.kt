@@ -8,27 +8,25 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Divider
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.gmail.bogumilmecel2.diary.composeResources.Res
 import com.gmail.bogumilmecel2.diary.composeResources.calories_short_name
 import com.gmail.bogumilmecel2.diary.composeResources.carbohydrates_short_name
 import com.gmail.bogumilmecel2.diary.composeResources.fat_short_name
 import com.gmail.bogumilmecel2.diary.composeResources.protein_short_name
-import domain.model.DiaryItem
-import domain.model.ProductDiaryEntry
-import domain.model.RecipeDiaryEntry
+import components.HorizontalSpacer
+import models.DiaryItem
+import models.ProductDiaryEntry
+import models.RecipeDiaryEntry
 import org.jetbrains.compose.resources.stringResource
-import string.FormatTwoValues
-import string.formatTwoValues
 import theme.FitnessAppTheme
+import utils.string.FormatTwoValues
+import utils.string.formatTwoValues
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -74,10 +72,7 @@ fun DiaryEntryRow(
                     )
                 }
 
-                Divider(
-                    modifier = Modifier.height(4.dp),
-                    color = Color.Transparent
-                )
+                HorizontalSpacer(size = 4.dp)
 
                 Row(
                     modifier = Modifier

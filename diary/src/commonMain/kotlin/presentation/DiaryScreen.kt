@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import components.VerticalSpacer
-import compose.getScreenWidth
-import date.getShortName
+import utils.compose.getScreenWidth
+import utils.date.getShortName
 import domain.model.MealName
 import domain.model.NutritionValues
 import org.koin.compose.viewmodel.koinViewModel

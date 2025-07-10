@@ -33,7 +33,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
-            implementation(project(":shared"))
+            implementation(project(":core"))
         }
     }
 }
