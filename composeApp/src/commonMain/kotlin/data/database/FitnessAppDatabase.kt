@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import api.DiaryDao
-import domain.model.NutritionValuesTypeConverter
+import models.NutritionValuesTypeConverter
 import models.IngredientsConverter
 import models.Product
 import models.ProductDiaryEntry

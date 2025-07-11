@@ -1,7 +1,6 @@
 package models
 
 import androidx.room.TypeConverter
-import domain.model.NutritionValues
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 

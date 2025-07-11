@@ -3,7 +3,7 @@ package preview
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import utils.date.getCurrentDate
-import domain.model.MealName
+import models.MealName
 import presentation.search.DiarySearchScreen
 import presentation.search.DiarySearchState
 import presentation.search.ListState

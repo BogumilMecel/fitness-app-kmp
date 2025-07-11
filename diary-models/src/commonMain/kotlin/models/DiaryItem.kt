@@ -1,8 +1,6 @@
 package models
 
 import androidx.compose.runtime.Composable
-import domain.model.MealName
-import domain.model.NutritionValues
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 

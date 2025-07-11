@@ -23,8 +23,8 @@ import com.gmail.bogumilmecel2.diary.composeResources.protein
 import components.FitnessAppCard
 import components.HorizontalSpacer
 import models.DiaryItem
-import domain.model.MealName
-import domain.model.NutritionValues
+import models.MealName
+import models.NutritionValues
 import org.jetbrains.compose.resources.stringResource
 import theme.FitnessAppTheme
 

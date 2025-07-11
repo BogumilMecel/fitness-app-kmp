@@ -3,7 +3,7 @@ package repository
 import api.DiaryApi
 import api.DiaryDao
 import data.BaseRepository
-import domain.model.NutritionValues
+import models.NutritionValues
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime

@@ -3,8 +3,6 @@ package models
 import androidx.compose.runtime.Composable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import domain.model.MealName
-import domain.model.NutritionValues
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName

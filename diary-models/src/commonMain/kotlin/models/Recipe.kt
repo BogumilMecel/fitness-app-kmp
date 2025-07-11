@@ -2,7 +2,6 @@ package models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import domain.model.NutritionValues
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

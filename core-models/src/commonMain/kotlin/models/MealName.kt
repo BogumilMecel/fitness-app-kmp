@@ -1,4 +1,4 @@
-package domain.model
+package models
 
 import androidx.compose.runtime.Composable
 import kotlinx.serialization.Serializable

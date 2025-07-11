@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
-import domain.model.MealName
+import models.MealName
 import models.Product
 import navigation.presentation.Route
 import presentation.base.BaseModel

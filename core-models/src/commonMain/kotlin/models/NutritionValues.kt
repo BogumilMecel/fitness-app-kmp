@@ -1,4 +1,4 @@
-package domain.model
+package models
 
 import androidx.room.TypeConverter
 import kotlinx.serialization.SerialName

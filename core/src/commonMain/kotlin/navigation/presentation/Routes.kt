@@ -11,7 +11,7 @@ import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_account
 import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_diary
 import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_summary
 import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_training
-import domain.model.MealName
+import models.MealName
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.StringResource
 

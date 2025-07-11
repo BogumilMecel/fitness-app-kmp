@@ -1,7 +1,7 @@
 package presentation.new_product
 
 import androidx.lifecycle.viewModelScope
-import domain.model.NutritionValues
+import models.NutritionValues
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch

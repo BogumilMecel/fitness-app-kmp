@@ -1,4 +1,4 @@
-import domain.model.NutritionValues
+import models.NutritionValues
 import models.DiaryItem
 
 

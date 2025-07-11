@@ -5,7 +5,7 @@ import com.gmail.bogumilmecel2.diary.composeResources.calories_short_name
 import com.gmail.bogumilmecel2.diary.composeResources.measurement_unit_gram
 import com.gmail.bogumilmecel2.diary.composeResources.measurement_unit_milliliter
 import models.MeasurementUnit
-import domain.model.NutritionValues
+import models.NutritionValues
 import domain.services.ResourcesService
 import utils.string.SPACE
 

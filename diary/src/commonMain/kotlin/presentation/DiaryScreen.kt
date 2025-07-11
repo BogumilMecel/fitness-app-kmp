@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import components.VerticalSpacer
 import utils.compose.getScreenWidth
 import utils.date.getShortName
-import domain.model.MealName
-import domain.model.NutritionValues
+import models.MealName
+import models.NutritionValues
 import org.koin.compose.viewmodel.koinViewModel
 import presentation.components.CalendarItem
 import presentation.components.MealCard

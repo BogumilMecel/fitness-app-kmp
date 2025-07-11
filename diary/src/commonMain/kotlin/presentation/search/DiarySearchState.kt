@@ -1,7 +1,7 @@
 package presentation.search
 
 import androidx.compose.runtime.Stable
-import domain.model.MealName
+import models.MealName
 import kotlinx.datetime.LocalDate
 import presentation.components.DiaryItemParams
 
