@@ -6,7 +6,6 @@ import domain.services.SettingsService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import navigation.domain.NavigationAction
@@ -37,8 +36,6 @@ open class BaseModel : ViewModel(), KoinComponent {
             )
         }
     }
-
-    protected fun getNotNullUserFlow() = settingsService.getUser().filterNotNull()
 
     private fun navigateBack(withPopUp: Boolean = false) {
         viewModelScope.launch {
