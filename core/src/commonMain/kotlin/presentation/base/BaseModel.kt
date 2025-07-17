@@ -3,7 +3,6 @@ package presentation.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import components.TextFieldData
-import domain.NavigatorService
 import domain.services.SettingsService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +13,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import navigation.domain.NavigationAction
+import navigation.domain.NavigatorService
 import navigation.presentation.Route
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -40,27 +40,6 @@ open class BaseModel : ViewModel(), KoinComponent {
                 )
             )
         }
-    }
-
-    protected inline fun <T> Resource<T>.handle(
-        showSnackbar: Boolean = true,
-        finally: () -> Unit = {},
-        onError: (Exception) -> Unit = {},
-        onSuccess: (T) -> Unit = {}
-    ) {
-        when (this) {
-            is Resource.Error -> {
-                if (showSnackbar) {
-                    // TODO: Add snackbar when ready
-                }
-                onError(exception)
-            }
-
-            is Resource.Success -> {
-                onSuccess(data)
-            }
-        }
-        finally()
     }
 
     protected fun <T> Resource<T>.handle(validationField: MutableStateFlow<TextFieldData>) {

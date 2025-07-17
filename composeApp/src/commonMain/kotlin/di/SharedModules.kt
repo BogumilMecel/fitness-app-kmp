@@ -1,7 +1,7 @@
 package di
 
 import data.database.FitnessAppDatabase
-import domain.NavigatorService
+import navigation.domain.NavigatorService
 import domain.NavigatorServiceImp
 import domain.model.Country
 import domain.services.ResourcesService
