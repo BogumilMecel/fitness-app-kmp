@@ -10,6 +10,7 @@ import presentation.base.BaseModel
 import utils.flow.getText
 import utils.flow.initTextField
 import utils.flow.isNotError
+import utils.handle
 
 class RegisterScreenModel(private val registerUseCases: RegisterUseCases) : BaseModel() {
 

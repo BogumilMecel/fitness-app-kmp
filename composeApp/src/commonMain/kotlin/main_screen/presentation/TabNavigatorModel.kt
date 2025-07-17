@@ -9,6 +9,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import presentation.base.BaseModel
+import utils.handle
 
 class TabNavigatorModel(
     private val mainRepository: MainRepository,

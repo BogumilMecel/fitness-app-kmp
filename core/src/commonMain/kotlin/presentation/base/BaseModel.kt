@@ -2,10 +2,8 @@ package presentation.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import components.TextFieldData
 import domain.services.SettingsService
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -16,8 +14,6 @@ import navigation.domain.NavigatorService
 import navigation.presentation.Route
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import utils.Resource
-import utils.flow.setError
 
 open class BaseModel : ViewModel(), KoinComponent {
 
@@ -40,30 +36,6 @@ open class BaseModel : ViewModel(), KoinComponent {
                 )
             )
         }
-    }
-
-    protected fun <T> Resource<T>.handle(validationField: MutableStateFlow<TextFieldData>) {
-        handle(
-            onError = { validationField.setError(it.message) },
-            onSuccess = { validationField.setError(null) }
-        )
-    }
-
-    protected inline fun <T> Resource<T>.handle(
-        finally: () -> Unit = {},
-        onError: (Exception) -> Unit = {},
-        onSuccess: (T) -> Unit = {}
-    ) {
-        when (this) {
-            is Resource.Error -> {
-                onError(exception)
-            }
-
-            is Resource.Success -> {
-                onSuccess(data)
-            }
-        }
-        finally()
     }
 
     protected fun getNotNullUserFlow() = settingsService.getUser().filterNotNull()
