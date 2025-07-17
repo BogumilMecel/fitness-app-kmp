@@ -7,6 +7,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import navigation.presentation.Route
 import presentation.base.BaseModel
+import utils.flow.getText
+import utils.flow.initTextField
+import utils.flow.isNotError
 
 class RegisterScreenModel(private val registerUseCases: RegisterUseCases) : BaseModel() {
 
