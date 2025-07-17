@@ -1,19 +1,21 @@
 package api
 
-import models.NewProductRequest
-import models.Product
-import models.ProductDiaryEntry
-import models.Recipe
-import models.RecipeDiaryEntry
-import utils.constans.Constants
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.http.parameters
 import kotlinx.datetime.LocalDateTime
+import models.NewProductRequest
+import models.Product
+import models.ProductDiaryEntry
+import models.ProductsResponse
+import models.Recipe
+import models.RecipeDiaryEntry
+import utils.constans.Constants
 
 class DiaryApi(private val httpClient: HttpClient) {
     suspend fun getUserProducts(latestDateTime: LocalDateTime?) = httpClient.get {
@@ -68,14 +70,10 @@ class DiaryApi(private val httpClient: HttpClient) {
         searchText: String,
         page: Int
     ) = httpClient.get {
-        parameters {
-            append(
-                name = Constants.Query.PAGE,
-                value = page.toString()
-            )
-        }
-        url(urlString = "/products/$searchText")
-    }.body<List<Product>>()
+        url(urlString = "/products")
+        parameter(key = Constants.Query.PAGE, value = page)
+        parameter(Constants.Query.SEARCH_TEXT, searchText)
+    }.body<ProductsResponse>()
 
     suspend fun insertProduct(newProductRequest: NewProductRequest) = httpClient.post {
         url(urlString = "/products")

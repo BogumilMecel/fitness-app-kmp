@@ -128,18 +128,16 @@ class DiarySearchScreenModel(
 
     private fun requestEverythingProducts() {
         everythingRequestJob = viewModelScope.launch {
-            diaryRepository.searchForProducts(
-                searchText = state.value.searchBarText,
-                page = everythingPage,
-            ).handle(
-                finally = {
-                    everythingRequestJob = null
-                },
-                onSuccess = {
-                    everythingProducts += it
-                    assignEverythingState()
-                }
-            )
+            runCatching {
+                diaryRepository.searchForProducts(
+                    searchText = state.value.searchBarText,
+                    page = everythingPage,
+                )
+            }.onSuccess {
+                everythingProducts += it.results
+                assignEverythingState()
+            }
+            everythingRequestJob = null
         }
     }
 

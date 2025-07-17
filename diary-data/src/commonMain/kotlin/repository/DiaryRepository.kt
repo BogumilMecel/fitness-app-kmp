@@ -1,16 +1,17 @@
 package repository
 
-import models.DeleteDiaryEntryRequest
-import models.DiaryEntriesResponse
-import models.NewProductRequest
-import models.Product
-import models.ProductDiaryEntry
-import models.Recipe
-import models.RecipeDiaryEntry
-import models.NutritionValues
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
+import models.DeleteDiaryEntryRequest
+import models.DiaryEntriesResponse
+import models.NewProductRequest
+import models.NutritionValues
+import models.Product
+import models.ProductDiaryEntry
+import models.ProductsResponse
+import models.Recipe
+import models.RecipeDiaryEntry
 import utils.Resource
 
 interface DiaryRepository {
@@ -20,7 +21,7 @@ interface DiaryRepository {
 
     suspend fun getRecipeDiaryEntries(latestDateTime: LocalDateTime?): Resource<List<RecipeDiaryEntry>>
 
-    suspend fun searchForProducts(searchText: String, page: Int): Resource<List<Product>>
+    suspend fun searchForProducts(searchText: String, page: Int): ProductsResponse
 
     suspend fun searchForProductWithBarcode(barcode: String): Resource<Product?>
 

@@ -1,6 +1,5 @@
 package di
 
-import utils.constans.Constants
 import data.database.FitnessAppDatabase
 import domain.NavigatorService
 import domain.NavigatorServiceImp
@@ -21,6 +20,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 import org.lighthousegames.logging.logging
+import utils.constans.Constants
 import utils.providers.ResourcesServiceImp
 import utils.providers.SettingsServiceImp
 
@@ -63,7 +63,7 @@ private val sharedModule = module {
                     key = Constants.Headers.TIMEZONE,
                     value = TimeZone.currentSystemDefault().id
                 )
-                url(urlString = "http://192.168.0.188/")
+                url(urlString = "http://192.168.0.134/")
                 port = 8080
             }
 

@@ -3,15 +3,16 @@ package repository
 import api.DiaryApi
 import api.DiaryDao
 import data.BaseRepository
-import models.NutritionValues
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import models.DeleteDiaryEntryRequest
 import models.DiaryEntriesResponse
 import models.NewProductRequest
+import models.NutritionValues
 import models.Product
 import models.ProductDiaryEntry
+import models.ProductsResponse
 import models.Recipe
 import models.RecipeDiaryEntry
 import utils.Resource
@@ -42,10 +43,8 @@ class DiaryRepositoryImp(
         }
     }
 
-    override suspend fun searchForProducts(searchText: String, page: Int): Resource<List<Product>> {
-        return handleRequest {
-            diaryApi.searchForProducts(searchText = searchText, page = page)
-        }
+    override suspend fun searchForProducts(searchText: String, page: Int): ProductsResponse {
+        return diaryApi.searchForProducts(searchText = searchText, page = page)
     }
 
     override suspend fun searchForProductWithBarcode(barcode: String): Resource<Product?> {
