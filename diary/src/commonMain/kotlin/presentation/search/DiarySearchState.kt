@@ -1,9 +1,9 @@
 package presentation.search
 
 import androidx.compose.runtime.Stable
-import models.MealName
 import kotlinx.datetime.LocalDate
-import presentation.components.DiaryItemParams
+import models.MealName
+import models.Product
 
 @Stable
 data class DiarySearchState(
@@ -17,5 +17,5 @@ data class DiarySearchState(
 
 sealed interface ListState {
     data object Loading: ListState
-    data class Results(val items: List<DiaryItemParams>): ListState
+    data class Results(val items: List<Product>): ListState
 }

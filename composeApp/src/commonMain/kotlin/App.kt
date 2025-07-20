@@ -15,11 +15,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import navigation.domain.NavigatorService
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.datetime.LocalDate
 import main_screen.presentation.TabNavigationItem
 import navigation.domain.NavigationAction
+import navigation.domain.NavigatorService
 import navigation.presentation.Route
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
@@ -32,11 +32,13 @@ import presentation.SummaryScreen
 import presentation.TrainingScreen
 import presentation.login.LoginScreen
 import presentation.navigation_screen.AuthNavigationScreen
+import presentation.new_product.NewProductScreen
+import presentation.new_product.NewProductScreenModel
+import presentation.product.ProductScreen
+import presentation.product.ProductScreenModel
 import presentation.register.RegisterScreen
 import presentation.search.DiarySearchScreen
 import presentation.search.DiarySearchScreenModel
-import presentation.new_product.NewProductScreen
-import presentation.new_product.NewProductScreenModel
 import theme.FitnessAppTheme
 
 @Composable
@@ -133,6 +135,22 @@ fun App() {
                     NewProductScreen(
                         state = state,
                         onEvent = viewModel::onEvent
+                    )
+                }
+                composable<Route.AddProductDiaryEntry> {
+                    val route = it.toRoute<Route.AddProductDiaryEntry>()
+                    val viewModel: ProductScreenModel = koinViewModel {
+                        parametersOf(
+                            route.productId,
+                            LocalDate.parse(route.date),
+                            route.mealName
+                        )
+                    }
+                    val state by viewModel.state.collectAsState()
+
+                    ProductScreen(
+                        state = state,
+                        onEvent = viewModel::onEvent,
                     )
                 }
                 composable<Route.BottomNavigation.Training> {

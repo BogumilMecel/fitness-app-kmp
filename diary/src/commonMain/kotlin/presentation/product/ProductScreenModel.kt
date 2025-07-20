@@ -1,20 +1,21 @@
 package presentation.product
 
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.serialization.Serializable
+import kotlinx.datetime.LocalDate
+import models.MealName
 import models.MeasurementUnit
-import models.Product
-import models.ProductDiaryEntry
 import presentation.base.BaseModel
 
 class ProductScreenModel(
-    private val entryMode: EntryMode,
+    private val productId: String,
+    private val date: LocalDate,
+    private val mealName: MealName,
 ) : BaseModel() {
 
     val state = MutableStateFlow(
         ProductState(
-            productName = entryMode.productName,
-            productMeasurementUnit = entryMode.productMeasurementUnit,
+            productName = "",
+            productMeasurementUnit = MeasurementUnit.GRAMS,
             headerPrimaryText = "",
             headerSecondaryText = "",
         )
@@ -30,27 +31,5 @@ class ProductScreenModel(
                 // TODO: handle on click
             }
         }
-    }
-
-    @Serializable
-    sealed class EntryMode(
-        val productName: String,
-        val productMeasurementUnit: MeasurementUnit,
-    ) {
-        @Serializable
-        data class Add(
-            val product: Product,
-        ) : EntryMode(
-            productName = product.name,
-            productMeasurementUnit = product.measurementUnit,
-        )
-
-        @Serializable
-        data class Edit(
-            val productDiaryEntry: ProductDiaryEntry,
-        ) : EntryMode(
-            productName = productDiaryEntry.productName,
-            productMeasurementUnit = productDiaryEntry.productMeasurementUnit,
-        )
     }
 } 

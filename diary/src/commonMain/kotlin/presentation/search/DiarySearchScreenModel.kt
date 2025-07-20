@@ -1,7 +1,6 @@
 package presentation.search
 
 import androidx.lifecycle.viewModelScope
-import domain.services.ResourcesService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.Job
@@ -13,7 +12,6 @@ import models.MealName
 import models.Product
 import navigation.presentation.Route
 import presentation.base.BaseModel
-import presentation.components.DiaryItemParams
 import repository.DiaryRepository
 import utils.constans.Constants
 
@@ -21,7 +19,6 @@ class DiarySearchScreenModel(
     private val date: LocalDate,
     private val mealName: MealName,
     private val diaryRepository: DiaryRepository,
-    private val resourcesService: ResourcesService,
 ) : BaseModel() {
 
     private var everythingRequestJob: Job? = null
@@ -36,6 +33,11 @@ class DiarySearchScreenModel(
             mealName = mealName,
         )
     )
+
+    init {
+        // TODO: Request initial products
+        state.update { it.copy(listState = ListState.Results(items = emptyList())) }
+    }
 
     fun onEvent(event: DiarySearchEvent) {
         when (event) {
@@ -66,6 +68,10 @@ class DiarySearchScreenModel(
             is DiarySearchEvent.TabSelected -> {
                 onTabSelected(tab = event.tab)
             }
+
+            is DiarySearchEvent.ProductClicked -> {
+                onProductClicked(product = event.product)
+            }
         }
     }
 
@@ -93,6 +99,16 @@ class DiarySearchScreenModel(
 
     private fun onScanBarcodeClicked() {
         // TODO: Handle on scan barcode clicked
+    }
+
+    private fun onProductClicked(product: Product) {
+        navigateTo(
+            Route.AddProductDiaryEntry(
+                productId = product.id,
+                date = date.toString(),
+                mealName = mealName,
+            )
+        )
     }
 
     private fun requestOrAssignUserProductsIfNeeded() {
@@ -144,16 +160,7 @@ class DiarySearchScreenModel(
     private fun assignUserProducts() {
         viewModelScope.launch {
             state.update {
-                it.copy(
-                    userProductsState = ListState.Results(
-                        items = userProducts.map { product ->
-                            DiaryItemParams.create(
-                                product = product,
-                                resourcesService = resourcesService,
-                            )
-                        }
-                    )
-                )
+                it.copy(userProductsState = ListState.Results(items = userProducts))
             }
         }
     }
@@ -161,16 +168,7 @@ class DiarySearchScreenModel(
     private fun assignEverythingState() {
         viewModelScope.launch {
             state.update {
-                it.copy(
-                    listState = ListState.Results(
-                        items = everythingProducts.map { product ->
-                            DiaryItemParams.create(
-                                product = product,
-                                resourcesService = resourcesService,
-                            )
-                        }
-                    )
-                )
+                it.copy(listState = ListState.Results(items = everythingProducts))
             }
         }
     }

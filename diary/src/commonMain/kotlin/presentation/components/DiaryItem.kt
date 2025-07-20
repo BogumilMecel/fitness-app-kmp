@@ -13,70 +13,49 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import models.Product
-import domain.services.ResourcesService
 import theme.FitnessAppTheme
-
-import utils.getCaloriesFormatted
 import utils.formatWithValue
+import utils.getCaloriesFormatted
 
 @Composable
 fun DiaryItem(
-    params: DiaryItemParams,
-    onItemClick: () -> Unit,
-    onItemLongClick: () -> Unit,
-) = with(params) {
+    product: Product,
+    onItemClick: (Product) -> Unit,
+    onItemLongClick: (Product) -> Unit,
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = FitnessAppTheme.colors.backgroundTertiary)
             .combinedClickable(
-                onClick = onItemClick,
-                onLongClick = onItemLongClick
+                onClick = {
+                    onItemClick(product)
+                },
+                onLongClick = {
+                    onItemLongClick(product)
+                }
             )
-            .padding(
-                vertical = 10.dp,
-                horizontal = 16.dp
-            ),
+            .padding(vertical = 10.dp, horizontal = 16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column {
             Text(
-                text = name,
+                text = product.name,
                 style = FitnessAppTheme.typography.bodyLarge
             )
 
             Text(
-                text = textBelowName,
+                text = product.measurementUnit.formatWithValue(value = 100),
                 style = FitnessAppTheme.typography.bodyMedium,
                 color = FitnessAppTheme.colors.contentSecondary
             )
         }
 
         Text(
-            text = endText,
+            text = product.nutritionValues.getCaloriesFormatted(),
             style = FitnessAppTheme.typography.bodyMedium,
             color = FitnessAppTheme.colors.contentSecondary
-        )
-    }
-}
-
-data class DiaryItemParams(
-    val name: String,
-    val textBelowName: String,
-    val endText: String,
-) {
-    companion object {
-        suspend fun create(
-            product: Product,
-            resourcesService: ResourcesService
-        ) = DiaryItemParams(
-            name = product.name,
-            textBelowName = product.measurementUnit.formatWithValue(
-                resourcesService = resourcesService,
-                value = 100,
-            ),
-            endText = product.nutritionValues.getCaloriesFormatted(resourcesService),
         )
     }
 }

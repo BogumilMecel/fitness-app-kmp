@@ -39,12 +39,13 @@ import components.FitnessAppTopBar
 import components.HorizontalSpacer
 import components.LazyColumn
 import components.VerticalSpacer
-import utils.date.getDisplayValue
+import models.Product
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import presentation.components.DiaryItem
 import presentation.utils.getDefaultRootModifier
 import theme.FitnessAppTheme
+import utils.date.getDisplayValue
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -126,66 +127,46 @@ fun DiarySearchScreen(
             )
         }
 
-        ListContent(
-            listState = state.listState,
-            lazyListState = when (state.selectedTab) {
-                SearchTab.EVERYTHING -> everythingListState
-                SearchTab.PRODUCTS -> userProductsListState
-                SearchTab.RECIPES -> userRecipesListState
-            },
-            additionalContent = {
-                when (state.selectedTab) {
-                    SearchTab.EVERYTHING -> {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 16.dp)
-                                .padding(top = 12.dp),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        ) {
-                            SearchButton(
-                                text = stringResource(Res.string.new_product),
-                                icon = {
-                                    Icon(
-                                        imageVector = Icons.Default.Add,
-                                        contentDescription = null,
-                                        tint = FitnessAppTheme.colors.contentSecondary,
-                                        modifier = Modifier.size(20.dp),
-                                    )
-                                },
-                                onClick = {
-                                    onEvent(DiarySearchEvent.AddProduct)
-                                }
-                            )
-
-                            SearchButton(
-                                text = stringResource(Res.string.scan_barcode),
-                                icon = {
-                                    Icon(
-                                        painter = painterResource(Res.drawable.barcode_scan),
-                                        contentDescription = null,
-                                        tint = FitnessAppTheme.colors.contentSecondary,
-                                        modifier = Modifier.size(20.dp),
-                                    )
-                                },
-                                onClick = {
-                                    onEvent(DiarySearchEvent.AddProduct)
-                                }
-                            )
-                        }
+        when (state.selectedTab) {
+            SearchTab.EVERYTHING -> {
+                EverythingContent(
+                    listState = state.listState,
+                    lazyListState = everythingListState,
+                    onAddProduct = {
+                        onEvent(DiarySearchEvent.AddProduct)
+                    },
+                    onScanBarcode = {
+                        onEvent(DiarySearchEvent.ScanBarcode)
+                    },
+                    onScrolledToEnd = {
+                        onEvent(DiarySearchEvent.ScrollToEnd)
+                    },
+                    onProductClicked = {
+                        onEvent(DiarySearchEvent.ProductClicked(product = it))
                     }
-                    SearchTab.PRODUCTS -> {
-
-                    }
-                    SearchTab.RECIPES -> {
-
-                    }
-                }
-            },
-            onScrolledToEnd = {
-                onEvent(DiarySearchEvent.ScrollToEnd)
+                )
             }
-        )
+
+            SearchTab.PRODUCTS -> {
+                UserProductsContent(
+                    listState = state.userProductsState,
+                    lazyListState = userProductsListState,
+                    onScrolledToEnd = {
+                        onEvent(DiarySearchEvent.ScrollToEnd)
+                    }
+                )
+            }
+
+            SearchTab.RECIPES -> {
+                UserRecipesContent(
+                    listState = state.listState,
+                    lazyListState = userRecipesListState,
+                    onScrolledToEnd = {
+                        onEvent(DiarySearchEvent.ScrollToEnd)
+                    }
+                )
+            }
+        }
     }
 }
 
@@ -220,32 +201,103 @@ private fun RowScope.SearchButton(
 }
 
 @Composable
-private fun ListContent(
+private fun EverythingContent(
     listState: ListState,
     lazyListState: LazyListState,
-    additionalContent: @Composable () -> Unit,
+    onAddProduct: () -> Unit,
+    onScanBarcode: () -> Unit,
     onScrolledToEnd: () -> Unit,
+    onProductClicked: (Product) -> Unit,
 ) {
-    additionalContent()
-
-    when (listState) {
-        is ListState.Loading -> {}
-        is ListState.Results -> {
-            LazyColumn(
-                onScrollToEnd = onScrolledToEnd,
-                state = lazyListState,
+    LazyColumn(
+        onScrollToEnd = onScrolledToEnd,
+        state = lazyListState,
+    ) {
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                itemsIndexed(listState.items) { index, product ->
-                    DiaryItem(
-                        params = product,
-                        onItemClick = {
+                SearchButton(
+                    text = stringResource(Res.string.new_product),
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = null,
+                            tint = FitnessAppTheme.colors.contentSecondary,
+                            modifier = Modifier.size(20.dp),
+                        )
+                    },
+                    onClick = onAddProduct
+                )
 
-                        },
+                SearchButton(
+                    text = stringResource(Res.string.scan_barcode),
+                    icon = {
+                        Icon(
+                            painter = painterResource(Res.drawable.barcode_scan),
+                            contentDescription = null,
+                            tint = FitnessAppTheme.colors.contentSecondary,
+                            modifier = Modifier.size(20.dp),
+                        )
+                    },
+                    onClick = onScanBarcode
+                )
+            }
+        }
+
+        when (listState) {
+            is ListState.Loading -> {}
+            is ListState.Results -> {
+                itemsIndexed(items = listState.items) { index, product ->
+                    DiaryItem(
+                        product = product,
+                        onItemClick = onProductClicked,
                         onItemLongClick = {
 
                         }
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun UserProductsContent(
+    listState: ListState,
+    lazyListState: LazyListState,
+    onScrolledToEnd: () -> Unit,
+) {
+    LazyColumn(
+        onScrollToEnd = onScrolledToEnd,
+        state = lazyListState,
+    ) {
+        when (listState) {
+            is ListState.Loading -> {}
+            is ListState.Results -> {
+                // TODO: Implement user products content
+            }
+        }
+    }
+}
+
+@Composable
+private fun UserRecipesContent(
+    listState: ListState,
+    lazyListState: LazyListState,
+    onScrolledToEnd: () -> Unit,
+) {
+    LazyColumn(
+        onScrollToEnd = onScrolledToEnd,
+        state = lazyListState,
+    ) {
+        when (listState) {
+            is ListState.Loading -> {}
+            is ListState.Results -> {
+                // TODO: Implement user recipes content
             }
         }
     }
