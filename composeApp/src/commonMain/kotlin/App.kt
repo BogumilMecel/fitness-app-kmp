@@ -1,5 +1,5 @@
-
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
@@ -18,9 +18,12 @@ import androidx.navigation.toRoute
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.datetime.LocalDate
 import main_screen.presentation.TabNavigationItem
+import navigation.ModalBottomSheetLayout
+import navigation.bottomSheet
 import navigation.domain.NavigationAction
 import navigation.domain.NavigatorService
 import navigation.presentation.Route
+import navigation.rememberBottomSheetNavigator
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -46,7 +49,8 @@ fun App() {
     FitnessAppTheme(darkTheme = isSystemInDarkTheme()) {
 
         val navigatorService = koinInject<NavigatorService>()
-        val navController = rememberNavController()
+        val bottomSheetNavigator = rememberBottomSheetNavigator(skipPartiallyExpanded = true)
+        val navController = rememberNavController(bottomSheetNavigator)
 
         val navBackStackEntry by navController.currentBackStackEntryAsState()
 
@@ -71,93 +75,99 @@ fun App() {
             }
         }
 
-        Scaffold(
-            bottomBar = {
-                if (navigationBarVisible) {
-                    navBackStackEntry?.let {
-                        NavigationBar(
-                            containerColor = FitnessAppTheme.colors.backgroundSecondary,
-                            modifier = Modifier.height(60.dp)
-                        ) {
-                            Route.BottomNavigation.entries.forEach { bottomNavigationRoute ->
-                                TabNavigationItem(
-                                    bottomNavigation = bottomNavigationRoute,
-                                    isSelected = it.destination.hasRoute(bottomNavigationRoute::class),
-                                    onClick = {
-                                        navController.navigate(bottomNavigationRoute)
-                                    }
-                                )
+        ModalBottomSheetLayout(
+            modifier = Modifier.fillMaxSize(),
+            bottomSheetNavigator = bottomSheetNavigator,
+            dragHandle = null,
+        ) {
+            Scaffold(
+                bottomBar = {
+                    if (navigationBarVisible) {
+                        navBackStackEntry?.let {
+                            NavigationBar(
+                                containerColor = FitnessAppTheme.colors.backgroundSecondary,
+                                modifier = Modifier.height(60.dp)
+                            ) {
+                                Route.BottomNavigation.entries.forEach { bottomNavigationRoute ->
+                                    TabNavigationItem(
+                                        bottomNavigation = bottomNavigationRoute,
+                                        isSelected = it.destination.hasRoute(bottomNavigationRoute::class),
+                                        onClick = {
+                                            navController.navigate(bottomNavigationRoute)
+                                        }
+                                    )
+                                }
                             }
                         }
                     }
                 }
-            }
-        ) {
-            NavHost(
-                navController = navController,
-                startDestination = Route.Splash
             ) {
-                composable<Route.Splash> {
-                    koinViewModel<SplashScreenModel>()
-                    SplashScreen()
-                }
-                composable<Route.AuthNavigator> {
-                    AuthNavigationScreen()
-                }
-                composable<Route.Login> {
-                    LoginScreen()
-                }
-                composable<Route.Register> {
-                    RegisterScreen()
-                }
-                composable<Route.BottomNavigation.Summary> {
-                    SummaryScreen()
-                }
-                composable<Route.BottomNavigation.Diary> {
-                    DiaryScreen()
-                }
-                composable<Route.DiarySearch> {
-                    val route = it.toRoute<Route.DiarySearch>()
-                    val viewModel: DiarySearchScreenModel = koinViewModel {
-                        parametersOf(LocalDate.parse(route.date), route.mealName)
+                NavHost(
+                    navController = navController,
+                    startDestination = Route.Splash
+                ) {
+                    composable<Route.Splash> {
+                        koinViewModel<SplashScreenModel>()
+                        SplashScreen()
                     }
-                    val state by viewModel.state.collectAsState()
+                    composable<Route.AuthNavigator> {
+                        AuthNavigationScreen()
+                    }
+                    composable<Route.Login> {
+                        LoginScreen()
+                    }
+                    composable<Route.Register> {
+                        RegisterScreen()
+                    }
+                    composable<Route.BottomNavigation.Summary> {
+                        SummaryScreen()
+                    }
+                    composable<Route.BottomNavigation.Diary> {
+                        DiaryScreen()
+                    }
+                    composable<Route.DiarySearch> {
+                        val route = it.toRoute<Route.DiarySearch>()
+                        val viewModel: DiarySearchScreenModel = koinViewModel {
+                            parametersOf(LocalDate.parse(route.date), route.mealName)
+                        }
+                        val state by viewModel.state.collectAsState()
 
-                    DiarySearchScreen(
-                        state = state,
-                        onEvent = viewModel::onEvent
-                    )
-                }
-                composable<Route.NewProduct> {
-                    val viewModel: NewProductScreenModel = koinViewModel()
-                    val state by viewModel.state.collectAsState()
-
-                    NewProductScreen(
-                        state = state,
-                        onEvent = viewModel::onEvent
-                    )
-                }
-                composable<Route.AddProductDiaryEntry> {
-                    val route = it.toRoute<Route.AddProductDiaryEntry>()
-                    val viewModel: ProductScreenModel = koinViewModel {
-                        parametersOf(
-                            route.productId,
-                            LocalDate.parse(route.date),
-                            route.mealName
+                        DiarySearchScreen(
+                            state = state,
+                            onEvent = viewModel::onEvent
                         )
                     }
-                    val state by viewModel.state.collectAsState()
+                    composable<Route.NewProduct> {
+                        val viewModel: NewProductScreenModel = koinViewModel()
+                        val state by viewModel.state.collectAsState()
 
-                    ProductScreen(
-                        state = state,
-                        onEvent = viewModel::onEvent,
-                    )
-                }
-                composable<Route.BottomNavigation.Training> {
-                    TrainingScreen()
-                }
-                composable<Route.BottomNavigation.Account> {
-                    AccountScreen()
+                        NewProductScreen(
+                            state = state,
+                            onEvent = viewModel::onEvent
+                        )
+                    }
+                    bottomSheet<Route.AddProductDiaryEntry> {
+                        val route = it.toRoute<Route.AddProductDiaryEntry>()
+                        val viewModel: ProductScreenModel = koinViewModel {
+                            parametersOf(
+                                route.productId,
+                                LocalDate.parse(route.date),
+                                route.mealName
+                            )
+                        }
+                        val state by viewModel.state.collectAsState()
+
+                        ProductScreen(
+                            state = state,
+                            onEvent = viewModel::onEvent,
+                        )
+                    }
+                    composable<Route.BottomNavigation.Training> {
+                        TrainingScreen()
+                    }
+                    composable<Route.BottomNavigation.Account> {
+                        AccountScreen()
+                    }
                 }
             }
         }

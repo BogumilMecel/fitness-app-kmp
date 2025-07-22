@@ -42,6 +42,7 @@ kotlin {
             implementation(project(":account"))
 
             implementation(compose.material3)
+            implementation(libs.material3.navigation)
         }
     }
 }

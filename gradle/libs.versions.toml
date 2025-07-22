@@ -21,6 +21,7 @@ sqldelight = "2.5.1"
 room = "2.7.1"
 ksp = "2.1.21-2.0.1"
 compose-navigation = "2.8.0-alpha13"
+material3Navigation = "0.0.2"
 
 [libraries]
 androidsvg-aar = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvgAar" }
@@ -45,6 +46,7 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "k
 kotling-logging = { module = "org.lighthousegames:logging", version.ref = "kotlin-logging" }
 
 jetbrains-compose-navigation = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref= "compose-navigation"}
+material3-navigation = { group = "io.github.stefanoq21", name = "material3-navigation-kmp", version.ref = "material3Navigation" }
 
 stately-common = { module = "co.touchlab:stately-common", version.ref = "statelyCommon" }
 
