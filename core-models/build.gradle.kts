@@ -40,6 +40,7 @@ kotlin {
 
             //room for @TypeConverter
             implementation(libs.room.runtime)
+            implementation(compose.components.resources)
         }
         iosMain.dependencies {
             
@@ -61,4 +62,8 @@ android {
     }
 }
 
- 
+compose.resources {
+    publicResClass = false
+    packageOfResClass = "com.gmail.bogumilmecel2.core-models.composeResources"
+    generateResClass = auto
+}
