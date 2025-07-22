@@ -79,4 +79,8 @@ class DiaryApi(private val httpClient: HttpClient) {
         url(urlString = "/products")
         setBody(newProductRequest)
     }.body<Product>()
+
+    suspend fun getProduct(productId: String) = httpClient.get {
+        url(urlString = "/products/$productId")
+    }.body<Product?>()
 }
