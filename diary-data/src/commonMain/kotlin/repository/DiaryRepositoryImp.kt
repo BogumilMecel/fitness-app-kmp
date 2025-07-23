@@ -85,8 +85,8 @@ class DiaryRepositoryImp(
         }
     }
 
-    override suspend fun getProduct(productId: String): Resource<Product?> {
-        TODO("Not yet implemented")
+    override suspend fun getProduct(productId: String): Product? {
+        return diaryApi.getProduct(productId)
     }
 
     override suspend fun addNewRecipe(recipe: Recipe): Resource<Recipe> {

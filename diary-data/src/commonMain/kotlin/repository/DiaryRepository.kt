@@ -41,7 +41,7 @@ interface DiaryRepository {
 
     suspend fun saveNewProduct(newProductRequest: NewProductRequest): Resource<Product>
 
-    suspend fun getProduct(productId: String): Resource<Product?>
+    suspend fun getProduct(productId: String): Product?
 
     suspend fun addNewRecipe(recipe: Recipe): Resource<Recipe>
 
