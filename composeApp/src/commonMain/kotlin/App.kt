@@ -3,10 +3,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -22,6 +25,7 @@ import navigation.ModalBottomSheetLayout
 import navigation.bottomSheet
 import navigation.domain.NavigationAction
 import navigation.domain.NavigatorService
+import navigation.domain.SnackbarService
 import navigation.presentation.Route
 import navigation.rememberBottomSheetNavigator
 import org.koin.compose.koinInject
@@ -49,8 +53,10 @@ fun App() {
     FitnessAppTheme(darkTheme = isSystemInDarkTheme()) {
 
         val navigatorService = koinInject<NavigatorService>()
+        val snackbarService = koinInject<SnackbarService>()
         val bottomSheetNavigator = rememberBottomSheetNavigator(skipPartiallyExpanded = true)
         val navController = rememberNavController(bottomSheetNavigator)
+        val snackbarHostState = remember { SnackbarHostState() }
 
         val navBackStackEntry by navController.currentBackStackEntryAsState()
 
@@ -72,6 +78,12 @@ fun App() {
                         navController.navigateUp()
                     }
                 }
+            }
+        }
+
+        LaunchedEffect(snackbarService) {
+            snackbarService.message.receiveAsFlow().collect { message ->
+                snackbarHostState.showSnackbar(message)
             }
         }
 
@@ -100,6 +112,9 @@ fun App() {
                             }
                         }
                     }
+                },
+                snackbarHost = {
+                    SnackbarHost(hostState = snackbarHostState)
                 }
             ) {
                 NavHost(

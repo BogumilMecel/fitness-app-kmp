@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,19 +49,42 @@ fun FitnessAppTopBar(
                 )
         ) {
             title?.let {
-                androidx.compose.material.Text(
+                Text(
                     text = title,
                     style = FitnessAppTheme.typography.headlineMedium,
                     color = FitnessAppTheme.colors.contentPrimary
                 )
             }
             subTitle?.let {
-                androidx.compose.material.Text(
+                Text(
                     text = subTitle,
                     style = FitnessAppTheme.typography.labelSmall,
                     color = FitnessAppTheme.colors.contentSecondary
                 )
             }
         }
+    }
+}
+
+@Composable
+fun TopBarLarge(
+    title: String,
+    onBackPressed: () -> Unit
+) {
+    Column {
+        IconButton(
+            onClick = onBackPressed,
+            modifier = Modifier.padding(vertical = 16.dp)
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = null
+            )
+        }
+
+        Text(
+            text = title,
+            style = FitnessAppTheme.typography.headlineMedium,
+        )
     }
 }

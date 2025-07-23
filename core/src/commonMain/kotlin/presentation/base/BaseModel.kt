@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import navigation.domain.NavigationAction
 import navigation.domain.NavigatorService
+import navigation.domain.SnackbarService
 import navigation.presentation.Route
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -18,6 +19,7 @@ open class BaseModel : ViewModel(), KoinComponent {
 
     protected val settingsService by inject<SettingsService>()
     private val navigatorService by inject<NavigatorService>()
+    val snackbarService by inject<SnackbarService>()
 
     open fun onBackPressed() {
         navigateBack()
@@ -50,4 +52,12 @@ open class BaseModel : ViewModel(), KoinComponent {
         started = SharingStarted.Eagerly,
         initialValue = initialValue,
     )
+
+    protected inline fun <R> runCatchingWithSnackbarOnFailure(block: () -> R): Result<R> = runCatching(block = block)
+            .onFailure { throwable ->
+                throwable.printStackTrace()
+                throwable.message?.let {
+                    snackbarService.message.trySend(it)
+                }
+            }
 }

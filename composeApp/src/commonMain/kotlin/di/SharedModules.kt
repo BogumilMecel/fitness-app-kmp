@@ -1,7 +1,6 @@
 package di
 
 import data.database.FitnessAppDatabase
-import navigation.domain.NavigatorService
 import domain.NavigatorServiceImp
 import domain.model.Country
 import domain.services.ResourcesService
@@ -18,6 +17,9 @@ import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.datetime.TimeZone
 import kotlinx.serialization.json.Json
+import navigation.domain.NavigatorService
+import navigation.domain.SnackbarService
+import navigation.domain.SnackbarServiceImp
 import org.koin.dsl.module
 import org.lighthousegames.logging.logging
 import utils.constans.Constants
@@ -26,6 +28,7 @@ import utils.providers.SettingsServiceImp
 
 private val sharedModule = module {
     single<NavigatorService> { NavigatorServiceImp() }
+    single<SnackbarService> { SnackbarServiceImp() }
     single<ResourcesService> { ResourcesServiceImp() }
     single<SettingsService> { SettingsServiceImp() }
     single<HttpClient> {
