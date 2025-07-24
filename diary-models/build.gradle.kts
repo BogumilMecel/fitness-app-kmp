@@ -37,6 +37,7 @@ kotlin {
         commonMain.dependencies {
             //core dependency
             implementation(project(":core"))
+            implementation(compose.components.resources)
         }
         iosMain.dependencies {
             
@@ -64,4 +65,10 @@ room {
 
 dependencies {
     ksp(libs.room.compiler)
-} 
+}
+
+compose.resources {
+    publicResClass = false
+    packageOfResClass = "com.gmail.bogumilmecel2.diary-models.composeResources"
+    generateResClass = auto
+}
