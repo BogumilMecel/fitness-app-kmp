@@ -90,6 +90,8 @@ fun App() {
         ModalBottomSheetLayout(
             modifier = Modifier.fillMaxSize(),
             bottomSheetNavigator = bottomSheetNavigator,
+            containerColor = FitnessAppTheme.colors.background,
+            contentColor = FitnessAppTheme.colors.contentPrimary,
             dragHandle = null,
         ) {
             Scaffold(
