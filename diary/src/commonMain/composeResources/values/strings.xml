@@ -27,4 +27,7 @@
     <string name="new_product_in_container">In container</string>
     <string name="new_product_in_average">In average</string>
     <string name="new_product_add_new_product">Add new product</string>
+
+    <string name="product_save_to">Save to</string>
+    <string name="product_weight">Weight</string>
 </resources>

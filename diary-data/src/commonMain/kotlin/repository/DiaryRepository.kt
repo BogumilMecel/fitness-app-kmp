@@ -5,6 +5,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import models.DeleteDiaryEntryRequest
 import models.DiaryEntriesResponse
+import models.NewProductDiaryEntryRequest
 import models.NewProductRequest
 import models.NutritionValues
 import models.Product
@@ -27,7 +28,7 @@ interface DiaryRepository {
 
     suspend fun searchForRecipes(searchText: String): Resource<List<Recipe>>
 
-    suspend fun insertProductDiaryEntry(productDiaryEntry: ProductDiaryEntry): Resource<ProductDiaryEntry>
+    suspend fun insertProductDiaryEntry(newProductDiaryEntryRequest: NewProductDiaryEntryRequest): ProductDiaryEntry
 
     suspend fun insertRecipeDiaryEntry(recipeDiaryEntry: RecipeDiaryEntry): Resource<RecipeDiaryEntry>
 

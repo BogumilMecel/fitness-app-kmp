@@ -9,6 +9,7 @@ import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.http.parameters
 import kotlinx.datetime.LocalDateTime
+import models.NewProductDiaryEntryRequest
 import models.NewProductRequest
 import models.Product
 import models.ProductDiaryEntry
@@ -79,6 +80,11 @@ class DiaryApi(private val httpClient: HttpClient) {
         url(urlString = "/products")
         setBody(newProductRequest)
     }.body<Product>()
+
+    suspend fun insertProductDiaryEntry(newProductDiaryEntryRequest: NewProductDiaryEntryRequest) = httpClient.post {
+        url(urlString = "/diaryEntries/product")
+        setBody(newProductDiaryEntryRequest)
+    }.body<ProductDiaryEntry>()
 
     suspend fun getProduct(productId: String) = httpClient.get {
         url(urlString = "/products/$productId")

@@ -8,6 +8,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import models.DeleteDiaryEntryRequest
 import models.DiaryEntriesResponse
+import models.NewProductDiaryEntryRequest
 import models.NewProductRequest
 import models.NutritionValues
 import models.Product
@@ -55,8 +56,10 @@ class DiaryRepositoryImp(
         TODO("Not yet implemented")
     }
 
-    override suspend fun insertProductDiaryEntry(productDiaryEntry: ProductDiaryEntry): Resource<ProductDiaryEntry> {
-        TODO("Not yet implemented")
+    override suspend fun insertProductDiaryEntry(
+        newProductDiaryEntryRequest: NewProductDiaryEntryRequest,
+    ): ProductDiaryEntry {
+        return diaryApi.insertProductDiaryEntry(newProductDiaryEntryRequest = newProductDiaryEntryRequest)
     }
 
     override suspend fun insertRecipeDiaryEntry(recipeDiaryEntry: RecipeDiaryEntry): Resource<RecipeDiaryEntry> {
