@@ -324,11 +324,11 @@ fun TextField(
     modifier: Modifier = Modifier,
     text: String,
     onValueChange: (String) -> Unit,
-    error: String? = null,
-    onErrorCleared: () -> Unit = {},
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
+    isError: Boolean = false,
+    onFocusChanged: (Boolean) -> Unit = {},
     leadingIcon: (@Composable () -> Unit)? = null,
     trailingIcon: (@Composable () -> Unit)? = null,
     label: String,
@@ -339,12 +339,9 @@ fun TextField(
     val isFocused by interactionSource.collectIsFocusedAsState()
 
     LaunchedEffect(key1 = isFocused) {
-        if (isFocused) {
-            onErrorCleared()
-        }
+        onFocusChanged(isFocused)
     }
 
-    val isError = error != null
     val focusedColor by animateColorAsState(
         targetValue = if (isError) FitnessAppTheme.colors.error else FitnessAppTheme.colors.contentPrimary
     )
@@ -366,89 +363,63 @@ fun TextField(
         }
     )
 
-    Column(
-        modifier = Modifier.animateContentSize().height(IntrinsicSize.Max),
-        verticalArrangement = Arrangement.spacedBy(2.dp)
-    ) {
-        OutlinedTextField(
-            value = text,
-            onValueChange = {
-                onErrorCleared()
-                onValueChange(it)
-            },
-            modifier = modifier
-                .fillMaxWidth()
-                .then(other = testTag?.let { Modifier.testTag(it) } ?: Modifier),
-            textStyle = FitnessAppTheme.typography.bodyLarge,
-            label = { Text(text = label) },
-            leadingIcon = leadingIcon?.let {
-                {
+    OutlinedTextField(
+        value = text,
+        onValueChange = {
+            onValueChange(it)
+        },
+        modifier = modifier
+            .fillMaxWidth()
+            .then(other = testTag?.let { Modifier.testTag(it) } ?: Modifier),
+        textStyle = FitnessAppTheme.typography.bodyLarge,
+        label = { Text(text = label) },
+        leadingIcon = leadingIcon?.let {
+            {
+                it()
+            }
+        },
+        trailingIcon = {
+            Row(modifier = Modifier.animateContentSize()) {
+                trailingIcon?.let {
                     it()
                 }
-            },
-            trailingIcon = {
-                Row(modifier = Modifier.animateContentSize()) {
-                    trailingIcon?.let {
-                        it()
-                    }
 
-                    AnimatedVisibility(
-                        visible = isFocused && text.isNotEmpty(),
-                        enter = fadeIn(),
-                        exit = fadeOut()
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Close,
-                            contentDescription = null,
-                            tint = iconColor,
-                            modifier = Modifier
-                                .padding(end = if (trailingIcon == null) 0.dp else 12.dp)
-                                .clickable {
-                                    onErrorCleared()
-                                    onValueChange("")
-                                }
-                        )
-                    }
+                AnimatedVisibility(
+                    visible = isFocused && text.isNotEmpty(),
+                    enter = fadeIn(),
+                    exit = fadeOut()
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Close,
+                        contentDescription = null,
+                        tint = iconColor,
+                        modifier = Modifier
+                            .padding(end = if (trailingIcon == null) 0.dp else 12.dp)
+                            .clickable {
+                                onValueChange("")
+                            }
+                    )
                 }
-            },
-            visualTransformation = visualTransformation,
-            colors = TextFieldDefaults.colors().copy(
-                focusedTextColor = FitnessAppTheme.colors.contentPrimary,
-                cursorColor = FitnessAppTheme.colors.contentPrimary,
-                focusedIndicatorColor = focusedColor,
-                unfocusedIndicatorColor = unfocusedColor,
-                focusedLabelColor = focusedColor,
-                unfocusedLabelColor = labelColor,
-                focusedContainerColor = FitnessAppTheme.colors.background,
-                unfocusedContainerColor = FitnessAppTheme.colors.background,
-                focusedTrailingIconColor = FitnessAppTheme.colors.contentPrimary,
-                unfocusedTrailingIconColor = unfocusedColor,
-            ),
-            interactionSource = interactionSource,
-            keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
-            maxLines = maxLines,
-        )
-
-        error?.let {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Info,
-                    contentDescription = null,
-                    tint = FitnessAppTheme.colors.error,
-                )
-
-                Text(
-                    text = it,
-                    style = FitnessAppTheme.typography.bodySmall,
-                    color = FitnessAppTheme.colors.error
-                )
             }
-        }
-    }
+        },
+        visualTransformation = visualTransformation,
+        colors = TextFieldDefaults.colors().copy(
+            focusedTextColor = FitnessAppTheme.colors.contentPrimary,
+            cursorColor = FitnessAppTheme.colors.contentPrimary,
+            focusedIndicatorColor = focusedColor,
+            unfocusedIndicatorColor = unfocusedColor,
+            focusedLabelColor = focusedColor,
+            unfocusedLabelColor = labelColor,
+            focusedContainerColor = FitnessAppTheme.colors.background,
+            unfocusedContainerColor = FitnessAppTheme.colors.background,
+            focusedTrailingIconColor = FitnessAppTheme.colors.contentPrimary,
+            unfocusedTrailingIconColor = unfocusedColor,
+        ),
+        interactionSource = interactionSource,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        maxLines = maxLines,
+    )
 }
 
 data class TextFieldData(
