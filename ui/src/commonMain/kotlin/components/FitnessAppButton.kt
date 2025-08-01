@@ -141,11 +141,20 @@ fun Button(
 }
 
 @Composable
+fun MediumButtonTextContent(text: String) {
+    Text(
+        text = text,
+        style = FitnessAppTheme.typography.labelMedium,
+        modifier = Modifier.padding(vertical = 12.dp, horizontal = 8.dp),
+    )
+}
+
+@Composable
 fun LargeButtonTextContent(text: String) {
     Text(
         text = text,
         style = FitnessAppTheme.typography.labelLarge,
-        modifier = Modifier.padding(vertical = 16.dp),
+        modifier = Modifier.padding(vertical = 16.dp, horizontal = 12.dp),
     )
 }
 
