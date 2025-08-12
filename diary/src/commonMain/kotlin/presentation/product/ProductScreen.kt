@@ -18,8 +18,8 @@ import com.gmail.bogumilmecel2.diary.composeResources.Res
 import com.gmail.bogumilmecel2.diary.composeResources.product_weight
 import components.Button
 import components.MediumButtonTextContent
-import components.TextField
 import components.SheetTopBarWithEndButton
+import components.TextField
 import org.jetbrains.compose.resources.stringResource
 import theme.FitnessAppTheme
 import utils.string.SPACE
@@ -51,6 +51,7 @@ fun ProductScreen(
             TextField(
                 text = state.weight,
                 label = stringResource(Res.string.product_weight) + String.SPACE +  "(${state.productMeasurementUnit.longDisplayName})",
+                backgroundColor = FitnessAppTheme.colors.backgroundSecondary,
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number,

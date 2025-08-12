@@ -90,7 +90,7 @@ fun App() {
         ModalBottomSheetLayout(
             modifier = Modifier.fillMaxSize(),
             bottomSheetNavigator = bottomSheetNavigator,
-            containerColor = FitnessAppTheme.colors.background,
+            containerColor = FitnessAppTheme.colors.backgroundSecondary,
             contentColor = FitnessAppTheme.colors.contentPrimary,
             dragHandle = null,
         ) {
