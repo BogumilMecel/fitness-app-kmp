@@ -30,6 +30,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.VisualTransformation
@@ -324,6 +325,7 @@ fun TextField(
     modifier: Modifier = Modifier,
     text: String,
     onValueChange: (String) -> Unit,
+    backgroundColor: Color = FitnessAppTheme.colors.background,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -410,8 +412,8 @@ fun TextField(
             unfocusedIndicatorColor = unfocusedColor,
             focusedLabelColor = focusedColor,
             unfocusedLabelColor = labelColor,
-            focusedContainerColor = FitnessAppTheme.colors.background,
-            unfocusedContainerColor = FitnessAppTheme.colors.background,
+            focusedContainerColor = backgroundColor,
+            unfocusedContainerColor = backgroundColor,
             focusedTrailingIconColor = FitnessAppTheme.colors.contentPrimary,
             unfocusedTrailingIconColor = unfocusedColor,
         ),
