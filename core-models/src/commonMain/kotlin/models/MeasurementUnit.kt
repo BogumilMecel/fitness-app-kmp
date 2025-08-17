@@ -22,6 +22,13 @@ enum class MeasurementUnit {
         MILLILITERS -> "ml"
     }
 
+    val shortDisplayName
+        @Composable
+        get() = when (this) {
+            GRAMS -> "g"
+            MILLILITERS -> "ml"
+        }
+
     val longDisplayName
         @Composable
         get() = when (this) {

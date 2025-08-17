@@ -87,7 +87,7 @@ fun ProductScreen(
                 .fillMaxWidth()
                 .horizontalScroll(state = rememberScrollState())
                 .padding(horizontal = 16.dp)
-                .padding(bottom = 24.dp),
+                .padding(bottom = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             listOf(50, 100, 150, 200).forEach { weight ->
@@ -98,7 +98,7 @@ fun ProductScreen(
                         onEvent(ProductEvent.OnQuickWeightButtonClicked(weight))
                     },
                     content = {
-                        MediumButtonTextContent(text = "$weight ${state.productMeasurementUnit.longDisplayName}")
+                        MediumButtonTextContent(text = "$weight ${state.productMeasurementUnit.shortDisplayName}")
                     }
                 )
             }
@@ -106,7 +106,7 @@ fun ProductScreen(
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(bottom = 12.dp),
+            modifier = Modifier.padding(bottom = 24.dp),
         ) {
             DonutChart(
                 slices = state.nutritionValuesPercentages.map { (nutritionValue, value) ->
@@ -194,7 +194,7 @@ private fun NutritionValueRow(
             )
 
             Text(
-                text = "$value ${measurementUnit.longDisplayName}",
+                text = "$value ${measurementUnit.getName()}",
                 style = FitnessAppTheme.typography.labelMedium,
                 color = FitnessAppTheme.colors.contentPrimary,
                 textAlign = TextAlign.End,
