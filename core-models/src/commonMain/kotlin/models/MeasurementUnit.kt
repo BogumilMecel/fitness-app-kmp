@@ -1,9 +1,9 @@
 package models
 
 import androidx.compose.runtime.Composable
-import com.gmail.bogumilmecel2.`diary-models`.composeResources.Res
-import com.gmail.bogumilmecel2.`diary-models`.composeResources.measurement_unit_grams
-import com.gmail.bogumilmecel2.`diary-models`.composeResources.measurement_unit_milliliters
+import com.gmail.bogumilmecel2.`core-models`.composeResources.Res
+import com.gmail.bogumilmecel2.`core-models`.composeResources.measurement_unit_grams
+import com.gmail.bogumilmecel2.`core-models`.composeResources.measurement_unit_milliliters
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.stringResource

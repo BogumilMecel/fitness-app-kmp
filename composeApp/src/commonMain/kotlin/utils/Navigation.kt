@@ -1,0 +1,19 @@
+package utils
+
+import androidx.core.bundle.Bundle
+import androidx.navigation.NavType
+import kotlinx.serialization.json.Json
+import models.Product
+
+val ProductParameterType = object : NavType<Product>(isNullableAllowed = false) {
+    override fun get(bundle: Bundle, key: String): Product? =
+        bundle.getString(key)?.let { parseValue(it) }
+
+    override fun put(bundle: Bundle, key: String, value: Product) {
+        bundle.putString(key, serializeAsValue(value))
+    }
+
+    override fun parseValue(value: String): Product = Json.decodeFromString(value)
+
+    override fun serializeAsValue(value: Product): String = Json.encodeToString(value)
+}

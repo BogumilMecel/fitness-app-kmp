@@ -104,9 +104,10 @@ class DiarySearchScreenModel(
     private fun onProductClicked(product: Product) {
         navigateTo(
             Route.AddProductDiaryEntry(
-                productId = product.id,
+                product = product,
                 date = date.toString(),
                 mealName = mealName,
+                weight = 100,
             )
         )
     }

@@ -3,4 +3,7 @@
     <string name="meal_lunch">Lunch</string>
     <string name="meal_dinner">Dinner</string>
     <string name="meal_supper">Supper</string>
+
+    <string name="measurement_unit_grams">Grams</string>
+    <string name="measurement_unit_milliliters">Milliliters</string>
 </resources> 

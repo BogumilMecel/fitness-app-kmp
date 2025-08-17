@@ -41,6 +41,9 @@ kotlin {
             //room for @TypeConverter
             implementation(libs.room.runtime)
             implementation(compose.components.resources)
+            implementation(libs.kotlinx.date)
+
+            implementation(project(":core-utils"))
         }
         iosMain.dependencies {
             

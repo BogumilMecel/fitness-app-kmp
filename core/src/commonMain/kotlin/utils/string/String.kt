@@ -18,6 +18,12 @@ val String.Companion.EMPTY
 val String.Companion.SPACE
     get() = " "
 
+val String.Companion.SEMICOLON
+    get() = ":"
+
+val String.Companion.PERCENTAGE
+    get() = "%"
+
 fun String.normalizeDecimalSeparator(): String {
     return this.replace(",", ".")
 }

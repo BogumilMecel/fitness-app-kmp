@@ -3,12 +3,15 @@ package presentation.product
 import kotlinx.datetime.LocalDate
 import models.MealName
 import models.MeasurementUnit
-import utils.string.EMPTY
+import models.NutritionValue
+import models.NutritionValues
 
 data class ProductState(
-    val weight: String = String.EMPTY,
-    val productName: String = String.EMPTY,
-    val productMeasurementUnit: MeasurementUnit = MeasurementUnit.GRAMS,
+    val weight: String,
+    val productName: String,
+    val productMeasurementUnit: MeasurementUnit,
     val mealName: MealName,
     val date: LocalDate,
+    val nutritionValuesPercentages: Map<NutritionValue, Float>,
+    val currentNutritionValues: NutritionValues,
 )

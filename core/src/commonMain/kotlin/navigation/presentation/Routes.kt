@@ -13,6 +13,7 @@ import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_summary
 import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_training
 import kotlinx.serialization.Serializable
 import models.MealName
+import models.Product
 import org.jetbrains.compose.resources.StringResource
 
 sealed interface Route {
@@ -71,9 +72,10 @@ sealed interface Route {
 
     @Serializable
     data class AddProductDiaryEntry(
-        val productId: String,
+        val product: Product,
         val date: String,
         val mealName: MealName,
+        val weight: Int,
     ) : Route
 
     @Serializable

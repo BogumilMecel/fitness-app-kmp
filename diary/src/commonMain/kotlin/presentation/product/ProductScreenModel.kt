@@ -7,29 +7,32 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import models.MealName
 import models.NewProductDiaryEntryRequest
+import models.NutritionValues
 import models.Product
+import models.calculatePercentages
+import models.forWeight
 import presentation.base.BaseModel
 import repository.DiaryRepository
 
 class ProductScreenModel(
-    private val productId: String,
+    private val product: Product,
     private val date: LocalDate,
     private val mealName: MealName,
+    private val weight: Int,
     private val diaryRepository: DiaryRepository,
 ) : BaseModel() {
 
-    private var product: Product? = null
-
     val state = MutableStateFlow(
         value = ProductState(
+            productName = product.name,
             date = date,
             mealName = mealName,
+            weight = weight.toString(),
+            productMeasurementUnit = product.measurementUnit,
+            nutritionValuesPercentages = product.nutritionValues.calculatePercentages(),
+            currentNutritionValues = product.nutritionValues.forWeight(weight = weight),
         )
     )
-
-    init {
-        requestProduct()
-    }
 
     fun onEvent(event: ProductEvent) {
         when (event) {
@@ -37,12 +40,14 @@ class ProductScreenModel(
                 state.update {
                     it.copy(weight = event.value)
                 }
+                updateNutritionValues()
             }
 
             is ProductEvent.OnQuickWeightButtonClicked -> {
                 state.update {
                     it.copy(weight = event.value.toString())
                 }
+                updateNutritionValues()
             }
 
             is ProductEvent.OnSaveClicked -> {
@@ -55,23 +60,13 @@ class ProductScreenModel(
         }
     }
 
-    private fun requestProduct() {
-        viewModelScope.launch {
-            runCatchingWithSnackbarOnFailure {
-                diaryRepository.getProduct(productId = productId)
-            }.onSuccess { result ->
-                result?.let { product ->
-                    this@ProductScreenModel.product = product
-                    state.update {
-                        it.copy(
-                            productName = product.name,
-                            productMeasurementUnit = product.measurementUnit,
-                        )
-                    }
-                } ?: onBackPressed()
-            }.onFailure {
-                onBackPressed()
-            }
+    private fun updateNutritionValues() {
+        state.update {
+            it.copy(
+                currentNutritionValues = it.weight.toIntOrNull()?.let { weight ->
+                    product.nutritionValues.forWeight(weight = weight)
+                } ?: it.currentNutritionValues
+            )
         }
     }
 
@@ -85,10 +80,11 @@ class ProductScreenModel(
 
                 diaryRepository.insertProductDiaryEntry(
                     newProductDiaryEntryRequest = NewProductDiaryEntryRequest(
-                        productId = product!!.id,
+                        productId = product.id,
                         weight = productWeight,
                         date = date,
                         mealName = mealName,
+                        nutritionValues = NutritionValues()
                     )
                 )
             }.onSuccess {

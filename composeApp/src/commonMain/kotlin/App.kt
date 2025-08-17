@@ -21,8 +21,8 @@ import androidx.navigation.toRoute
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.datetime.LocalDate
 import main_screen.presentation.TabNavigationItem
+import models.Product
 import navigation.ModalBottomSheetLayout
-import navigation.bottomSheet
 import navigation.domain.NavigationAction
 import navigation.domain.NavigatorService
 import navigation.domain.SnackbarService
@@ -47,6 +47,9 @@ import presentation.register.RegisterScreen
 import presentation.search.DiarySearchScreen
 import presentation.search.DiarySearchScreenModel
 import theme.FitnessAppTheme
+import utils.ProductParameterType
+import utils.bottomSheet
+import kotlin.reflect.typeOf
 
 @Composable
 fun App() {
@@ -163,13 +166,17 @@ fun App() {
                             onEvent = viewModel::onEvent
                         )
                     }
-                    bottomSheet<Route.AddProductDiaryEntry> {
+                    bottomSheet<Route.AddProductDiaryEntry>(
+                        typeMap = mapOf(typeOf<Product>() to ProductParameterType),
+                        navigator = bottomSheetNavigator,
+                    ) {
                         val route = it.toRoute<Route.AddProductDiaryEntry>()
                         val viewModel: ProductScreenModel = koinViewModel {
                             parametersOf(
-                                route.productId,
+                                route.product,
                                 LocalDate.parse(route.date),
-                                route.mealName
+                                route.mealName,
+                                route.weight,
                             )
                         }
                         val state by viewModel.state.collectAsState()

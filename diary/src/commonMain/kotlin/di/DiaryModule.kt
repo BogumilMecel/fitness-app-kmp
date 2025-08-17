@@ -39,9 +39,10 @@ val diaryModule = module {
     }
     viewModel { parameters ->
         ProductScreenModel(
-            productId = parameters.get(),
+            product = parameters.get(),
             date = parameters.get(),
             mealName = parameters.get(),
+            weight = parameters.get(),
             diaryRepository = get(),
         )
     }
