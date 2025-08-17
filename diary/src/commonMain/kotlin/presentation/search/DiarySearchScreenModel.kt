@@ -105,7 +105,7 @@ class DiarySearchScreenModel(
         navigateTo(
             Route.AddProductDiaryEntry(
                 product = product,
-                date = date.toString(),
+                date = date,
                 mealName = mealName,
                 weight = 100,
             )

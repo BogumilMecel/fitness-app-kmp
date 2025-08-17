@@ -1,9 +1,5 @@
 package presentation
 
-import utils.date.getCurrentDate
-import models.DiaryItem
-import models.MealName
-import models.NutritionValues
 import domain.use_case.CreateAvailableDiaryDatesUseCase
 import domain.use_case.GetOfflineDiaryEntriesUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -11,8 +7,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.LocalDate
+import models.DiaryItem
+import models.MealName
+import models.NutritionValues
 import navigation.presentation.Route
 import presentation.base.BaseModel
+import utils.date.getCurrentDate
 
 class DiaryScreenModel(
     createAvailableDiaryDatesUseCase: CreateAvailableDiaryDatesUseCase,
@@ -67,7 +67,7 @@ class DiaryScreenModel(
         navigateTo(
             Route.DiarySearch(
                 mealName = mealName,
-                date = selectedDate.value.toString()
+                date = selectedDate.value
             )
         )
     }

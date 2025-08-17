@@ -2,6 +2,7 @@ package utils
 
 import androidx.core.bundle.Bundle
 import androidx.navigation.NavType
+import kotlinx.datetime.LocalDate
 import kotlinx.serialization.json.Json
 import models.Product
 
@@ -16,4 +17,17 @@ val ProductParameterType = object : NavType<Product>(isNullableAllowed = false) 
     override fun parseValue(value: String): Product = Json.decodeFromString(value)
 
     override fun serializeAsValue(value: Product): String = Json.encodeToString(value)
+}
+
+val LocalDateParameterType = object : NavType<LocalDate>(isNullableAllowed = false) {
+    override fun get(bundle: Bundle, key: String): LocalDate? =
+        bundle.getString(key)?.let { parseValue(it) }
+
+    override fun put(bundle: Bundle, key: String, value: LocalDate) {
+        bundle.putString(key, serializeAsValue(value))
+    }
+
+    override fun parseValue(value: String): LocalDate = Json.decodeFromString(value)
+
+    override fun serializeAsValue(value: LocalDate): String = Json.encodeToString(value)
 }

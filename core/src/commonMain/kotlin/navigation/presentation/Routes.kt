@@ -11,6 +11,7 @@ import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_account
 import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_diary
 import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_summary
 import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_training
+import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 import models.MealName
 import models.Product
@@ -63,7 +64,7 @@ sealed interface Route {
 
     @Serializable
     data class DiarySearch(
-        val date: String,
+        val date: LocalDate,
         val mealName: MealName,
     ) : Route
 
@@ -73,7 +74,7 @@ sealed interface Route {
     @Serializable
     data class AddProductDiaryEntry(
         val product: Product,
-        val date: String,
+        val date: LocalDate,
         val mealName: MealName,
         val weight: Int,
     ) : Route

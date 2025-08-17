@@ -47,6 +47,7 @@ import presentation.register.RegisterScreen
 import presentation.search.DiarySearchScreen
 import presentation.search.DiarySearchScreenModel
 import theme.FitnessAppTheme
+import utils.LocalDateParameterType
 import utils.ProductParameterType
 import utils.bottomSheet
 import kotlin.reflect.typeOf
@@ -145,10 +146,14 @@ fun App() {
                     composable<Route.BottomNavigation.Diary> {
                         DiaryScreen()
                     }
-                    composable<Route.DiarySearch> {
+                    composable<Route.DiarySearch>(
+                        typeMap = mapOf(
+                            typeOf<LocalDate>() to LocalDateParameterType,
+                        )
+                    ) {
                         val route = it.toRoute<Route.DiarySearch>()
                         val viewModel: DiarySearchScreenModel = koinViewModel {
-                            parametersOf(LocalDate.parse(route.date), route.mealName)
+                            parametersOf(route.date, route.mealName)
                         }
                         val state by viewModel.state.collectAsState()
 
@@ -167,14 +172,17 @@ fun App() {
                         )
                     }
                     bottomSheet<Route.AddProductDiaryEntry>(
-                        typeMap = mapOf(typeOf<Product>() to ProductParameterType),
+                        typeMap = mapOf(
+                            typeOf<Product>() to ProductParameterType,
+                            typeOf<LocalDate>() to LocalDateParameterType,
+                        ),
                         navigator = bottomSheetNavigator,
                     ) {
                         val route = it.toRoute<Route.AddProductDiaryEntry>()
                         val viewModel: ProductScreenModel = koinViewModel {
                             parametersOf(
                                 route.product,
-                                LocalDate.parse(route.date),
+                                route.date,
                                 route.mealName,
                                 route.weight,
                             )
