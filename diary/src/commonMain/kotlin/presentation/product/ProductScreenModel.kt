@@ -57,6 +57,10 @@ class ProductScreenModel(
             is ProductEvent.OnBackPressed -> {
                 onBackPressed()
             }
+
+            is ProductEvent.OnMeasurementUnitClicked -> {
+                // TODO: Navigate to new screen
+            }
         }
     }
 

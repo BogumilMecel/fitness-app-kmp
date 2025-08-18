@@ -1,6 +1,7 @@
 package presentation.product
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,11 +15,15 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -72,7 +77,9 @@ fun ProductScreen(
                 text = state.weight,
                 label = stringResource(Res.string.product_weight) + String.SPACE + "(${state.productMeasurementUnit.longDisplayName})",
                 backgroundColor = FitnessAppTheme.colors.backgroundSecondary,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number,
                 ),
@@ -80,6 +87,30 @@ fun ProductScreen(
                     onEvent(ProductEvent.WeightChanged(it))
                 }
             )
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .padding(start = 4.dp, top = 6.dp)
+                    .clip(shape = RoundedCornerShape(8.dp))
+                    .clickable {
+                        onEvent(ProductEvent.OnMeasurementUnitClicked)
+                    }
+                    .padding(start = 4.dp)
+                    .padding(vertical = 8.dp),
+            ) {
+                Text(
+                    text = state.productMeasurementUnit.longDisplayName,
+                    style = FitnessAppTheme.typography.labelLarge,
+                    color = FitnessAppTheme.colors.contentPrimary,
+                    modifier = Modifier.padding(end = 2.dp),
+                )
+
+                Icon(
+                    imageVector = Icons.Default.ArrowDropDown,
+                    contentDescription = null,
+                )
+            }
         }
 
         Row(
@@ -117,7 +148,7 @@ fun ProductScreen(
                 },
                 strokeWidth = 16.dp,
                 lineGap = 4.dp,
-                lineColor = FitnessAppTheme.colors.surface,
+                lineColor = FitnessAppTheme.colors.border,
                 modifier = Modifier
                     .size(160.dp)
                     .padding(horizontal = 16.dp),
