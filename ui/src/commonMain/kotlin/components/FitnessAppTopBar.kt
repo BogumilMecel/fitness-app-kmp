@@ -129,3 +129,32 @@ fun SheetTopBarWithEndButton(
         )
     }
 }
+
+@Composable
+fun SheetTopBar(
+    title: String,
+    onBackPressed: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .padding(top = 12.dp, bottom = 16.dp)
+            .fillMaxWidth(),
+    ) {
+        BackButton(
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+                .padding(start = 8.dp),
+            onClick = onBackPressed,
+        )
+
+        Text(
+            text = title,
+            style = FitnessAppTheme.typography.headlineMedium,
+            textAlign = TextAlign.Center,
+            maxLines = 2,
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(horizontal = 48.dp)
+        )
+    }
+}
