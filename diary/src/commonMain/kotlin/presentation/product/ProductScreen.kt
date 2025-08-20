@@ -38,13 +38,16 @@ import com.gmail.bogumilmecel2.diary.composeResources.protein
 import components.Button
 import components.ChartSlice
 import components.DonutChart
+import components.FitnessAppTopBar
+import components.LargeButtonTextContent
 import components.MediumButtonTextContent
-import components.SheetTopBarWithEndButton
 import components.TextField
+import components.VerticalSpacer
 import models.MeasurementUnit
 import models.NutritionValue
 import org.jetbrains.compose.resources.stringResource
 import theme.FitnessAppTheme
+import utils.formatWithValue
 import utils.string.PERCENTAGE
 import utils.string.SEMICOLON
 import utils.string.SPACE
@@ -54,14 +57,13 @@ fun ProductScreen(
     state: ProductState,
     onEvent: (ProductEvent) -> Unit,
 ) {
-    Column {
-        SheetTopBarWithEndButton(
+    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .verticalScroll(rememberScrollState())
+    ) {
+        FitnessAppTopBar(
             title = state.productName,
-            endButtonTextColor = FitnessAppTheme.colors.primary,
-            endButtonText = "SAVE",
-            onEndButtonClicked = {
-                onEvent(ProductEvent.OnSaveClicked)
-            },
             onBackPressed = {
                 onEvent(ProductEvent.OnBackPressed)
             }
@@ -76,7 +78,6 @@ fun ProductScreen(
             TextField(
                 text = state.weight,
                 label = stringResource(Res.string.product_weight) + String.SPACE + "(${state.productMeasurementUnit.longDisplayName})",
-                backgroundColor = FitnessAppTheme.colors.backgroundSecondary,
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
@@ -189,6 +190,20 @@ fun ProductScreen(
                 }
             }
         }
+
+        VerticalSpacer(modifier = Modifier.weight(1f))
+
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            backgroundColor = FitnessAppTheme.colors.primary,
+            onClick = {
+                onEvent(ProductEvent.OnSaveClicked)
+            }
+        ) {
+            LargeButtonTextContent(text = "Save")
+        }
     }
 }
 
@@ -225,7 +240,7 @@ private fun NutritionValueRow(
             )
 
             Text(
-                text = "$value ${measurementUnit.shortDisplayName}",
+                text = measurementUnit.formatWithValue(value = value),
                 style = FitnessAppTheme.typography.labelMedium,
                 color = FitnessAppTheme.colors.contentPrimary,
                 textAlign = TextAlign.End,

@@ -30,4 +30,5 @@
 
     <string name="product_save_to">Save to</string>
     <string name="product_weight">Weight</string>
+    <string name="product_measurement_unit">Measurement unit</string>
 </resources>

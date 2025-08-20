@@ -17,5 +17,11 @@ fun MeasurementUnit.formatWithValue(value: Int) = "$value" + String.SPACE + when
 }
 
 @Composable
+fun MeasurementUnit.formatWithValue(value: Double) = "$value" + String.SPACE + when(this) {
+    MeasurementUnit.GRAMS -> stringResource(resource = Res.string.measurement_unit_gram)
+    MeasurementUnit.MILLILITERS -> stringResource(resource = Res.string.measurement_unit_milliliter)
+}
+
+@Composable
 fun NutritionValues.getCaloriesFormatted() =
     "$calories ${String.SPACE} ${stringResource(resource = Res.string.calories_short_name)}"

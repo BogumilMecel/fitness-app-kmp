@@ -1,7 +1,6 @@
 package di
 
 import data.database.FitnessAppDatabase
-import domain.NavigatorServiceImp
 import domain.model.Country
 import domain.services.ResourcesService
 import domain.services.SettingsService
@@ -18,10 +17,13 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.datetime.TimeZone
 import kotlinx.serialization.json.Json
 import navigation.domain.NavigatorService
+import navigation.domain.NavigatorServiceImp
 import navigation.domain.SnackbarService
 import navigation.domain.SnackbarServiceImp
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import org.lighthousegames.logging.logging
+import presentation.selector.SelectorScreenModel
 import utils.constans.Constants
 import utils.providers.ResourcesServiceImp
 import utils.providers.SettingsServiceImp
@@ -83,6 +85,12 @@ private val sharedModule = module {
         }
     }
     single { get<FitnessAppDatabase>().diaryDao }
+    viewModel { arguments ->
+        SelectorScreenModel(
+            title = arguments.get(),
+            items = arguments.get(),
+        )
+    }
 }
 
 val sharedModules = listOf(

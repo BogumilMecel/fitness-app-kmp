@@ -1,3 +1,4 @@
+
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -46,9 +47,12 @@ import presentation.product.ProductScreenModel
 import presentation.register.RegisterScreen
 import presentation.search.DiarySearchScreen
 import presentation.search.DiarySearchScreenModel
+import presentation.selector.SelectorScreen
+import presentation.selector.SelectorScreenModel
 import theme.FitnessAppTheme
 import utils.LocalDateParameterType
 import utils.ProductParameterType
+import utils.SelectorItemListParameterType
 import utils.bottomSheet
 import kotlin.reflect.typeOf
 
@@ -79,7 +83,11 @@ fun App() {
                     }
 
                     is NavigationAction.Back -> {
-                        navController.navigateUp()
+                        if (it.withPopUp) {
+                            navController.popBackStack()
+                        } else {
+                            navController.navigateUp()
+                        }
                     }
                 }
             }
@@ -171,12 +179,11 @@ fun App() {
                             onEvent = viewModel::onEvent
                         )
                     }
-                    bottomSheet<Route.AddProductDiaryEntry>(
+                    composable<Route.AddProductDiaryEntry>(
                         typeMap = mapOf(
                             typeOf<Product>() to ProductParameterType,
                             typeOf<LocalDate>() to LocalDateParameterType,
                         ),
-                        navigator = bottomSheetNavigator,
                     ) {
                         val route = it.toRoute<Route.AddProductDiaryEntry>()
                         val viewModel: ProductScreenModel = koinViewModel {
@@ -199,6 +206,23 @@ fun App() {
                     }
                     composable<Route.BottomNavigation.Account> {
                         AccountScreen()
+                    }
+                    bottomSheet<Route.Selector>(
+                        navigator = bottomSheetNavigator,
+                        typeMap = mapOf(
+                            typeOf<List<domain.model.SelectorItem>>() to SelectorItemListParameterType,
+                        )
+                    ) {
+                        val route = it.toRoute<Route.Selector>()
+                        val viewModel: SelectorScreenModel = koinViewModel {
+                            parametersOf(route.title, route.items)
+                        }
+                        val state by viewModel.state.collectAsState()
+
+                        SelectorScreen(
+                            state = state,
+                            onEvent = viewModel::onEvent
+                        )
                     }
                 }
             }

@@ -18,14 +18,20 @@ import org.koin.core.component.inject
 open class BaseModel : ViewModel(), KoinComponent {
 
     protected val settingsService by inject<SettingsService>()
-    private val navigatorService by inject<NavigatorService>()
-    val snackbarService by inject<SnackbarService>()
+    protected val navigatorService by inject<NavigatorService>()
+    protected val snackbarService by inject<SnackbarService>()
 
-    open fun onBackPressed() {
-        navigateBack()
+    open fun onBackPressed(withPopUp: Boolean = false) {
+        navigateBack(withPopUp = withPopUp)
     }
 
-    fun navigateTo(
+    protected fun setBackResult(result: Any) {
+        viewModelScope.launch {
+            navigatorService.backResult.send(result)
+        }
+    }
+
+    protected fun navigateTo(
         route: Route,
         withPopUp: Boolean = false
     ) {

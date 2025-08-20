@@ -33,7 +33,15 @@ fun FitnessAppTheme(
     content: @Composable () -> Unit
 ) {
     val colors = if (darkTheme) darkFitnessAppColorSchema() else lightFitnessAppColorSchema()
-    val materialColors = if (darkTheme) darkColorScheme() else lightColorScheme()
+    val materialColors = if (darkTheme) {
+        darkColorScheme(
+            background = colors.background
+        )
+    } else {
+        lightColorScheme(
+            background = colors.background
+        )
+    }
 
     CompositionLocalProvider(
         LocalColors provides colors,

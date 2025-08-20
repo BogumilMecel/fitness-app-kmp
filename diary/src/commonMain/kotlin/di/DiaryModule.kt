@@ -44,6 +44,7 @@ val diaryModule = module {
             mealName = parameters.get(),
             weight = parameters.get(),
             diaryRepository = get(),
+            resourcesService = get()
         )
     }
 }

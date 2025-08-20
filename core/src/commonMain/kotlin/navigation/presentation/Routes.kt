@@ -11,6 +11,7 @@ import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_account
 import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_diary
 import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_summary
 import com.gmail.bogumilmecel2.ui.composeResources.bottom_nav_training
+import domain.model.SelectorItem
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 import models.MealName
@@ -83,5 +84,11 @@ sealed interface Route {
     data class EditProductDiaryEntry(
         val productId: String,
         val productDiaryEntryId: String,
+    ) : Route
+
+    @Serializable
+    data class Selector(
+        val title: String,
+        val items: List<SelectorItem>
     ) : Route
 }
