@@ -1,7 +1,12 @@
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -75,6 +80,12 @@ fun App() {
                     || currentDestination.hasRoute(Route.BottomNavigation.Account::class)
         } == true
 
+        val backgroundColor = if (navBackStackEntry?.destination?.hasRoute(Route.DiarySearch::class) == true) {
+            FitnessAppTheme.colors.backgroundSecondary
+        } else {
+            FitnessAppTheme.colors.background
+        }
+
         LaunchedEffect(true) {
             navigatorService.navigationAction.receiveAsFlow().collect {
                 when (it) {
@@ -99,130 +110,137 @@ fun App() {
             }
         }
 
-        ModalBottomSheetLayout(
-            modifier = Modifier.fillMaxSize(),
-            bottomSheetNavigator = bottomSheetNavigator,
-            containerColor = FitnessAppTheme.colors.backgroundSecondary,
-            contentColor = FitnessAppTheme.colors.contentPrimary,
-            dragHandle = null,
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(backgroundColor)
+                .windowInsetsPadding(WindowInsets.safeDrawing)
         ) {
-            Scaffold(
-                bottomBar = {
-                    if (navigationBarVisible) {
-                        navBackStackEntry?.let {
-                            NavigationBar(
-                                containerColor = FitnessAppTheme.colors.backgroundSecondary,
-                                modifier = Modifier.height(60.dp)
-                            ) {
-                                Route.BottomNavigation.entries.forEach { bottomNavigationRoute ->
-                                    TabNavigationItem(
-                                        bottomNavigation = bottomNavigationRoute,
-                                        isSelected = it.destination.hasRoute(bottomNavigationRoute::class),
-                                        onClick = {
-                                            navController.navigate(bottomNavigationRoute)
-                                        }
-                                    )
+            ModalBottomSheetLayout(
+                modifier = Modifier.fillMaxSize(),
+                bottomSheetNavigator = bottomSheetNavigator,
+                containerColor = FitnessAppTheme.colors.backgroundSecondary,
+                contentColor = FitnessAppTheme.colors.contentPrimary,
+                dragHandle = null,
+            ) {
+                Scaffold(
+                    bottomBar = {
+                        if (navigationBarVisible) {
+                            navBackStackEntry?.let {
+                                NavigationBar(
+                                    containerColor = FitnessAppTheme.colors.backgroundSecondary,
+                                    modifier = Modifier.height(60.dp)
+                                ) {
+                                    Route.BottomNavigation.entries.forEach { bottomNavigationRoute ->
+                                        TabNavigationItem(
+                                            bottomNavigation = bottomNavigationRoute,
+                                            isSelected = it.destination.hasRoute(bottomNavigationRoute::class),
+                                            onClick = {
+                                                navController.navigate(bottomNavigationRoute)
+                                            }
+                                        )
+                                    }
                                 }
                             }
                         }
+                    },
+                    snackbarHost = {
+                        SnackbarHost(hostState = snackbarHostState)
                     }
-                },
-                snackbarHost = {
-                    SnackbarHost(hostState = snackbarHostState)
-                }
-            ) {
-                NavHost(
-                    navController = navController,
-                    startDestination = Route.Splash
                 ) {
-                    composable<Route.Splash> {
-                        koinViewModel<SplashScreenModel>()
-                        SplashScreen()
-                    }
-                    composable<Route.AuthNavigator> {
-                        AuthNavigationScreen()
-                    }
-                    composable<Route.Login> {
-                        LoginScreen()
-                    }
-                    composable<Route.Register> {
-                        RegisterScreen()
-                    }
-                    composable<Route.BottomNavigation.Summary> {
-                        SummaryScreen()
-                    }
-                    composable<Route.BottomNavigation.Diary> {
-                        DiaryScreen()
-                    }
-                    composable<Route.DiarySearch>(
-                        typeMap = mapOf(
-                            typeOf<LocalDate>() to LocalDateParameterType,
-                        )
+                    NavHost(
+                        navController = navController,
+                        startDestination = Route.Splash
                     ) {
-                        val route = it.toRoute<Route.DiarySearch>()
-                        val viewModel: DiarySearchScreenModel = koinViewModel {
-                            parametersOf(route.date, route.mealName)
+                        composable<Route.Splash> {
+                            koinViewModel<SplashScreenModel>()
+                            SplashScreen()
                         }
-                        val state by viewModel.state.collectAsState()
+                        composable<Route.AuthNavigator> {
+                            AuthNavigationScreen()
+                        }
+                        composable<Route.Login> {
+                            LoginScreen()
+                        }
+                        composable<Route.Register> {
+                            RegisterScreen()
+                        }
+                        composable<Route.BottomNavigation.Summary> {
+                            SummaryScreen()
+                        }
+                        composable<Route.BottomNavigation.Diary> {
+                            DiaryScreen()
+                        }
+                        composable<Route.DiarySearch>(
+                            typeMap = mapOf(
+                                typeOf<LocalDate>() to LocalDateParameterType,
+                            )
+                        ) {
+                            val route = it.toRoute<Route.DiarySearch>()
+                            val viewModel: DiarySearchScreenModel = koinViewModel {
+                                parametersOf(route.date, route.mealName)
+                            }
+                            val state by viewModel.state.collectAsState()
 
-                        DiarySearchScreen(
-                            state = state,
-                            onEvent = viewModel::onEvent
-                        )
-                    }
-                    composable<Route.NewProduct> {
-                        val viewModel: NewProductScreenModel = koinViewModel()
-                        val state by viewModel.state.collectAsState()
-
-                        NewProductScreen(
-                            state = state,
-                            onEvent = viewModel::onEvent
-                        )
-                    }
-                    composable<Route.AddProductDiaryEntry>(
-                        typeMap = mapOf(
-                            typeOf<Product>() to ProductParameterType,
-                            typeOf<LocalDate>() to LocalDateParameterType,
-                        ),
-                    ) {
-                        val route = it.toRoute<Route.AddProductDiaryEntry>()
-                        val viewModel: ProductScreenModel = koinViewModel {
-                            parametersOf(
-                                route.product,
-                                route.date,
-                                route.mealName,
-                                route.weight,
+                            DiarySearchScreen(
+                                state = state,
+                                onEvent = viewModel::onEvent
                             )
                         }
-                        val state by viewModel.state.collectAsState()
+                        composable<Route.NewProduct> {
+                            val viewModel: NewProductScreenModel = koinViewModel()
+                            val state by viewModel.state.collectAsState()
 
-                        ProductScreen(
-                            state = state,
-                            onEvent = viewModel::onEvent,
-                        )
-                    }
-                    composable<Route.BottomNavigation.Training> {
-                        TrainingScreen()
-                    }
-                    composable<Route.BottomNavigation.Account> {
-                        AccountScreen()
-                    }
-                    bottomSheet<Route.Selector>(
-                        navigator = bottomSheetNavigator,
-                        typeMap = mapOf(
-                            typeOf<List<domain.model.SelectorItem>>() to SelectorItemListParameterType,
-                        )
-                    ) {
-                        val route = it.toRoute<Route.Selector>()
-                        val viewModel: SelectorScreenModel = koinViewModel {
-                            parametersOf(route.title, route.items)
+                            NewProductScreen(
+                                state = state,
+                                onEvent = viewModel::onEvent
+                            )
                         }
-                        val state by viewModel.state.collectAsState()
+                        composable<Route.AddProductDiaryEntry>(
+                            typeMap = mapOf(
+                                typeOf<Product>() to ProductParameterType,
+                                typeOf<LocalDate>() to LocalDateParameterType,
+                            ),
+                        ) {
+                            val route = it.toRoute<Route.AddProductDiaryEntry>()
+                            val viewModel: ProductScreenModel = koinViewModel {
+                                parametersOf(
+                                    route.product,
+                                    route.date,
+                                    route.mealName,
+                                    route.weight,
+                                )
+                            }
+                            val state by viewModel.state.collectAsState()
 
-                        SelectorScreen(
-                            state = state,
-                            onEvent = viewModel::onEvent
-                        )
+                            ProductScreen(
+                                state = state,
+                                onEvent = viewModel::onEvent,
+                            )
+                        }
+                        composable<Route.BottomNavigation.Training> {
+                            TrainingScreen()
+                        }
+                        composable<Route.BottomNavigation.Account> {
+                            AccountScreen()
+                        }
+                        bottomSheet<Route.Selector>(
+                            navigator = bottomSheetNavigator,
+                            typeMap = mapOf(
+                                typeOf<List<domain.model.SelectorItem>>() to SelectorItemListParameterType,
+                            )
+                        ) {
+                            val route = it.toRoute<Route.Selector>()
+                            val viewModel: SelectorScreenModel = koinViewModel {
+                                parametersOf(route.title, route.items)
+                            }
+                            val state by viewModel.state.collectAsState()
+
+                            SelectorScreen(
+                                state = state,
+                                onEvent = viewModel::onEvent
+                            )
+                        }
                     }
                 }
             }
