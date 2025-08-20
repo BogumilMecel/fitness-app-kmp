@@ -3,6 +3,7 @@ package presentation.search
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -25,7 +27,9 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.gmail.bogumilmecel2.diary.composeResources.Res
@@ -34,10 +38,10 @@ import com.gmail.bogumilmecel2.diary.composeResources.new_product
 import com.gmail.bogumilmecel2.diary.composeResources.scan_barcode
 import com.gmail.bogumilmecel2.diary.composeResources.search_for_products
 import components.Button
-import components.FitnessAppTextField
 import components.FitnessAppTopBar
 import components.HorizontalSpacer
 import components.LazyColumn
+import components.TextField
 import components.VerticalSpacer
 import models.Product
 import org.jetbrains.compose.resources.painterResource
@@ -73,25 +77,46 @@ fun DiarySearchScreen(
 
             VerticalSpacer(size = 8.dp)
 
-            FitnessAppTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                text = state.searchBarText,
-                onValueChange = {
-                    onEvent(DiarySearchEvent.SearchTextChanged(it))
-                },
-                label = stringResource(Res.string.search_for_products),
-                maxLines = 1,
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Search
-                ),
-                keyboardActions = KeyboardActions(
-                    onSearch = {
-                        onEvent(DiarySearchEvent.Search)
-                    }
+            Row(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                TextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    text = state.searchBarText,
+                    onValueChange = {
+                        onEvent(DiarySearchEvent.SearchTextChanged(it))
+                    },
+                    backgroundColor = FitnessAppTheme.colors.backgroundSecondary,
+                    label = stringResource(Res.string.search_for_products),
+                    maxLines = 1,
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Search
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onSearch = {
+                            onEvent(DiarySearchEvent.Search)
+                        }
+                    )
                 )
-            )
+
+                Icon(
+                    painter = painterResource(Res.drawable.barcode_scan),
+                    contentDescription = null,
+                    tint = FitnessAppTheme.colors.contentPrimary,
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .size(48.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .clickable {
+                            onEvent(DiarySearchEvent.ScanBarcode)
+                        }
+                        .padding(8.dp),
+                )
+            }
 
             VerticalSpacer(size = 16.dp)
 

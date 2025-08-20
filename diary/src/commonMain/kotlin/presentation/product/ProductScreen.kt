@@ -57,11 +57,7 @@ fun ProductScreen(
     state: ProductState,
     onEvent: (ProductEvent) -> Unit,
 ) {
-    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .verticalScroll(rememberScrollState())
-    ) {
+    Column {
         FitnessAppTopBar(
             title = state.productName,
             onBackPressed = {
