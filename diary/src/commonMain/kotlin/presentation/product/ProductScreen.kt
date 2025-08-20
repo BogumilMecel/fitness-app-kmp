@@ -225,7 +225,7 @@ private fun NutritionValueRow(
             )
 
             Text(
-                text = "$value ${measurementUnit.getName()}",
+                text = "$value ${measurementUnit.shortDisplayName}",
                 style = FitnessAppTheme.typography.labelMedium,
                 color = FitnessAppTheme.colors.contentPrimary,
                 textAlign = TextAlign.End,

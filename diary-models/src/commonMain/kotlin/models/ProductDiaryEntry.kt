@@ -49,7 +49,7 @@ data class ProductDiaryEntry(
     override val changeDateTime: LocalDateTime
 ) : DiaryItem {
     @Composable
-    override fun getDisplayValue() = "$weight ${productMeasurementUnit.getName()}."
+    override fun getDisplayValue() = "$weight ${productMeasurementUnit.shortDisplayName}."
 
     override fun getDiaryEntryType() = DiaryEntryType.PRODUCT
 } 

@@ -16,12 +16,6 @@ enum class MeasurementUnit {
     @SerialName("milliliters")
     MILLILITERS;
 
-    @Composable
-    fun getName() = when (this) {
-        GRAMS -> "g"
-        MILLILITERS -> "ml"
-    }
-
     val shortDisplayName
         @Composable
         get() = when (this) {
@@ -34,5 +28,11 @@ enum class MeasurementUnit {
         get() = when (this) {
             GRAMS -> stringResource(Res.string.measurement_unit_grams)
             MILLILITERS -> stringResource(Res.string.measurement_unit_milliliters)
+        }
+
+    val longDisplayNameResource
+        get() = when (this) {
+            GRAMS -> Res.string.measurement_unit_grams
+            MILLILITERS -> Res.string.measurement_unit_milliliters
         }
 } 
