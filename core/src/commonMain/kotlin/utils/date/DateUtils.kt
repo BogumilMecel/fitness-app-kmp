@@ -38,3 +38,5 @@ fun DayOfWeek.getShortName() = when(this) {
     DayOfWeek.SUNDAY -> stringResource(Res.string.sunday_short_name)
     else -> ""
 }
+
+expect fun getSystemFirstDayOfWeek(): DayOfWeek
