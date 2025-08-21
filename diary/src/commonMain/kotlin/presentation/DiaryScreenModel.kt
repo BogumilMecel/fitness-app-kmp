@@ -1,6 +1,5 @@
 package presentation
 
-import domain.use_case.CreateAvailableDiaryDatesUseCase
 import domain.use_case.GetOfflineDiaryEntriesUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,11 +14,9 @@ import presentation.base.BaseModel
 import utils.date.getCurrentDate
 
 class DiaryScreenModel(
-    createAvailableDiaryDatesUseCase: CreateAvailableDiaryDatesUseCase,
     private val getOfflineDiaryEntriesUseCase: GetOfflineDiaryEntriesUseCase
 ) : BaseModel() {
 
-    val availableDates = createAvailableDiaryDatesUseCase()
     val selectedDate = MutableStateFlow(getCurrentDate())
 
     @OptIn(ExperimentalCoroutinesApi::class)

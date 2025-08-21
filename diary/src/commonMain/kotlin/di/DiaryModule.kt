@@ -1,7 +1,6 @@
 package di
 
 import api.DiaryApi
-import domain.use_case.CreateAvailableDiaryDatesUseCase
 import domain.use_case.GetOfflineDiaryEntriesUseCase
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -21,7 +20,6 @@ val diaryModule = module {
     }
     viewModel {
         DiaryScreenModel(
-            createAvailableDiaryDatesUseCase = CreateAvailableDiaryDatesUseCase(settingsService = get()),
             getOfflineDiaryEntriesUseCase = GetOfflineDiaryEntriesUseCase(diaryRepository = get())
         )
     }
