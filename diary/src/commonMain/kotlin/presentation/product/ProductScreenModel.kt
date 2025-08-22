@@ -13,7 +13,6 @@ import kotlinx.datetime.LocalDate
 import models.MealName
 import models.MeasurementUnit
 import models.NewProductDiaryEntryRequest
-import models.NutritionValues
 import models.Product
 import models.calculatePercentages
 import models.forWeight
@@ -126,7 +125,7 @@ class ProductScreenModel(
                         weight = productWeight,
                         date = date,
                         mealName = mealName,
-                        nutritionValues = NutritionValues()
+                        nutritionValues = state.value.currentNutritionValues,
                     )
                 )
             }.onSuccess {
