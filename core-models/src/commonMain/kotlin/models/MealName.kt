@@ -6,13 +6,24 @@ import com.gmail.bogumilmecel2.`core-models`.composeResources.meal_brakfast
 import com.gmail.bogumilmecel2.`core-models`.composeResources.meal_dinner
 import com.gmail.bogumilmecel2.`core-models`.composeResources.meal_lunch
 import com.gmail.bogumilmecel2.`core-models`.composeResources.meal_supper
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 @Serializable
 enum class MealName {
-    BREAKFAST, LUNCH, DINNER, SUPPER;
+    @SerialName("breakfast")
+    BREAKFAST,
+
+    @SerialName("lunch")
+    LUNCH,
+
+    @SerialName("dinner")
+    DINNER,
+
+    @SerialName("supper")
+    SUPPER;
 
     val displayName: String
         @Composable
