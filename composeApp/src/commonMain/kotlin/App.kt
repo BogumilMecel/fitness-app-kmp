@@ -39,6 +39,7 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 import presentation.AccountScreen
 import presentation.DiaryScreen
+import presentation.IntroductionScreen
 import presentation.SplashScreen
 import presentation.SplashScreenModel
 import presentation.SummaryScreen
@@ -164,6 +165,9 @@ fun App() {
                         }
                         composable<Route.Register> {
                             RegisterScreen()
+                        }
+                        composable<Route.Introduction> {
+                            IntroductionScreen()
                         }
                         composable<Route.BottomNavigation.Summary> {
                             SummaryScreen()

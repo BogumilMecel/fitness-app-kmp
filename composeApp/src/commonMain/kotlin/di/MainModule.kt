@@ -1,7 +1,5 @@
 package di
 
-import data.api.MainApiClient
-import data.repository.MainRepositoryImp
 import domain.use_case.GetProductDiaryAndSaveOfflineUseCase
 import domain.use_case.GetProductsAndSaveOfflineUseCase
 import domain.use_case.GetRecipeDiaryAndSaveOfflineUseCase
@@ -14,9 +12,6 @@ import org.koin.dsl.module
 val mainModule = module {
     viewModel {
         TabNavigatorModel(
-            mainRepository = MainRepositoryImp(
-                mainApiClient = MainApiClient(httpClient = get())
-            ),
             initialDiaryDataUseCases = InitialDiaryDataUseCases(
                 getProductsAndSaveOfflineUseCase = GetProductsAndSaveOfflineUseCase(
                     diaryRepository = get(),

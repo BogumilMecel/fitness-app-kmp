@@ -1,7 +1,6 @@
 package main_screen.presentation
 
 import androidx.lifecycle.viewModelScope
-import domain.repository.MainRepository
 import domain.use_case.InitialDiaryDataUseCases
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -9,10 +8,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import presentation.base.BaseModel
-import utils.handle
 
 class TabNavigatorModel(
-    private val mainRepository: MainRepository,
     private val initialDiaryDataUseCases: InitialDiaryDataUseCases,
 ) : BaseModel() {
 
@@ -24,16 +21,8 @@ class TabNavigatorModel(
 
     private fun requestInitialData() {
         viewModelScope.launch {
-            val availableDiaryDates = async { requestAvailableDiaryDates() }
-            val diaryData = async { requestDiaryData() }
-            awaitAll(availableDiaryDates, diaryData)
+            async { requestDiaryData() }.await()
             tabNavigationEnabled.value = true
-        }
-    }
-
-    private suspend fun requestAvailableDiaryDates() {
-        mainRepository.requestAvailableDates().handle {
-            settingsService.setAvailableDiaryDatesCount(it.availableDaysCount)
         }
     }
 
