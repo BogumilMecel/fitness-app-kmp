@@ -101,5 +101,6 @@ val sharedModules = listOf(
     diaryModule,
     trainingModule,
     accountModule,
+    introductionModule,
     mainModule,
 )

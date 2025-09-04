@@ -14,6 +14,7 @@ include(":summary")
 include(":diary")
 include(":training")
 include(":account")
+include(":introduction")
 
 pluginManagement {
     repositories {

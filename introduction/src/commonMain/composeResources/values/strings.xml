@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Main introduction text -->
+    <string name="let_us_know_something_about_you">Let us know something about you</string>
+    
+    <!-- Navigation buttons -->
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="finish">Finish</string>
+    
+    <!-- Question titles -->
+    <string name="what_is_your_gender">What is your gender?</string>
+    <string name="what_is_your_age">What is your age?</string>
+    <string name="what_is_your_height">What is your height?</string>
+    <string name="what_is_your_current_weight">What is your current weight?</string>
+    <string name="what_type_of_work_do_you_have">What type of work do you have?</string>
+    <string name="how_often_do_you_train_in_a_week">How often do you train in a week?</string>
+    <string name="how_would_you_describe_your_activity_level_during_a_day">How would you describe your activity level during a day?</string>
+    <string name="what_is_your_desired_weight">What is your desired weight?</string>
+    
+    <!-- Units -->
+    <string name="cm">cm</string>
+    <string name="kg">kg</string>
+
+    <!-- Gender options -->
+    <string name="introduction_male">Male</string>
+    <string name="introduction_female">Female</string>
+
+    <!-- Work type options -->
+    <string name="introduction_sedentary">Sedentary</string>
+    <string name="introduction_mixed">Mixed</string>
+    <string name="introduction_physical">Physical</string>
+
+    <!-- Training frequency options -->
+    <string name="introduction_none">None</string>
+    <string name="introduction_training_low">1-2 times</string>
+    <string name="introduction_training_average">3-4 times</string>
+    <string name="introduction_training_high">5-6 times</string>
+    <string name="introduction_training_very_high">7+ times</string>
+
+    <!-- Activity level options -->
+    <string name="introduction_activity_low">Low</string>
+    <string name="introduction_activity_moderate">Moderate</string>
+    <string name="introduction_activity_high">High</string>
+    <string name="introduction_activity_very_high">Very High</string>
+
+    <!-- Desired weight options -->
+    <string name="introduction_loose">Lose weight</string>
+    <string name="introduction_keep">Keep current weight</string>
+    <string name="introduction_gain">Gain weight</string>
+</resources> 

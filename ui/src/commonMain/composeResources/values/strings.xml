@@ -132,25 +132,6 @@
 
     <string name="nutrition_goals">Nutrition goals</string>
 
-    <string name="introduction_sedentary">Sedentary</string>
-    <string name="introduction_mixed">Mixed</string>
-    <string name="introduction_physical">Physical</string>
-
-    <string name="introduction_none">None</string>
-    <string name="introduction_training_low">1–2</string>
-    <string name="introduction_training_average">3–4</string>
-    <string name="introduction_training_high">5–6</string>
-    <string name="introduction_training_very_high">7–8</string>
-    <string name="introduction_activity_low">Low</string>
-    <string name="introduction_activity_moderate">Moderate</string>
-    <string name="introduction_activity_high">High</string>
-    <string name="introduction_activity_very_high">Very High</string>
-    <string name="introduction_male">Male</string>
-    <string name="introduction_female">Female</string>
-    <string name="introduction_loose">Loose</string>
-    <string name="introduction_gain">Gain</string>
-    <string name="introduction_keep">Keep</string>
-
     <string name="training_start_workout">Start New Workout</string>
     <string name="training_copy_workout">Copy Previous Workout</string>
 

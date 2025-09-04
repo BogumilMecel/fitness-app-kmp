@@ -40,6 +40,7 @@ import org.koin.core.parameter.parametersOf
 import presentation.AccountScreen
 import presentation.DiaryScreen
 import presentation.IntroductionScreen
+import presentation.IntroductionScreenModel
 import presentation.SplashScreen
 import presentation.SplashScreenModel
 import presentation.SummaryScreen
@@ -173,7 +174,13 @@ fun App() {
                             RegisterScreen()
                         }
                         composable<Route.Introduction> {
-                            IntroductionScreen()
+                            val viewModel: IntroductionScreenModel = koinViewModel()
+                            val state by viewModel.state.collectAsState()
+
+                            IntroductionScreen(
+                                state = state,
+                                onEvent = viewModel::onEvent,
+                            )
                         }
                         composable<Route.BottomNavigation.Summary> {
                             SummaryScreen()

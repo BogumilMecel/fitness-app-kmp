@@ -64,6 +64,9 @@ sealed interface Route {
     data object AuthNavigator : Route
 
     @Serializable
+    data object Introduction : Route
+
+    @Serializable
     data class DiarySearch(
         val date: LocalDate,
         val mealName: MealName,

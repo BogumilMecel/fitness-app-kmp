@@ -40,6 +40,7 @@ kotlin {
             implementation(project(":diary"))
             implementation(project(":training"))
             implementation(project(":account"))
+            implementation(project(":introduction"))
 
             implementation(compose.material3)
             implementation(libs.material3.navigation)
