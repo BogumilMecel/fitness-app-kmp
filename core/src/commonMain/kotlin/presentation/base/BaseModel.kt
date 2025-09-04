@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import navigation.domain.NavigationAction
 import navigation.domain.NavigatorService
+import navigation.domain.PopUpParams
 import navigation.domain.SnackbarService
 import navigation.presentation.Route
 import org.koin.core.component.KoinComponent
@@ -33,13 +34,15 @@ open class BaseModel : ViewModel(), KoinComponent {
 
     protected fun navigateTo(
         route: Route,
-        withPopUp: Boolean = false
+        popUpTo: Route? = null
     ) {
         viewModelScope.launch {
             navigatorService.navigationAction.send(
                 NavigationAction.ToScreen(
                     route = route,
-                    withPopUp = withPopUp
+                    popUpParams = popUpTo?.let {
+                        PopUpParams(popUpTo = it)
+                    }
                 )
             )
         }

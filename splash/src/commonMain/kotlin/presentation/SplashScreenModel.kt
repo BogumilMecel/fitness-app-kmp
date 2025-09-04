@@ -15,13 +15,22 @@ class SplashScreenModel (
         viewModelScope.launch {
             when(authenticateUserUseCase()) {
                 Result.NavigateToLogin -> {
-                    navigateTo(Route.Login)
+                    navigateTo(
+                        route = Route.Login,
+                        popUpTo = Route.Splash,
+                    )
                 }
                 Result.NavigateToIntroduction -> {
-                    navigateTo(Route.AuthNavigator)
+                    navigateTo(
+                        route = Route.Introduction,
+                        popUpTo = Route.Splash,
+                    )
                 }
                 Result.NavigateToMainScreen -> {
-                    navigateTo(Route.BottomNavigation.Summary)
+                    navigateTo(
+                        route = Route.BottomNavigation.Summary,
+                        popUpTo = Route.Splash,
+                    )
                 }
             }
         }

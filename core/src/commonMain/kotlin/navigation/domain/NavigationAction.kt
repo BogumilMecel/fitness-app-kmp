@@ -2,11 +2,16 @@ package navigation.domain
 
 import navigation.presentation.Route
 
-sealed class NavigationAction(open val withPopUp: Boolean) {
+sealed interface NavigationAction {
     data class ToScreen(
-        override val withPopUp: Boolean,
-        val route: Route
-    ) : NavigationAction(withPopUp)
+        val popUpParams: PopUpParams? = null,
+        val route: Route,
+    ) : NavigationAction
 
-    data class Back(override val withPopUp: Boolean) : NavigationAction(withPopUp)
+    data class Back(val withPopUp: Boolean) : NavigationAction
 }
+
+data class PopUpParams(
+    val popUpTo: Route,
+    val inclusive: Boolean = true,
+)

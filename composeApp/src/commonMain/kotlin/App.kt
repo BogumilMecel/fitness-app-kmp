@@ -91,7 +91,13 @@ fun App() {
             navigatorService.navigationAction.receiveAsFlow().collect {
                 when (it) {
                     is NavigationAction.ToScreen -> {
-                        navController.navigate(it.route)
+                        navController.navigate(it.route) {
+                            it.popUpParams?.let { popUpParams ->
+                                popUpTo(route = popUpParams.popUpTo) {
+                                    inclusive = popUpParams.inclusive
+                                }
+                            }
+                        }
                     }
 
                     is NavigationAction.Back -> {
