@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import theme.FitnessAppTheme
 import utils.ClickableContent
@@ -179,148 +180,6 @@ fun FitnessAppTextField(
 }
 
 @Composable
-fun FitnessAppTextField(
-    modifier: Modifier = Modifier,
-    text: String,
-    onValueChange: (String) -> Unit,
-    error: String? = null,
-    onErrorCleared: () -> Unit = {},
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
-    leadingIcon: ImageVector? = null,
-    trailingIcon: ClickableContent.Icon? = null,
-    label: String,
-    maxLines: Int = 1,
-    testTag: String? = null,
-) {
-    val interactionSource = remember { MutableInteractionSource() }
-    val isFocused by interactionSource.collectIsFocusedAsState()
-
-    LaunchedEffect(key1 = isFocused) {
-        if (isFocused) {
-            onErrorCleared()
-        }
-    }
-
-    val isError = error != null
-    val focusedColor by animateColorAsState(
-        targetValue = if (isError) FitnessAppTheme.colors.error else FitnessAppTheme.colors.contentPrimary
-    )
-    val unfocusedColor by animateColorAsState(
-        targetValue = if (isError) FitnessAppTheme.colors.error else FitnessAppTheme.colors.contentSecondary
-    )
-    val labelColor by animateColorAsState(
-        targetValue = if (isError && text.isNotEmpty()) {
-            FitnessAppTheme.colors.error
-        } else {
-            FitnessAppTheme.colors.contentSecondary
-        }
-    )
-    val iconColor by animateColorAsState(
-        targetValue = if (isFocused) {
-            FitnessAppTheme.colors.contentPrimary
-        } else {
-            FitnessAppTheme.colors.contentSecondary
-        }
-    )
-
-    Column(
-        modifier = Modifier.animateContentSize().height(IntrinsicSize.Max),
-        verticalArrangement = Arrangement.spacedBy(2.dp)
-    ) {
-        OutlinedTextField(
-            value = text,
-            onValueChange = {
-                onErrorCleared()
-                onValueChange(it)
-            },
-            modifier = modifier
-                .fillMaxWidth()
-                .then(other = testTag?.let { Modifier.testTag(it) } ?: Modifier),
-            textStyle = FitnessAppTheme.typography.bodyLarge,
-            label = { Text(text = label) },
-            leadingIcon = if (leadingIcon != null) {
-                {
-                    Icon(
-                        imageVector = leadingIcon,
-                        contentDescription = null,
-                        tint = iconColor
-                    )
-                }
-            } else null,
-            trailingIcon = {
-                Row(
-                    modifier = Modifier.animateContentSize(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    trailingIcon?.let {
-                        Icon(
-                            imageVector = it.icon,
-                            contentDescription = null,
-                            tint = iconColor,
-                            modifier = Modifier.clickable(onClick = it.onClick)
-                        )
-                    }
-
-                    AnimatedVisibility(
-                        visible = isFocused && text.isNotEmpty(),
-                        enter = fadeIn(),
-                        exit = fadeOut()
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Close,
-                            contentDescription = null,
-                            tint = iconColor,
-                            modifier = Modifier
-                                .padding(end = if (trailingIcon == null) 0.dp else 12.dp)
-                                .clickable {
-                                    onErrorCleared()
-                                    onValueChange("")
-                                }
-                        )
-                    }
-                }
-            },
-            visualTransformation = visualTransformation,
-            colors = TextFieldDefaults.colors().copy(
-                focusedTextColor = FitnessAppTheme.colors.contentPrimary,
-                cursorColor = FitnessAppTheme.colors.contentPrimary,
-                focusedIndicatorColor = focusedColor,
-                unfocusedIndicatorColor = unfocusedColor,
-                focusedLabelColor = focusedColor,
-                unfocusedLabelColor = labelColor,
-                focusedContainerColor = FitnessAppTheme.colors.backgroundSecondary,
-                unfocusedContainerColor = FitnessAppTheme.colors.backgroundSecondary,
-            ),
-            interactionSource = interactionSource,
-            keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
-            maxLines = maxLines,
-        )
-
-        error?.let {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Info,
-                    contentDescription = null,
-                    tint = FitnessAppTheme.colors.error,
-                )
-
-                Text(
-                    text = it,
-                    style = FitnessAppTheme.typography.bodySmall,
-                    color = FitnessAppTheme.colors.error
-                )
-            }
-        }
-    }
-}
-
-@Composable
 fun TextField(
     modifier: Modifier = Modifier,
     text: String,
@@ -335,6 +194,7 @@ fun TextField(
     trailingIcon: (@Composable () -> Unit)? = null,
     label: String,
     maxLines: Int = 1,
+    textAlign: TextAlign = TextAlign.Start,
     testTag: String? = null,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -373,7 +233,9 @@ fun TextField(
         modifier = modifier
             .fillMaxWidth()
             .then(other = testTag?.let { Modifier.testTag(it) } ?: Modifier),
-        textStyle = FitnessAppTheme.typography.bodyLarge,
+        textStyle = FitnessAppTheme.typography.bodyLarge.copy(
+            textAlign = textAlign,
+        ),
         label = { Text(text = label) },
         leadingIcon = leadingIcon?.let {
             {
