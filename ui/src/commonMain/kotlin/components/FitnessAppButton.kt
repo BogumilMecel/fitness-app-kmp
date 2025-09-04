@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import theme.FitnessAppTheme
 
@@ -150,11 +151,14 @@ fun MediumButtonTextContent(text: String) {
 }
 
 @Composable
-fun LargeButtonTextContent(text: String) {
+fun LargeButtonTextContent(
+    text: String,
+    horizontalPadding: Dp = 12.dp,
+) {
     Text(
         text = text,
         style = FitnessAppTheme.typography.labelLarge,
-        modifier = Modifier.padding(vertical = 16.dp, horizontal = 12.dp),
+        modifier = Modifier.padding(vertical = 16.dp, horizontal = horizontalPadding),
     )
 }
 
