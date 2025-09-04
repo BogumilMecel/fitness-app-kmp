@@ -14,7 +14,7 @@ class AuthenticateUserUseCase(
 
         settingsService.setUser(user = user)
 
-        return if (user.nutritionValues != null && user.userInformation != null) {
+        return if (user.nutritionValues != null && user.hasInformation) {
             Result.NavigateToMainScreen
         } else {
             Result.NavigateToIntroduction

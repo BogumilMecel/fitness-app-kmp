@@ -18,8 +18,8 @@ data class User(
     @SerialName("nutrition_values")
     val nutritionValues: NutritionValues? = null,
 
-    @SerialName("user_information")
-    val userInformation: UserInformation? = null,
+    @SerialName("has_information")
+    val hasInformation: Boolean = false,
 
     @SerialName("log_streak")
     val logStreak: Int,
