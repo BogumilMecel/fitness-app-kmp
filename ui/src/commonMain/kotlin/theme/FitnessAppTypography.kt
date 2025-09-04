@@ -16,6 +16,7 @@ import org.jetbrains.compose.resources.Font
 
 @Immutable
 data class FitnessAppTypography(
+    val headlineExtraLarge: TextStyle = headline(fontSize = 28.sp, lineHeight = 32.sp),
     val headlineLarge: TextStyle = headline(fontSize = 24.sp, lineHeight = 32.sp),
     val headlineMedium: TextStyle = headline(fontSize = 20.sp, lineHeight = 28.sp),
     val headlineSmall: TextStyle = headline(fontSize = 18.sp, lineHeight = 24.sp),
