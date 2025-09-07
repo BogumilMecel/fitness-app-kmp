@@ -25,5 +25,9 @@ val String.Companion.PERCENTAGE
     get() = "%"
 
 fun String.normalizeDecimalSeparator(): String {
-    return this.replace(",", ".")
+    return replace(",", ".")
 }
+
+fun String.toValidInt(): Int? = trim().toIntOrNull()
+
+fun String.toValidDouble(): Double? = trim().normalizeDecimalSeparator().toDoubleOrNull()
