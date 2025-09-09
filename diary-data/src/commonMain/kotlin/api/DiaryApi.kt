@@ -7,7 +7,6 @@ import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
-import io.ktor.http.parameters
 import kotlinx.datetime.LocalDateTime
 import models.NewProductDiaryEntryRequest
 import models.NewProductRequest
@@ -20,51 +19,23 @@ import utils.constans.Constants
 
 class DiaryApi(private val httpClient: HttpClient) {
     suspend fun getUserProducts(latestDateTime: LocalDateTime?) = httpClient.get {
-        parameters {
-            latestDateTime?.toString()?.let {
-                append(
-                    name = Constants.Query.LATEST_DATE_TIME,
-                    value = it
-                )
-            }
-        }
         url(urlString = "/userData/products")
+        parameter(key = Constants.Query.LATEST_DATE_TIME, value = latestDateTime)
     }.body<List<Product>>()
 
     suspend fun getUserProductDiaryEntries(latestDateTime: LocalDateTime?) = httpClient.get {
-        parameters {
-            latestDateTime?.toString()?.let {
-                append(
-                    name = Constants.Query.LATEST_DATE_TIME,
-                    value = it
-                )
-            }
-        }
         url(urlString = "/userData/product_diary")
+        parameter(key = Constants.Query.LATEST_DATE_TIME, value = latestDateTime)
     }.body<List<ProductDiaryEntry>>()
 
     suspend fun getUserRecipes(latestDateTime: LocalDateTime?) = httpClient.get {
-        parameters {
-            latestDateTime?.toString()?.let {
-                append(
-                    name = Constants.Query.LATEST_DATE_TIME,
-                    value = it
-                )
-            }
-        }
         url(urlString = "/userData/recipes")
+        parameter(key = Constants.Query.LATEST_DATE_TIME, value = latestDateTime)
     }.body<List<Recipe>>()
 
     suspend fun getUserRecipeDiaryEntries(latestDateTime: LocalDateTime?) = httpClient.get {
-        parameters {
-            latestDateTime?.toString()?.let {
-                append(
-                    name = Constants.Query.LATEST_DATE_TIME,
-                    value = it
-                )
-            }
-        }
         url(urlString = "/userData/recipe_diary")
+        parameter(key = Constants.Query.LATEST_DATE_TIME, value = latestDateTime)
     }.body<List<RecipeDiaryEntry>>()
 
     suspend fun searchForProducts(

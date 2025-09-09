@@ -34,6 +34,8 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(project(":core"))
+            implementation(project(":diary-models"))
+            implementation(project(":diary-data"))
         }
     }
 }

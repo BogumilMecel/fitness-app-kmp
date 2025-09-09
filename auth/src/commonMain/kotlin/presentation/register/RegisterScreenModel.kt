@@ -51,7 +51,10 @@ class RegisterScreenModel(private val registerUseCases: RegisterUseCases) : Base
             username = username.getText()
         ).handle(
             onSuccess = {
-                navigateTo(Route.BottomNavigation.Summary)
+                navigateTo(
+                    route = Route.Splash,
+                    popUpTo = Route.Register,
+                )
             }
         )
     }

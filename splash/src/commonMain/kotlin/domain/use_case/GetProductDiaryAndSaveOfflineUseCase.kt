@@ -8,10 +8,10 @@ class GetProductDiaryAndSaveOfflineUseCase(private val diaryRepository: DiaryRep
     suspend operator fun invoke(): Resource<Unit> {
         val latestOfflineProductDiaryEntry = diaryRepository.getOfflineProductDiaryEntries(
             limit = 1
-        ).firstOrNull() ?: return Resource.Error()
+        ).firstOrNull()
 
         val userProductDiaryEntries = diaryRepository.getProductDiaryEntries(
-            latestDateTime = latestOfflineProductDiaryEntry.firstOrNull()?.changeDateTime
+            latestDateTime = latestOfflineProductDiaryEntry?.firstOrNull()?.changeDateTime
         ).data ?: return Resource.Error()
 
         return Resource.Success(diaryRepository.insertOfflineProductDiaryEntries(userProductDiaryEntries))

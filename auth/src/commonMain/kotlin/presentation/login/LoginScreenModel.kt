@@ -55,7 +55,10 @@ class LoginScreenModel(private val loginUseCases: LoginUseCases) : BaseModel() {
             password = password.getText()
         ).handle(
             onSuccess = {
-                navigateTo(Route.BottomNavigation.Summary)
+                navigateTo(
+                    route = Route.Splash,
+                    popUpTo = Route.Login,
+                )
             },
             finally = {
                 buttonEnabled.value = true

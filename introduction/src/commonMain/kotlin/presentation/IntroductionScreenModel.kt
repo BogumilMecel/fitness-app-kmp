@@ -98,7 +98,7 @@ class IntroductionScreenModel(
                             )
 
                             navigateTo(
-                                route = Route.BottomNavigation.Summary,
+                                route = Route.Splash,
                                 popUpTo = Route.Introduction,
                             )
                         }
