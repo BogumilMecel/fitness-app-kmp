@@ -167,7 +167,7 @@ class DiaryRepositoryImp(
         searchText: String?,
         limit: Long,
         skip: Long
-    ): Flow<List<Recipe>> {
+    ): List<Recipe> {
         return diaryDao.getUserRecipes(userId = userId, searchText = searchText, limit = limit, offset = skip)
     }
 

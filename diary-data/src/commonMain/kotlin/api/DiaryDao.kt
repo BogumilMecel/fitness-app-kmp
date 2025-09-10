@@ -79,7 +79,7 @@ interface DiaryDao {
         AND (:searchText IS NULL OR name LIKE '%' || :searchText || '%')
         ORDER BY creationDateTime DESC LIMIT :limit OFFSET :offset
     """)
-    fun getUserRecipes(userId: String?, searchText: String?, limit: Long, offset: Long): Flow<List<Recipe>>
+    fun getUserRecipes(userId: String?, searchText: String?, limit: Long, offset: Long): List<Recipe>
 
     // Insert or replace a recipe
     @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)

@@ -86,7 +86,7 @@ interface DiaryRepository {
         searchText: String? = null,
         limit: Long,
         skip: Long = 0,
-    ): Flow<List<Recipe>>
+    ): List<Recipe>
 
     suspend fun getOfflineRecipe(recipeId: String): Resource<Recipe?>
 
