@@ -2,19 +2,26 @@ package presentation.search
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDate
 import models.MealName
 import models.Product
+import models.Recipe
 import navigation.presentation.Route
 import presentation.base.BaseModel
 import repository.DiaryRepository
-import utils.constans.Constants
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class DiarySearchScreenModel(
     private val date: LocalDate,
     private val mealName: MealName,
@@ -24,8 +31,6 @@ class DiarySearchScreenModel(
     private var everythingRequestJob: Job? = null
     private var everythingPage = 0
     private val everythingProducts = mutableListOf<Product>()
-    private var userProductsPage = 0
-    private val userProducts = mutableListOf<Product>()
 
     val state = MutableStateFlow(
         value = DiarySearchState(
@@ -35,8 +40,23 @@ class DiarySearchScreenModel(
     )
 
     init {
-        // TODO: Request initial products
-        state.update { it.copy(listState = ListState.Results(items = emptyList())) }
+        state.filter { it.selectedTab == SearchTab.PRODUCTS }.map { state ->
+            withContext(Dispatchers.IO) {
+                diaryRepository.getOfflineProducts(
+                    userId = settingsService.getNotNullUser().id,
+                    searchText = state.searchBarText.ifEmpty { null }
+                )
+            }
+        }.onEach { assignUserProducts(products = it) }.launchIn(viewModelScope)
+
+        state.filter { it.selectedTab == SearchTab.RECIPES }.map { state ->
+            withContext(Dispatchers.IO) {
+                diaryRepository.getOfflineRecipes(
+                    userId = settingsService.getNotNullUser().id,
+                    searchText = state.searchBarText.ifEmpty { null },
+                )
+            }
+        }.onEach { assignUserRecipes(recipes = it) }.launchIn(viewModelScope)
     }
 
     fun onEvent(event: DiarySearchEvent) {
@@ -90,7 +110,6 @@ class DiarySearchScreenModel(
         state.update {
             it.copy(selectedTab = tab)
         }
-        requestOrAssignUserProductsIfNeeded()
     }
 
     private fun onAddProductClicked() {
@@ -112,33 +131,11 @@ class DiarySearchScreenModel(
         )
     }
 
-    private fun requestOrAssignUserProductsIfNeeded() {
-        if (state.value.selectedTab == SearchTab.PRODUCTS) {
-            if (userProductsPage == 0) {
-                userProductsPage = 1
-                requestUserOfflineProducts()
-            } else {
-                assignUserProducts()
-            }
-        }
-    }
-
     private fun onScrollToEnd() {
-        when (state.value.selectedTab) {
-            SearchTab.EVERYTHING -> {
-                if (everythingRequestJob != null) {
-                    everythingPage++
-                    requestEverythingProducts()
-                }
-            }
-
-            SearchTab.PRODUCTS -> {
-                userProductsPage++
-                requestUserOfflineProducts()
-            }
-
-            SearchTab.RECIPES -> {
-
+        if (state.value.selectedTab == SearchTab.EVERYTHING) {
+            if (everythingRequestJob != null) {
+                everythingPage++
+                requestEverythingProducts()
             }
         }
     }
@@ -158,10 +155,18 @@ class DiarySearchScreenModel(
         }
     }
 
-    private fun assignUserProducts() {
+    private fun assignUserProducts(products: List<Product>) {
         viewModelScope.launch {
             state.update {
-                it.copy(userProductsState = ListState.Results(items = userProducts))
+                it.copy(userProducts = products)
+            }
+        }
+    }
+
+    private fun assignUserRecipes(recipes: List<Recipe>) {
+        viewModelScope.launch {
+            state.update {
+                it.copy(userRecipes = recipes)
             }
         }
     }
@@ -171,18 +176,6 @@ class DiarySearchScreenModel(
             state.update {
                 it.copy(listState = ListState.Results(items = everythingProducts))
             }
-        }
-    }
-
-    private fun requestUserOfflineProducts() {
-        viewModelScope.launch(Dispatchers.IO) {
-            userProducts += diaryRepository.getOfflineProducts(
-                userId = settingsService.getNotNullUser().id,
-                searchText = state.value.searchBarText,
-                limit = Constants.Paging.OFFLINE_PAGE_SIZE,
-                skip = userProductsPage * Constants.Paging.OFFLINE_PAGE_SIZE,
-            )
-            assignUserProducts()
         }
     }
 }

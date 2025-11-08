@@ -4,6 +4,7 @@ import androidx.compose.runtime.Stable
 import kotlinx.datetime.LocalDate
 import models.MealName
 import models.Product
+import models.Recipe
 
 @Stable
 data class DiarySearchState(
@@ -12,10 +13,11 @@ data class DiarySearchState(
     val searchBarText: String = "",
     val selectedTab: SearchTab = SearchTab.EVERYTHING,
     val listState: ListState = ListState.Loading,
-    val userProductsState: ListState = ListState.Loading,
+    val userProducts: List<Product> = emptyList(),
+    val userRecipes: List<Recipe> = emptyList(),
 )
 
 sealed interface ListState {
-    data object Loading: ListState
-    data class Results(val items: List<Product>): ListState
+    data object Loading : ListState
+    data class Results(val items: List<Product>) : ListState
 }

@@ -53,8 +53,6 @@ interface DiaryRepository {
     suspend fun getOfflineProducts(
         userId: String? = null,
         searchText: String? = null,
-        limit: Long,
-        skip: Long = 0,
     ): List<Product>
 
     suspend fun getOfflineProduct(productId: String): Resource<Product?>
@@ -84,8 +82,6 @@ interface DiaryRepository {
     fun getOfflineRecipes(
         userId: String? = null,
         searchText: String? = null,
-        limit: Long,
-        skip: Long = 0,
     ): List<Recipe>
 
     suspend fun getOfflineRecipe(recipeId: String): Resource<Recipe?>

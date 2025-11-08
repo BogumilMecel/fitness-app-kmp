@@ -12,7 +12,6 @@ class GetRecipesAndSaveOfflineUseCase(
     suspend operator fun invoke(): Resource<Unit> {
         val latestOfflineRecipe = diaryRepository.getOfflineRecipes(
             userId = settingsService.getUser().firstOrNull()?.id,
-            limit = 1,
         ).firstOrNull()
 
         val userRecipes = diaryRepository.getUserRecipes(

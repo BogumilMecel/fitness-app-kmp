@@ -13,6 +13,5 @@ object Constants {
     }
     object Paging {
         const val API_PAGE_SIZE = 20L
-        const val OFFLINE_PAGE_SIZE = 100L
     }
 }

@@ -105,14 +105,10 @@ class DiaryRepositoryImp(
     override suspend fun getOfflineProducts(
         userId: String?,
         searchText: String?,
-        limit: Long,
-        skip: Long,
     ): List<Product> {
         return diaryDao.getProducts(
             userId = userId,
             searchText = searchText,
-            limit = limit,
-            offset = skip
         )
     }
 
@@ -165,10 +161,8 @@ class DiaryRepositoryImp(
     override fun getOfflineRecipes(
         userId: String?,
         searchText: String?,
-        limit: Long,
-        skip: Long
     ): List<Recipe> {
-        return diaryDao.getUserRecipes(userId = userId, searchText = searchText, limit = limit, offset = skip)
+        return diaryDao.getUserRecipes(userId = userId, searchText = searchText)
     }
 
     override suspend fun getOfflineRecipe(recipeId: String): Resource<Recipe?> {

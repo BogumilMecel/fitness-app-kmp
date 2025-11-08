@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -174,10 +175,13 @@ fun DiarySearchScreen(
 
             SearchTab.PRODUCTS -> {
                 UserProductsContent(
-                    listState = state.userProductsState,
+                    products = state.userProducts,
                     lazyListState = userProductsListState,
                     onScrolledToEnd = {
                         onEvent(DiarySearchEvent.ScrollToEnd)
+                    },
+                    onProductClicked = { product ->
+                        onEvent(DiarySearchEvent.ProductClicked(product = product))
                     }
                 )
             }
@@ -292,19 +296,25 @@ private fun EverythingContent(
 
 @Composable
 private fun UserProductsContent(
-    listState: ListState,
+    products: List<Product>,
     lazyListState: LazyListState,
     onScrolledToEnd: () -> Unit,
+    onProductClicked: (Product) -> Unit,
 ) {
     LazyColumn(
         onScrollToEnd = onScrolledToEnd,
         state = lazyListState,
     ) {
-        when (listState) {
-            is ListState.Loading -> {}
-            is ListState.Results -> {
-                // TODO: Implement user products content
-            }
+        items(products) { product ->
+            DiaryItem(
+                product = product,
+                onItemClick = {
+                    onProductClicked(product)
+                },
+                onItemLongClick = {
+
+                }
+            )
         }
     }
 }

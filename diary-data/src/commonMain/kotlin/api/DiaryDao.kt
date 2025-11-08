@@ -19,13 +19,10 @@ interface DiaryDao {
         WHERE (:userId IS NULL OR userId = :userId)
         AND (:searchText IS NULL OR name LIKE '%' || :searchText || '%')
         ORDER BY creationDateTime DESC
-        LIMIT :limit OFFSET :offset
     """)
     fun getProducts(
         userId: String?,
         searchText: String?,
-        limit: Long,
-        offset: Long
     ): List<Product>
 
     // Insert or replace product
@@ -77,9 +74,9 @@ interface DiaryDao {
         SELECT * FROM Recipe
         WHERE (:userId IS NULL OR userId = :userId)
         AND (:searchText IS NULL OR name LIKE '%' || :searchText || '%')
-        ORDER BY creationDateTime DESC LIMIT :limit OFFSET :offset
+        ORDER BY creationDateTime DESC
     """)
-    fun getUserRecipes(userId: String?, searchText: String?, limit: Long, offset: Long): List<Recipe>
+    fun getUserRecipes(userId: String?, searchText: String?): List<Recipe>
 
     // Insert or replace a recipe
     @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)

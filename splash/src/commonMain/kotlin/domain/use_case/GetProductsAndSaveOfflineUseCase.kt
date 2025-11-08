@@ -11,8 +11,7 @@ class GetProductsAndSaveOfflineUseCase(
 ) {
     suspend operator fun invoke(): Resource<Unit> {
         val latestOfflineProduct = diaryRepository.getOfflineProducts(
-            userId = settingsService.getUser().firstOrNull()?.id,
-            limit = 1,
+            userId = settingsService.getUser().firstOrNull()?.id
         ).firstOrNull()
 
         val userProducts = diaryRepository.getUserProducts(

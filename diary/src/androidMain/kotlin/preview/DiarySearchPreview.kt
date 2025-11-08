@@ -2,13 +2,13 @@ package preview
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import utils.date.getCurrentDate
 import models.MealName
 import presentation.search.DiarySearchScreen
 import presentation.search.DiarySearchState
 import presentation.search.ListState
 import presentation.search.SearchTab
 import theme.FitnessAppTheme
+import utils.date.getCurrentDate
 
 @Composable
 @Preview
@@ -32,7 +32,7 @@ private fun PreviewContent(darkTheme: Boolean) {
                 searchBarText = "Rice",
                 selectedTab = SearchTab.EVERYTHING,
                 listState = ListState.Loading,
-                userProductsState = ListState.Loading,
+                userProducts = emptyList(),
             ),
             onEvent = {}
         )
