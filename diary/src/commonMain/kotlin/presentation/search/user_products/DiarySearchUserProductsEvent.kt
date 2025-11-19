@@ -1,0 +1,4 @@
+package presentation.search.user_products
+
+sealed interface DiarySearchUserProductsEvent
+
