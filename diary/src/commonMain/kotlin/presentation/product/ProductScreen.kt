@@ -38,7 +38,7 @@ import com.gmail.bogumilmecel2.diary.composeResources.protein
 import components.Button
 import components.ChartSlice
 import components.DonutChart
-import components.FitnessAppTopBar
+import components.AppTopBar
 import components.LargeButtonTextContent
 import components.MediumButtonTextContent
 import components.TextField
@@ -58,7 +58,7 @@ fun ProductScreen(
     onEvent: (ProductEvent) -> Unit,
 ) {
     Column {
-        FitnessAppTopBar(
+        AppTopBar(
             title = state.productName,
             onBackPressed = {
                 onEvent(ProductEvent.OnBackPressed)

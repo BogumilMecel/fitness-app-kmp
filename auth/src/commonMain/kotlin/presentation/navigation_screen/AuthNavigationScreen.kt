@@ -23,7 +23,7 @@ import com.gmail.bogumilmecel2.ui.composeResources.welcome_to
 import components.Divider
 import components.FitnessAppButton
 import components.FitnessAppButtonStyle
-import components.FitnessAppTopBar
+import components.AppTopBar
 import components.VerticalSpacer
 import dev.sergiobelda.compose.vectorize.images.Images
 import dev.sergiobelda.compose.vectorize.images.icons.GoogleLogo
@@ -33,7 +33,7 @@ import theme.FitnessAppTheme
 
 @Composable
 fun AuthNavigationScreen(viewModel: AuthNavigationModel = koinViewModel()) = with(viewModel) {
-    FitnessAppTopBar(title = stringResource(Res.string.welcome_to))
+    AppTopBar(title = stringResource(Res.string.welcome_to))
 
     Column(
         modifier = Modifier

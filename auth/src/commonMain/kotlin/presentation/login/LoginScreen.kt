@@ -20,10 +20,10 @@ import com.gmail.bogumilmecel2.ui.composeResources.forgot_password
 import com.gmail.bogumilmecel2.ui.composeResources.login
 import com.gmail.bogumilmecel2.ui.composeResources.password
 import com.gmail.bogumilmecel2.ui.composeResources.sign_in
+import components.AppTopBar
 import components.FitnessAppButton
 import components.FitnessAppClickableText
 import components.FitnessAppTextField
-import components.FitnessAppTopBar
 import components.VerticalSpacer
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -41,7 +41,7 @@ fun LoginScreen(viewModel : LoginScreenModel = koinViewModel()) = with(viewModel
     val buttonEnabled by buttonEnabled.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        FitnessAppTopBar(
+        AppTopBar(
             title = stringResource(Res.string.login),
             onBackPressed = ::onBackPressed
         )

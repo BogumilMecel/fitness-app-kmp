@@ -25,7 +25,7 @@ import com.gmail.bogumilmecel2.ui.composeResources.sign_up
 import com.gmail.bogumilmecel2.ui.composeResources.username
 import components.FitnessAppButton
 import components.FitnessAppTextField
-import components.FitnessAppTopBar
+import components.AppTopBar
 import components.VerticalSpacer
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -38,7 +38,7 @@ fun RegisterScreen(viewModel: RegisterScreenModel = koinViewModel()) = with(view
     val password by password.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        FitnessAppTopBar(
+        AppTopBar(
             title = stringResource(Res.string.register_header),
             onBackPressed = ::onBackPressed
         )

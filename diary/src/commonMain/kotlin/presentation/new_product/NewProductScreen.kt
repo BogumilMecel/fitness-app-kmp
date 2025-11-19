@@ -43,7 +43,7 @@ import com.gmail.bogumilmecel2.diary.composeResources.new_product_nutrition_valu
 import com.gmail.bogumilmecel2.diary.composeResources.new_product_product_name
 import com.gmail.bogumilmecel2.diary.composeResources.protein
 import components.Button
-import components.FitnessAppTopBar
+import components.AppTopBar
 import components.LargeButtonTextContent
 import components.TextField
 import components.VerticalSpacer
@@ -59,7 +59,7 @@ fun NewProductScreen(
     onEvent: (NewProductEvent) -> Unit,
 ) {
     Column(modifier = getDefaultRootModifier()) {
-        FitnessAppTopBar(
+        AppTopBar(
             title = stringResource(Res.string.new_product),
             onBackPressed = {
                 onEvent(NewProductEvent.BackPressed)

@@ -38,8 +38,8 @@ import com.gmail.bogumilmecel2.diary.composeResources.barcode_scan
 import com.gmail.bogumilmecel2.diary.composeResources.new_product
 import com.gmail.bogumilmecel2.diary.composeResources.scan_barcode
 import com.gmail.bogumilmecel2.diary.composeResources.search_for_products
+import components.AppTopBar
 import components.Button
-import components.FitnessAppTopBar
 import components.HorizontalSpacer
 import components.LazyColumn
 import components.TextField
@@ -68,7 +68,7 @@ fun DiarySearchScreen(
                 .fillMaxWidth()
                 .background(color = FitnessAppTheme.colors.backgroundSecondary)
         ) {
-            FitnessAppTopBar(
+            AppTopBar(
                 title = state.mealName.displayName,
                 subTitle = state.date.getDisplayValue(),
                 onBackPressed = {
