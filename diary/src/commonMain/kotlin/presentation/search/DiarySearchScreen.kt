@@ -23,9 +23,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
+import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -120,13 +119,13 @@ fun DiarySearchScreen(
 
             VerticalSpacer(size = 16.dp)
 
-            TabRow(
+            PrimaryTabRow(
                 selectedTabIndex = state.selectedTab.ordinal,
                 containerColor = FitnessAppTheme.colors.backgroundSecondary,
-                indicator = { tabPositions ->
+                indicator = {
                     Box(
                         modifier = Modifier
-                            .tabIndicatorOffset(tabPositions[state.selectedTab.ordinal])
+                            .tabIndicatorOffset(selectedTabIndex = state.selectedTab.ordinal)
                             .fillMaxWidth()
                             .height(2.dp)
                             .background(FitnessAppTheme.colors.contentPrimary)
