@@ -67,7 +67,14 @@ fun AppOutlinedTextField(
             .optionalTestTag(testTag),
         textStyle = FitnessAppTheme.typography.bodyLarge.copy(textAlign = textAlign),
         label = {
-            Text(text = label)
+            Text(
+                text = label,
+                style = if (text.isEmpty()) {
+                    FitnessAppTheme.typography.bodyLarge
+                } else {
+                    FitnessAppTheme.typography.bodySmall
+                }
+            )
         },
         leadingIcon = leadingIcon,
         trailingIcon = {
