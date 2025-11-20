@@ -5,6 +5,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 
 fun Modifier.noRippleClickable(
@@ -21,4 +22,8 @@ fun Modifier.noRippleClickable(
         interactionSource = remember { MutableInteractionSource() },
         onClick = onClick
     )
+}
+
+fun Modifier.optionalTestTag(testTag: String?) = composed {
+    if (testTag != null) Modifier.testTag(testTag) else Modifier
 }

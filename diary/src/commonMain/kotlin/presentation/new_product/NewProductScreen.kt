@@ -45,7 +45,7 @@ import com.gmail.bogumilmecel2.diary.composeResources.protein
 import components.Button
 import components.AppTopBar
 import components.LargeButtonTextContent
-import components.TextField
+import components.AppOutlinedTextField
 import components.VerticalSpacer
 import components.largeButton
 import org.jetbrains.compose.resources.painterResource
@@ -73,7 +73,7 @@ fun NewProductScreen(
         ) {
             VerticalSpacer(size = 12.dp)
 
-            TextField(
+            AppOutlinedTextField(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = state.productName,
                 label = stringResource(Res.string.new_product_product_name),
@@ -84,7 +84,7 @@ fun NewProductScreen(
 
             VerticalSpacer(size = 12.dp)
 
-            TextField(
+            AppOutlinedTextField(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = state.containerWeight,
                 label = stringResource(Res.string.new_product_container_weight),
@@ -98,7 +98,7 @@ fun NewProductScreen(
 
             VerticalSpacer(size = 12.dp)
 
-            TextField(
+            AppOutlinedTextField(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = state.barcode,
                 label = stringResource(Res.string.new_product_barcode),
@@ -139,7 +139,7 @@ fun NewProductScreen(
 
             VerticalSpacer(size = 12.dp)
 
-            TextField(
+            AppOutlinedTextField(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = state.calories,
                 label = stringResource(Res.string.calories),
@@ -153,7 +153,7 @@ fun NewProductScreen(
 
             VerticalSpacer(size = 12.dp)
 
-            TextField(
+            AppOutlinedTextField(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = state.carbohydrates,
                 label = stringResource(Res.string.carbs),
@@ -167,7 +167,7 @@ fun NewProductScreen(
 
             VerticalSpacer(size = 12.dp)
 
-            TextField(
+            AppOutlinedTextField(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = state.protein,
                 label = stringResource(Res.string.protein),
@@ -181,7 +181,7 @@ fun NewProductScreen(
 
             VerticalSpacer(size = 12.dp)
 
-            TextField(
+            AppOutlinedTextField(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = state.fat,
                 label = stringResource(Res.string.fat),

@@ -15,7 +15,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import components.TextField
+import components.AppOutlinedTextField
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import theme.FitnessAppTheme
@@ -34,7 +34,7 @@ fun TextQuestion(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        TextField(
+        AppOutlinedTextField(
             text = text,
             label = "",
             onValueChange = {
@@ -45,7 +45,6 @@ fun TextQuestion(
                 .width(120.dp)
                 .focusRequester(focusRequester),
             textAlign = TextAlign.Center,
-            maxLines = 1
         )
 
         unitResId?.let {

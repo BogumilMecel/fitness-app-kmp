@@ -41,7 +41,7 @@ import components.DonutChart
 import components.AppTopBar
 import components.LargeButtonTextContent
 import components.MediumButtonTextContent
-import components.TextField
+import components.AppOutlinedTextField
 import components.VerticalSpacer
 import models.MeasurementUnit
 import models.NutritionValue
@@ -71,7 +71,7 @@ fun ProductScreen(
                 .padding(horizontal = 16.dp, vertical = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            TextField(
+            AppOutlinedTextField(
                 text = state.weight,
                 label = stringResource(Res.string.product_weight) + String.SPACE + "(${state.productMeasurementUnit.longDisplayName})",
                 modifier = Modifier

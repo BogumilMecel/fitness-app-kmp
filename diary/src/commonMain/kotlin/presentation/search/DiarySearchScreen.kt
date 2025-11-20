@@ -38,11 +38,11 @@ import com.gmail.bogumilmecel2.diary.composeResources.barcode_scan
 import com.gmail.bogumilmecel2.diary.composeResources.new_product
 import com.gmail.bogumilmecel2.diary.composeResources.scan_barcode
 import com.gmail.bogumilmecel2.diary.composeResources.search_for_products
+import components.AppOutlinedTextField
 import components.AppTopBar
 import components.Button
 import components.HorizontalSpacer
 import components.LazyColumn
-import components.TextField
 import components.VerticalSpacer
 import models.Product
 import org.jetbrains.compose.resources.painterResource
@@ -83,7 +83,7 @@ fun DiarySearchScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                TextField(
+                AppOutlinedTextField(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f),
@@ -93,7 +93,6 @@ fun DiarySearchScreen(
                     },
                     backgroundColor = FitnessAppTheme.colors.backgroundSecondary,
                     label = stringResource(Res.string.search_for_products),
-                    maxLines = 1,
                     keyboardOptions = KeyboardOptions(
                         imeAction = ImeAction.Search
                     ),

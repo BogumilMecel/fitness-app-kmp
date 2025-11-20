@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Email
@@ -23,9 +24,9 @@ import com.gmail.bogumilmecel2.ui.composeResources.password
 import com.gmail.bogumilmecel2.ui.composeResources.register_header
 import com.gmail.bogumilmecel2.ui.composeResources.sign_up
 import com.gmail.bogumilmecel2.ui.composeResources.username
-import components.FitnessAppButton
-import components.FitnessAppTextField
+import components.AppOutlinedTextField
 import components.AppTopBar
+import components.FitnessAppButton
 import components.VerticalSpacer
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -50,31 +51,49 @@ fun RegisterScreen(viewModel: RegisterScreenModel = koinViewModel()) = with(view
                 .align(Alignment.Center)
                 .padding(horizontal = 16.dp),
         ) {
-            FitnessAppTextField(
-                textFieldData = email,
+            AppOutlinedTextField(
+                text = email.text,
+                onValueChange = email.onValueChange,
                 label = stringResource(Res.string.email_address),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                leadingIcon = Icons.Default.Email,
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Email,
+                        contentDescription = null
+                    )
+                },
                 testTag = TestTags.EMAIL
             )
 
             VerticalSpacer()
 
-            FitnessAppTextField(
-                textFieldData = username,
+            AppOutlinedTextField(
+                text = username.text,
+                onValueChange = username.onValueChange,
                 label = stringResource(resource = Res.string.username),
-                leadingIcon = Icons.Default.AccountCircle,
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.AccountCircle,
+                        contentDescription = null
+                    )
+                },
                 testTag = TestTags.USERNAME
             )
 
             VerticalSpacer()
 
-            FitnessAppTextField(
-                textFieldData = password,
+            AppOutlinedTextField(
+                text = password.text,
+                onValueChange = password.onValueChange,
                 label = stringResource(resource = Res.string.password),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 visualTransformation = PasswordVisualTransformation(),
-                leadingIcon = Icons.Default.Password,
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Password,
+                        contentDescription = null
+                    )
+                },
                 testTag = TestTags.PASSWORD
             )
 
