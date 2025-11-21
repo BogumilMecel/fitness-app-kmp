@@ -25,7 +25,7 @@ fun Divider(
             modifier = Modifier
                 .height(1.dp)
                 .fillMaxWidth()
-                .background(color = FitnessAppTheme.colors.contentSecondary)
+                .background(color = FitnessAppTheme.colors.border)
         )
 
         text?.let {
